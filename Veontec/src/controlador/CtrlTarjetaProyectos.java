@@ -1,6 +1,6 @@
 package controlador;
 
-import index.MyFreeLab;
+import index.Veontec;
 import modelo.InterfaceCard;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
@@ -174,13 +174,13 @@ public class CtrlTarjetaProyectos extends InterfaceCard {
             JasperPrint jp = mtdGenerarReporte();
 
             if (jp.getPages().isEmpty()) {
-                JOptionPane.showMessageDialog(laVista, MyFreeLab.idioma
+                JOptionPane.showMessageDialog(laVista, Veontec.idioma
                         .getProperty("ctrlTarjetaProyecto.mtdCotizarProyecto.msg1"));
 
             } else {
                 // Mostar el reporte de Cotización
                 JasperViewer jviewer = new JasperViewer(jp, false);
-                jviewer.setTitle(MyFreeLab.idioma
+                jviewer.setTitle(Veontec.idioma
                         .getProperty("ctrlTarjetaProyecto.mtdCotizarProyecto.msg2")
                         +" : " + dto.getCmpNombre());
                 jviewer.setVisible(true);
@@ -190,7 +190,7 @@ public class CtrlTarjetaProyectos extends InterfaceCard {
         } catch (Exception e) {
             // El archivo no existe
             //System.out.println("" + e.getMessage());
-            CtrlPrincipal.mensajeCtrlPrincipal(MyFreeLab.idioma
+            CtrlPrincipal.mensajeCtrlPrincipal(Veontec.idioma
                         .getProperty("ctrlTarjetaProyecto.mtdCotizarProyecto.msg3"));
         }
 
@@ -212,30 +212,30 @@ public class CtrlTarjetaProyectos extends InterfaceCard {
             // * Información del software
             parametros.put("rpNombreSoftware", Info.NombreSoftware);
             parametros.put("rpCopyright", Info.Copyright );
-            parametros.put("rpEtqDerechosReservados", MyFreeLab.idioma
+            parametros.put("rpEtqDerechosReservados", Veontec.idioma
                     .getProperty("ctrlTarjetaProyecto.mtdGenerarReporte.rpEtqDerechosReservados"));
             
             // Introducción
-            parametros.put("rpTitulo", MyFreeLab.idioma
+            parametros.put("rpTitulo", Veontec.idioma
                     .getProperty("ctrlTarjetaProyecto.mtdGenerarReporte.rpTitulo"));
-            parametros.put("rpSeccion1", MyFreeLab.idioma
+            parametros.put("rpSeccion1", Veontec.idioma
                     .getProperty("ctrlTarjetaProyecto.mtdGenerarReporte.rpSeccion1")
                     .replaceAll("<Proyecto>", dto.getCmpNombre() ));
-            parametros.put("rpSeccion2", MyFreeLab.idioma
+            parametros.put("rpSeccion2", Veontec.idioma
                     .getProperty("ctrlTarjetaProyecto.mtdGenerarReporte.rpSeccion2"));
             
             // Etiquetas
-            parametros.put("rpEtqClientes", MyFreeLab.idioma
+            parametros.put("rpEtqClientes", Veontec.idioma
                     .getProperty("ctrlTarjetaProyecto.mtdGenerarReporte.rpEtqClientes"));
-            parametros.put("rpEtqDatosPersonales", MyFreeLab.idioma
+            parametros.put("rpEtqDatosPersonales", Veontec.idioma
                     .getProperty("ctrlTarjetaProyecto.mtdGenerarReporte.rpEtqDatosPersonales"));
-            parametros.put("rpEtqRequisitoID", MyFreeLab.idioma
+            parametros.put("rpEtqRequisitoID", Veontec.idioma
                     .getProperty("ctrlTarjetaProyecto.mtdGenerarReporte.rpEtqRequisitoID"));
-            parametros.put("rpEtqNombreRequisito", MyFreeLab.idioma
+            parametros.put("rpEtqNombreRequisito", Veontec.idioma
                     .getProperty("ctrlTarjetaProyecto.mtdGenerarReporte.rpEtqNombreRequisito"));
-            parametros.put("rpEtqCosto", MyFreeLab.idioma
+            parametros.put("rpEtqCosto", Veontec.idioma
                     .getProperty("ctrlTarjetaProyecto.mtdGenerarReporte.rpEtqCosto"));
-            parametros.put("rpEtqCostoTotal", MyFreeLab.idioma
+            parametros.put("rpEtqCostoTotal", Veontec.idioma
                     .getProperty("ctrlTarjetaProyecto.mtdGenerarReporte.rpEtqCostoTotal"));
             
             JasperReport jr = JasperCompileManager.compileReport(pathReporteCotizacion);
@@ -245,7 +245,7 @@ public class CtrlTarjetaProyectos extends InterfaceCard {
         } catch (JRException ex) {
             // Error en la base de datos
             //Logger.getLogger(CtrlPrincipal.class.getName()).log(Level.SEVERE, null, ex);
-            CtrlPrincipal.mensajeCtrlPrincipal(MyFreeLab.idioma
+            CtrlPrincipal.mensajeCtrlPrincipal(Veontec.idioma
                         .getProperty("ctrlTarjetaProyecto.mtdGenerarReporte.msg1"));
         }
 

@@ -1,6 +1,6 @@
 package controlador;
 
-import index.MyFreeLab;
+import index.Veontec;
 import java.awt.Color;
 import java.awt.Dialog;
 import java.awt.event.MouseEvent;
@@ -49,7 +49,7 @@ public class CtrlConexion implements MouseListener{
         //modal.setModal(true);
         //modal.setType(Window.Type.UTILITY);
         modal.setModalityType(Dialog.ModalityType.APPLICATION_MODAL);
-        modal.setTitle(MyFreeLab.idioma.getProperty("ctrlConexion.mtdInit.titulo"));
+        modal.setTitle(Veontec.idioma.getProperty("ctrlConexion.mtdInit.titulo"));
         modal.setSize( laVista.getSize() );
         modal.setPreferredSize( laVista.getSize() );
         modal.setResizable(false);
@@ -101,10 +101,10 @@ public class CtrlConexion implements MouseListener{
             if(CtrlHiloConexion.mtdEstablecer()){
                 if( !MyFreeLabDao.mtdChecarTablas() ){  
                     int opc = JOptionPane.showConfirmDialog(laVista,
-                            MyFreeLab.idioma.getProperty("ctrlConexion.mtdEstablecerConexion.msg1") +
-                            MyFreeLab.idioma.getProperty("ctrlConexion.mtdEstablecerConexion.msg2") +
-                            MyFreeLab.idioma.getProperty("ctrlConexion.mtdEstablecerConexion.msg3"),
-                            MyFreeLab.idioma.getProperty("ctrlConexion.mtdEstablecerConexion.msg4"), 
+                            Veontec.idioma.getProperty("ctrlConexion.mtdEstablecerConexion.msg1") +
+                            Veontec.idioma.getProperty("ctrlConexion.mtdEstablecerConexion.msg2") +
+                            Veontec.idioma.getProperty("ctrlConexion.mtdEstablecerConexion.msg3"),
+                            Veontec.idioma.getProperty("ctrlConexion.mtdEstablecerConexion.msg4"), 
                             JOptionPane.YES_OPTION);
                     
                     if( JOptionPane.YES_OPTION == opc ){
@@ -115,13 +115,13 @@ public class CtrlConexion implements MouseListener{
                             MyFreeLabDao.mtdCrearTablaEmpresas();
                             MyFreeLabDao.mtdCrearTablaRequisitos();
                             MyFreeLabDao.mtdCrearTablaAsociados();
-                            JOptionPane.showMessageDialog(laVista, MyFreeLab.idioma
+                            JOptionPane.showMessageDialog(laVista, Veontec.idioma
                                     .getProperty("ctrlConexion.mtdEstablecerConexion.msg5"));
                             
                     }else{
                         
                         mtdCerrarConexion();
-                        JOptionPane.showMessageDialog(laVista, MyFreeLab.idioma
+                        JOptionPane.showMessageDialog(laVista, Veontec.idioma
                                 .getProperty("ctrlConexion.mtdEstablecerConexion.msg6"));
                     }
                     
@@ -138,13 +138,13 @@ public class CtrlConexion implements MouseListener{
             }else{ 
                 // * Error al establecer la conexión
                 JOptionPane.showMessageDialog(laVista, 
-                MyFreeLab.idioma.getProperty("ctrlConexion.mtdEstablecerConexion.msg7") +
-                MyFreeLab.idioma.getProperty("ctrlConexion.mtdEstablecerConexion.msg8") +
-                MyFreeLab.idioma.getProperty("ctrlConexion.mtdEstablecerConexion.msg9") +
-                MyFreeLab.idioma.getProperty("ctrlConexion.mtdEstablecerConexion.msg10") +
-                MyFreeLab.idioma.getProperty("ctrlConexion.mtdEstablecerConexion.msg11") +
-                MyFreeLab.idioma.getProperty("ctrlConexion.mtdEstablecerConexion.msg12") +
-                MyFreeLab.idioma.getProperty("ctrlConexion.mtdEstablecerConexion.msg13"));
+                Veontec.idioma.getProperty("ctrlConexion.mtdEstablecerConexion.msg7") +
+                Veontec.idioma.getProperty("ctrlConexion.mtdEstablecerConexion.msg8") +
+                Veontec.idioma.getProperty("ctrlConexion.mtdEstablecerConexion.msg9") +
+                Veontec.idioma.getProperty("ctrlConexion.mtdEstablecerConexion.msg10") +
+                Veontec.idioma.getProperty("ctrlConexion.mtdEstablecerConexion.msg11") +
+                Veontec.idioma.getProperty("ctrlConexion.mtdEstablecerConexion.msg12") +
+                Veontec.idioma.getProperty("ctrlConexion.mtdEstablecerConexion.msg13"));
             }
             
         }

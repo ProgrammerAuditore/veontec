@@ -5,7 +5,7 @@
  */
 package vista.paneles;
 
-import index.MyFreeLab;
+import index.Veontec;
 import java.awt.Dimension;
 import src.Info;
 import src.Recursos;
@@ -38,10 +38,10 @@ public class PanelAcercaDe extends javax.swing.JPanel {
     
     private void mtdEstablecerIdioma(){
         // * Etiquetas
-        this.etqLink.setText(MyFreeLab.idioma.getProperty("panelAcercaDe.etqLink"));
+        this.etqLink.setText(Veontec.idioma.getProperty("panelAcercaDe.etqLink"));
         
         // * Botones
-        this.btnAceptar.setTexto(MyFreeLab.idioma.getProperty("panelAcercaDe.btnAceptar"));
+        this.btnAceptar.setTexto(Veontec.idioma.getProperty("panelAcercaDe.btnAceptar"));
     }
 
     /**
@@ -69,7 +69,7 @@ public class PanelAcercaDe extends javax.swing.JPanel {
             }
         });
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(MyFreeLab.idioma.getProperty("panelAcercaDe.panelTitulo")));
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(Veontec.idioma.getProperty("panelAcercaDe.panelTitulo")));
 
         cmpDescripcion.setColumns(20);
         cmpDescripcion.setLineWrap(true);

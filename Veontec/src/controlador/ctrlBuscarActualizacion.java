@@ -1,6 +1,6 @@
 package controlador;
 
-import index.MyFreeLab;
+import index.Veontec;
 import java.awt.Color;
 import java.awt.Desktop;
 import java.awt.Dialog;
@@ -61,7 +61,7 @@ public class ctrlBuscarActualizacion implements MouseListener {
 
         // * Establecer propiedades para la modal
         modal.setModalityType(Dialog.ModalityType.APPLICATION_MODAL);
-        modal.setTitle(MyFreeLab.idioma.getProperty("ctrlBuscarActualizacion.mdInit.titulo"));
+        modal.setTitle(Veontec.idioma.getProperty("ctrlBuscarActualizacion.mdInit.titulo"));
         modal.setResizable(false);
         modal.setSize( laVista.getSize() );
         modal.setPreferredSize( laVista.getSize() );
@@ -109,7 +109,7 @@ public class ctrlBuscarActualizacion implements MouseListener {
 
     public void mtdBuscarActualizacion() {
         
-        CtrlPrincipal.mensajeCtrlPrincipal(MyFreeLab.idioma.
+        CtrlPrincipal.mensajeCtrlPrincipal(Veontec.idioma.
                 getProperty("ctrlBuscarActualizacion.mtdBuscarActualizacion.msg1"));
         
         String path = Recursos.dirTemp;
@@ -143,13 +143,13 @@ public class ctrlBuscarActualizacion implements MouseListener {
             !doc.get("app_name_version").contains(Info.sProduccion) ) {
         
             // * Actualizar el programa
-            CtrlPrincipal.mensajeCtrlPrincipal(MyFreeLab.idioma
+            CtrlPrincipal.mensajeCtrlPrincipal(Veontec.idioma
                     .getProperty("ctrlBuscarActualizacion.ProcesoDeActualizacion.msg1")
                     .replaceAll("<MyFreeLab>", versionName));
             
             // * Establecer informacion de la archivo_descarga version
             if( CtrlPrincipal.ctrlBuscarActualizacion == false ){
-                laVista.etqVersionActual.setText(MyFreeLab.idioma.getProperty("ctrlBuscarActualizacion.ProcesoDeActualizacion.msg2"));
+                laVista.etqVersionActual.setText(Veontec.idioma.getProperty("ctrlBuscarActualizacion.ProcesoDeActualizacion.msg2"));
                 laVista.cmpVersionActual.setText(doc.get("app_name_version"));
                 laVista.cmpNovedades.setText(doc.get("app_novedades"));
 
@@ -158,16 +158,15 @@ public class ctrlBuscarActualizacion implements MouseListener {
             }
 
             int resp = JOptionPane.showConfirmDialog(laVista,
-                    MyFreeLab.idioma.getProperty("ctrlBuscarActualizacion.ProcesoDeActualizacion.msg3"),
-                    MyFreeLab.idioma.getProperty("ctrlBuscarActualizacion.ProcesoDeActualizacion.msg4")
+                    Veontec.idioma.getProperty("ctrlBuscarActualizacion.ProcesoDeActualizacion.msg3"),
+                    Veontec.idioma.getProperty("ctrlBuscarActualizacion.ProcesoDeActualizacion.msg4")
                     .replaceAll("<MyFreeLab>", versionName), 
                     JOptionPane.YES_NO_OPTION);
 
             if (resp == JOptionPane.YES_OPTION) {
 
                 // Verificar el sistema operativo
-                CtrlPrincipal.mensajeCtrlPrincipal(
-                        MyFreeLab.idioma.getProperty("ctrlBuscarActualizacion.ProcesoDeActualizacion.msg5")+
+                CtrlPrincipal.mensajeCtrlPrincipal(Veontec.idioma.getProperty("ctrlBuscarActualizacion.ProcesoDeActualizacion.msg5")+
                         " " + doc.get("app_name_version"));
                 
                 if ( Recursos.OsWin ) {
@@ -187,7 +186,7 @@ public class ctrlBuscarActualizacion implements MouseListener {
             
             if( CtrlPrincipal.ctrlBuscarActualizacion == false ){
                 JOptionPane.showMessageDialog(laVista, Info.NombreSoftware + " "+
-                        MyFreeLab.idioma.getProperty("ctrlBuscarActualizacion.ProcesoDeActualizacion.msg6"));
+                        Veontec.idioma.getProperty("ctrlBuscarActualizacion.ProcesoDeActualizacion.msg6"));
             }
             
         }
@@ -196,7 +195,7 @@ public class ctrlBuscarActualizacion implements MouseListener {
     }
     
     private boolean mtdInstalarActualizacionExe(String url, String versionNum) {
-        CtrlPrincipal.mensajeCtrlPrincipal(MyFreeLab.idioma.
+        CtrlPrincipal.mensajeCtrlPrincipal(Veontec.idioma.
                 getProperty("ctrlBuscarActualizacion.mtdInstalarActualizacionExe.msg1"));
         
         String fileName;
@@ -240,13 +239,13 @@ public class ctrlBuscarActualizacion implements MouseListener {
             }
             */
             
-            msg += MyFreeLab.idioma.
+            msg += Veontec.idioma.
                 getProperty("ctrlBuscarActualizacion.mtdInstalarActualizacionExe.msg2")
                 .replace("<MyFreeLab>", Info.NombreSoftware);
             
             msg +="\n";
             
-            msg += MyFreeLab.idioma.
+            msg += Veontec.idioma.
                 getProperty("ctrlBuscarActualizacion.mtdInstalarActualizacionExe.msg3")
                 .replace("<MyFreeLab>", archivo.getAbsolutePath());
             
@@ -254,7 +253,7 @@ public class ctrlBuscarActualizacion implements MouseListener {
             System.exit(0);
             return true;
         } else{
-            JOptionPane.showMessageDialog(laVista, MyFreeLab.idioma.
+            JOptionPane.showMessageDialog(laVista, Veontec.idioma.
                 getProperty("ctrlBuscarActualizacion.mtdInstalarActualizacionExe.msg4"));
         }
         
@@ -263,7 +262,7 @@ public class ctrlBuscarActualizacion implements MouseListener {
 
 
     private boolean mtdInstalarActualizacionDeb(String url, String versionNum) {
-        CtrlPrincipal.mensajeCtrlPrincipal(MyFreeLab.idioma.
+        CtrlPrincipal.mensajeCtrlPrincipal(Veontec.idioma.
                 getProperty("ctrlBuscarActualizacion.mtdInstalarActualizacionDeb.msg1"));
         
         String fileName;
@@ -303,13 +302,13 @@ public class ctrlBuscarActualizacion implements MouseListener {
             } catch (IOException ex) {}
             */
             
-            msg += MyFreeLab.idioma.
+            msg += Veontec.idioma.
                 getProperty("ctrlBuscarActualizacion.mtdInstalarActualizacionDeb.msg2")
                 .replace("<MyFreeLab>", Info.NombreSoftware);
             
             msg +="\n";
             
-            msg += MyFreeLab.idioma.
+            msg += Veontec.idioma.
                 getProperty("ctrlBuscarActualizacion.mtdInstalarActualizacionDeb.msg3")
                 .replace("<MyFreeLab>", archivo.getAbsolutePath());
             
@@ -317,7 +316,7 @@ public class ctrlBuscarActualizacion implements MouseListener {
             System.exit(0);
             return true;
         } else{
-            JOptionPane.showMessageDialog(laVista, MyFreeLab.idioma.
+            JOptionPane.showMessageDialog(laVista, Veontec.idioma.
                 getProperty("ctrlBuscarActualizacion.mtdInstalarActualizacionDeb.msg4"));
         }
         
@@ -332,14 +331,14 @@ public class ctrlBuscarActualizacion implements MouseListener {
             while ((bytesRead = in.read(dataBuffer, 0, 1024)) != -1) {
                 fileOutputStream.write(dataBuffer, 0, bytesRead);
                 //CtrlPrincipal.mensajeCtrlPrincipal("Buscando actualización "+ ((1024/bytesRead)* 100) +"%");
-                CtrlPrincipal.mensajeCtrlPrincipal(MyFreeLab.idioma.
+                CtrlPrincipal.mensajeCtrlPrincipal(Veontec.idioma.
                 getProperty("ctrlBuscarActualizacion.mtdDescargaURL.msg1"));
             }
         } catch (IOException e) {
             // handle exception
-            CtrlPrincipal.mensajeCtrlPrincipal(MyFreeLab.idioma.
+            CtrlPrincipal.mensajeCtrlPrincipal(Veontec.idioma.
                 getProperty("ctrlBuscarActualizacion.mtdDescargaURL.msg2"));
-            JOptionPane.showMessageDialog(laVista, MyFreeLab.idioma.
+            JOptionPane.showMessageDialog(laVista, Veontec.idioma.
                 getProperty("ctrlBuscarActualizacion.mtdDescargaURL.msg2"));
             //System.out.println("" + e.getMessage());
         }
@@ -356,7 +355,7 @@ public class ctrlBuscarActualizacion implements MouseListener {
     private void mtdEstablecerDatosDelProgramaActual(){
         
         // * Cambiar estilo de los campos
-        laVista.etqVersionActual.setText(MyFreeLab.idioma.
+        laVista.etqVersionActual.setText(Veontec.idioma.
                 getProperty("ctrlBuscarActualizacion.mtdEstablecerDatosDelProgramaActual.msg1"));
         laVista.cmpVersionActual.setBorder(null);
         laVista.cmpNovedades.setBorder(null);
@@ -383,7 +382,7 @@ public class ctrlBuscarActualizacion implements MouseListener {
         } else if ( comandoLinux.contains("gdebi") ){        
             return "gdebi";
         } else {
-            JOptionPane.showMessageDialog(laVista, MyFreeLab.idioma.
+            JOptionPane.showMessageDialog(laVista, Veontec.idioma.
                 getProperty("ctrlBuscarActualizacion.mtdInstaladorDeb.msg1"));
             return "echo";
         }

@@ -1,6 +1,6 @@
 package controlador;
 
-import index.MyFreeLab;
+import index.Veontec;
 import java.awt.Dialog;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -66,7 +66,7 @@ public class CtrlGestionarProyectos implements MouseListener{
         //modal = new JDialog();
         CtrlPrincipal.cambiosModalGestionarProyectos = false;
         
-        modal.setTitle(MyFreeLab.idioma.getProperty("ctrlGestionarProyecto.mtdInit.titulo"));
+        modal.setTitle(Veontec.idioma.getProperty("ctrlGestionarProyecto.mtdInit.titulo"));
         //modal.setType(Window.Type.UTILITY);
         modal.setModalityType(Dialog.ModalityType.APPLICATION_MODAL);
         modal.setResizable(false);
@@ -133,7 +133,7 @@ public class CtrlGestionarProyectos implements MouseListener{
             }
             
             if( !encontrado )
-            JOptionPane.showMessageDialog(laVista, MyFreeLab.idioma
+            JOptionPane.showMessageDialog(laVista, Veontec.idioma
                     .getProperty("ctrlGestionarProyecto.mtdBuscarProyecto.msg1")
                     .replace("<Proyecto>",  cmpProyecto));
             
@@ -156,14 +156,14 @@ public class CtrlGestionarProyectos implements MouseListener{
                     // * Notificar al controlador principal
                     CtrlPrincipal.modificacionesCard = true;
                     mtdRellenarTabla();
-                    JOptionPane.showMessageDialog(laVista, MyFreeLab.idioma
+                    JOptionPane.showMessageDialog(laVista, Veontec.idioma
                     .getProperty("ctrlGestionarProyecto.mtdCrearProyecto.msg1")
                     .replace("<Proyecto>", dto.getCmpNombre())
                     );
                 }
                 
             } else
-            JOptionPane.showMessageDialog(laVista, MyFreeLab.idioma
+            JOptionPane.showMessageDialog(laVista, Veontec.idioma
                     .getProperty("ctrlGestionarProyecto.mtdCrearProyecto.msg2")
                     .replace("<Proyecto>",  dto.getCmpNombre())
             );
@@ -185,9 +185,9 @@ public class CtrlGestionarProyectos implements MouseListener{
                 return;
             }
             
-            msg[1] = MyFreeLab.idioma
+            msg[1] = Veontec.idioma
                     .getProperty("ctrlGestionarProyecto.mtdModificarProyecto.msg1") + " | " + dto.getCmpNombre();
-            msg[0] = MyFreeLab.idioma
+            msg[0] = Veontec.idioma
                     .getProperty("ctrlGestionarProyecto.mtdModificarProyecto.msg2");
             int opc = JOptionPane.showConfirmDialog(laVista, msg[0], msg[1], JOptionPane.YES_NO_OPTION);
 
@@ -198,7 +198,7 @@ public class CtrlGestionarProyectos implements MouseListener{
                     // * Notificar al controlador principal
                     CtrlPrincipal.modificacionesCard = true;
                     mtdRellenarTabla();
-                    JOptionPane.showMessageDialog(laVista, MyFreeLab.idioma
+                    JOptionPane.showMessageDialog(laVista, Veontec.idioma
                     .getProperty("ctrlGestionarProyecto.mtdModificarProyecto.msg3")
                     .replace("<Proyecto>", dto.getCmpNombre())
                     );
@@ -207,7 +207,7 @@ public class CtrlGestionarProyectos implements MouseListener{
             }
                 
         } else
-        JOptionPane.showMessageDialog(laVista, MyFreeLab.idioma
+        JOptionPane.showMessageDialog(laVista, Veontec.idioma
                     .getProperty("ctrlGestionarProyecto.mtdModificarProyecto.msg4"));
         
     }
@@ -223,9 +223,9 @@ public class CtrlGestionarProyectos implements MouseListener{
             }
             
             String[] msg =  new String[2];
-            msg[0] = MyFreeLab.idioma
+            msg[0] = Veontec.idioma
                     .getProperty("ctrlGestionarProyecto.mtdRemoverProyecto.msg1")+" | "+ dto.getCmpNombre();
-            msg[1] = MyFreeLab.idioma
+            msg[1] = Veontec.idioma
                     .getProperty("ctrlGestionarProyecto.mtdRemoverProyecto.msg2");
             int opc = JOptionPane.showConfirmDialog(laVista, msg[1] , msg[0], JOptionPane.YES_NO_OPTION);
             
@@ -234,7 +234,7 @@ public class CtrlGestionarProyectos implements MouseListener{
                     // * Notificar al controlador principal
                     CtrlPrincipal.modificacionesCard = true;
                     modeloTabla.removeRow(seleccionado);
-                    JOptionPane.showMessageDialog(laVista, MyFreeLab.idioma
+                    JOptionPane.showMessageDialog(laVista, Veontec.idioma
                     .getProperty("ctrlGestionarProyecto.mtdRemoverProyecto.msg3")
                     .replace("<Proyecto>", dto.getCmpNombre())
                     );
@@ -242,7 +242,7 @@ public class CtrlGestionarProyectos implements MouseListener{
             }
             
         } else
-        JOptionPane.showMessageDialog(laVista, MyFreeLab.idioma
+        JOptionPane.showMessageDialog(laVista, Veontec.idioma
                     .getProperty("ctrlGestionarProyecto.mtdRemoverProyecto.msg4"));
         
     }
@@ -258,14 +258,14 @@ public class CtrlGestionarProyectos implements MouseListener{
             }
             
             String[] msg =  new String[2];
-            msg[0] = MyFreeLab.idioma
+            msg[0] = Veontec.idioma
                     .getProperty("ctrlGestionarProyecto.mtdEliminarProyecto.msg1")+" | "+ dto.getCmpNombre();
-            msg[1] = MyFreeLab.idioma
+            msg[1] = Veontec.idioma
                     .getProperty("ctrlGestionarProyecto.mtdEliminarProyecto.msg2");
             
             // * Verificar si el proyecto está eliminado
             if( dto.getCmpCtrlEstado() == 0 ){
-                JOptionPane.showMessageDialog(laVista, MyFreeLab.idioma
+                JOptionPane.showMessageDialog(laVista, Veontec.idioma
                     .getProperty("ctrlGestionarProyecto.mtdEliminarProyecto.msg3"));
                 return;
             }
@@ -280,7 +280,7 @@ public class CtrlGestionarProyectos implements MouseListener{
                     // * Notificar al controlador principal
                     CtrlPrincipal.modificacionesCard = true;
                     mtdRellenarTabla();
-                    JOptionPane.showMessageDialog(laVista, MyFreeLab.idioma
+                    JOptionPane.showMessageDialog(laVista, Veontec.idioma
                     .getProperty("ctrlGestionarProyecto.mtdEliminarProyecto.msg4")
                     .replace("<Proyecto>", dto.getCmpNombre())
                     );
@@ -288,7 +288,7 @@ public class CtrlGestionarProyectos implements MouseListener{
             }
             
         } else
-        JOptionPane.showMessageDialog(laVista, MyFreeLab.idioma
+        JOptionPane.showMessageDialog(laVista, Veontec.idioma
                     .getProperty("ctrlGestionarProyecto.mtdEliminarProyecto.msg5"));
     
     }
@@ -304,14 +304,14 @@ public class CtrlGestionarProyectos implements MouseListener{
             }
             
             String[] msg =  new String[2];
-            msg[0] = MyFreeLab.idioma
+            msg[0] = Veontec.idioma
                     .getProperty("ctrlGestionarProyecto.mtdRecuperarProyecto.msg1")+" | "+ dto.getCmpNombre();
-            msg[1] = MyFreeLab.idioma
+            msg[1] = Veontec.idioma
                     .getProperty("ctrlGestionarProyecto.mtdRecuperarProyecto.msg2");
             
             // * Verificar si el proyecto está en proceso
             if( dto.getCmpCtrlEstado() > 0 && dto.getCmpCtrlEstado() <= 50 ){
-                JOptionPane.showMessageDialog(laVista, MyFreeLab.idioma
+                JOptionPane.showMessageDialog(laVista, Veontec.idioma
                     .getProperty("ctrlGestionarProyecto.mtdRecuperarProyecto.msg3"));
                 return;
             }
@@ -326,7 +326,7 @@ public class CtrlGestionarProyectos implements MouseListener{
                     // * Notificar al controlador principal
                     CtrlPrincipal.modificacionesCard = true;
                     mtdRellenarTabla();
-                    JOptionPane.showMessageDialog(laVista, MyFreeLab.idioma
+                    JOptionPane.showMessageDialog(laVista, Veontec.idioma
                     .getProperty("ctrlGestionarProyecto.mtdRecuperarProyecto.msg4")
                     .replace("<Proyecto>", dto.getCmpNombre())
                     );
@@ -334,7 +334,7 @@ public class CtrlGestionarProyectos implements MouseListener{
             }
             
         } else
-        JOptionPane.showMessageDialog(laVista, MyFreeLab.idioma
+        JOptionPane.showMessageDialog(laVista, Veontec.idioma
                     .getProperty("ctrlGestionarProyecto.mtdRecuperarProyecto.msg5"));
     
     }
@@ -350,16 +350,16 @@ public class CtrlGestionarProyectos implements MouseListener{
             }
             
             String[] msg =  new String[3];
-            msg[0] = MyFreeLab.idioma
+            msg[0] = Veontec.idioma
                     .getProperty("ctrlGestionarProyecto.mtdFinalizarProyecto.msg1")+" | "+ dto.getCmpNombre();
-            msg[1] = MyFreeLab.idioma
+            msg[1] = Veontec.idioma
                     .getProperty("ctrlGestionarProyecto.mtdFinalizarProyecto.msg2");
-            msg[2] = MyFreeLab.idioma
+            msg[2] = Veontec.idioma
                     .getProperty("ctrlGestionarProyecto.mtdFinalizarProyecto.msg3");
             
             // * Verificar si se puede finalizar
             if(dto.getCmpCtrlEstado() > 50){
-                JOptionPane.showMessageDialog(laVista, MyFreeLab.idioma
+                JOptionPane.showMessageDialog(laVista, Veontec.idioma
                     .getProperty("ctrlGestionarProyecto.mtdFinalizarProyecto.msg4"));
                 return;
             }else
@@ -378,7 +378,7 @@ public class CtrlGestionarProyectos implements MouseListener{
                     // * Notificar al controlador principal
                     CtrlPrincipal.modificacionesCard = true;
                     mtdRellenarTabla();
-                    JOptionPane.showMessageDialog(laVista, MyFreeLab.idioma
+                    JOptionPane.showMessageDialog(laVista, Veontec.idioma
                     .getProperty("ctrlGestionarProyecto.mtdFinalizarProyecto.msg5")
                     .replace("<Proyecto>", dto.getCmpNombre())
                     );
@@ -386,7 +386,7 @@ public class CtrlGestionarProyectos implements MouseListener{
             }
             
         } else
-        JOptionPane.showMessageDialog(laVista, MyFreeLab.idioma
+        JOptionPane.showMessageDialog(laVista, Veontec.idioma
                     .getProperty("ctrlGestionarProyecto.mtdFinalizarProyecto.msg6"));
     }
     
@@ -443,11 +443,11 @@ public class CtrlGestionarProyectos implements MouseListener{
         String cmp = laVista.cmpProyecto.getText().trim();
 
         if( laVista.cmpProyecto.isAprobado() == false || cmp.isEmpty() ){
-            JOptionPane.showMessageDialog(laVista, MyFreeLab.idioma
+            JOptionPane.showMessageDialog(laVista, Veontec.idioma
                     .getProperty("ctrlGestionarProyecto.mtdValidarCampo.msg1"));
             return false;
         } else if( cmp.length() > 30 ) {
-            JOptionPane.showMessageDialog(laVista, MyFreeLab.idioma
+            JOptionPane.showMessageDialog(laVista, Veontec.idioma
                     .getProperty("ctrlGestionarProyecto.mtdValidarCampo.msg2"));
             return false;
         }
@@ -503,14 +503,14 @@ public class CtrlGestionarProyectos implements MouseListener{
     
     private boolean mtdValidarDatos(ProyectoDto proyecto){  
         int errores = 0;
-        String msg = MyFreeLab.idioma
+        String msg = Veontec.idioma
                     .getProperty("ctrlGestionarProyecto.mtdValidarDatos.msg1");
         
         //System.out.println("" + proyecto.toString());
         //System.out.println("" + mtdFormatoFecha(proyecto.getCmpFechaInicial()));
         if( mtdFormatoFecha(proyecto.getCmpFechaInicial()) == false ){
             errores++;
-            msg += MyFreeLab.idioma
+            msg += Veontec.idioma
                     .getProperty("ctrlGestionarProyecto.mtdValidarDatos.msg2");
             
         }
@@ -518,7 +518,7 @@ public class CtrlGestionarProyectos implements MouseListener{
         //System.out.println("" + mtdFormatoFecha(proyecto.getCmpFechaFinal()));
         if( mtdFormatoFecha(proyecto.getCmpFechaFinal()) == false ){
             errores++;
-            msg += MyFreeLab.idioma
+            msg += Veontec.idioma
                     .getProperty("ctrlGestionarProyecto.mtdValidarDatos.msg3");
         
         }
@@ -533,7 +533,7 @@ public class CtrlGestionarProyectos implements MouseListener{
             
             if( diffDias < 0 ){
                 errores++;
-                msg += MyFreeLab.idioma
+                msg += Veontec.idioma
                     .getProperty("ctrlGestionarProyecto.mtdValidarDatos.msg4");
             }
             
@@ -541,26 +541,26 @@ public class CtrlGestionarProyectos implements MouseListener{
         
         if( proyecto.getCmpNombre().isEmpty() ){
             errores++;
-            msg += MyFreeLab.idioma
+            msg += Veontec.idioma
                     .getProperty("ctrlGestionarProyecto.mtdValidarDatos.msg5");
             
         } else if( proyecto.getCmpNombre().length() > 30 ) {
             errores++;
-            msg += MyFreeLab.idioma
+            msg += Veontec.idioma
                     .getProperty("ctrlGestionarProyecto.mtdValidarDatos.msg6");
             
         }
         
         if( proyecto.getCmpMontoAdelantado() < 0 ){
             errores++;
-            msg += MyFreeLab.idioma
+            msg += Veontec.idioma
                     .getProperty("ctrlGestionarProyecto.mtdValidarDatos.msg7");
         
         }
         
         if( proyecto.getCmpMontoAdelantado() < 0 ){
             errores++;
-            msg += MyFreeLab.idioma
+            msg += Veontec.idioma
                     .getProperty("ctrlGestionarProyecto.mtdValidarDatos.msg8");
         
         }
@@ -568,7 +568,7 @@ public class CtrlGestionarProyectos implements MouseListener{
         //System.out.println("Errores : " + errores );
         if( errores > 0 ){
             JOptionPane.showMessageDialog(laVista, msg, 
-                    MyFreeLab.idioma
+                    Veontec.idioma
                     .getProperty("ctrlGestionarProyecto.mtdValidarDatos.msg9")
                     + " | "+proyecto.getCmpNombre(), JOptionPane.YES_OPTION);
             return false;

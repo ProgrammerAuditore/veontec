@@ -5,7 +5,7 @@
  */
 package vista.componentes.campos;
 
-import index.MyFreeLab;
+import index.Veontec;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.FocusEvent;
@@ -107,7 +107,7 @@ public class CampoCorreo extends JTextField implements FocusListener, KeyListene
     }
     
     private void setToolTip(){
-        String aqui= MyFreeLab.idioma.getProperty("componente.setToolTip.aqui");
+        String aqui= Veontec.idioma.getProperty("componente.setToolTip.aqui");
         String EstiloToolTip = "<html><b><font color=white>" + getPlaceholder() + " " + aqui + "</font></b></html>" ;
         setToolTipText( EstiloToolTip );
     }

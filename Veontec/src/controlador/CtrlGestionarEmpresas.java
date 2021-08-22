@@ -1,6 +1,6 @@
 package controlador;
 
-import index.MyFreeLab;
+import index.Veontec;
 import java.awt.Dialog;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -59,7 +59,7 @@ public class CtrlGestionarEmpresas implements MouseListener {
     public void mtdInit() {
         //modal = new JDialog();
         
-        modal.setTitle(MyFreeLab.idioma.getProperty("ctrlGestionarEmpresa.mtdInit.titulo"));
+        modal.setTitle(Veontec.idioma.getProperty("ctrlGestionarEmpresa.mtdInit.titulo"));
         //modal.setType(Window.Type.UTILITY);
         modal.setModalityType(Dialog.ModalityType.APPLICATION_MODAL);
         modal.setResizable(false);
@@ -147,7 +147,7 @@ public class CtrlGestionarEmpresas implements MouseListener {
             }
             
             if( !resultado )
-            JOptionPane.showMessageDialog(laVista, MyFreeLab.idioma
+            JOptionPane.showMessageDialog(laVista, Veontec.idioma
                     .getProperty("ctrlGestionarEmpresa.mtdBuscarEmpresa.msg1")
                     .replace("<Empresa>", cmpEmpresa)
             );
@@ -170,14 +170,14 @@ public class CtrlGestionarEmpresas implements MouseListener {
                     mtdRellenarTabla();
                     CtrlPrincipal.ctrlBarraEstadoNumEmpresas =  empresas.size();
                     CtrlPrincipal.actualizarBarraEstado();
-                    JOptionPane.showMessageDialog(laVista, MyFreeLab.idioma
+                    JOptionPane.showMessageDialog(laVista, Veontec.idioma
                     .getProperty("ctrlGestionarEmpresa.mtdCrearEmpresa.msg1")
                     .replace("<Empresa>", dto.getCmpNombre())
                     );
                 }
                 
             }else 
-            JOptionPane.showMessageDialog(laVista,  MyFreeLab.idioma
+            JOptionPane.showMessageDialog(laVista,  Veontec.idioma
                     .getProperty("ctrlGestionarEmpresa.mtdCrearEmpresa.msg2")
                     .replace("<Empresa>", dto.getCmpNombre())
             );
@@ -198,16 +198,16 @@ public class CtrlGestionarEmpresas implements MouseListener {
             }
             
             String[] msg = new String[2];
-            msg[1] = MyFreeLab.idioma
+            msg[1] = Veontec.idioma
                     .getProperty("ctrlGestionarEmpresa.mtdModificarEmpresa.msg1") + " | " + dto.getCmpNombre();
-            msg[0] = MyFreeLab.idioma
+            msg[0] = Veontec.idioma
                     .getProperty("ctrlGestionarEmpresa.mtdModificarEmpresa.msg2");
             int opc = JOptionPane.showConfirmDialog(laVista, msg[0], msg[1], JOptionPane.YES_OPTION);
             
             if( opc == JOptionPane.YES_OPTION ){
                 if( dao.mtdActualizar(dto) ){
                     mtdRellenarTabla();
-                    JOptionPane.showMessageDialog(laVista, MyFreeLab.idioma
+                    JOptionPane.showMessageDialog(laVista, Veontec.idioma
                     .getProperty("ctrlGestionarEmpresa.mtdModificarEmpresa.msg3")
                     .replace("<Empresa>", dto.getCmpNombre())
                     );
@@ -215,7 +215,7 @@ public class CtrlGestionarEmpresas implements MouseListener {
             }
             
         } else
-        JOptionPane.showMessageDialog(laVista, MyFreeLab.idioma
+        JOptionPane.showMessageDialog(laVista, Veontec.idioma
                     .getProperty("ctrlGestionarEmpresa.mtdModificarEmpresa.msg4"));
         
     }
@@ -228,9 +228,9 @@ public class CtrlGestionarEmpresas implements MouseListener {
             String[] msg = new String[2];
             dto = mtdObtenerEmpresa(seleccionado);
             
-            msg[1] = MyFreeLab.idioma
+            msg[1] = Veontec.idioma
                     .getProperty("ctrlGestionarEmpresa.mtdRemoverEmpresa.msg1") + " | " + dto.getCmpNombre();
-            msg[0] = MyFreeLab.idioma
+            msg[0] = Veontec.idioma
                     .getProperty("ctrlGestionarEmpresa.mtdRemoverEmpresa.msg2");
             int opc = JOptionPane.showConfirmDialog(laVista, msg[0], msg[1], JOptionPane.YES_NO_OPTION );
             
@@ -241,7 +241,7 @@ public class CtrlGestionarEmpresas implements MouseListener {
                     modeloTabla.removeRow(seleccionado);
                     CtrlPrincipal.ctrlBarraEstadoNumEmpresas =  modeloTabla.getRowCount();
                     CtrlPrincipal.actualizarBarraEstado();
-                    JOptionPane.showMessageDialog(laVista, MyFreeLab.idioma
+                    JOptionPane.showMessageDialog(laVista, Veontec.idioma
                     .getProperty("ctrlGestionarEmpresa.mtdRemoverEmpresa.msg3")
                     .replace("<Empresa>", dto.getCmpNombre())
                     );
@@ -249,7 +249,7 @@ public class CtrlGestionarEmpresas implements MouseListener {
             }
             
         } else
-        JOptionPane.showMessageDialog(laVista, MyFreeLab.idioma
+        JOptionPane.showMessageDialog(laVista, Veontec.idioma
                     .getProperty("ctrlGestionarEmpresa.mtdRemoverEmpresa.msg4"));
         
     }
@@ -270,11 +270,11 @@ public class CtrlGestionarEmpresas implements MouseListener {
         String campo = laVista.cmpEmpresa.getText().trim();
         
         if( campo.isEmpty() || !laVista.cmpEmpresa.isAprobado() ){
-            JOptionPane.showMessageDialog(laVista, MyFreeLab.idioma
+            JOptionPane.showMessageDialog(laVista, Veontec.idioma
                     .getProperty("ctrlGestionarEmpresa.mtdValidarCampo.msg1"));
             return false;
         } else if( campo.length() > 30 ){
-            JOptionPane.showMessageDialog(laVista, MyFreeLab.idioma
+            JOptionPane.showMessageDialog(laVista, Veontec.idioma
                     .getProperty("ctrlGestionarEmpresa.mtdValidarCampo.msg2"));
             return false;
         }
@@ -286,53 +286,53 @@ public class CtrlGestionarEmpresas implements MouseListener {
     
     private boolean mtdValidarDatos(EmpresaDto empresa){
         int errores = 0;
-        String msg = MyFreeLab.idioma
+        String msg = Veontec.idioma
                     .getProperty("ctrlGestionarEmpresa.mtdValidarDatos.msg1");
         
         if( empresa.getCmpNombre().isEmpty() ){
             errores++;
-            msg += MyFreeLab.idioma
+            msg += Veontec.idioma
                     .getProperty("ctrlGestionarEmpresa.mtdValidarDatos.msg2");
         } else if( empresa.getCmpNombre().length() > 30 ){
             errores++;
-            msg += MyFreeLab.idioma
+            msg += Veontec.idioma
                     .getProperty("ctrlGestionarEmpresa.mtdValidarDatos.msg3");
         }
         
         if( empresa.getCmpCorreo().isEmpty() ){
             errores++;
-            msg += MyFreeLab.idioma
+            msg += Veontec.idioma
                     .getProperty("ctrlGestionarEmpresa.mtdValidarDatos.msg4");
         } else if( empresa.getCmpCorreo().length() > 60 ){
             errores++;
-            msg += MyFreeLab.idioma
+            msg += Veontec.idioma
                     .getProperty("ctrlGestionarEmpresa.mtdValidarDatos.msg5");
         } else if( !mtdComprobarCorreo( empresa.getCmpCorreo() ) ){
             errores++;
-            msg += MyFreeLab.idioma
+            msg += Veontec.idioma
                     .getProperty("ctrlGestionarEmpresa.mtdValidarDatos.msg6");
         }
         
         if( empresa.getCmpDireccion().isEmpty() ){
             errores++;
-            msg += MyFreeLab.idioma
+            msg += Veontec.idioma
                     .getProperty("ctrlGestionarEmpresa.mtdValidarDatos.msg7");
         } else if( empresa.getCmpDireccion().length() > 60 ){
             errores++;
-            msg += MyFreeLab.idioma
+            msg += Veontec.idioma
                     .getProperty("ctrlGestionarEmpresa.mtdValidarDatos.msg8");
         }
         
         if( !mtdComprobarTMovil(empresa.getCmpTMovil()) ){
             errores++;
-            msg += MyFreeLab.idioma
+            msg += Veontec.idioma
                     .getProperty("ctrlGestionarEmpresa.mtdValidarDatos.msg9");
         }
         
         //System.out.println("Errores : "+ errores);
         if( errores > 0 ){
             JOptionPane.showMessageDialog(laVista, msg, 
-                    MyFreeLab.idioma
+                    Veontec.idioma
                     .getProperty("ctrlGestionarEmpresa.mtdValidarDatos.msg10")
                     + " | " + empresa.getCmpNombre(),
                     JOptionPane.YES_OPTION

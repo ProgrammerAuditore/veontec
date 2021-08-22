@@ -1,6 +1,6 @@
 package controlador;
 
-import index.MyFreeLab;
+import index.Veontec;
 import java.awt.Dialog;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -65,7 +65,7 @@ public class CtrlGestionarRequisitos implements MouseListener{
         requisitos = new ArrayList<RequisitoDto>();
         //modal = new JDialog();
         
-        modal.setTitle(MyFreeLab.idioma
+        modal.setTitle(Veontec.idioma
                 .getProperty("ctrlGestionarRequisitos.mtdInit.titulo")
                 +" | " + proyecto_dto.getCmpNombre() );
         //modal.setType(Window.Type.UTILITY);
@@ -123,7 +123,7 @@ public class CtrlGestionarRequisitos implements MouseListener{
             }
             
             if( !encontrado )
-            JOptionPane.showMessageDialog(laVista, MyFreeLab.idioma
+            JOptionPane.showMessageDialog(laVista, Veontec.idioma
                     .getProperty("ctrlGestionarRequisitos.mtdBuscarRequisito.msg1")
                     .replace("<Requisito>", cmpRequisito)
             );
@@ -144,14 +144,14 @@ public class CtrlGestionarRequisitos implements MouseListener{
                 
                 if( dao.mtdInsetar(dto) ){
                     mtdRellenarTabla();
-                    JOptionPane.showMessageDialog(laVista, MyFreeLab.idioma
+                    JOptionPane.showMessageDialog(laVista, Veontec.idioma
                         .getProperty("ctrlGestionarRequisitos.mtdCrearRequisito.msg1")
                         .replace("<Requisito>", dto.getCmpNombre())
                     );
                 }
                 
             }else
-            JOptionPane.showMessageDialog(laVista, MyFreeLab.idioma
+            JOptionPane.showMessageDialog(laVista, Veontec.idioma
                     .getProperty("ctrlGestionarRequisitos.mtdCrearRequisito.msg2")
                     .replace("<Requisito>", dto.getCmpNombre())
             );   
@@ -171,14 +171,14 @@ public class CtrlGestionarRequisitos implements MouseListener{
             }
             
             String[] msg = new String[2];
-            msg[0] = MyFreeLab.idioma.getProperty("ctrlGestionarRequisitos.mtdModificarRequisito.msg1") + " | " + dto.getCmpNombre();
-            msg[1] = MyFreeLab.idioma.getProperty("ctrlGestionarRequisitos.mtdModificarRequisito.msg2");
+            msg[0] = Veontec.idioma.getProperty("ctrlGestionarRequisitos.mtdModificarRequisito.msg1") + " | " + dto.getCmpNombre();
+            msg[1] = Veontec.idioma.getProperty("ctrlGestionarRequisitos.mtdModificarRequisito.msg2");
             int opc = JOptionPane.showConfirmDialog(laVista, msg[1], msg[0], JOptionPane.YES_NO_OPTION);
             
             if( opc == JOptionPane.YES_OPTION ){
                 if( dao.mtdActualizar(dto) ){
                     mtdRellenarTabla();
-                    JOptionPane.showMessageDialog(laVista, MyFreeLab.idioma
+                    JOptionPane.showMessageDialog(laVista, Veontec.idioma
                     .getProperty("ctrlGestionarRequisitos.mtdModificarRequisito.msg3")
                     .replace("<Requisito>", dto.getCmpNombre())
                     );
@@ -186,7 +186,7 @@ public class CtrlGestionarRequisitos implements MouseListener{
             }
             
         }else 
-        JOptionPane.showMessageDialog(laVista, MyFreeLab.idioma
+        JOptionPane.showMessageDialog(laVista, Veontec.idioma
                     .getProperty("ctrlGestionarRequisitos.mtdModificarRequisito.msg4"));
             
     }
@@ -198,15 +198,15 @@ public class CtrlGestionarRequisitos implements MouseListener{
             String[] msg = new String[2];
             dto = mtdObtenerRequisito(seleccionado);
             
-            msg[0] = MyFreeLab.idioma.getProperty("ctrlGestionarRequisitos.mtdEliminarRequisito.msg1") + " | " + dto.getCmpNombre();
-            msg[1] = MyFreeLab.idioma.getProperty("ctrlGestionarRequisitos.mtdEliminarRequisito.msg2");
+            msg[0] = Veontec.idioma.getProperty("ctrlGestionarRequisitos.mtdEliminarRequisito.msg1") + " | " + dto.getCmpNombre();
+            msg[1] = Veontec.idioma.getProperty("ctrlGestionarRequisitos.mtdEliminarRequisito.msg2");
             int opc = JOptionPane.showConfirmDialog(laVista, msg[1], msg[0], JOptionPane.YES_NO_OPTION);
             
             if( opc == JOptionPane.YES_OPTION ){
                 if( dao.mtdRemover(dto) ){
                     modeloTabla.removeRow(seleccionado);
                     mtdCalcularMonto();
-                    JOptionPane.showMessageDialog(laVista, MyFreeLab.idioma
+                    JOptionPane.showMessageDialog(laVista, Veontec.idioma
                     .getProperty("ctrlGestionarRequisitos.mtdEliminarRequisito.msg3")
                     .replace("<Requisito>", dto.getCmpNombre())
                     );
@@ -214,7 +214,7 @@ public class CtrlGestionarRequisitos implements MouseListener{
             }
             
         } else
-        JOptionPane.showMessageDialog(laVista, MyFreeLab.idioma
+        JOptionPane.showMessageDialog(laVista, Veontec.idioma
                     .getProperty("ctrlGestionarRequisitos.mtdEliminarRequisito.msg4"));
     
     }
@@ -237,11 +237,11 @@ public class CtrlGestionarRequisitos implements MouseListener{
         String campo = laVista.cmpRequisito.getText();
         
         if( campo.isEmpty() || !laVista.cmpRequisito.isAprobado() ){
-            JOptionPane.showMessageDialog(laVista, MyFreeLab.idioma
+            JOptionPane.showMessageDialog(laVista, Veontec.idioma
                     .getProperty("ctrlGestionarRequisitos.mtdValidarCampoRequisito.msg1"));
             return false;
         }else if ( campo.length() > 30 ){
-            JOptionPane.showMessageDialog(laVista, MyFreeLab.idioma
+            JOptionPane.showMessageDialog(laVista, Veontec.idioma
                     .getProperty("ctrlGestionarRequisitos.mtdValidarCampoRequisito.msg2"));
             return false;
         }
@@ -255,11 +255,11 @@ public class CtrlGestionarRequisitos implements MouseListener{
         String campo = laVista.cmpCosto.getText();
         
         if( campo.isEmpty() || !laVista.cmpCosto.isAprobado() ){
-            JOptionPane.showMessageDialog(laVista, MyFreeLab.idioma
+            JOptionPane.showMessageDialog(laVista, Veontec.idioma
                     .getProperty("ctrlGestionarRequisitos.mtdValidarCampoCosto.msg1"));
             return false;
         } else if( campo.equals("0") || campo.equals("0.0") ){
-            JOptionPane.showMessageDialog(laVista, MyFreeLab.idioma
+            JOptionPane.showMessageDialog(laVista, Veontec.idioma
                     .getProperty("ctrlGestionarRequisitos.mtdValidarCampoCosto.msg2"));
             return false;
         }
@@ -331,30 +331,30 @@ public class CtrlGestionarRequisitos implements MouseListener{
 
     private boolean mtdValidarDatos(RequisitoDto requisito) {
         int errores = 0;
-        String msg = MyFreeLab.idioma
+        String msg = Veontec.idioma
                     .getProperty("ctrlGestionarRequisitos.mtdValidarDatos.msg1");
         
         if(requisito.getCmpNombre().isEmpty()){
             errores++;
-            msg += MyFreeLab.idioma
+            msg += Veontec.idioma
                     .getProperty("ctrlGestionarRequisitos.mtdValidarDatos.msg2");
         }else
         if (requisito.getCmpNombre().length() > 30){
             errores++;
-            msg += MyFreeLab.idioma
+            msg += Veontec.idioma
                     .getProperty("ctrlGestionarRequisitos.mtdValidarDatos.msg3");
         }
        
         if (requisito.getCmpCosto() < 0){
             errores++;
-            msg += MyFreeLab.idioma
+            msg += Veontec.idioma
                     .getProperty("ctrlGestionarRequisitos.mtdValidarDatos.msg4");
         }
         
         //System.out.println("Errores: " + errores);
         if( errores > 0 ){
             JOptionPane.showMessageDialog(laVista, msg,
-                    MyFreeLab.idioma
+                    Veontec.idioma
                     .getProperty("ctrlGestionarRequisitos.mtdValidarDatos.msg5")
                     +" | " + requisito.getCmpNombre(),
                     JOptionPane.YES_OPTION);

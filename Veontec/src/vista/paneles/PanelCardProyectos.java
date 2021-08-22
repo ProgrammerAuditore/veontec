@@ -5,7 +5,7 @@
  */
 package vista.paneles;
 
-import index.MyFreeLab;
+import index.Veontec;
 import java.awt.Color;
 import java.awt.Dimension;
 
@@ -60,7 +60,7 @@ public class PanelCardProyectos extends javax.swing.JPanel {
         btnCotizar.setVisible(true);
         btnCotizar.setEnabled(true);
         //btnCotizar.setTexto("Ver info.");
-        this.btnCotizar.setTexto(MyFreeLab.idioma.getProperty("panelCardProyecto.btnVerInfo"));
+        this.btnCotizar.setTexto(Veontec.idioma.getProperty("panelCardProyecto.btnVerInfo"));
     }
     
     private void mtdBorrarInformacion(){
@@ -74,14 +74,14 @@ public class PanelCardProyectos extends javax.swing.JPanel {
     private void mtdEstablecerIdioma(){
         
         // * Etiquetas
-        this.lblFechaInicial.setText(MyFreeLab.idioma.getProperty("panelCardProyecto.lblFechaInicial"));
-        this.lblFechaFinal.setText(MyFreeLab.idioma.getProperty("panelCardProyecto.lblFechaFinal"));
-        this.lblMontoInicial.setText(MyFreeLab.idioma.getProperty("panelCardProyecto.lblMontoInicial"));
-        this.lblMontoEstimado.setText(MyFreeLab.idioma.getProperty("panelCardProyecto.lblMontoEstimado"));
+        this.lblFechaInicial.setText(Veontec.idioma.getProperty("panelCardProyecto.lblFechaInicial"));
+        this.lblFechaFinal.setText(Veontec.idioma.getProperty("panelCardProyecto.lblFechaFinal"));
+        this.lblMontoInicial.setText(Veontec.idioma.getProperty("panelCardProyecto.lblMontoInicial"));
+        this.lblMontoEstimado.setText(Veontec.idioma.getProperty("panelCardProyecto.lblMontoEstimado"));
         
         // * Botones
-        this.btnCotizar.setTexto(MyFreeLab.idioma.getProperty("panelCardProyecto.btnCotizar"));
-        this.btnModificar.setTexto(MyFreeLab.idioma.getProperty("panelCardProyecto.btnModificar"));
+        this.btnCotizar.setTexto(Veontec.idioma.getProperty("panelCardProyecto.btnCotizar"));
+        this.btnModificar.setTexto(Veontec.idioma.getProperty("panelCardProyecto.btnModificar"));
         
         
     }

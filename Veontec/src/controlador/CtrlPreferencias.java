@@ -1,6 +1,6 @@
 package controlador;
 
-import index.MyFreeLab;
+import index.Veontec;
 import java.awt.Dialog;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -35,7 +35,7 @@ public class CtrlPreferencias implements MouseListener{
     public void mtdInit(){
         mtdEstablecerDatos();
         modal.setModalityType(Dialog.ModalityType.APPLICATION_MODAL);
-        modal.setTitle(MyFreeLab.idioma.getProperty("ctrlPreferencias.mtdInit.titulo"));
+        modal.setTitle(Veontec.idioma.getProperty("ctrlPreferencias.mtdInit.titulo"));
         modal.setResizable(false);
         modal.setSize( laVista.getSize() );
         modal.setPreferredSize( laVista.getSize() );
@@ -71,13 +71,13 @@ public class CtrlPreferencias implements MouseListener{
             dto.setEstilo( String.valueOf(laVista.cmboxEstilos.getSelectedItem()) );
             
             dao.regitrar_datos(dto);
-            JOptionPane.showMessageDialog(laVista, MyFreeLab.idioma
+            JOptionPane.showMessageDialog(laVista, Veontec.idioma
                     .getProperty("ctrlPreferencias.mtdBtnAceptar.msg1"));
             
             mtdBtnCancelar();
             
         }else
-            JOptionPane.showMessageDialog(laVista, MyFreeLab.idioma
+            JOptionPane.showMessageDialog(laVista, Veontec.idioma
                     .getProperty("ctrlPreferencias.mtdBtnAceptar.msg2"));
     }
     
@@ -96,11 +96,11 @@ public class CtrlPreferencias implements MouseListener{
             dto = new PreferenciaDto();
         }
         
-        if( MyFreeLab.idioma.getProperty("lang").equals("English") ){
+        if( Veontec.idioma.getProperty("lang").equals("English") ){
             laVista.cmboxIdiomas.removeAllItems();
-            laVista.cmboxIdiomas.addItem(MyFreeLab.idioma
+            laVista.cmboxIdiomas.addItem(Veontec.idioma
                         .getProperty("ctrlPreferencias.mtdEstablecerDatos.msg1"));
-            laVista.cmboxIdiomas.addItem(MyFreeLab.idioma
+            laVista.cmboxIdiomas.addItem(Veontec.idioma
                         .getProperty("ctrlPreferencias.mtdEstablecerDatos.msg2"));
         }
         

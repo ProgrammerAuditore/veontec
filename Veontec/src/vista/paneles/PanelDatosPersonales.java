@@ -5,7 +5,7 @@
  */
 package vista.paneles;
 
-import index.MyFreeLab;
+import index.Veontec;
 import src.Recursos;
 
 /**
@@ -29,23 +29,23 @@ public class PanelDatosPersonales extends javax.swing.JPanel {
     
     private void mtdEstablecerIdioma(){
         // * Etiquetas
-        this.etqApellidos.setText(MyFreeLab.idioma.getProperty("panelDatosPersonales.etqApellidos"));
-        this.etqDireccion.setText(MyFreeLab.idioma.getProperty("panelDatosPersonales.etqDireccion"));
-        this.etqEmail.setText(MyFreeLab.idioma.getProperty("panelDatosPersonales.etqEmail"));
-        this.etqNombres.setText(MyFreeLab.idioma.getProperty("panelDatosPersonales.etqNombres"));
-        this.etqTelMovil.setText(MyFreeLab.idioma.getProperty("panelDatosPersonales.etqTelMovil"));
-        this.etqTitulo.setText(MyFreeLab.idioma.getProperty("panelDatosPersonales.etqTitulo"));
+        this.etqApellidos.setText(Veontec.idioma.getProperty("panelDatosPersonales.etqApellidos"));
+        this.etqDireccion.setText(Veontec.idioma.getProperty("panelDatosPersonales.etqDireccion"));
+        this.etqEmail.setText(Veontec.idioma.getProperty("panelDatosPersonales.etqEmail"));
+        this.etqNombres.setText(Veontec.idioma.getProperty("panelDatosPersonales.etqNombres"));
+        this.etqTelMovil.setText(Veontec.idioma.getProperty("panelDatosPersonales.etqTelMovil"));
+        this.etqTitulo.setText(Veontec.idioma.getProperty("panelDatosPersonales.etqTitulo"));
         
         // * Campos (Placeholder)
-        this.cmpApellidos.setPlaceholder(MyFreeLab.idioma.getProperty("panelDatosPersonales.etqApellidos"));
-        this.cmpDireccion.setPlaceholder(MyFreeLab.idioma.getProperty("panelDatosPersonales.etqDireccion"));
-        this.cmpCorreo.setPlaceholder(MyFreeLab.idioma.getProperty("panelDatosPersonales.etqEmail"));
-        this.cmpNombres.setPlaceholder(MyFreeLab.idioma.getProperty("panelDatosPersonales.etqNombres"));
-        this.cmpTelMovil.setPlaceholder(MyFreeLab.idioma.getProperty("panelDatosPersonales.etqTelMovil"));
+        this.cmpApellidos.setPlaceholder(Veontec.idioma.getProperty("panelDatosPersonales.etqApellidos"));
+        this.cmpDireccion.setPlaceholder(Veontec.idioma.getProperty("panelDatosPersonales.etqDireccion"));
+        this.cmpCorreo.setPlaceholder(Veontec.idioma.getProperty("panelDatosPersonales.etqEmail"));
+        this.cmpNombres.setPlaceholder(Veontec.idioma.getProperty("panelDatosPersonales.etqNombres"));
+        this.cmpTelMovil.setPlaceholder(Veontec.idioma.getProperty("panelDatosPersonales.etqTelMovil"));
         
         // * Botones
-        this.btnAceptar.setTexto(MyFreeLab.idioma.getProperty("panelDatosPersonales.btnAceptar"));
-        this.btnCancelar.setTexto(MyFreeLab.idioma.getProperty("panelDatosPersonales.btnCancelar"));
+        this.btnAceptar.setTexto(Veontec.idioma.getProperty("panelDatosPersonales.btnAceptar"));
+        this.btnCancelar.setTexto(Veontec.idioma.getProperty("panelDatosPersonales.btnCancelar"));
     }
 
     /**
@@ -104,7 +104,7 @@ public class PanelDatosPersonales extends javax.swing.JPanel {
             .addComponent(etqTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, 61, Short.MAX_VALUE)
         );
 
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(MyFreeLab.idioma.getProperty("panelDatosPersonales.etqTituloPanel")));
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(Veontec.idioma.getProperty("panelDatosPersonales.etqTituloPanel")));
 
         etqNombres.setText("Introduzca nombre (s)");
 
