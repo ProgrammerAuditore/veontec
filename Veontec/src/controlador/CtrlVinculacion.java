@@ -1,6 +1,6 @@
 package controlador;
 
-import index.MyFreeLab;
+import index.Veontec;
 import java.awt.Dialog;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
@@ -49,7 +49,7 @@ public class CtrlVinculacion implements MouseListener, ItemListener{
         
         // * Defini propiedades
         this.laVista.cmbProyectos.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { 
-            MyFreeLab.idioma.getProperty("ctrlVinculacion.msg1")
+            Veontec.idioma.getProperty("ctrlVinculacion.msg1")
         }));
         this.laVista.lstEmpresas.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         this.laVista.lstEmpresasAsociadas.setFocusable(false);
@@ -69,7 +69,7 @@ public class CtrlVinculacion implements MouseListener, ItemListener{
         lista_asociados = new ArrayList<>();
         
         modal.setModalityType(Dialog.ModalityType.APPLICATION_MODAL);
-        modal.setTitle(MyFreeLab.idioma.
+        modal.setTitle(Veontec.idioma.
                 getProperty("ctrlVinculacion.mtdInit.titulo"));
         modal.setResizable(false);
         modal.setSize( laVista.getSize() );
@@ -168,7 +168,7 @@ public class CtrlVinculacion implements MouseListener, ItemListener{
                 mtdCargarEmpresas();
                 mtdDefinirEmpresasAsociados();
                 mtdReEstablecerEmpresas();
-                JOptionPane.showMessageDialog(laVista, MyFreeLab.idioma
+                JOptionPane.showMessageDialog(laVista, Veontec.idioma
                         .getProperty("ctrlVinculacion.mtdAsociar.msg1")
                         .replace("<Empresa>", vinculacion_dto.getCmpEmpNombre())
                         .replace("<Proyecto>", vinculacion_dto.getCmpProNombre())
@@ -176,7 +176,7 @@ public class CtrlVinculacion implements MouseListener, ItemListener{
             }
         
         }else 
-        JOptionPane.showMessageDialog(laVista, MyFreeLab.idioma.
+        JOptionPane.showMessageDialog(laVista, Veontec.idioma.
                 getProperty("ctrlVinculacion.mtdAsociar.msg2"));
         
     }
@@ -195,14 +195,14 @@ public class CtrlVinculacion implements MouseListener, ItemListener{
                 mtdCargarEmpresas();
                 mtdDefinirEmpresasAsociados();
                 mtdReEstablecerEmpresas();
-                JOptionPane.showMessageDialog(laVista, MyFreeLab.idioma
+                JOptionPane.showMessageDialog(laVista, Veontec.idioma
                     .getProperty("ctrlVinculacion.mtdEliminar.msg1")
                     .replace("<Empresa>", vinculacion_dto.getCmpEmpNombre())
                     .replace("<Proyecto>", vinculacion_dto.getCmpProNombre())
                 );
             }
         } else
-        JOptionPane.showMessageDialog(laVista, MyFreeLab.idioma.
+        JOptionPane.showMessageDialog(laVista, Veontec.idioma.
                 getProperty("ctrlVinculacion.mtdEliminar.msg2"));
         
     }
@@ -235,7 +235,7 @@ public class CtrlVinculacion implements MouseListener, ItemListener{
         mtdVaciarEmpresas();
         mtdCargarEmpresas();
         
-        if( !nombre_empresa.equals(MyFreeLab.idioma.
+        if( !nombre_empresa.equals(Veontec.idioma.
                 getProperty("ctrlVinculacion.mtdElegirProyecto.msg1")) ){
             laVista.etqAsociar.setEnabled(true);
             
@@ -252,7 +252,7 @@ public class CtrlVinculacion implements MouseListener, ItemListener{
     private void mtdVaciarEmpresas(){
        lista_empresas.clear();
        laVista.lstEmpresas.removeAll();
-       String[] ninguno = {MyFreeLab.idioma.
+       String[] ninguno = {Veontec.idioma.
                 getProperty("ctrlVinculacion.mtdVaciarEmpresas.msg1")};
        
        laVista.lstEmpresasAsociadas.setListData(ninguno);

@@ -1,6 +1,6 @@
 package controlador;
 
-import index.MyFreeLab;
+import index.Veontec;
 import java.awt.Dialog;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -49,7 +49,7 @@ public class CtrlResumen implements MouseListener{
     public void mtdInit(){
         
         modal.setModalityType(Dialog.ModalityType.APPLICATION_MODAL);
-        modal.setTitle(MyFreeLab.idioma.getProperty("panelInforme.mtdInit.titulo"));
+        modal.setTitle(Veontec.idioma.getProperty("panelInforme.mtdInit.titulo"));
         modal.setResizable(false);
         modal.setSize( laVista.getSize() );
         modal.setPreferredSize(laVista.getSize() );
@@ -90,7 +90,7 @@ public class CtrlResumen implements MouseListener{
             JasperPrint jp = mtdCargarJasperReports();
 
             if (jp.getPages().isEmpty()) {
-                JOptionPane.showMessageDialog(laVista, MyFreeLab.idioma
+                JOptionPane.showMessageDialog(laVista, Veontec.idioma
                         .getProperty("ctrlTarjetaProyecto.mtdCotizarProyecto.msg1"));
 
             } else {
@@ -109,7 +109,7 @@ public class CtrlResumen implements MouseListener{
         } catch (Exception e) {
             // El archivo no existe
             //System.out.println("" + e.getMessage());
-            CtrlPrincipal.mensajeCtrlPrincipal(MyFreeLab.idioma
+            CtrlPrincipal.mensajeCtrlPrincipal(Veontec.idioma
                         .getProperty("ctrlTarjetaProyecto.mtdCotizarProyecto.msg3"));
         }
         
@@ -135,7 +135,7 @@ public class CtrlResumen implements MouseListener{
         } catch (JRException ex) {
             // Error en la base de datos
             //Logger.getLogger(CtrlPrincipal.class.getName()).log(Level.SEVERE, null, ex);
-            CtrlPrincipal.mensajeCtrlPrincipal(MyFreeLab.idioma
+            CtrlPrincipal.mensajeCtrlPrincipal(Veontec.idioma
                         .getProperty("ctrlTarjetaProyecto.mtdGenerarReporte.msg1"));
         }
 

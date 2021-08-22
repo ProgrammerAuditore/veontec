@@ -5,7 +5,7 @@
  */
 package vista.paneles;
 
-import index.MyFreeLab;
+import index.Veontec;
 import java.awt.Dimension;
 import src.Recursos;
 
@@ -31,12 +31,12 @@ public class PanelActualizacion extends javax.swing.JPanel {
     
     private void mtdEstablecerIdioma(){
         // * Etiquetas
-        this.etqNovedades.setText(MyFreeLab.idioma.getProperty("panelActualizacion.etqNovedades"));
-        this.etqVersionActual.setText(MyFreeLab.idioma.getProperty("panelActualizacion.etqVersionActual"));
+        this.etqNovedades.setText(Veontec.idioma.getProperty("panelActualizacion.etqNovedades"));
+        this.etqVersionActual.setText(Veontec.idioma.getProperty("panelActualizacion.etqVersionActual"));
         
         
         // * Botones
-        this.btnBuscar.setTexto(MyFreeLab.idioma.getProperty("panelActualizacion.btnBuscar"));
+        this.btnBuscar.setTexto(Veontec.idioma.getProperty("panelActualizacion.btnBuscar"));
     }
 
     /**
@@ -56,7 +56,7 @@ public class PanelActualizacion extends javax.swing.JPanel {
         cmpVersionActual = new vista.componentes.campos.CampoTexto();
         btnBuscar = new vista.componentes.boton.Boton();
 
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(MyFreeLab.idioma.getProperty("panelActualizacion.panelTitulo")));
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(Veontec.idioma.getProperty("panelActualizacion.panelTitulo")));
 
         etqNovedades.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         etqNovedades.setText("Novedades");

@@ -28,7 +28,7 @@ import src.Recursos;
 import src.idiomas.Idiomas;
 import vista.ventanas.VentanaPrincipal;
 
-public class MyFreeLab {
+public class Veontec {
     
     private VentanaPrincipal ventana;
     public static Properties idioma = new Idiomas("en");
@@ -37,7 +37,7 @@ public class MyFreeLab {
     
     public void mtdTagInit() {
         
-        MyFreeLab.mtdVerificarArranque();
+        Veontec.mtdVerificarArranque();
         
         mtdCargarPreferencias();
         HiloConexion hc = new HiloConexion();
@@ -79,9 +79,9 @@ public class MyFreeLab {
         
         // * Verificar conexion 
         if( CtrlHiloConexion.ctrlEstado ){
-            CtrlPrincipal.mensajeCtrlPrincipal(MyFreeLab.idioma.getProperty("ctrlPrincipal.conexion.on.msg2"));
+            CtrlPrincipal.mensajeCtrlPrincipal(Veontec.idioma.getProperty("ctrlPrincipal.conexion.on.msg2"));
         }else{
-            CtrlPrincipal.mensajeCtrlPrincipal(MyFreeLab.idioma.getProperty("ctrlPrincipal.conexion.off.msg2"));
+            CtrlPrincipal.mensajeCtrlPrincipal(Veontec.idioma.getProperty("ctrlPrincipal.conexion.off.msg2"));
         }
         
     }
@@ -121,12 +121,12 @@ public class MyFreeLab {
         // ***** FASE 1  | Verificar ID
         //System.out.println("***** FASE 1 | Verificar ID");
         System.out.println(Info.NombreSoftware + " running.");
-        MyFreeLab.ctrlID = Recursos.PID * 3 + 7;
+        Veontec.ctrlID = Recursos.PID * 3 + 7;
 
         // * Guardar datos de inicialización del programa
         EjecucionDao archivoRun = new EjecucionDao();
         EjecucionDto dto = new EjecucionDto();
-        dto.setId(MyFreeLab.ctrlID);
+        dto.setId(Veontec.ctrlID);
         dto.setPid(Recursos.PID);
         dto.setEstado(1);
         dto.setTiempo_inicial(System.nanoTime());
@@ -149,10 +149,10 @@ public class MyFreeLab {
             
             if( dto.getIdioma().trim().equals("Español") || dto.getIdioma().trim().equals("Spanish") ){
                 idioma = new Idiomas("es");
-                MyFreeLab.IdiomaDefinido = "ESP";
+                Veontec.IdiomaDefinido = "ESP";
             }else{
                 idioma = new Idiomas("en");
-                MyFreeLab.IdiomaDefinido = "ENG";
+                Veontec.IdiomaDefinido = "ENG";
             }
             Recursos.mtdCambiarFuente( dto.getFuente() );
             Recursos.styleButtonDefault = dto.getEstilo();
@@ -161,7 +161,7 @@ public class MyFreeLab {
     
     public static void mtdVerificarID(){
         EjecucionDao archivoRun = new EjecucionDao();
-        long estadoA = MyFreeLab.ctrlID;
+        long estadoA = Veontec.ctrlID;
         long estadoC = estadoA * 3 + 7;
         
         if( Recursos.dataRun().getAbsoluteFile().exists() ){
@@ -195,7 +195,7 @@ public class MyFreeLab {
             System.exit(0);
         }
         
-        MyFreeLab.ctrlID = estadoC;
+        Veontec.ctrlID = estadoC;
     }
     
     public static boolean mtdVerificarPID(){
@@ -334,22 +334,22 @@ public class MyFreeLab {
         System.out.println(Info.NombreSoftware);
         System.out.println(Info.Avatar);
         System.out.println("");
-        System.out.println(MyFreeLab.idioma.get("MyFreeLab.mtdTagHelp.msg1"));
+        System.out.println(Veontec.idioma.get("MyFreeLab.mtdTagHelp.msg1"));
         
         System.out.print("  --init              ");
-        System.out.println(MyFreeLab.idioma.get("MyFreeLab.mtdTagHelp.msg2") +" "+Info.NombreSoftware);
+        System.out.println(Veontec.idioma.get("MyFreeLab.mtdTagHelp.msg2") +" "+Info.NombreSoftware);
         
         System.out.print("  --mkconn, -mc       ");
-        System.out.println(MyFreeLab.idioma.get("MyFreeLab.mtdTagHelp.msg3") + " conn");
+        System.out.println(Veontec.idioma.get("MyFreeLab.mtdTagHelp.msg3") + " conn");
         
         System.out.print("  --mkpref, -mp       ");
-        System.out.println(MyFreeLab.idioma.get("MyFreeLab.mtdTagHelp.msg3") + " .pconfig");
+        System.out.println(Veontec.idioma.get("MyFreeLab.mtdTagHelp.msg3") + " .pconfig");
         
         System.out.print("  --pid               ");
-        System.out.println(MyFreeLab.idioma.get("MyFreeLab.mtdTagHelp.msg4"));
+        System.out.println(Veontec.idioma.get("MyFreeLab.mtdTagHelp.msg4"));
         
         System.out.print("  --help, -h          ");
-        System.out.println(MyFreeLab.idioma.get("MyFreeLab.mtdTagHelp.msg5"));
+        System.out.println(Veontec.idioma.get("MyFreeLab.mtdTagHelp.msg5"));
         
         System.out.println("");
         System.out.println(Info.SitioWeb);

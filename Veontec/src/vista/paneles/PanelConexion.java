@@ -5,7 +5,7 @@
  */
 package vista.paneles;
 
-import index.MyFreeLab;
+import index.Veontec;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
@@ -60,23 +60,23 @@ public class PanelConexion extends javax.swing.JPanel {
     
     private void mtdEstablecerIdioma(){
         // * Etiquetas
-        this.etqUsuario.setText(MyFreeLab.idioma.getProperty("panelConexion.etqUsuario"));
-        this.etqContrasenha.setText(MyFreeLab.idioma.getProperty("panelConexion.etqContrasenha"));
-        this.etqDatabase.setText(MyFreeLab.idioma.getProperty("panelConexion.etqDatabase"));
-        this.etqHost.setText(MyFreeLab.idioma.getProperty("panelConexion.etqHost"));
-        this.etqPuerto.setText(MyFreeLab.idioma.getProperty("panelConexion.etqPuerto"));
-        this.etqTitulo.setText(MyFreeLab.idioma.getProperty("panelConexion.etqTitulo"));
+        this.etqUsuario.setText(Veontec.idioma.getProperty("panelConexion.etqUsuario"));
+        this.etqContrasenha.setText(Veontec.idioma.getProperty("panelConexion.etqContrasenha"));
+        this.etqDatabase.setText(Veontec.idioma.getProperty("panelConexion.etqDatabase"));
+        this.etqHost.setText(Veontec.idioma.getProperty("panelConexion.etqHost"));
+        this.etqPuerto.setText(Veontec.idioma.getProperty("panelConexion.etqPuerto"));
+        this.etqTitulo.setText(Veontec.idioma.getProperty("panelConexion.etqTitulo"));
         
         // * Campos (Placeholder)
-        this.cmpUsuario.setPlaceholder(MyFreeLab.idioma.getProperty("panelConexion.etqUsuario"));
-        this.cmpContrasenha.setPlaceholder(MyFreeLab.idioma.getProperty("panelConexion.etqContrasenha"));
-        this.cmpDatabase.setPlaceholder(MyFreeLab.idioma.getProperty("panelConexion.etqDatabase"));
-        this.cmpHost.setPlaceholder(MyFreeLab.idioma.getProperty("panelConexion.etqHost"));
-        this.cmpPuerto.setPlaceholder(MyFreeLab.idioma.getProperty("panelConexion.etqPuerto"));
+        this.cmpUsuario.setPlaceholder(Veontec.idioma.getProperty("panelConexion.etqUsuario"));
+        this.cmpContrasenha.setPlaceholder(Veontec.idioma.getProperty("panelConexion.etqContrasenha"));
+        this.cmpDatabase.setPlaceholder(Veontec.idioma.getProperty("panelConexion.etqDatabase"));
+        this.cmpHost.setPlaceholder(Veontec.idioma.getProperty("panelConexion.etqHost"));
+        this.cmpPuerto.setPlaceholder(Veontec.idioma.getProperty("panelConexion.etqPuerto"));
         
         // Botones
-        this.btnEstablecerConexion.setTexto(MyFreeLab.idioma.getProperty("panelConexion.btnEstablecerConexion"));
-        this.btnCerrarConexion.setTexto(MyFreeLab.idioma.getProperty("panelConexion.btnCerrarConexion"));
+        this.btnEstablecerConexion.setTexto(Veontec.idioma.getProperty("panelConexion.btnEstablecerConexion"));
+        this.btnCerrarConexion.setTexto(Veontec.idioma.getProperty("panelConexion.btnCerrarConexion"));
         
     }
     
@@ -142,7 +142,7 @@ public class PanelConexion extends javax.swing.JPanel {
             .addComponent(etqTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, 60, Short.MAX_VALUE)
         );
 
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(MyFreeLab.idioma.getProperty("panelConexion.etqTituloPanel")));
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(Veontec.idioma.getProperty("panelConexion.etqTituloPanel")));
 
         etqHost.setText("Introduzca el host");
 

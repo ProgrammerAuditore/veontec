@@ -5,7 +5,7 @@
  */
 package vista.paneles;
 
-import index.MyFreeLab;
+import index.Veontec;
 import src.Recursos;
 
 /**
@@ -30,21 +30,21 @@ public class PanelGestionarProyectos extends javax.swing.JPanel {
     private void mtdEstablecerIdioma(){
         
         // * Etiquetas
-        this.etqTitulo.setText(MyFreeLab.idioma.getProperty("panelGestionarProyecto.etqTitulo"));
-        this.etqAcciones.setText(MyFreeLab.idioma.getProperty("panelGestionarProyecto.etqAcciones"));
-        this.etqProyecto.setText(MyFreeLab.idioma.getProperty("panelGestionarProyecto.etqProyecto"));
+        this.etqTitulo.setText(Veontec.idioma.getProperty("panelGestionarProyecto.etqTitulo"));
+        this.etqAcciones.setText(Veontec.idioma.getProperty("panelGestionarProyecto.etqAcciones"));
+        this.etqProyecto.setText(Veontec.idioma.getProperty("panelGestionarProyecto.etqProyecto"));
         
         // * Campos (Placeholder)
-        this.cmpProyecto.setPlaceholder(MyFreeLab.idioma.getProperty("panelGestionarProyecto.etqProyecto"));
+        this.cmpProyecto.setPlaceholder(Veontec.idioma.getProperty("panelGestionarProyecto.etqProyecto"));
         
         // * Botones
-        this.btnCrear.setTexto(MyFreeLab.idioma.getProperty("panelGestionarProyecto.btnCrear"));
-        this.btnBuscar.setTexto(MyFreeLab.idioma.getProperty("panelGestionarProyecto.btnBuscar"));
-        this.btnModificar.setTexto(MyFreeLab.idioma.getProperty("panelGestionarProyecto.btnModificar"));
-        this.btnEliminar.setTexto(MyFreeLab.idioma.getProperty("panelGestionarProyecto.btnEliminar"));
-        this.btnRemover.setTexto(MyFreeLab.idioma.getProperty("panelGestionarProyecto.btnRemover"));
-        this.btnRealizado.setTexto(MyFreeLab.idioma.getProperty("panelGestionarProyecto.btnRealizado"));
-        this.btnRecuperar.setTexto(MyFreeLab.idioma.getProperty("panelGestionarProyecto.btnRecuperar"));
+        this.btnCrear.setTexto(Veontec.idioma.getProperty("panelGestionarProyecto.btnCrear"));
+        this.btnBuscar.setTexto(Veontec.idioma.getProperty("panelGestionarProyecto.btnBuscar"));
+        this.btnModificar.setTexto(Veontec.idioma.getProperty("panelGestionarProyecto.btnModificar"));
+        this.btnEliminar.setTexto(Veontec.idioma.getProperty("panelGestionarProyecto.btnEliminar"));
+        this.btnRemover.setTexto(Veontec.idioma.getProperty("panelGestionarProyecto.btnRemover"));
+        this.btnRealizado.setTexto(Veontec.idioma.getProperty("panelGestionarProyecto.btnRealizado"));
+        this.btnRecuperar.setTexto(Veontec.idioma.getProperty("panelGestionarProyecto.btnRecuperar"));
         
     }
 
@@ -104,7 +104,7 @@ public class PanelGestionarProyectos extends javax.swing.JPanel {
             .addComponent(etqTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, 61, Short.MAX_VALUE)
         );
 
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(MyFreeLab.idioma.getProperty("panelGestionarProyecto.etqTituloPanel")));
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(Veontec.idioma.getProperty("panelGestionarProyecto.etqTituloPanel")));
 
         etqProyecto.setText("Nombre del proyecto");
 
