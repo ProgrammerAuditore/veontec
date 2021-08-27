@@ -48,10 +48,6 @@ public class PanelInicarSession extends javax.swing.JPanel {
 
         etiqueta1.setText("Correo electronico");
 
-        campoPassword1.setText("campoPassword1");
-
-        campoCorreo1.setText("campoCorreo1");
-
         btnIniciarSession.setImgButtonType("success");
         btnIniciarSession.setTexto("Iniciar session");
 

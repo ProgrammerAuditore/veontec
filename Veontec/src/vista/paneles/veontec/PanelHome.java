@@ -20,12 +20,12 @@ package vista.paneles.veontec;
  *
  * @author victor
  */
-public class PanelRegistrarme extends javax.swing.JPanel {
+public class PanelHome extends javax.swing.JPanel {
 
     /**
      * Creates new form PanelLoggin
      */
-    public PanelRegistrarme() {
+    public PanelHome() {
         initComponents();
     }
 
@@ -42,23 +42,53 @@ public class PanelRegistrarme extends javax.swing.JPanel {
         etiqueta1 = new vista.componentes.etiqueta.Etiqueta();
         campoPassword1 = new vista.componentes.campos.CampoPassword();
         campoCorreo1 = new vista.componentes.campos.CampoCorreo();
-        btnRegistrarme = new vista.componentes.boton.Boton();
+        btnEliminarCuenta = new vista.componentes.boton.Boton();
         etiqueta2 = new vista.componentes.etiqueta.Etiqueta();
-        etiqueta3 = new vista.componentes.etiqueta.Etiqueta();
-        campoPassword2 = new vista.componentes.campos.CampoPassword();
         campoTexto1 = new vista.componentes.campos.CampoTexto();
         etiqueta4 = new vista.componentes.etiqueta.Etiqueta();
+        boton1 = new vista.componentes.boton.Boton();
+        jPanel1 = new javax.swing.JPanel();
+        titulo1 = new vista.componentes.etiqueta.Titulo();
 
         etiqueta1.setText("Correo electronico");
 
-        btnRegistrarme.setImgButtonType("success");
-        btnRegistrarme.setTexto("Registrarme");
+        campoPassword1.setEditable(false);
+
+        campoCorreo1.setEditable(false);
+
+        btnEliminarCuenta.setImgButtonType("danger");
+        btnEliminarCuenta.setTexto("Elimiinar cuenta");
 
         etiqueta2.setText("Contraseña");
 
-        etiqueta3.setText("Repetir contraseña");
+        campoTexto1.setEditable(false);
 
         etiqueta4.setText("Nombre completo");
+
+        boton1.setImgButtonType("warning");
+        boton1.setTexto("Cerrrar sesion");
+
+        jPanel1.setBackground(new java.awt.Color(0, 102, 102));
+
+        titulo1.setForeground(new java.awt.Color(255, 255, 255));
+        titulo1.setText("Bienvenida a Veontec");
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(titulo1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(229, 229, 229))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(titulo1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(24, Short.MAX_VALUE))
+        );
 
         javax.swing.GroupLayout jPanelBackground1Layout = new javax.swing.GroupLayout(jPanelBackground1);
         jPanelBackground1.setLayout(jPanelBackground1Layout);
@@ -68,25 +98,28 @@ public class PanelRegistrarme extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(jPanelBackground1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(campoTexto1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(campoPassword2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(campoCorreo1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(campoPassword1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelBackground1Layout.createSequentialGroup()
+                        .addGap(0, 634, Short.MAX_VALUE)
+                        .addComponent(btnEliminarCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(boton1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanelBackground1Layout.createSequentialGroup()
                         .addGroup(jPanelBackground1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(etiqueta4, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(etiqueta3, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(etiqueta1, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(etiqueta2, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 366, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelBackground1Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(btnRegistrarme, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanelBackground1Layout.setVerticalGroup(
             jPanelBackground1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelBackground1Layout.createSequentialGroup()
-                .addGap(22, 22, 22)
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(33, 33, 33)
                 .addComponent(etiqueta4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(campoTexto1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -98,12 +131,10 @@ public class PanelRegistrarme extends javax.swing.JPanel {
                 .addComponent(etiqueta2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(campoPassword1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(etiqueta3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(campoPassword2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 77, Short.MAX_VALUE)
-                .addComponent(btnRegistrarme, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 238, Short.MAX_VALUE)
+                .addGroup(jPanelBackground1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnEliminarCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(boton1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
@@ -111,25 +142,26 @@ public class PanelRegistrarme extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanelBackground1, javax.swing.GroupLayout.DEFAULT_SIZE, 560, Short.MAX_VALUE)
+            .addComponent(jPanelBackground1, javax.swing.GroupLayout.DEFAULT_SIZE, 930, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanelBackground1, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
+            .addComponent(jPanelBackground1, javax.swing.GroupLayout.DEFAULT_SIZE, 605, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    public vista.componentes.boton.Boton btnRegistrarme;
+    private vista.componentes.boton.Boton boton1;
+    public vista.componentes.boton.Boton btnEliminarCuenta;
     public vista.componentes.campos.CampoCorreo campoCorreo1;
     public vista.componentes.campos.CampoPassword campoPassword1;
-    public vista.componentes.campos.CampoPassword campoPassword2;
     public vista.componentes.campos.CampoTexto campoTexto1;
     private vista.componentes.etiqueta.Etiqueta etiqueta1;
     private vista.componentes.etiqueta.Etiqueta etiqueta2;
-    private vista.componentes.etiqueta.Etiqueta etiqueta3;
     private vista.componentes.etiqueta.Etiqueta etiqueta4;
+    private javax.swing.JPanel jPanel1;
     private vista.componentes.jpanelbackground.JPanelBackground jPanelBackground1;
+    private vista.componentes.etiqueta.Titulo titulo1;
     // End of variables declaration//GEN-END:variables
 }
