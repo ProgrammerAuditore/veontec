@@ -1,28 +1,19 @@
 package modelo;
 
 import controlador.CtrlAcercaDe;
-import controlador.CtrlConexion;
-import controlador.CtrlDatosPersonales;
-import controlador.CtrlResumen;
-import controlador.CtrlGestionarEmpresas;
-import controlador.CtrlGestionarProyectos;
-import controlador.CtrlGestionarRequisitos;
-import controlador.CtrlPreferencias;
-import controlador.CtrlVinculacion;
-import controlador.ctrlBuscarActualizacion;
 import javax.swing.JDialog;
 import modelo.dao.ConexionDao;
 import modelo.dao.DatosPersonalesDao;
 import modelo.dao.EmpresaDao;
 import modelo.dao.PreferenciaDao;
-import modelo.dao.ProyectoDao;
+import modelo.dao.UsuarioDao;
 import modelo.dao.RequisitoDao;
 import modelo.dao.VinculacionDao;
 import modelo.dto.ConexionDto;
 import modelo.dto.DatosPersonalesDto;
 import modelo.dto.EmpresaDto;
 import modelo.dto.PreferenciaDto;
-import modelo.dto.ProyectoDto;
+import modelo.dto.UsuarioDto;
 import modelo.dto.RequisitoDto;
 import modelo.dto.VinculacionDto;
 import vista.paneles.PanelAcercaDe;
@@ -40,12 +31,12 @@ import vista.ventanas.VentanaPrincipal;
 public class FabricarModal {
     
     private VentanaPrincipal laVista;
-    private ProyectoDto proyecto;
+    private UsuarioDto proyecto;
 
     public FabricarModal(VentanaPrincipal laVista) {
         this.laVista = laVista;
     }
-    
+    /*
     public boolean construir(String modal){
         
         switch(modal){
@@ -110,8 +101,8 @@ public class FabricarModal {
         
         // * Crear el modal Configurar conexión con su respectivo patrón de diseño MVC
         PanelResumen vista = new PanelResumen();
-        ProyectoDto dto = new ProyectoDto();
-        ProyectoDao dao = new ProyectoDao();
+        UsuarioDto dto = new UsuarioDto();
+        UsuarioDao dao = new UsuarioDao();
         CtrlResumen controlador = new CtrlResumen(vista, dto, dao);
         controlador.modal = new JDialog(laVista);
         controlador.mtdInit();
@@ -124,8 +115,8 @@ public class FabricarModal {
         
         // * Crear el modal Configurar conexión con su respectivo patrón de diseño MVC
         PanelGestionarProyectos vista = new PanelGestionarProyectos();
-        ProyectoDao dao = new ProyectoDao();
-        ProyectoDto dto = new ProyectoDto();
+        UsuarioDao dao = new UsuarioDao();
+        UsuarioDto dto = new UsuarioDto();
         CtrlGestionarProyectos controlador = new CtrlGestionarProyectos(vista, dto, dao);
         controlador.modal = new JDialog(laVista);
         controlador.mtdInit();
@@ -134,7 +125,7 @@ public class FabricarModal {
 
     }
 
-    private void modalGestionarRequisitos(ProyectoDto proyecto_dto) {
+    private void modalGestionarRequisitos(UsuarioDto proyecto_dto) {
         
         // * Crear el modal Configurar conexión con su respectivo patrón de diseño MVC
         PanelGestionarRequisitos vista = new PanelGestionarRequisitos();
@@ -167,7 +158,7 @@ public class FabricarModal {
         // * Crear el modal Vinculación con su respectivo patrón de diseño MVC
         PanelVinculacion vista = new PanelVinculacion();
         EmpresaDao empresa_dao = new EmpresaDao();
-        ProyectoDao proyecto_dao = new ProyectoDao();
+        UsuarioDao proyecto_dao = new UsuarioDao();
         VinculacionDao vinculacion_dao = new VinculacionDao();
         VinculacionDto vinculacion_dto = new VinculacionDto();
         CtrlVinculacion controlador = new CtrlVinculacion(vista, proyecto_dao, empresa_dao, vinculacion_dao, vinculacion_dto);
@@ -203,12 +194,13 @@ public class FabricarModal {
         
     }
 
-    public ProyectoDto getProyecto() {
+    public UsuarioDto getProyecto() {
         return proyecto;
     }
 
-    public void setProyecto(ProyectoDto proyecto) {
+    public void setProyecto(UsuarioDto proyecto) {
         this.proyecto = proyecto;
     }
+    */
 
 }

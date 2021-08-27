@@ -1,7 +1,7 @@
 package index;
 
 import controlador.CtrlHiloConexion;
-import controlador.CtrlPrincipal;
+import controlador.CtrlInicio;
 import hilos.HiloConexion;
 import hilos.HiloPrincipal;
 import hilos.HiloSplash;
@@ -18,7 +18,7 @@ import modelo.dao.EjecucionDao;
 import modelo.dao.ConexionDao;
 import modelo.dao.EmpresaDao;
 import modelo.dao.PreferenciaDao;
-import modelo.dao.ProyectoDao;
+import modelo.dao.UsuarioDao;
 import modelo.dao.RequisitoDao;
 import modelo.dto.ConexionDto;
 import modelo.dto.EjecucionDto;
@@ -26,6 +26,7 @@ import modelo.dto.PreferenciaDto;
 import src.Info;
 import src.Recursos;
 import src.idiomas.Idiomas;
+import vista.ventanas.VentanaInicio;
 import vista.ventanas.VentanaPrincipal;
 
 public class MyFreeLab {
@@ -39,14 +40,26 @@ public class MyFreeLab {
         
         MyFreeLab.mtdVerificarArranque();
         
+        Recursos.dataConexion().exists();
+        
+        // * Establecer conexion..
+        ConexionDto conec = new ConexionDto("3306", "sql3.freesqldatabase.com", "sql3432572", "sql3432572", "R9p2mht4YB");
+        CtrlHiloConexion.ctrlDatos = conec;
+        CtrlHiloConexion.mtdEstablecer();
+        
         mtdCargarPreferencias();
         HiloConexion hc = new HiloConexion();
         HiloPrincipal hp = new HiloPrincipal();
-        HiloSplash hs = new HiloSplash();
+        //HiloSplash hs = new HiloSplash();
         hc.setDaemon(true);
         hp.setDaemon(true);
-        hs.setDaemon(true);
+        //hs.setDaemon(true);
         
+        VentanaInicio ni = new VentanaInicio();
+        CtrlInicio ctrl = new CtrlInicio(ni, ni.pnRegistrarme, ni.pnLoggin); 
+        ctrl.mtdInit();
+        
+        /*
         // * Crear la ventana principal con su respectivo patrón de diseño MVC
         ventana = new VentanaPrincipal();
         ProyectoDao daoP = new ProyectoDao();
@@ -54,18 +67,22 @@ public class MyFreeLab {
         RequisitoDao daoR = new RequisitoDao();
         FabricarModal fabrica = new FabricarModal(ventana);
         CtrlPrincipal ctrl_p = new CtrlPrincipal(ventana, fabrica, daoP, daoE, daoR);
-    
+        */
+        
         // * Ejecutar hilos
-        hs.start();
+        //hs.start();
         hc.start();
         hp.start();
         
+        /*
         try {
             hs.join();
         } catch (InterruptedException ex) {
             Logger.getLogger(Index.class.getName()).log(Level.SEVERE, null, ex);
         }
+        */
         
+        /*
         // * Abrir la ventana del programa
         ventana.setState(JFrame.ICONIFIED);
         ventana.setVisible(true);
@@ -83,6 +100,7 @@ public class MyFreeLab {
         }else{
             CtrlPrincipal.mensajeCtrlPrincipal(MyFreeLab.idioma.getProperty("ctrlPrincipal.conexion.off.msg2"));
         }
+        */
         
     }
     

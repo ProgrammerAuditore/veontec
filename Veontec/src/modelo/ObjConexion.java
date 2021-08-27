@@ -19,7 +19,7 @@ public class ObjConexion {
         // Crear una una conexion
         try {
             
-            String param = "?autoReconnect=true";
+            String param = "?autoReconnect=true&useSSL=false";
             String dm = "jdbc:mysql://" + datos.getHost() + ":" + datos.getPuerto() + "/" + datos.getDatabase() + param;
             Class.forName("com.mysql.jdbc.Driver").getInterfaces();
             conn = DriverManager.getConnection(dm, datos.getUsuario(), datos.getPass());

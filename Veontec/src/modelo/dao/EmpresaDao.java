@@ -65,8 +65,8 @@ public class EmpresaDao implements keyword_query<EmpresaDto>{
     }
 
     @Override
-    public boolean mtdConsultar(EmpresaDto empresa_dto) {
-        return false;
+    public EmpresaDto mtdConsultar(EmpresaDto empresa_dto) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
