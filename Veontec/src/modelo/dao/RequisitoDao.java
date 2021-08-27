@@ -7,7 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import modelo.dto.ProyectoDto;
+import modelo.dto.UsuarioDto;
 import modelo.dto.RequisitoDto;
 import modelo.interfaces.keyword_query;
 
@@ -62,8 +62,8 @@ public class RequisitoDao implements keyword_query<RequisitoDto>{
     }
 
     @Override
-    public boolean mtdConsultar(RequisitoDto requisito_dto) {
-        return false;
+    public RequisitoDto mtdConsultar(RequisitoDto requisito_dto) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override

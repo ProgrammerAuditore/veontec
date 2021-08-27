@@ -35,6 +35,7 @@ public class CampoPassword extends JPasswordField implements FocusListener{
         setSelectionColor(Color.LIGHT_GRAY);
         setSelectedTextColor(Color.WHITE);
         setEchoChar((char)0);
+        setEchoChar('*');
         
         // Establecer texto de ayuda
         setToolTip();
