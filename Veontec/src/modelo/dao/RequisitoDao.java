@@ -7,11 +7,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import modelo.dto.UsuarioDto;
 import modelo.dto.RequisitoDto;
+import modelo.interfaces.keyword_extra;
 import modelo.interfaces.keyword_query;
 
-public class RequisitoDao implements keyword_query<RequisitoDto>{
+public class RequisitoDao implements keyword_query<RequisitoDto>, keyword_extra<RequisitoDto>{
 
     @Override
     public boolean mtdInsetar(RequisitoDto requisito_dto) {
@@ -217,6 +217,31 @@ public class RequisitoDao implements keyword_query<RequisitoDto>{
     
     @Override
     public boolean mtdEliminar(RequisitoDto requisito_dto) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public List<RequisitoDto> mtdListar(int inicio, int fin) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public long mtdRowCount() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public long mtdRowCount(int estado) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public long mtdRowCount(RequisitoDto obj_dto) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public List<RequisitoDto> mtdListar(RequisitoDto obj_dto, int inicio, int fin) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

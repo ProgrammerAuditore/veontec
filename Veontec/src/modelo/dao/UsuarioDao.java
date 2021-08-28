@@ -7,10 +7,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 import modelo.dto.UsuarioDto;
+import modelo.interfaces.keyword_extra;
 import modelo.interfaces.keyword_query;
 import modelo.interfaces.keyword_proyectos;
 
-public class UsuarioDao implements keyword_query<UsuarioDto>, keyword_proyectos<UsuarioDto>{
+public class UsuarioDao implements keyword_query<UsuarioDto>, keyword_proyectos<UsuarioDto>, keyword_extra<UsuarioDto>{
 
     @Override
     public boolean mtdInsetar(UsuarioDto obj_dto) {
@@ -125,6 +126,31 @@ public class UsuarioDao implements keyword_query<UsuarioDto>, keyword_proyectos<
 
     @Override
     public List<UsuarioDto> mtdListarProyectoRealizados() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public List<UsuarioDto> mtdListar(int inicio, int fin) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public long mtdRowCount() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public long mtdRowCount(int estado) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public long mtdRowCount(UsuarioDto obj_dto) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public List<UsuarioDto> mtdListar(UsuarioDto obj_dto, int inicio, int fin) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

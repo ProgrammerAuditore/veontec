@@ -7,15 +7,19 @@ import hilos.HiloPrincipal;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.List;
 import java.util.Properties;
 import java.util.Scanner;
+import javax.swing.JOptionPane;
 import modelo.dao.EjecucionDao;
 import modelo.dao.ConexionDao;
 import modelo.dao.PreferenciaDao;
+import modelo.dao.ProductoDao;
 import modelo.dao.UsuarioDao;
 import modelo.dto.ConexionDto;
 import modelo.dto.EjecucionDto;
 import modelo.dto.PreferenciaDto;
+import modelo.dto.ProductoDto;
 import modelo.dto.UsuarioDto;
 import src.Info;
 import src.Recursos;
@@ -279,29 +283,42 @@ public class Veontec {
     public void mtdTagTest(){
         mtdVerInformacionDelSoftware();
         
-        /*
-        try {
-            ObjVersionesXml objDocXml = new ObjVersionesXml();
-            File xml = new File( getClass().getResource("../" + Recursos.docVersionesXml).toURI() );
-            objDocXml.setArchivoXml( xml );
-            HashMap<String, String> info = objDocXml.mtdMapearUltimaVersionInterno();
+         // * Establecer conexion..
+        ConexionDto conec = new ConexionDto("3306", "sql3.freesqldatabase.com", "sql3432572", "sql3432572", "R9p2mht4YB");
+        CtrlHiloConexion.ctrlDatos = conec;
+        CtrlHiloConexion.mtdEstablecer();
+        
+        if( CtrlHiloConexion.checkConexion() ){
+            ProductoDto dto = new ProductoDto();
+            dto.setProdID(7);
+            dto.setProdTitulo("Pantalon Estilo Cargo");
+            dto.setProdDescripcion("Rayas negras");
+            dto.setProdCategoria("Caballeros");
+            dto.setProdPrecio(499.90);
+            dto.setProdStock(208);
+            dto.setProdTipo(0);
+            dto.setProdEnlace("Vacio");
+            dto.setProdUsuario(4);
+
+            ProductoDao dao = new ProductoDao();
             
-            // * Establecer los datos
-            System.out.println("" + info.get("app_name_version"));
-            System.out.println("" + info.get("app_num_version"));
-            System.out.println("" + info.get("app_novedades"));
+            // * Obtener todo los productos
+            List<ProductoDto> productos = dao.mtdListar(dto);
+            
+            if( productos == null ){
+                JOptionPane.showMessageDialog(null, "No hay productos registrados por ningun usuario.");
+                return;
+            }
+            
+            // Vas crear un objeto ProductoDto por cada producto que 
+            // hay en la lista de 'productos'
+            for( ProductoDto prod : productos ){
+                System.out.println("" + prod.getProdTitulo());
+            }
         
-        } catch (URISyntaxException ex) {
-            //Logger.getLogger(ctrlBuscarActualizacion.class.getName()).log(Level.SEVERE, null, ex);
+        }else{
+            JOptionPane.showMessageDialog(null, "No existe conexion.");
         }
-        */
-        
-        /*
-        // * Inicializar testeo
-        Testing probar = new Testing();
-        probar.setLocationRelativeTo(null);
-        probar.setVisible(true);
-        */
     }
     
     // * Obtener el PID del programa

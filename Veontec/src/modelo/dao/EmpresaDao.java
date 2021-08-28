@@ -8,9 +8,10 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import modelo.dto.EmpresaDto;
+import modelo.interfaces.keyword_extra;
 import modelo.interfaces.keyword_query;
 
-public class EmpresaDao implements keyword_query<EmpresaDto>{
+public class EmpresaDao implements keyword_query<EmpresaDto>, keyword_extra<EmpresaDto>{
 
     @Override
     public boolean mtdInsetar(EmpresaDto empresa_dto) {
@@ -177,6 +178,26 @@ public class EmpresaDao implements keyword_query<EmpresaDto>{
         }
         
         return filas;
+    }
+
+    @Override
+    public List<EmpresaDto> mtdListar(int inicio, int fin) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public long mtdRowCount(int estado) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public long mtdRowCount(EmpresaDto obj_dto) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public List<EmpresaDto> mtdListar(EmpresaDto obj_dto, int inicio, int fin) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }
