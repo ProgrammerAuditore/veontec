@@ -5,7 +5,7 @@
  */
 package vista.paneles;
 
-import index.MyFreeLab;
+import index.Veontec;
 import src.Recursos;
 
 /**
@@ -30,21 +30,21 @@ public class PanelGestionarRequisitos extends javax.swing.JPanel {
     private void mtdEstablecerIdioma(){
         
         // * Etiquetas
-        this.etqTitulo.setText(MyFreeLab.idioma.getProperty("panelGestionarRequisito.etqTitulo"));
-        this.etqCosto.setText(MyFreeLab.idioma.getProperty("panelGestionarRequisito.etqCosto"));
-        this.etqRequisito.setText(MyFreeLab.idioma.getProperty("panelGestionarRequisito.etqRequisito"));
-        this.etqMontoEstimado.setText(MyFreeLab.idioma.getProperty("panelGestionarRequisito.etqMontoEstimado"));
+        this.etqTitulo.setText(Veontec.idioma.getProperty("panelGestionarRequisito.etqTitulo"));
+        this.etqCosto.setText(Veontec.idioma.getProperty("panelGestionarRequisito.etqCosto"));
+        this.etqRequisito.setText(Veontec.idioma.getProperty("panelGestionarRequisito.etqRequisito"));
+        this.etqMontoEstimado.setText(Veontec.idioma.getProperty("panelGestionarRequisito.etqMontoEstimado"));
         
         // * Campos (Placeholder)
-        this.cmpRequisito.setPlaceholder(MyFreeLab.idioma.getProperty("panelGestionarRequisito.etqRequisito"));
-        this.cmpCosto.setPlaceholder(MyFreeLab.idioma.getProperty("panelGestionarRequisito.etqCosto"));
-        this.cmpMontoEstimado.setText(MyFreeLab.idioma.getProperty("panelGestionarRequisito.etqMontoEstimado"));
+        this.cmpRequisito.setPlaceholder(Veontec.idioma.getProperty("panelGestionarRequisito.etqRequisito"));
+        this.cmpCosto.setPlaceholder(Veontec.idioma.getProperty("panelGestionarRequisito.etqCosto"));
+        this.cmpMontoEstimado.setText(Veontec.idioma.getProperty("panelGestionarRequisito.etqMontoEstimado"));
 
         // * Botones
-        this.btnCrear.setTexto(MyFreeLab.idioma.getProperty("panelGestionarRequisito.btnCrear"));
-        this.btnBuscar.setTexto(MyFreeLab.idioma.getProperty("panelGestionarRequisito.btnBuscar"));
-        this.btnModificar.setTexto(MyFreeLab.idioma.getProperty("panelGestionarRequisito.btnModificar"));
-        this.btnRemover.setTexto(MyFreeLab.idioma.getProperty("panelGestionarRequisito.btnRemover"));
+        this.btnCrear.setTexto(Veontec.idioma.getProperty("panelGestionarRequisito.btnCrear"));
+        this.btnBuscar.setTexto(Veontec.idioma.getProperty("panelGestionarRequisito.btnBuscar"));
+        this.btnModificar.setTexto(Veontec.idioma.getProperty("panelGestionarRequisito.btnModificar"));
+        this.btnRemover.setTexto(Veontec.idioma.getProperty("panelGestionarRequisito.btnRemover"));
         
     }
     
@@ -104,7 +104,7 @@ public class PanelGestionarRequisitos extends javax.swing.JPanel {
             .addComponent(etqTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, 61, Short.MAX_VALUE)
         );
 
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(MyFreeLab.idioma.getProperty("panelGestionarRequisito.etqTituloPanel")));
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(Veontec.idioma.getProperty("panelGestionarRequisito.etqTituloPanel")));
 
         etqRequisito.setText("Requisito");
 

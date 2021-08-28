@@ -1,6 +1,6 @@
 package controlador;
 
-import index.MyFreeLab;
+import index.Veontec;
 import java.awt.Dialog;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -37,7 +37,7 @@ public class CtrlDatosPersonales implements MouseListener{
         //modal.setModal(true);
         //modal.setType(Window.Type.UTILITY);
         modal.setModalityType(Dialog.ModalityType.APPLICATION_MODAL);
-        modal.setTitle(MyFreeLab.idioma.getProperty("ctrlDatosPersonales.mtdInit.titulo"));
+        modal.setTitle(Veontec.idioma.getProperty("ctrlDatosPersonales.mtdInit.titulo"));
         modal.setResizable(false);
         modal.setSize( laVista.getSize() );
         modal.setPreferredSize(laVista.getSize() );
@@ -102,7 +102,7 @@ public class CtrlDatosPersonales implements MouseListener{
                     // Registrarlo a la base de datos...
                     ////System.out.println("Registrarlo a la base de datos");
                     if(dao.mtdInsertar(dto)){
-                        JOptionPane.showMessageDialog(laVista, MyFreeLab.idioma
+                        JOptionPane.showMessageDialog(laVista, Veontec.idioma
                                 .getProperty("ctrlDatosPersonales.mtdEstablecerDatos.msg1"));
                     }
 
@@ -111,17 +111,17 @@ public class CtrlDatosPersonales implements MouseListener{
                     // Actualizar los datos personales en la base de datos
                     String[] msg = new String[2];
                     // Titulo
-                    msg[0] = MyFreeLab.idioma
+                    msg[0] = Veontec.idioma
                                 .getProperty("ctrlDatosPersonales.mtdEstablecerDatos.msg2");
                     // Pregunta
-                    msg[1] = MyFreeLab.idioma
+                    msg[1] = Veontec.idioma
                                 .getProperty("ctrlDatosPersonales.mtdEstablecerDatos.msg3"); 
                     int opc = JOptionPane.showConfirmDialog(laVista, msg[1], msg[0], JOptionPane.YES_NO_OPTION);
                     mtdCapturarDatos();
 
                     if( opc ==  JOptionPane.YES_OPTION ){
                         if(dao.mtdActualizarDatos(dto))
-                            JOptionPane.showMessageDialog(laVista, MyFreeLab.idioma
+                            JOptionPane.showMessageDialog(laVista, Veontec.idioma
                                 .getProperty("ctrlDatosPersonales.mtdEstablecerDatos.msg4"));
                     }
 
@@ -151,7 +151,7 @@ public class CtrlDatosPersonales implements MouseListener{
             
                 return true;
         }else{
-            JOptionPane.showMessageDialog(laVista, MyFreeLab.idioma
+            JOptionPane.showMessageDialog(laVista, Veontec.idioma
                                 .getProperty("ctrlDatosPersonales.mtdCapturarDatos.msg1"));
         }
             
@@ -160,28 +160,28 @@ public class CtrlDatosPersonales implements MouseListener{
     
     private boolean mtdRtnNombreApellido(){
         boolean gAceptado = true;
-        String msg=MyFreeLab.idioma
+        String msg=Veontec.idioma
                    .getProperty("ctrlDatosPersonales.mtdRtnNombreApellido.msg1");
         
         if( laVista.cmpNombres.getText().trim().length() >= 30 ){
             gAceptado = false;
-            msg += MyFreeLab.idioma
+            msg += Veontec.idioma
                    .getProperty("ctrlDatosPersonales.mtdRtnNombreApellido.msg2");
         }
         
         if( laVista.cmpApellidos.getText().trim().length() >= 30 ){
             gAceptado = false;
-            msg += MyFreeLab.idioma
+            msg += Veontec.idioma
                    .getProperty("ctrlDatosPersonales.mtdRtnNombreApellido.msg3");
         }
         
         if( !gAceptado ){
             msg = msg + "\n";
-            msg += MyFreeLab.idioma
+            msg += Veontec.idioma
                    .getProperty("ctrlDatosPersonales.mtdRtnNombreApellido.msg4");
-            msg += MyFreeLab.idioma
+            msg += Veontec.idioma
                    .getProperty("ctrlDatosPersonales.mtdRtnNombreApellido.msg5");
-            msg += MyFreeLab.idioma
+            msg += Veontec.idioma
                    .getProperty("ctrlDatosPersonales.mtdRtnNombreApellido.msg6");
             JOptionPane.showMessageDialog(laVista, msg);
         }
@@ -191,28 +191,28 @@ public class CtrlDatosPersonales implements MouseListener{
     
     private boolean mtdRtnCorreoDireccion(){
         boolean gAceptado = true;
-        String msg=MyFreeLab.idioma
+        String msg=Veontec.idioma
                    .getProperty("ctrlDatosPersonales.mtdRtnCorreoDireccion.msg1");
         
         if( laVista.cmpDireccion.getText().trim().length() >= 60 ){
             gAceptado = false;
-            msg +=MyFreeLab.idioma
+            msg +=Veontec.idioma
                    .getProperty("ctrlDatosPersonales.mtdRtnCorreoDireccion.msg2");
         }
         
         if( laVista.cmpCorreo.getText().trim().length() >= 60 ){
             gAceptado = false;
-            msg +=MyFreeLab.idioma
+            msg +=Veontec.idioma
                    .getProperty("ctrlDatosPersonales.mtdRtnCorreoDireccion.msg3");
         }
         
         if( !gAceptado ){
             msg = msg + "\n";
-            msg += MyFreeLab.idioma
+            msg += Veontec.idioma
                    .getProperty("ctrlDatosPersonales.mtdRtnCorreoDireccion.msg4");
-            msg += MyFreeLab.idioma
+            msg += Veontec.idioma
                    .getProperty("ctrlDatosPersonales.mtdRtnCorreoDireccion.msg5");
-            msg += MyFreeLab.idioma
+            msg += Veontec.idioma
                    .getProperty("ctrlDatosPersonales.mtdRtnCorreoDireccion.msg6");
             JOptionPane.showMessageDialog(laVista, msg);
         }
@@ -222,22 +222,22 @@ public class CtrlDatosPersonales implements MouseListener{
     
     private boolean mtdRtnTMovil(){
         boolean gAceptado = true;
-        String msg=MyFreeLab.idioma
+        String msg=Veontec.idioma
                    .getProperty("ctrlDatosPersonales.mtdRtnTMovil.msg1");
         
         if( laVista.cmpTelMovil.getText().trim().length() < 10 || laVista.cmpTelMovil.getText().trim().length() > 10 ){
             gAceptado = false;
-            msg += MyFreeLab.idioma
+            msg += Veontec.idioma
                    .getProperty("ctrlDatosPersonales.mtdRtnTMovil.msg2");
         }
         
         if( !gAceptado ){
             msg = msg + "\n";
-            msg += MyFreeLab.idioma
+            msg += Veontec.idioma
                    .getProperty("ctrlDatosPersonales.mtdRtnTMovil.msg3");
-            msg += MyFreeLab.idioma
+            msg += Veontec.idioma
                    .getProperty("ctrlDatosPersonales.mtdRtnTMovil.msg4");
-            msg += MyFreeLab.idioma
+            msg += Veontec.idioma
                    .getProperty("ctrlDatosPersonales.mtdRtnTMovil.msg5");
             JOptionPane.showMessageDialog(laVista, msg);
         }

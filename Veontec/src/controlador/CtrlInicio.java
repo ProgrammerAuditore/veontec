@@ -2,6 +2,7 @@ package controlador;
 
 import de.mkammerer.argon2.Argon2;
 import de.mkammerer.argon2.Argon2Factory;
+import index.Veontec;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import javax.swing.JOptionPane;
@@ -74,21 +75,23 @@ public class CtrlInicio implements MouseListener{
         }
         
         // * Registrando usuario
-        UsuarioDto usuario = new UsuarioDto();
+        UsuarioDto dto = new UsuarioDto();
         UsuarioDao dao = new UsuarioDao();
-        usuario.setCmpCorreo( pnInicarSession.campoCorreo1.getText().trim() );
-        usuario = dao.mtdConsultar(usuario);
+        dto.setCmpCorreo( pnInicarSession.campoCorreo1.getText().trim() );
+        dto = dao.mtdConsultar(dto);
         //System.out.println("Iniciar Session : \n " + usuario.toString());
             
         // * Verificar usuario
-        if( pnInicarSession.campoCorreo1.getText().trim().equals(usuario.getCmpCorreo().trim())
-            && mtdVerificarPassword(usuario.getCmpPassword().trim()) ){
-            JOptionPane.showMessageDialog(ni, "Bienvenido " + usuario.getCmpNombreCompleto() );
+        if( pnInicarSession.campoCorreo1.getText().trim().equals(dto.getCmpCorreo().trim())
+            && mtdVerificarPassword(dto.getCmpPassword().trim()) ){
+            JOptionPane.showMessageDialog(ni, "Bienvenido " + dto.getCmpNombreCompleto() );
             ni.setVisible(false);
             ni.dispose();
             
             VentanaHome vh = new VentanaHome();
-            CtrlPrincipal ctrl = new CtrlPrincipal(vh, dao, usuario );
+            Veontec.usuarioDao = dao;
+            Veontec.usuarioDto = dto;
+            CtrlHome ctrl = new CtrlHome(vh);
             ctrl.laVista.setLocationRelativeTo(null);
             ctrl.laVista.setVisible(true);
             

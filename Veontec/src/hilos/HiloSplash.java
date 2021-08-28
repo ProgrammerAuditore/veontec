@@ -1,7 +1,7 @@
 package hilos;
 
 import controlador.CtrlHiloConexion;
-import index.MyFreeLab;
+import index.Veontec;
 import modelo.dao.EjecucionDao;
 import modelo.dao.ConexionDao;
 import modelo.dao.MyFreeLabDao;
@@ -57,7 +57,7 @@ public class HiloSplash extends Thread{
     private void mtdVerificarID(){
         // ***** FASE 2 | Verificar ID
         //System.out.println("***** FASE 2 | Verificar ID");
-        MyFreeLab.mtdVerificarID();
+        Veontec.mtdVerificarID();
     }
     
     private void mtdCargarConfiguracion(){
@@ -65,18 +65,18 @@ public class HiloSplash extends Thread{
         Recursos.dataConexion().exists();
             
         // Titulo - Carga
-        mtdCargarTitulo(MyFreeLab.idioma
+        mtdCargarTitulo(Veontec.idioma
                 .getProperty("hiloSplash.mtdCargarConfiguracion.msg1"));
         
         // Proceso de carga
         if( new PreferenciaDao().obtener_datos() != null ){
-            splash.etqMensaje.setText(MyFreeLab.idioma
+            splash.etqMensaje.setText(Veontec.idioma
                 .getProperty("hiloSplash.mtdCargarConfiguracion.msg2"));
             //System.out.println("Datos de conexión cargado. [!]");
         }else {
             PreferenciaDto pre = new PreferenciaDto();
             new PreferenciaDao().regitrar_datos(pre);
-            splash.etqMensaje.setText(MyFreeLab.idioma
+            splash.etqMensaje.setText(Veontec.idioma
                 .getProperty("hiloSplash.mtdCargarConfiguracion.msg3"));
             //System.out.println("Datos de conexión creado. [!]");
         }
@@ -89,18 +89,18 @@ public class HiloSplash extends Thread{
         Recursos.dataConexion().exists();
             
         // Titulo - Carga
-        mtdCargarTitulo(MyFreeLab.idioma
+        mtdCargarTitulo(Veontec.idioma
                 .getProperty("hiloSplash.mtdCargarDatosDeConexion.msg1"));
 
         // Proceso de carga
         if( new ConexionDao().obtener_datos() != null ){
-            splash.etqMensaje.setText(MyFreeLab.idioma
+            splash.etqMensaje.setText(Veontec.idioma
                 .getProperty("hiloSplash.mtdCargarDatosDeConexion.msg2"));
             //System.out.println("Datos de conexión cargado. [!]");
         }else {
             ConexionDto conec = new ConexionDto("0", "", "", "", "");
             new ConexionDao().regitrar_datos(conec);
-            splash.etqMensaje.setText(MyFreeLab.idioma
+            splash.etqMensaje.setText(Veontec.idioma
                 .getProperty("hiloSplash.mtdCargarDatosDeConexion.msg3"));
             //System.out.println("Datos de conexión creado. [!]");
         }
@@ -113,15 +113,15 @@ public class HiloSplash extends Thread{
         CtrlHiloConexion.ctrlDatos = new ConexionDao().obtener_datos();
             
         // Titulo - Carga
-        mtdCargarTitulo(MyFreeLab.idioma
+        mtdCargarTitulo(Veontec.idioma
                 .getProperty("hiloSplash.mtdEstablecerConexion.msg1"));
         
         // Proceso de carga
         if(CtrlHiloConexion.mtdEstablecer())
-            splash.etqMensaje.setText(MyFreeLab.idioma
+            splash.etqMensaje.setText(Veontec.idioma
                 .getProperty("hiloSplash.conexion.on"));
         else
-            splash.etqMensaje.setText(MyFreeLab.idioma
+            splash.etqMensaje.setText(Veontec.idioma
                 .getProperty("hiloSplash.conexion.off"));
 
         mtdTiempoDeEspera();
@@ -131,19 +131,19 @@ public class HiloSplash extends Thread{
         // * Cargar tabla datos personales..
             
         // Titulo - Carga
-        mtdCargarTitulo(MyFreeLab.idioma
+        mtdCargarTitulo(Veontec.idioma
                 .getProperty("hiloSplash.mtdCargarBaseDeDatos.msg1"));
 
         // Proceso de carga
         if( CtrlHiloConexion.checkConexion() ){
             if( !MyFreeLabDao.mtdCrearBaseDeDatos())
-                splash.etqMensaje.setText(MyFreeLab.idioma
+                splash.etqMensaje.setText(Veontec.idioma
                 .getProperty("hiloSplash.mtdCargarBaseDeDatos.msg2"));
             else
-                splash.etqMensaje.setText(MyFreeLab.idioma
+                splash.etqMensaje.setText(Veontec.idioma
                 .getProperty("hiloSplash.mtdCargarBaseDeDatos.msg3"));
         } else
-        splash.etqMensaje.setText(MyFreeLab.idioma
+        splash.etqMensaje.setText(Veontec.idioma
                 .getProperty("hiloSplash.conexion.off"));
 
         mtdTiempoDeEspera();
@@ -154,19 +154,19 @@ public class HiloSplash extends Thread{
         // * Cargar tabla datos personales..
             
         // Titulo - Carga
-        mtdCargarTitulo(MyFreeLab.idioma
+        mtdCargarTitulo(Veontec.idioma
                 .getProperty("hiloSplash.mtdCargarTablaDatosPersonales.msg1"));
 
         // Proceso de carga
         if( CtrlHiloConexion.checkConexion() ){
             if( !MyFreeLabDao.mtdCrearTablaDatosPersonales() )
-                splash.etqMensaje.setText(MyFreeLab.idioma
+                splash.etqMensaje.setText(Veontec.idioma
                 .getProperty("hiloSplash.mtdCargarTablaDatosPersonales.msg2"));
             else
-                splash.etqMensaje.setText(MyFreeLab.idioma
+                splash.etqMensaje.setText(Veontec.idioma
                 .getProperty("hiloSplash.mtdCargarTablaDatosPersonales.msg3"));
         } else
-        splash.etqMensaje.setText(MyFreeLab.idioma
+        splash.etqMensaje.setText(Veontec.idioma
                 .getProperty("hiloSplash.conexion.off"));
 
         mtdTiempoDeEspera();
@@ -176,19 +176,19 @@ public class HiloSplash extends Thread{
         // * Cargar tabla proyectos..
             
         // Titulo - Carga
-        mtdCargarTitulo(MyFreeLab.idioma
+        mtdCargarTitulo(Veontec.idioma
                 .getProperty("hiloSplash.mtdCargarTablaProyectos.msg1"));
 
         // Proceso de carga
         if( CtrlHiloConexion.checkConexion() ){
             if( !MyFreeLabDao.mtdCrearTablaProyectos() )
-                splash.etqMensaje.setText(MyFreeLab.idioma
+                splash.etqMensaje.setText(Veontec.idioma
                 .getProperty("hiloSplash.mtdCargarTablaProyectos.msg2"));
             else
-                splash.etqMensaje.setText(MyFreeLab.idioma
+                splash.etqMensaje.setText(Veontec.idioma
                 .getProperty("hiloSplash.mtdCargarTablaProyectos.msg3"));
         } else
-        splash.etqMensaje.setText(MyFreeLab.idioma
+        splash.etqMensaje.setText(Veontec.idioma
                 .getProperty("hiloSplash.conexion.off"));
 
         mtdTiempoDeEspera();
@@ -198,19 +198,19 @@ public class HiloSplash extends Thread{
         // * Cargar tabla datos personales..
             
         // Titulo - Carga
-        mtdCargarTitulo(MyFreeLab.idioma
+        mtdCargarTitulo(Veontec.idioma
                 .getProperty("hiloSplash.mtdCargarTablaEmpresas.msg1"));
 
         // Proceso de carga
         if( CtrlHiloConexion.checkConexion() ){
             if( !MyFreeLabDao.mtdCrearTablaEmpresas())
-                splash.etqMensaje.setText(MyFreeLab.idioma
+                splash.etqMensaje.setText(Veontec.idioma
                 .getProperty("hiloSplash.mtdCargarTablaEmpresas.msg2"));
             else
-                splash.etqMensaje.setText(MyFreeLab.idioma
+                splash.etqMensaje.setText(Veontec.idioma
                 .getProperty("hiloSplash.mtdCargarTablaEmpresas.msg3"));
         } else
-        splash.etqMensaje.setText(MyFreeLab.idioma
+        splash.etqMensaje.setText(Veontec.idioma
                 .getProperty("hiloSplash.conexion.off"));
 
         mtdTiempoDeEspera();
@@ -220,19 +220,19 @@ public class HiloSplash extends Thread{
         // * Cargar tabla requisitos..
             
         // Titulo - Carga
-        mtdCargarTitulo(MyFreeLab.idioma
+        mtdCargarTitulo(Veontec.idioma
                 .getProperty("hiloSplash.mtdCargarTablaRequisitos.msg1"));
 
         // Proceso de carga
         if( CtrlHiloConexion.checkConexion() ){
             if( !MyFreeLabDao.mtdCrearTablaRequisitos())
-                splash.etqMensaje.setText(MyFreeLab.idioma
+                splash.etqMensaje.setText(Veontec.idioma
                 .getProperty("hiloSplash.mtdCargarTablaRequisitos.msg2"));
             else
-                splash.etqMensaje.setText(MyFreeLab.idioma
+                splash.etqMensaje.setText(Veontec.idioma
                 .getProperty("hiloSplash.mtdCargarTablaRequisitos.msg3"));
         } else
-        splash.etqMensaje.setText(MyFreeLab.idioma
+        splash.etqMensaje.setText(Veontec.idioma
                 .getProperty("hiloSplash.conexion.off"));
 
         mtdTiempoDeEspera();
@@ -242,19 +242,19 @@ public class HiloSplash extends Thread{
         // * Cargar tabla requisitos..
             
         // Titulo - Carga
-        mtdCargarTitulo(MyFreeLab.idioma
+        mtdCargarTitulo(Veontec.idioma
                 .getProperty("hiloSplash.mtdCargarTablaAsociados.msg1"));
 
         // Proceso de carga
         if( CtrlHiloConexion.checkConexion() ){
             if( !MyFreeLabDao.mtdCrearTablaAsociados())
-                splash.etqMensaje.setText(MyFreeLab.idioma
+                splash.etqMensaje.setText(Veontec.idioma
                 .getProperty("hiloSplash.mtdCargarTablaAsociados.msg2"));
             else
-                splash.etqMensaje.setText(MyFreeLab.idioma
+                splash.etqMensaje.setText(Veontec.idioma
                 .getProperty("hiloSplash.mtdCargarTablaAsociados.msg3"));
         } else
-        splash.etqMensaje.setText(MyFreeLab.idioma
+        splash.etqMensaje.setText(Veontec.idioma
                 .getProperty("hiloSplash.conexion.off"));
 
         mtdTiempoDeEspera();

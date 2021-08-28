@@ -7,7 +7,7 @@ public class Index {
     public static void main(String[] args) {
         // * Inicializar el programa
         //System.out.println("Inicializando programa...");
-        MyFreeLab programa  = new MyFreeLab();
+        Veontec programa  = new Veontec();
         
         switch (args.length) {
             case 0:

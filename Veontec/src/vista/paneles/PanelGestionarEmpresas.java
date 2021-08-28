@@ -5,7 +5,7 @@
  */
 package vista.paneles;
 
-import index.MyFreeLab;
+import index.Veontec;
 import src.Recursos;
 
 /**
@@ -30,17 +30,17 @@ public class PanelGestionarEmpresas extends javax.swing.JPanel {
     private void mtdEstablecerIdioma(){
         
         // * Etiquetas
-        this.titulo1.setText(MyFreeLab.idioma.getProperty("panelGestionarEmpresa.etqTitulo"));
-        this.eqtEmpresa.setText(MyFreeLab.idioma.getProperty("panelGestionarEmpresa.eqtEmpresa") );
+        this.titulo1.setText(Veontec.idioma.getProperty("panelGestionarEmpresa.etqTitulo"));
+        this.eqtEmpresa.setText(Veontec.idioma.getProperty("panelGestionarEmpresa.eqtEmpresa") );
         
         // * Campos (Placeholder)
-        this.cmpEmpresa.setPlaceholder(MyFreeLab.idioma.getProperty("panelGestionarEmpresa.eqtEmpresa") );
+        this.cmpEmpresa.setPlaceholder(Veontec.idioma.getProperty("panelGestionarEmpresa.eqtEmpresa") );
         
         // * Botones
-        this.btnCrear.setTexto(MyFreeLab.idioma.getProperty("panelGestionarEmpresa.btnCrear") );
-        this.btnModificar.setTexto(MyFreeLab.idioma.getProperty("panelGestionarEmpresa.btnModificar") );
-        this.btnBuscar.setTexto(MyFreeLab.idioma.getProperty("panelGestionarEmpresa.btnBuscar") );
-        this.btnRemover.setTexto(MyFreeLab.idioma.getProperty("panelGestionarEmpresa.btnRemover") );
+        this.btnCrear.setTexto(Veontec.idioma.getProperty("panelGestionarEmpresa.btnCrear") );
+        this.btnModificar.setTexto(Veontec.idioma.getProperty("panelGestionarEmpresa.btnModificar") );
+        this.btnBuscar.setTexto(Veontec.idioma.getProperty("panelGestionarEmpresa.btnBuscar") );
+        this.btnRemover.setTexto(Veontec.idioma.getProperty("panelGestionarEmpresa.btnRemover") );
         
         
     }
@@ -97,7 +97,7 @@ public class PanelGestionarEmpresas extends javax.swing.JPanel {
             .addComponent(titulo1, javax.swing.GroupLayout.DEFAULT_SIZE, 61, Short.MAX_VALUE)
         );
 
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(MyFreeLab.idioma.getProperty("panelGestionarEmpresa.etqTituloPanel")));
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(Veontec.idioma.getProperty("panelGestionarEmpresa.etqTituloPanel")));
 
         eqtEmpresa.setText("Nombre del empresa");
 

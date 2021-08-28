@@ -1,6 +1,6 @@
 package vista.paneles;
 
-import index.MyFreeLab;
+import index.Veontec;
 import src.Recursos;
 
 public class PanelResumen extends javax.swing.JPanel {
@@ -18,39 +18,39 @@ public class PanelResumen extends javax.swing.JPanel {
     private void mtdEstablecerIdioma(){
         
         // * Paneles
-        tpanelInformativo.setTitleAt(0, MyFreeLab.idioma.getProperty("panelInforme.tpanelInformativo.tab1"));
-        tpanelInformativo.setTitleAt(1, MyFreeLab.idioma.getProperty("panelInforme.tpanelInformativo.tab2"));
+        tpanelInformativo.setTitleAt(0, Veontec.idioma.getProperty("panelInforme.tpanelInformativo.tab1"));
+        tpanelInformativo.setTitleAt(1, Veontec.idioma.getProperty("panelInforme.tpanelInformativo.tab2"));
         
         // * Etiquetas
-        this.lblProEnProceso.setText(MyFreeLab.idioma.getProperty("panelInforme.lblProEnProceso"));
-        this.lblProFinalizados.setText(MyFreeLab.idioma.getProperty("panelInforme.lblProFinalizados"));
-        this.lblProEliminados.setText(MyFreeLab.idioma.getProperty("panelInforme.lblProEliminados"));
-        this.lblProTotales.setText(MyFreeLab.idioma.getProperty("panelInforme.lblProTotales"));
+        this.lblProEnProceso.setText(Veontec.idioma.getProperty("panelInforme.lblProEnProceso"));
+        this.lblProFinalizados.setText(Veontec.idioma.getProperty("panelInforme.lblProFinalizados"));
+        this.lblProEliminados.setText(Veontec.idioma.getProperty("panelInforme.lblProEliminados"));
+        this.lblProTotales.setText(Veontec.idioma.getProperty("panelInforme.lblProTotales"));
         
-        this.lblMontoEsperado.setText(MyFreeLab.idioma.getProperty("panelInforme.lblMontoEsperado"));
-        this.lblMontoPerdidas.setText(MyFreeLab.idioma.getProperty("panelInforme.lblMontoPerdidas"));
-        this.lblMontoLibre.setText(MyFreeLab.idioma.getProperty("panelInforme.lblMontoLibre"));
-        this.lblMontoObtenido.setText(MyFreeLab.idioma.getProperty("panelInforme.lblMontoObtenido"));
+        this.lblMontoEsperado.setText(Veontec.idioma.getProperty("panelInforme.lblMontoEsperado"));
+        this.lblMontoPerdidas.setText(Veontec.idioma.getProperty("panelInforme.lblMontoPerdidas"));
+        this.lblMontoLibre.setText(Veontec.idioma.getProperty("panelInforme.lblMontoLibre"));
+        this.lblMontoObtenido.setText(Veontec.idioma.getProperty("panelInforme.lblMontoObtenido"));
         
-        this.etqTitulo.setText(MyFreeLab.idioma.getProperty("panelInforme.etqTitulo"));
+        this.etqTitulo.setText(Veontec.idioma.getProperty("panelInforme.etqTitulo"));
         
         // * Campos (Placeholder)
-        this.cmpProEnProceso.setPlaceholder(MyFreeLab.idioma.getProperty("panelInforme.lblProEnProceso"));
-        this.cmpProFinalizados.setPlaceholder(MyFreeLab.idioma.getProperty("panelInforme.lblProFinalizados"));
-        this.cmpProEliminados.setPlaceholder(MyFreeLab.idioma.getProperty("panelInforme.lblProEliminados"));
-        this.cmpProTotales.setPlaceholder(MyFreeLab.idioma.getProperty("panelInforme.lblProTotales"));
+        this.cmpProEnProceso.setPlaceholder(Veontec.idioma.getProperty("panelInforme.lblProEnProceso"));
+        this.cmpProFinalizados.setPlaceholder(Veontec.idioma.getProperty("panelInforme.lblProFinalizados"));
+        this.cmpProEliminados.setPlaceholder(Veontec.idioma.getProperty("panelInforme.lblProEliminados"));
+        this.cmpProTotales.setPlaceholder(Veontec.idioma.getProperty("panelInforme.lblProTotales"));
         
-        this.cmpMontoEsperado.setPlaceholder(MyFreeLab.idioma.getProperty("panelInforme.lblMontoEsperado"));
-        this.cmpMontoPerdidas.setPlaceholder(MyFreeLab.idioma.getProperty("panelInforme.lblMontoPerdidas"));
-        this.cmpMontoLibre.setPlaceholder(MyFreeLab.idioma.getProperty("panelInforme.lblMontoLibre"));
-        this.cmpMontoObtenido.setPlaceholder(MyFreeLab.idioma.getProperty("panelInforme.lblMontoObtenido"));
+        this.cmpMontoEsperado.setPlaceholder(Veontec.idioma.getProperty("panelInforme.lblMontoEsperado"));
+        this.cmpMontoPerdidas.setPlaceholder(Veontec.idioma.getProperty("panelInforme.lblMontoPerdidas"));
+        this.cmpMontoLibre.setPlaceholder(Veontec.idioma.getProperty("panelInforme.lblMontoLibre"));
+        this.cmpMontoObtenido.setPlaceholder(Veontec.idioma.getProperty("panelInforme.lblMontoObtenido"));
         
         // * Mensajes
-        this.lblMonMsg.setText(MyFreeLab.idioma.getProperty("panelInforme.lblMonMsg"));
-        this.lblProMsg.setText(MyFreeLab.idioma.getProperty("panelInforme.lblProMsg"));
+        this.lblMonMsg.setText(Veontec.idioma.getProperty("panelInforme.lblMonMsg"));
+        this.lblProMsg.setText(Veontec.idioma.getProperty("panelInforme.lblProMsg"));
         
         // * Botones
-        this.btnAceptar.setTexto(MyFreeLab.idioma.getProperty("panelInforme.btnAceptar"));
+        this.btnAceptar.setTexto(Veontec.idioma.getProperty("panelInforme.btnAceptar"));
     }
 
     /**

@@ -5,7 +5,7 @@
  */
 package vista.ventanas;
 
-import index.MyFreeLab;
+import index.Veontec;
 import src.Recursos;
 
 /**
@@ -47,35 +47,35 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     
     private void mtdEstablecerIdioma(){
         // * Menus
-        this.menuArchivo.setText(MyFreeLab.idioma.getProperty("Archivo") );
-        this.menuAyuda.setText(MyFreeLab.idioma.getProperty("Ayuda"));
-        this.menuEditar.setText(MyFreeLab.idioma.getProperty("Editar"));
-        this.menuConfigurar.setText(MyFreeLab.idioma.getProperty("Configurar"));
+        this.menuArchivo.setText(Veontec.idioma.getProperty("Archivo") );
+        this.menuAyuda.setText(Veontec.idioma.getProperty("Ayuda"));
+        this.menuEditar.setText(Veontec.idioma.getProperty("Editar"));
+        this.menuConfigurar.setText(Veontec.idioma.getProperty("Configurar"));
         
         // * Etiquetas
-        this.etqFiltroProEnProceso.setText(MyFreeLab.idioma.getProperty("etq.FiltroProEnProceso"));
-        this.etqFiltroProRealizados.setText(MyFreeLab.idioma.getProperty("etq.FiltroProRealizados"));
-        this.etqFiltroProEliminados.setText(MyFreeLab.idioma.getProperty("etq.FiltroProEliminados"));
+        this.etqFiltroProEnProceso.setText(Veontec.idioma.getProperty("etq.FiltroProEnProceso"));
+        this.etqFiltroProRealizados.setText(Veontec.idioma.getProperty("etq.FiltroProRealizados"));
+        this.etqFiltroProEliminados.setText(Veontec.idioma.getProperty("etq.FiltroProEliminados"));
         
         // * Botones
-        this.btnSalir.setText(MyFreeLab.idioma.getProperty("btn.Salir"));
-        this.btnPreferencias.setText(MyFreeLab.idioma.getProperty("btn.Preferencia"));
-        this.btnGenerarInforme.setText(MyFreeLab.idioma.getProperty("btn.GenerarInforme"));
+        this.btnSalir.setText(Veontec.idioma.getProperty("btn.Salir"));
+        this.btnPreferencias.setText(Veontec.idioma.getProperty("btn.Preferencia"));
+        this.btnGenerarInforme.setText(Veontec.idioma.getProperty("btn.GenerarInforme"));
         
-        this.btnDatosPersonales.setText(MyFreeLab.idioma.getProperty("btn.DatosPersonales"));
-        this.btnGestionarProyectos.setText(MyFreeLab.idioma.getProperty("btn.GestionarProyectos"));
-        this.btnGestionarEmpresas.setText(MyFreeLab.idioma.getProperty("btn.GestionarEmpresas"));
-        this.btnVinculacion.setText(MyFreeLab.idioma.getProperty("btn.Vinculacion"));
+        this.btnDatosPersonales.setText(Veontec.idioma.getProperty("btn.DatosPersonales"));
+        this.btnGestionarProyectos.setText(Veontec.idioma.getProperty("btn.GestionarProyectos"));
+        this.btnGestionarEmpresas.setText(Veontec.idioma.getProperty("btn.GestionarEmpresas"));
+        this.btnVinculacion.setText(Veontec.idioma.getProperty("btn.Vinculacion"));
         
-        this.btnConexion.setText(MyFreeLab.idioma.getProperty("btn.Conexion"));
+        this.btnConexion.setText(Veontec.idioma.getProperty("btn.Conexion"));
         
-        this.btnReportarError.setText(MyFreeLab.idioma.getProperty("btn.ReportarError"));
-        this.btnObtenerAyuda.setText(MyFreeLab.idioma.getProperty("btn.ObtenerAyuda"));
-        this.btnActualizarPrograma.setText(MyFreeLab.idioma.getProperty("btn.ActualizarPrograma"));
-        this.btnAcercaDe.setText(MyFreeLab.idioma.getProperty("btn.AcercaDe"));
+        this.btnReportarError.setText(Veontec.idioma.getProperty("btn.ReportarError"));
+        this.btnObtenerAyuda.setText(Veontec.idioma.getProperty("btn.ObtenerAyuda"));
+        this.btnActualizarPrograma.setText(Veontec.idioma.getProperty("btn.ActualizarPrograma"));
+        this.btnAcercaDe.setText(Veontec.idioma.getProperty("btn.AcercaDe"));
         
         // * Establecer placeholder
-        this.cmpBusqueda.setPlaceholder(MyFreeLab.idioma.getProperty("msg.CampoBusqueda"));
+        this.cmpBusqueda.setPlaceholder(Veontec.idioma.getProperty("msg.CampoBusqueda"));
     }
 
     /**

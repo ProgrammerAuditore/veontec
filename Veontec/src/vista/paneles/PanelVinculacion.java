@@ -5,7 +5,7 @@
  */
 package vista.paneles;
 
-import index.MyFreeLab;
+import index.Veontec;
 import java.awt.Color;
 import src.Recursos;
 
@@ -36,17 +36,17 @@ public class PanelVinculacion extends javax.swing.JPanel {
     private void mtdEstablecerIdioma(){
         
         // * Etiquetas
-        this.etqTitulo.setText(MyFreeLab.idioma.getProperty("panelVinculacion.etqTitulo"));
-        this.etqAsociar.setText(MyFreeLab.idioma.getProperty("panelVinculacion.etqAsociar"));
-        this.etqDesvincular.setText(MyFreeLab.idioma.getProperty("panelVinculacion.etqDesvincular"));
-        this.etqProyectos.setText(MyFreeLab.idioma.getProperty("panelVinculacion.etqProyectos"));
-        this.etqEmpresas.setText(MyFreeLab.idioma.getProperty("panelVinculacion.etqEmpresas"));
-        this.etqEmpresasAsociadas.setText(MyFreeLab.idioma.getProperty("panelVinculacion.etqEmpresasAsociadas"));
-        this.etqInstruccion1.setText(MyFreeLab.idioma.getProperty("panelVinculacion.etqInstruccion1"));
-        this.etqInstruccion2.setText(MyFreeLab.idioma.getProperty("panelVinculacion.etqInstruccion2"));
+        this.etqTitulo.setText(Veontec.idioma.getProperty("panelVinculacion.etqTitulo"));
+        this.etqAsociar.setText(Veontec.idioma.getProperty("panelVinculacion.etqAsociar"));
+        this.etqDesvincular.setText(Veontec.idioma.getProperty("panelVinculacion.etqDesvincular"));
+        this.etqProyectos.setText(Veontec.idioma.getProperty("panelVinculacion.etqProyectos"));
+        this.etqEmpresas.setText(Veontec.idioma.getProperty("panelVinculacion.etqEmpresas"));
+        this.etqEmpresasAsociadas.setText(Veontec.idioma.getProperty("panelVinculacion.etqEmpresasAsociadas"));
+        this.etqInstruccion1.setText(Veontec.idioma.getProperty("panelVinculacion.etqInstruccion1"));
+        this.etqInstruccion2.setText(Veontec.idioma.getProperty("panelVinculacion.etqInstruccion2"));
         
         // * Botones
-        this.btnCancelar.setTexto(MyFreeLab.idioma.getProperty("panelVinculacion.btnCancelar"));
+        this.btnCancelar.setTexto(Veontec.idioma.getProperty("panelVinculacion.btnCancelar"));
     }
 
     /**
@@ -107,7 +107,7 @@ public class PanelVinculacion extends javax.swing.JPanel {
             .addComponent(etqTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, 61, Short.MAX_VALUE)
         );
 
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(MyFreeLab.idioma.getProperty("panelVinculacion.etqTituloPanel")));
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(Veontec.idioma.getProperty("panelVinculacion.etqTituloPanel")));
 
         etqProyectos.setText("Selecciona un proyecto");
 

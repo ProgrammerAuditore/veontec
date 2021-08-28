@@ -5,7 +5,7 @@
  */
 package vista.paneles;
 
-import index.MyFreeLab;
+import index.Veontec;
 import java.awt.Color;
 import src.Recursos;
 
@@ -32,21 +32,21 @@ public class PanelPreferencias extends javax.swing.JPanel {
     private void mtdEstablecerIdioma(){
         
         // * Paneles
-        tpanelOpciones.setTitleAt(0, MyFreeLab.idioma.getProperty("panelPreferencias.tpanelOpciones"));
+        tpanelOpciones.setTitleAt(0, Veontec.idioma.getProperty("panelPreferencias.tpanelOpciones"));
         
         // * Etiquetas
-        this.etqTitulo.setText(MyFreeLab.idioma.getProperty("panelPreferencias.etqTitulo"));
-        this.etqEstilo.setText(MyFreeLab.idioma.getProperty("panelPreferencias.etqEstilo"));
-        this.etqFuente.setText(MyFreeLab.idioma.getProperty("panelPreferencias.etqFuente"));
-        this.etqIdioma.setText(MyFreeLab.idioma.getProperty("panelPreferencias.etqIdioma"));
+        this.etqTitulo.setText(Veontec.idioma.getProperty("panelPreferencias.etqTitulo"));
+        this.etqEstilo.setText(Veontec.idioma.getProperty("panelPreferencias.etqEstilo"));
+        this.etqFuente.setText(Veontec.idioma.getProperty("panelPreferencias.etqFuente"));
+        this.etqIdioma.setText(Veontec.idioma.getProperty("panelPreferencias.etqIdioma"));
         //this.etqSimboloMoneda.setText(MyFreeLab.idioma.getProperty("panelPreferencias.etqSimboloMoneda"));
         
         // * Campos
         //this.cmpSimboloMoneda.setPlaceholder(MyFreeLab.idioma.getProperty("panelPreferencias.etqSimboloMoneda"));
         
         // * Botones
-        this.btnAceptar.setTexto(MyFreeLab.idioma.getProperty("panelPreferencias.btnAceptar"));
-        this.btnCancelar.setTexto(MyFreeLab.idioma.getProperty("panelPreferencias.btnCancelar"));
+        this.btnAceptar.setTexto(Veontec.idioma.getProperty("panelPreferencias.btnAceptar"));
+        this.btnCancelar.setTexto(Veontec.idioma.getProperty("panelPreferencias.btnCancelar"));
     }
 
     /**
