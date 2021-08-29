@@ -12,7 +12,6 @@ import java.util.Properties;
 import java.util.Scanner;
 import javax.swing.JOptionPane;
 import modelo.dao.EjecucionDao;
-import modelo.dao.ConexionDao;
 import modelo.dao.PreferenciaDao;
 import modelo.dao.ProductoDao;
 import modelo.dao.UsuarioDao;
@@ -59,48 +58,10 @@ public class Veontec {
         CtrlInicio ctrl = new CtrlInicio(ni, ni.pnRegistrarme, ni.pnLoggin); 
         ctrl.mtdInit();
         
-        /*
-        // * Crear la ventana principal con su respectivo patrón de diseño MVC
-        ventana = new VentanaPrincipal();
-        ProyectoDao daoP = new ProyectoDao();
-        EmpresaDao daoE = new EmpresaDao();
-        RequisitoDao daoR = new RequisitoDao();
-        FabricarModal fabrica = new FabricarModal(ventana);
-        CtrlPrincipal ctrl_p = new CtrlPrincipal(ventana, fabrica, daoP, daoE, daoR);
-        */
-        
         // * Ejecutar hilos
         //hs.start();
         hc.start();
         hp.start();
-        
-        /*
-        try {
-            hs.join();
-        } catch (InterruptedException ex) {
-            Logger.getLogger(Index.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        */
-        
-        /*
-        // * Abrir la ventana del programa
-        ventana.setState(JFrame.ICONIFIED);
-        ventana.setVisible(true);
-        try {
-            Thread.sleep(600);
-        } catch (InterruptedException ex) {}
-        ventana.setAutoRequestFocus(true);
-        ventana.requestFocus();
-        ventana.setExtendedState(JFrame.NORMAL);
-        ventana.setVisible(true);
-        
-        // * Verificar conexion 
-        if( CtrlHiloConexion.ctrlEstado ){
-            CtrlPrincipal.mensajeCtrlPrincipal(MyFreeLab.idioma.getProperty("ctrlPrincipal.conexion.on.msg2"));
-        }else{
-            CtrlPrincipal.mensajeCtrlPrincipal(MyFreeLab.idioma.getProperty("ctrlPrincipal.conexion.off.msg2"));
-        }
-        */
         
     }
     
@@ -439,35 +400,6 @@ public class Veontec {
         // * Si el pid almacenado en el archivo .run
         // no está en ejecución devuelve una nueva PID 
         return Recursos.PID;
-    }
-
-    void mtdTagMkConn() {
-        File conn = Recursos.dataConexion();
-        
-        if( conn.exists() )
-            conn.delete();
-            
-        ConexionDto conec = new ConexionDto("0", "", "", "", "");
-        new ConexionDao().regitrar_datos(conec);
-        
-        if( conn.exists() ){
-            System.out.println("" + conn.getAbsolutePath());
-        }
-        
-    }
-
-    void mtdTagMkPref() {
-        File pconfig = Recursos.dataPreferencias();
-        
-        if( pconfig.exists() )
-            pconfig.delete();
-        
-        PreferenciaDto pref = new PreferenciaDto();
-        new PreferenciaDao().regitrar_datos(pref);
-        
-        if( pconfig.exists() ){
-            System.out.println("" + pconfig.getAbsolutePath());
-        }
     }
     
 }
