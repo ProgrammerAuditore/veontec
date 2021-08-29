@@ -38,20 +38,25 @@
                       <Component id="campoCorreo1" max="32767" attributes="0"/>
                       <Component id="campoPassword1" alignment="0" max="32767" attributes="0"/>
                       <Group type="102" alignment="1" attributes="0">
-                          <EmptySpace min="0" pref="634" max="32767" attributes="0"/>
                           <Component id="btnEliminarCuenta" min="-2" pref="140" max="-2" attributes="0"/>
-                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <EmptySpace max="32767" attributes="0"/>
+                          <Component id="boton2" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Component id="boton1" min="-2" max="-2" attributes="0"/>
                       </Group>
+                      <Component id="jPanel1" alignment="0" max="32767" attributes="0"/>
+                      <Component id="campoTMovil1" alignment="0" max="32767" attributes="0"/>
                       <Group type="102" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="etiqueta4" min="-2" pref="170" max="-2" attributes="0"/>
                               <Component id="etiqueta1" alignment="0" min="-2" pref="170" max="-2" attributes="0"/>
                               <Component id="etiqueta2" alignment="0" min="-2" pref="170" max="-2" attributes="0"/>
+                              <Component id="etiqueta5" alignment="0" min="-2" pref="180" max="-2" attributes="0"/>
+                              <Component id="etiqueta3" alignment="0" min="-2" pref="180" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                       </Group>
-                      <Component id="jPanel1" alignment="0" max="32767" attributes="0"/>
+                      <Component id="campoTexto2" alignment="0" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
@@ -74,10 +79,19 @@
                   <Component id="etiqueta2" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="campoPassword1" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="238" max="32767" attributes="0"/>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <Component id="etiqueta3" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="campoTMovil1" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                  <Component id="etiqueta5" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="campoTexto2" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace pref="101" max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="btnEliminarCuenta" alignment="0" min="-2" max="-2" attributes="0"/>
                       <Component id="boton1" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="boton2" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
@@ -152,7 +166,7 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="353" max="-2" attributes="0"/>
                       <Component id="titulo1" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="32767" attributes="0"/>
+                      <EmptySpace pref="434" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -177,6 +191,25 @@
             </Component>
           </SubComponents>
         </Container>
+        <Component class="vista.componentes.boton.Boton" name="boton2">
+          <Properties>
+            <Property name="texto" type="java.lang.String" value="Guardar"/>
+          </Properties>
+        </Component>
+        <Component class="vista.componentes.etiqueta.Etiqueta" name="etiqueta3">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="No. T&#xe9;lefono / Movil"/>
+          </Properties>
+        </Component>
+        <Component class="vista.componentes.campos.CampoTMovil" name="campoTMovil1">
+        </Component>
+        <Component class="vista.componentes.etiqueta.Etiqueta" name="etiqueta5">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Direcci&#xf3;n"/>
+          </Properties>
+        </Component>
+        <Component class="vista.componentes.campos.CampoTexto" name="campoTexto2">
+        </Component>
       </SubComponents>
     </Container>
   </SubComponents>
