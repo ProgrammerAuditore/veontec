@@ -324,7 +324,6 @@ public class Veontec {
     public void mtdTagHelp(){
         mtdCargarPreferencias();
         System.out.println(Info.NombreSoftware);
-        System.out.println(Info.Avatar);
         System.out.println("");
         System.out.println(Veontec.idioma.get("MyFreeLab.mtdTagHelp.msg1"));
         
@@ -342,9 +341,6 @@ public class Veontec {
         
         System.out.print("  --help, -h          ");
         System.out.println(Veontec.idioma.get("MyFreeLab.mtdTagHelp.msg5"));
-        
-        System.out.println("");
-        System.out.println(Info.SitioWeb);
    
     }
 
