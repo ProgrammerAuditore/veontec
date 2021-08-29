@@ -83,17 +83,11 @@
           </Properties>
         </Component>
         <Component class="vista.componentes.campos.CampoPassword" name="campoPassword1">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="campoPassword1"/>
-          </Properties>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
           </AuxValues>
         </Component>
         <Component class="vista.componentes.campos.CampoCorreo" name="campoCorreo1">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="campoCorreo1"/>
-          </Properties>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
           </AuxValues>

@@ -5,13 +5,16 @@ import de.mkammerer.argon2.Argon2Factory;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import javax.swing.JOptionPane;
+import modelo.ObjEmail;
 import modelo.dao.DatosPersonalesDao;
 import modelo.dao.UsuarioDao;
 import modelo.dto.DatosPersonalesDto;
 import modelo.dto.UsuarioDto;
 import vista.paneles.veontec.PanelInicarSession;
 import vista.paneles.veontec.PanelRegistrarme;
+import vista.ventanas.VentanaHome;
 import vista.ventanas.VentanaInicio;
+import vista.ventanas.VentanaPrincipal;
 
 public class CtrlInicio implements MouseListener{
     
@@ -41,6 +44,7 @@ public class CtrlInicio implements MouseListener{
         if(CtrlHiloConexion.checkConexion() == false){
             ni.tabContenedor.getTabComponentAt(1).setEnabled(false);
             ni.tabContenedor.getTabComponentAt(2).setEnabled(false);
+            System.out.println("No hay conexion a la base de datos");
         }else{
             System.out.println("Existe conexion a la base de datos... ");
         }
@@ -80,6 +84,13 @@ public class CtrlInicio implements MouseListener{
         if( pnInicarSession.campoCorreo1.getText().trim().equals(usuario.getCmpCorreo().trim())
             && mtdVerificarPassword(usuario.getCmpPassword().trim()) ){
             JOptionPane.showMessageDialog(ni, "Bienvenido " + usuario.getCmpNombreCompleto() );
+            ni.setVisible(false);
+            ni.dispose();
+            
+            VentanaHome vh = new VentanaHome();
+            CtrlPrincipal ctrl = new CtrlPrincipal(vh, dao, usuario );
+            ctrl.laVista.setLocationRelativeTo(null);
+            ctrl.laVista.setVisible(true);
             
         }else{
             JOptionPane.showMessageDialog(ni, "Vefica que los datos sean correctos.");
@@ -105,8 +116,8 @@ public class CtrlInicio implements MouseListener{
             JOptionPane.showMessageDialog(null, "El correo ya está registrado.");
         }else{
             if( dao.mtdInsetar(usuario) ){
-                JOptionPane.showMessageDialog(ni, "Se registro exitosamente.");
                 mtdVaciarCampos_Registrarme();
+                JOptionPane.showMessageDialog(ni, "Se registro exitosamente.");
             }
         }
         

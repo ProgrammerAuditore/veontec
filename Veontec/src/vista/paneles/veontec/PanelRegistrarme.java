@@ -51,20 +51,12 @@ public class PanelRegistrarme extends javax.swing.JPanel {
 
         etiqueta1.setText("Correo electronico");
 
-        campoPassword1.setText("campoPassword1");
-
-        campoCorreo1.setText("campoCorreo1");
-
         btnRegistrarme.setImgButtonType("success");
         btnRegistrarme.setTexto("Registrarme");
 
         etiqueta2.setText("Contraseña");
 
         etiqueta3.setText("Repetir contraseña");
-
-        campoPassword2.setText("campoPassword2");
-
-        campoTexto1.setText("campoTexto1");
 
         etiqueta4.setText("Nombre completo");
 
@@ -77,10 +69,6 @@ public class PanelRegistrarme extends javax.swing.JPanel {
                 .addGroup(jPanelBackground1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(campoTexto1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(campoPassword2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelBackground1Layout.createSequentialGroup()
-                        .addGap(0, 215, Short.MAX_VALUE)
-                        .addComponent(btnRegistrarme, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(185, 185, 185))
                     .addComponent(campoCorreo1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(campoPassword1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanelBackground1Layout.createSequentialGroup()
@@ -89,7 +77,10 @@ public class PanelRegistrarme extends javax.swing.JPanel {
                             .addComponent(etiqueta3, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(etiqueta1, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(etiqueta2, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(0, 366, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelBackground1Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(btnRegistrarme, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         jPanelBackground1Layout.setVerticalGroup(
