@@ -1,17 +1,15 @@
 package controlador;
 
 import java.awt.Dialog;
-import java.awt.Frame;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import javax.swing.JDialog;
-import javax.swing.JOptionPane;
 import javax.swing.tree.DefaultMutableTreeNode;
 import modelo.dto.UsuarioDto;
-import vista.paneles.veontec.PanelCrearProducto;
-import vista.paneles.veontec.PanelMiTienda;
+import vista.paneles.PanelCrearProducto;
+import vista.paneles.PanelMiTienda;
 
 public class CtrlMiTienda implements MouseListener{
     

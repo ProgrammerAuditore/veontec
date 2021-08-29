@@ -201,7 +201,6 @@
         </Component>
         <Component class="vista.componentes.campos.CampoDatos" name="cmpNombres">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Mochila Color Negro"/>
             <Property name="componenteDidireccional" type="javax.swing.JLabel" editor="org.netbeans.modules.form.ComponentChooserEditor">
               <ComponentRef name="etqNombres"/>
             </Property>
@@ -251,7 +250,6 @@
         </Component>
         <Component class="vista.componentes.campos.CampoMoneda" name="campoMoneda1">
           <Properties>
-            <Property name="text" type="java.lang.String" value="12"/>
             <Property name="placeholder" type="java.lang.String" value="Ingresa el precio"/>
           </Properties>
         </Component>
@@ -262,7 +260,6 @@
         </Component>
         <Component class="vista.componentes.campos.CampoNumerico" name="campoNumerico1">
           <Properties>
-            <Property name="text" type="java.lang.String" value="10"/>
             <Property name="placeholder" type="java.lang.String" value="Ingresa una cantidad"/>
           </Properties>
         </Component>

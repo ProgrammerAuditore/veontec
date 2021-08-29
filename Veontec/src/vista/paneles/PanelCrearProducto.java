@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package vista.paneles.veontec;
+package vista.paneles;
 
 import vista.paneles.*;
 import index.Veontec;
@@ -89,7 +89,6 @@ public class PanelCrearProducto extends javax.swing.JPanel {
 
         etqEmail.setText("Seleccionar categoría");
 
-        cmpNombres.setText("Mochila Color Negro");
         cmpNombres.setComponenteDidireccional(etqNombres);
         cmpNombres.setPlaceholder("Ingresa titulo del producto");
 
@@ -104,12 +103,10 @@ public class PanelCrearProducto extends javax.swing.JPanel {
 
         jSeparator1.setOrientation(javax.swing.SwingConstants.VERTICAL);
 
-        campoMoneda1.setText("12");
         campoMoneda1.setPlaceholder("Ingresa el precio");
 
         etiqueta2.setText("Stock disponible");
 
-        campoNumerico1.setText("10");
         campoNumerico1.setPlaceholder("Ingresa una cantidad");
 
         campoTexto1.setEditable(false);

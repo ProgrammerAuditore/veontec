@@ -8,7 +8,7 @@ import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import javax.swing.tree.DefaultMutableTreeNode;
 import modelo.dto.UsuarioDto;
-import vista.paneles.veontec.PanelMiTienda;
+import vista.paneles.PanelMiTienda;
 
 public class CtrlCrearProducto implements MouseListener{
     

@@ -40,9 +40,9 @@ public class VentanaInicio extends javax.swing.JFrame {
 
         tabContenedor = new javax.swing.JTabbedPane();
         jPanelBackground2 = new vista.componentes.jpanelbackground.JPanelBackground();
-        pnLoggin = new vista.paneles.veontec.PanelInicarSession();
+        pnLoggin = new vista.paneles.PanelInicarSession();
         jPanelBackground3 = new vista.componentes.jpanelbackground.JPanelBackground();
-        pnRegistrarme = new vista.paneles.veontec.PanelRegistrarme();
+        pnRegistrarme = new vista.paneles.PanelRegistrarme();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -130,8 +130,8 @@ public class VentanaInicio extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private vista.componentes.jpanelbackground.JPanelBackground jPanelBackground2;
     private vista.componentes.jpanelbackground.JPanelBackground jPanelBackground3;
-    public vista.paneles.veontec.PanelInicarSession pnLoggin;
-    public vista.paneles.veontec.PanelRegistrarme pnRegistrarme;
+    public vista.paneles.PanelInicarSession pnLoggin;
+    public vista.paneles.PanelRegistrarme pnRegistrarme;
     public javax.swing.JTabbedPane tabContenedor;
     // End of variables declaration//GEN-END:variables
 }

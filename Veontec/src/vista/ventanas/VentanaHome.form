@@ -75,7 +75,7 @@
             </DimensionLayout>
           </Layout>
           <SubComponents>
-            <Component class="vista.paneles.veontec.PanelHome" name="panelHome1">
+            <Component class="vista.paneles.PanelHome" name="panelHome1">
             </Component>
           </SubComponents>
         </Container>
@@ -107,7 +107,7 @@
             </DimensionLayout>
           </Layout>
           <SubComponents>
-            <Component class="vista.paneles.veontec.PanelMiTienda" name="pnMiTienda">
+            <Component class="vista.paneles.PanelMiTienda" name="pnMiTienda">
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
               </AuxValues>
@@ -142,7 +142,7 @@
             </DimensionLayout>
           </Layout>
           <SubComponents>
-            <Component class="vista.paneles.veontec.PanelCompras" name="panelCompras1">
+            <Component class="vista.paneles.PanelCompras" name="panelCompras1">
             </Component>
           </SubComponents>
         </Container>
@@ -174,7 +174,7 @@
             </DimensionLayout>
           </Layout>
           <SubComponents>
-            <Component class="vista.paneles.veontec.PanelVentas" name="panelVentas1">
+            <Component class="vista.paneles.PanelVentas" name="panelVentas1">
             </Component>
           </SubComponents>
         </Container>
@@ -206,7 +206,7 @@
             </DimensionLayout>
           </Layout>
           <SubComponents>
-            <Component class="vista.paneles.veontec.PanelPreguntas" name="panelPreguntas1">
+            <Component class="vista.paneles.PanelPreguntas" name="panelPreguntas1">
             </Component>
           </SubComponents>
         </Container>
@@ -238,7 +238,7 @@
             </DimensionLayout>
           </Layout>
           <SubComponents>
-            <Component class="vista.paneles.veontec.PanelMiCuenta" name="panelMiCuenta1">
+            <Component class="vista.paneles.PanelMiCuenta" name="panelMiCuenta1">
             </Component>
           </SubComponents>
         </Container>

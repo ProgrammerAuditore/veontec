@@ -1,31 +1,7 @@
 package modelo;
 
-import controlador.CtrlAcercaDe;
-import javax.swing.JDialog;
-import modelo.dao.ConexionDao;
-import modelo.dao.DatosPersonalesDao;
-import modelo.dao.EmpresaDao;
-import modelo.dao.PreferenciaDao;
-import modelo.dao.UsuarioDao;
-import modelo.dao.RequisitoDao;
-import modelo.dao.VinculacionDao;
-import modelo.dto.ConexionDto;
-import modelo.dto.DatosPersonalesDto;
-import modelo.dto.EmpresaDto;
-import modelo.dto.PreferenciaDto;
+
 import modelo.dto.UsuarioDto;
-import modelo.dto.RequisitoDto;
-import modelo.dto.VinculacionDto;
-import vista.paneles.PanelAcercaDe;
-import vista.paneles.PanelActualizacion;
-import vista.paneles.PanelConexion;
-import vista.paneles.PanelPreferencias;
-import vista.paneles.PanelDatosPersonales;
-import vista.paneles.PanelGestionarEmpresas;
-import vista.paneles.PanelGestionarProyectos;
-import vista.paneles.PanelGestionarRequisitos;
-import vista.paneles.PanelResumen;
-import vista.paneles.PanelVinculacion;
 import vista.ventanas.VentanaPrincipal;
 
 public class FabricarModal {

@@ -40,17 +40,17 @@ public class VentanaHome extends javax.swing.JFrame {
 
         pnTabMenu = new javax.swing.JTabbedPane();
         pnInicio = new vista.componentes.jpanelbackground.JPanelBackground();
-        panelHome1 = new vista.paneles.veontec.PanelHome();
+        panelHome1 = new vista.paneles.PanelHome();
         jPanelBackground6 = new vista.componentes.jpanelbackground.JPanelBackground();
-        pnMiTienda = new vista.paneles.veontec.PanelMiTienda();
+        pnMiTienda = new vista.paneles.PanelMiTienda();
         jPanelBackground2 = new vista.componentes.jpanelbackground.JPanelBackground();
-        panelCompras1 = new vista.paneles.veontec.PanelCompras();
+        panelCompras1 = new vista.paneles.PanelCompras();
         jPanelBackground3 = new vista.componentes.jpanelbackground.JPanelBackground();
-        panelVentas1 = new vista.paneles.veontec.PanelVentas();
+        panelVentas1 = new vista.paneles.PanelVentas();
         jPanelBackground5 = new vista.componentes.jpanelbackground.JPanelBackground();
-        panelPreguntas1 = new vista.paneles.veontec.PanelPreguntas();
+        panelPreguntas1 = new vista.paneles.PanelPreguntas();
         jPanelBackground4 = new vista.componentes.jpanelbackground.JPanelBackground();
-        panelMiCuenta1 = new vista.paneles.veontec.PanelMiCuenta();
+        panelMiCuenta1 = new vista.paneles.PanelMiCuenta();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -214,13 +214,13 @@ public class VentanaHome extends javax.swing.JFrame {
     private vista.componentes.jpanelbackground.JPanelBackground jPanelBackground4;
     private vista.componentes.jpanelbackground.JPanelBackground jPanelBackground5;
     private vista.componentes.jpanelbackground.JPanelBackground jPanelBackground6;
-    private vista.paneles.veontec.PanelCompras panelCompras1;
-    private vista.paneles.veontec.PanelHome panelHome1;
-    private vista.paneles.veontec.PanelMiCuenta panelMiCuenta1;
-    private vista.paneles.veontec.PanelPreguntas panelPreguntas1;
-    private vista.paneles.veontec.PanelVentas panelVentas1;
+    private vista.paneles.PanelCompras panelCompras1;
+    private vista.paneles.PanelHome panelHome1;
+    private vista.paneles.PanelMiCuenta panelMiCuenta1;
+    private vista.paneles.PanelPreguntas panelPreguntas1;
+    private vista.paneles.PanelVentas panelVentas1;
     public vista.componentes.jpanelbackground.JPanelBackground pnInicio;
-    public vista.paneles.veontec.PanelMiTienda pnMiTienda;
+    public vista.paneles.PanelMiTienda pnMiTienda;
     public javax.swing.JTabbedPane pnTabMenu;
     // End of variables declaration//GEN-END:variables
 }

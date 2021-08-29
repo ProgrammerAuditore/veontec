@@ -6,16 +6,12 @@ import index.Veontec;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import javax.swing.JOptionPane;
-import modelo.ObjEmail;
-import modelo.dao.DatosPersonalesDao;
 import modelo.dao.UsuarioDao;
-import modelo.dto.DatosPersonalesDto;
 import modelo.dto.UsuarioDto;
-import vista.paneles.veontec.PanelInicarSession;
-import vista.paneles.veontec.PanelRegistrarme;
+import vista.paneles.PanelInicarSession;
+import vista.paneles.PanelRegistrarme;
 import vista.ventanas.VentanaHome;
 import vista.ventanas.VentanaInicio;
-import vista.ventanas.VentanaPrincipal;
 
 public class CtrlInicio implements MouseListener{
     
@@ -25,8 +21,6 @@ public class CtrlInicio implements MouseListener{
     private VentanaInicio ni;
     
     // * Modelos
-    private DatosPersonalesDao dao;
-    private DatosPersonalesDto dto;
 
     public CtrlInicio(VentanaInicio ni, PanelRegistrarme pnRegistrarme, PanelInicarSession pnInicarSession) {
         this.ni = ni;

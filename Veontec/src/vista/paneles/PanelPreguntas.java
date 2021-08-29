@@ -14,18 +14,18 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package vista.paneles.veontec;
+package vista.paneles;
 
 /**
  *
  * @author victor
  */
-public class PanelCompras extends javax.swing.JPanel {
+public class PanelPreguntas extends javax.swing.JPanel {
 
     /**
      * Creates new form PanelLoggin
      */
-    public PanelCompras() {
+    public PanelPreguntas() {
         initComponents();
     }
 
@@ -52,7 +52,7 @@ public class PanelCompras extends javax.swing.JPanel {
 
         titulo1.setForeground(new java.awt.Color(255, 255, 255));
         titulo1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        titulo1.setText("Compras");
+        titulo1.setText("Preguntas");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -67,7 +67,7 @@ public class PanelCompras extends javax.swing.JPanel {
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Opciones"));
 
-        campoTexto1.setPlaceholder("Buscar una compra por producto");
+        campoTexto1.setPlaceholder("Buscar una pregunta por producto");
 
         boton1.setImgButtonType("dark");
         boton1.setTexto("Buscar");
