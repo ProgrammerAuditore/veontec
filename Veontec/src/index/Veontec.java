@@ -13,12 +13,12 @@ import java.util.Scanner;
 import javax.swing.JOptionPane;
 import modelo.dao.EjecucionDao;
 import modelo.dao.PreferenciaDao;
-import modelo.dao.ProductoDao;
+import modelo.dao.RespuestaDao;
 import modelo.dao.UsuarioDao;
 import modelo.dto.ConexionDto;
 import modelo.dto.EjecucionDto;
 import modelo.dto.PreferenciaDto;
-import modelo.dto.ProductoDto;
+import modelo.dto.RespuestaDto;
 import modelo.dto.UsuarioDto;
 import src.Info;
 import src.Recursos;
@@ -244,39 +244,13 @@ public class Veontec {
     public void mtdTagTest(){
         mtdVerInformacionDelSoftware();
         
-         // * Establecer conexion..
+        // * Establecer conexion..
         ConexionDto conec = new ConexionDto("3306", "sql3.freesqldatabase.com", "sql3432572", "sql3432572", "R9p2mht4YB");
         CtrlHiloConexion.ctrlDatos = conec;
         CtrlHiloConexion.mtdEstablecer();
         
         if( CtrlHiloConexion.checkConexion() ){
-            ProductoDto dto = new ProductoDto();
-            dto.setProdID(7);
-            dto.setProdTitulo("Pantalon Estilo Cargo");
-            dto.setProdDescripcion("Rayas negras");
-            dto.setProdCategoria("Caballeros");
-            dto.setProdPrecio(499.90);
-            dto.setProdStock(208);
-            dto.setProdTipo(0);
-            dto.setProdEnlace("Vacio");
-            dto.setProdUsuario(4);
-
-            ProductoDao dao = new ProductoDao();
-            
-            // * Obtener todo los productos
-            List<ProductoDto> productos = dao.mtdListar(dto);
-            
-            if( productos == null ){
-                JOptionPane.showMessageDialog(null, "No hay productos registrados por ningun usuario.");
-                return;
-            }
-            
-            // Vas crear un objeto ProductoDto por cada producto que 
-            // hay en la lista de 'productos'
-            for( ProductoDto prod : productos ){
-                System.out.println("" + prod.getProdTitulo());
-            }
-        
+          
         }else{
             JOptionPane.showMessageDialog(null, "No existe conexion.");
         }
