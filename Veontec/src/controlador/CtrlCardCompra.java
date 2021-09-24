@@ -5,36 +5,41 @@ import java.awt.Insets;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import modelo.dao.CompraDao;
 import modelo.dao.ProductoDao;
+import modelo.dto.CompraDto;
 import modelo.dto.ProductoDto;
-import vista.paneles.PanelCardProducto;
+import vista.paneles.PanelCardCompra;
+import vista.paneles.PanelCardMiProducto;
 
-public class CtrlCard {
+public class CtrlCardCompra {
 
     
     // * Vista
-    private PanelCardProducto tarjeta;
+    private PanelCardCompra tarjeta;
     
     // * Modelo
     private ProductoDto prodDto;
     private ProductoDao prodDao;
+    private CompraDto compDto;
+    private CompraDao compDao;
     
     // * Atributos
     private GridBagConstraints tarjeta_dimensiones;
     private Integer item;
     
     // Constructor
-    public CtrlCard(ProductoDto prodDto, ProductoDao prodDao) {
-        this.tarjeta = new PanelCardProducto();
+    public CtrlCardCompra(ProductoDto prodDto, CompraDto compDto) {
+        this.tarjeta = new PanelCardCompra();
         this.prodDto = prodDto;
-        this.prodDao = prodDao;
+        this.compDto = compDto;
         this.tarjeta_dimensiones = new GridBagConstraints();
     }
     
     // Eventos
     private void mtdCrearEventoBtnGuardar(){
         MouseListener eventoBtnComprar = null;
-        tarjeta.btnEliminar.removeMouseListener(eventoBtnComprar);
+        tarjeta.btnCancelarCompra.removeMouseListener(eventoBtnComprar);
         
         eventoBtnComprar =  new MouseAdapter(){
             @Override
@@ -43,20 +48,34 @@ public class CtrlCard {
             }
         };
         
-        tarjeta.btnEliminar.addMouseListener(eventoBtnComprar);
+        tarjeta.btnCancelarCompra.addMouseListener(eventoBtnComprar);
     }
     
     // Métodos
     public void mtdInit(){
+        
+        if( compDto.getCompEstado() == 100 ){
+            tarjeta.btnCancelarCompra.setVisible(false);
+            tarjeta.btnHacerPregunta.setVisible(false);
+        }else{
+            mtdCrearEventoBtnGuardar();
+        }
+        
         mtdEstablecerDimensiones();
-        mtdCrearEventoBtnGuardar();
         mtdEstablecerDatos();
     }
     
     private void mtdEstablecerDatos(){
         tarjeta.etqTitulo.setText( prodDto.getProdTitulo() );
-        tarjeta.cmpPrecioUnidad.setText( "" + prodDto.getProdPrecio() );
-        tarjeta.cmpStockDisponible.setText( ""  + prodDto.getProdStock());
+        tarjeta.cmpPrecioUnidad.setText( "" + compDto.getCompPrecio() );
+        tarjeta.cmpStockCompra.setText( ""  + compDto.getCompCantidad());
+        
+        // * Establecer los detalles de compra
+        String detalles_de_compra = tarjeta.cmpDetalleCompra.getText();
+        detalles_de_compra = detalles_de_compra.replaceAll("<FechaDeCompra>", compDto.getCompFecha());
+        detalles_de_compra = detalles_de_compra.replaceAll("<Descripcion>", prodDto.getProdDescripcion());
+        tarjeta.cmpDetalleCompra.setText(detalles_de_compra);
+        
     }
 
     private void mtdEstablecerDimensiones(){
@@ -71,11 +90,11 @@ public class CtrlCard {
         //tarjeta.setVisible(true);
     }
     
-    public PanelCardProducto getLaVista() {
+    public PanelCardCompra getLaVista() {
         return tarjeta;
     }
 
-    public void setLaVista(PanelCardProducto laVista) {
+    public void setLaVista(PanelCardCompra laVista) {
         this.tarjeta = laVista;
     }
 

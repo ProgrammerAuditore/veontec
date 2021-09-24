@@ -15,7 +15,7 @@ import modelo.dao.ProductoDao;
 import modelo.dao.UsuarioDao;
 import modelo.dto.ProductoDto;
 import modelo.dto.UsuarioDto;
-import vista.paneles.PanelCardProducto;
+import vista.paneles.PanelCardMiProducto;
 import vista.paneles.PanelCrearProducto;
 import vista.paneles.PanelMiTienda;
 
@@ -132,7 +132,7 @@ public class CtrlMiTienda implements MouseListener{
         }
         
         for (int i = 0; i < totalProductos; i++) {
-            CtrlCard tarjeta = new CtrlCard(lstMisProductos.get(i), producto_dao);
+            CtrlCardMiProducto tarjeta = new CtrlCardMiProducto(lstMisProductos.get(i), producto_dao);
             tarjeta.setItem(i);
             tarjeta.mtdInit();
             laVista.pnContenedor.add(tarjeta.getLaVista(), tarjeta.getTarjeta_dimensiones());

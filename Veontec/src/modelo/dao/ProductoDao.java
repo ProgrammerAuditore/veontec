@@ -131,6 +131,7 @@ public class ProductoDao implements keyword_query<ProductoDto>, keyword_producto
             ResultSet rs = ps.executeQuery();
             
             if( rs.next() ){
+                prod = new ProductoDto();
                 prod.setProdID( rs.getInt("prodID") );
                 prod.setProdTitulo(rs.getString("prodTitulo") );
                 prod.setProdDescripcion(rs.getString("prodDescripcion") );

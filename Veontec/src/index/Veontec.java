@@ -42,8 +42,9 @@ public class Veontec {
         //ConexionDto conec = new ConexionDto("3306", "sql3.freesqldatabase.com", "sql3432572", "sql3432572", "R9p2mht4YB");
         ConexionDto conec = new ConexionDto("3306", "localhost", "sql3432572", "root", "");
         CtrlHiloConexion.ctrlDatos = conec;
+        CtrlHiloConexion.mtdEstablecer();
         
-        if(!CtrlHiloConexion.mtdEstablecer()){
+        if(!CtrlHiloConexion.ctrlEstado){
             JOptionPane.showMessageDialog(null, "No hay conexion al servidor.");
             System.exit(0);
         }

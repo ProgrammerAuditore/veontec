@@ -43,7 +43,7 @@
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout"/>
       <SubComponents>
-        <Container class="vista.componentes.jpanelbackground.JPanelBackground" name="pnInicio">
+        <Container class="vista.componentes.jpanelbackground.JPanelBackground" name="pnNose">
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
           </AuxValues>
@@ -58,17 +58,20 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="panelHome1" alignment="0" max="32767" attributes="0"/>
+                  <Component id="panelHome" alignment="0" max="32767" attributes="0"/>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="panelHome1" alignment="1" max="32767" attributes="0"/>
+                  <Component id="panelHome" alignment="1" max="32767" attributes="0"/>
               </Group>
             </DimensionLayout>
           </Layout>
           <SubComponents>
-            <Component class="vista.paneles.PanelHome" name="panelHome1">
+            <Component class="vista.paneles.PanelHome" name="panelHome">
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+              </AuxValues>
             </Component>
           </SubComponents>
         </Container>
@@ -113,17 +116,20 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="panelCompras1" alignment="0" pref="1080" max="32767" attributes="0"/>
+                  <Component id="pnCompras" alignment="0" pref="1080" max="32767" attributes="0"/>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="panelCompras1" alignment="0" pref="727" max="32767" attributes="0"/>
+                  <Component id="pnCompras" alignment="0" pref="727" max="32767" attributes="0"/>
               </Group>
             </DimensionLayout>
           </Layout>
           <SubComponents>
-            <Component class="vista.paneles.PanelCompras" name="panelCompras1">
+            <Component class="vista.paneles.PanelCompras" name="pnCompras">
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+              </AuxValues>
             </Component>
           </SubComponents>
         </Container>
@@ -139,17 +145,20 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="panelVentas1" alignment="0" pref="1080" max="32767" attributes="0"/>
+                  <Component id="pnVentas" alignment="0" pref="1080" max="32767" attributes="0"/>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="panelVentas1" alignment="1" max="32767" attributes="0"/>
+                  <Component id="pnVentas" alignment="1" max="32767" attributes="0"/>
               </Group>
             </DimensionLayout>
           </Layout>
           <SubComponents>
-            <Component class="vista.paneles.PanelVentas" name="panelVentas1">
+            <Component class="vista.paneles.PanelVentas" name="pnVentas">
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+              </AuxValues>
             </Component>
           </SubComponents>
         </Container>

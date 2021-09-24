@@ -28,6 +28,7 @@ public class CtrlHome implements MouseListener{
         
         // * Establecer oyentes
         laVista.pnTabMenu.addMouseListener(this);
+        mtdCargarBienvenida();
         
     }
     
@@ -36,6 +37,7 @@ public class CtrlHome implements MouseListener{
         if( laVista.pnTabMenu.getSelectedIndex() == TabsHome.Inicio.ordinal() 
             && tabPreviaSeleccionada != TabsHome.Inicio.ordinal() ){
             
+            mtdCargarBienvenida();
             System.out.println("Estas en Inicio....");
             
             tabPreviaSeleccionada = TabsHome.Inicio.ordinal();
@@ -44,8 +46,9 @@ public class CtrlHome implements MouseListener{
         if( laVista.pnTabMenu.getSelectedIndex() == TabsHome.MiTienda.ordinal() 
             && tabPreviaSeleccionada != TabsHome.MiTienda.ordinal() ){
             
-            System.out.println("Estas en MiTienda....");
             mtdCargarMiTienda();
+            System.out.println("Estas en MiTienda....");
+            
             
             tabPreviaSeleccionada = TabsHome.MiTienda.ordinal();
         }
@@ -53,6 +56,7 @@ public class CtrlHome implements MouseListener{
         if( laVista.pnTabMenu.getSelectedIndex() == TabsHome.Compras.ordinal() 
             && tabPreviaSeleccionada != TabsHome.Compras.ordinal() ){
             
+            mtdCargarCompras();
             System.out.println("Estas en Compras....");
             
             tabPreviaSeleccionada = TabsHome.Compras.ordinal();
@@ -61,6 +65,7 @@ public class CtrlHome implements MouseListener{
         if( laVista.pnTabMenu.getSelectedIndex() == TabsHome.Ventas.ordinal() 
             && tabPreviaSeleccionada != TabsHome.Ventas.ordinal() ){
             
+            mtdCargarVentas();
             System.out.println("Estas en Ventas....");
             
             tabPreviaSeleccionada = TabsHome.Ventas.ordinal();
@@ -84,6 +89,11 @@ public class CtrlHome implements MouseListener{
         }
     }
     
+    private void mtdCargarBienvenida(){
+        CtrlBienvenida ctrl = CtrlBienvenida.getInstancia(laVista.panelHome, Veontec.usuarioDto, Veontec.usuarioDao);
+
+    }
+    
     private void mtdCargarMiTienda(){
         CtrlMiTienda ctrl = CtrlMiTienda.getInstancia(laVista.pnMiTienda, Veontec.usuarioDto, Veontec.usuarioDao);
 
@@ -91,6 +101,16 @@ public class CtrlHome implements MouseListener{
     
     private void mtdCargarMiCuenta(){
         CtrlMiCuenta ctrl = CtrlMiCuenta.getInstancia(laVista.pnMiCuenta, Veontec.usuarioDto, Veontec.usuarioDao);
+        
+    }
+    
+    private void mtdCargarVentas(){
+        CtrlVenta ctrl = CtrlVenta.getInstancia(laVista.pnVentas, Veontec.usuarioDto, Veontec.usuarioDao);
+        
+    }
+    
+    private void mtdCargarCompras(){
+        CtrlCompras ctrl = CtrlCompras.getInstancia(laVista.pnCompras, Veontec.usuarioDto, Veontec.usuarioDao);
         
     }
     

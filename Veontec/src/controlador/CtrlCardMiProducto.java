@@ -7,13 +7,13 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import modelo.dao.ProductoDao;
 import modelo.dto.ProductoDto;
-import vista.paneles.PanelCardProducto;
+import vista.paneles.PanelCardMiProducto;
 
-public class CtrlCard {
+public class CtrlCardMiProducto {
 
     
     // * Vista
-    private PanelCardProducto tarjeta;
+    private PanelCardMiProducto tarjeta;
     
     // * Modelo
     private ProductoDto prodDto;
@@ -24,8 +24,8 @@ public class CtrlCard {
     private Integer item;
     
     // Constructor
-    public CtrlCard(ProductoDto prodDto, ProductoDao prodDao) {
-        this.tarjeta = new PanelCardProducto();
+    public CtrlCardMiProducto(ProductoDto prodDto, ProductoDao prodDao) {
+        this.tarjeta = new PanelCardMiProducto();
         this.prodDto = prodDto;
         this.prodDao = prodDao;
         this.tarjeta_dimensiones = new GridBagConstraints();
@@ -71,11 +71,11 @@ public class CtrlCard {
         //tarjeta.setVisible(true);
     }
     
-    public PanelCardProducto getLaVista() {
+    public PanelCardMiProducto getLaVista() {
         return tarjeta;
     }
 
-    public void setLaVista(PanelCardProducto laVista) {
+    public void setLaVista(PanelCardMiProducto laVista) {
         this.tarjeta = laVista;
     }
 

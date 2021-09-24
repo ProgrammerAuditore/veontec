@@ -7,13 +7,14 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import modelo.dao.ProductoDao;
 import modelo.dto.ProductoDto;
-import vista.paneles.PanelCardProducto;
+import vista.paneles.PanelCardMiProducto;
+import vista.paneles.PanelCardVenta;
 
-public class CtrlCard {
+public class CtrlCardVenta {
 
     
     // * Vista
-    private PanelCardProducto tarjeta;
+    private PanelCardVenta tarjeta;
     
     // * Modelo
     private ProductoDto prodDto;
@@ -24,8 +25,8 @@ public class CtrlCard {
     private Integer item;
     
     // Constructor
-    public CtrlCard(ProductoDto prodDto, ProductoDao prodDao) {
-        this.tarjeta = new PanelCardProducto();
+    public CtrlCardVenta(ProductoDto prodDto, ProductoDao prodDao) {
+        this.tarjeta = new PanelCardVenta();
         this.prodDto = prodDto;
         this.prodDao = prodDao;
         this.tarjeta_dimensiones = new GridBagConstraints();
@@ -34,7 +35,7 @@ public class CtrlCard {
     // Eventos
     private void mtdCrearEventoBtnGuardar(){
         MouseListener eventoBtnComprar = null;
-        tarjeta.btnEliminar.removeMouseListener(eventoBtnComprar);
+        tarjeta.etqTitulo.removeMouseListener(eventoBtnComprar);
         
         eventoBtnComprar =  new MouseAdapter(){
             @Override
@@ -43,12 +44,13 @@ public class CtrlCard {
             }
         };
         
-        tarjeta.btnEliminar.addMouseListener(eventoBtnComprar);
+        tarjeta.etqTitulo.addMouseListener(eventoBtnComprar);
     }
     
     // Métodos
     public void mtdInit(){
         mtdEstablecerDimensiones();
+        mtdEstablecerOpciones();
         mtdCrearEventoBtnGuardar();
         mtdEstablecerDatos();
     }
@@ -56,7 +58,12 @@ public class CtrlCard {
     private void mtdEstablecerDatos(){
         tarjeta.etqTitulo.setText( prodDto.getProdTitulo() );
         tarjeta.cmpPrecioUnidad.setText( "" + prodDto.getProdPrecio() );
-        tarjeta.cmpStockDisponible.setText( ""  + prodDto.getProdStock());
+        tarjeta.cmpStockVendido.setText( ""  + prodDto.getProdStock());
+    }
+    
+    private void mtdEstablecerOpciones(){
+        //tarjeta.btnEliminar.setVisible(false);
+        //tarjeta.btnEditar.setVisible(false);
     }
 
     private void mtdEstablecerDimensiones(){
@@ -71,11 +78,11 @@ public class CtrlCard {
         //tarjeta.setVisible(true);
     }
     
-    public PanelCardProducto getLaVista() {
+    public PanelCardVenta getLaVista() {
         return tarjeta;
     }
 
-    public void setLaVista(PanelCardProducto laVista) {
+    public void setLaVista(PanelCardVenta laVista) {
         this.tarjeta = laVista;
     }
 
