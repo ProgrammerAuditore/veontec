@@ -65,7 +65,7 @@ public class CtrlInicio implements MouseListener{
     private void mtdIniciarSession(){
         // * Verificar los campos de registrarme
         if( mtdCamposIncorrectos_IniciarSession() ){
-            return ;
+            return;
         }
         
         // * Registrando usuario
@@ -73,9 +73,15 @@ public class CtrlInicio implements MouseListener{
         UsuarioDao dao = new UsuarioDao();
         dto.setCmpCorreo( pnInicarSession.campoCorreo1.getText().trim() );
         dto = dao.mtdConsultar(dto);
-        //System.out.println("Iniciar Session : \n " + usuario.toString());
-            
+        System.out.println("Iniciar Session : \n " + dto.toString());
+        
+        if( dto.getCmpCorreo() == null || dto.getCmpPassword() == null   ){
+            JOptionPane.showMessageDialog(null, "Usuario no registrado o verifeque los datos.");
+            return;
+        }
+                    
         // * Verificar usuario
+        System.out.println("\n" + pnInicarSession.campoCorreo1.getText().trim() + "\n" + dto.getCmpCorreo().trim());
         if( pnInicarSession.campoCorreo1.getText().trim().equals(dto.getCmpCorreo().trim())
             && mtdVerificarPassword(dto.getCmpPassword().trim()) ){
             JOptionPane.showMessageDialog(ni, "Bienvenido " + dto.getCmpNombreCompleto() );
@@ -85,6 +91,8 @@ public class CtrlInicio implements MouseListener{
             VentanaHome vh = new VentanaHome();
             Veontec.usuarioDao = dao;
             Veontec.usuarioDto = dto;
+            Veontec.ventanaHome = vh;
+            vh.setTitle( Veontec.usuarioDto.getCmpNombreCompleto() + " | "  + Veontec.usuarioDto.getCmpCorreo());
             CtrlHome ctrl = new CtrlHome(vh);
             ctrl.laVista.setLocationRelativeTo(null);
             ctrl.laVista.setVisible(true);

@@ -63,7 +63,7 @@ public class UsuarioDao implements keyword_query<UsuarioDto>{
                 usuario.setCmpNombreCompleto( rs.getString("usuaNombre") );
                 usuario.setCmpCorreo( rs.getString("usuaCorreo") );
                 usuario.setCmpPassword( rs.getString("usuaPassword") );
-                //System.out.println("mtdConsultar \n" + usuario.toString());
+                System.out.println("mtdConsultar \n" + usuario.toString());
             }
             
         } catch (SQLException e) {

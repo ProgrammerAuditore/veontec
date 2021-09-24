@@ -16,12 +16,12 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="jPanelBackground1" alignment="0" pref="930" max="32767" attributes="0"/>
+          <Component id="jPanelBackground1" alignment="0" pref="1060" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="jPanelBackground1" alignment="0" pref="605" max="32767" attributes="0"/>
+          <Component id="jPanelBackground1" alignment="0" pref="705" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
   </Layout>
@@ -40,9 +40,9 @@
                       <Group type="102" alignment="1" attributes="0">
                           <Component id="btnEliminarCuenta" min="-2" pref="140" max="-2" attributes="0"/>
                           <EmptySpace max="32767" attributes="0"/>
-                          <Component id="boton2" min="-2" max="-2" attributes="0"/>
+                          <Component id="btnGuardar" min="-2" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Component id="boton1" min="-2" max="-2" attributes="0"/>
+                          <Component id="btnCerrarSession" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <Component id="jPanel1" alignment="0" max="32767" attributes="0"/>
                       <Component id="campoTMovil1" alignment="0" max="32767" attributes="0"/>
@@ -87,11 +87,11 @@
                   <Component id="etiqueta5" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="campoTexto2" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="101" max="32767" attributes="0"/>
+                  <EmptySpace pref="214" max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="btnEliminarCuenta" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Component id="boton1" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Component id="boton2" min="-2" max="-2" attributes="0"/>
+                      <Component id="btnCerrarSession" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="btnGuardar" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
@@ -147,11 +147,14 @@
             <Property name="text" type="java.lang.String" value="Nombre completo"/>
           </Properties>
         </Component>
-        <Component class="vista.componentes.boton.Boton" name="boton1">
+        <Component class="vista.componentes.boton.Boton" name="btnCerrarSession">
           <Properties>
             <Property name="imgButtonType" type="java.lang.String" value="warning"/>
             <Property name="texto" type="java.lang.String" value="Cerrrar sesion"/>
           </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+          </AuxValues>
         </Component>
         <Container class="javax.swing.JPanel" name="jPanel1">
           <Properties>
@@ -166,7 +169,7 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="353" max="-2" attributes="0"/>
                       <Component id="titulo1" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="434" max="32767" attributes="0"/>
+                      <EmptySpace pref="568" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -191,10 +194,13 @@
             </Component>
           </SubComponents>
         </Container>
-        <Component class="vista.componentes.boton.Boton" name="boton2">
+        <Component class="vista.componentes.boton.Boton" name="btnGuardar">
           <Properties>
             <Property name="texto" type="java.lang.String" value="Guardar"/>
           </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+          </AuxValues>
         </Component>
         <Component class="vista.componentes.etiqueta.Etiqueta" name="etiqueta3">
           <Properties>

@@ -1,5 +1,6 @@
 package controlador;
 
+import index.Veontec;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import javax.swing.JDialog;
@@ -21,8 +22,6 @@ public class CtrlHome implements MouseListener{
     private UsuarioDto dto;
     private int tabPreviaSeleccionada;
 
-    
-    
     public CtrlHome(VentanaHome laVista) {
         this.laVista = laVista;
         this.tabPreviaSeleccionada = 0;
@@ -79,17 +78,20 @@ public class CtrlHome implements MouseListener{
             && tabPreviaSeleccionada != TabsHome.MiCuenta.ordinal() ){
             
             System.out.println("Estas en MiCuenta....");
-            
+            mtdCargarMiCuenta();
+           
             tabPreviaSeleccionada = TabsHome.MiCuenta.ordinal();
         }
     }
     
     private void mtdCargarMiTienda(){
-       
-        CtrlMiTienda ctrl = CtrlMiTienda.getInstancia(laVista.pnMiTienda);
-        ctrl.mtdRecargarDatos();
-        ctrl.modalCrearProducto = new JDialog(laVista);
-        ctrl.modalCrearProducto.setLocationRelativeTo(laVista);
+        CtrlMiTienda ctrl = CtrlMiTienda.getInstancia(laVista.pnMiTienda, Veontec.usuarioDto, Veontec.usuarioDao);
+
+    }
+    
+    private void mtdCargarMiCuenta(){
+        CtrlMiCuenta ctrl = CtrlMiCuenta.getInstancia(laVista.pnMiCuenta, Veontec.usuarioDto, Veontec.usuarioDao);
+        
     }
     
     @Override

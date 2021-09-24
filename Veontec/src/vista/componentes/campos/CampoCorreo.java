@@ -137,7 +137,8 @@ public class CampoCorreo extends JTextField implements FocusListener, KeyListene
         String nombre = null;
         String dominio = null;
         String extension = null;
-        
+
+        /* // Corregir bug
         if( campo.contains("@") && campo.contains(".") ){
             nombre = getText().substring(0, getText().indexOf("@"));
             dominio = getText().substring(getText().indexOf("@") + 1, getText().indexOf("."));
@@ -151,8 +152,9 @@ public class CampoCorreo extends JTextField implements FocusListener, KeyListene
                 return true;
             }
         }
+        */
         
-        return false;
+        return true;
     }
     
     public boolean isAprobado(){

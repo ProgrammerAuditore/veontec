@@ -7,28 +7,25 @@ import hilos.HiloPrincipal;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.List;
 import java.util.Properties;
 import java.util.Scanner;
 import javax.swing.JOptionPane;
 import modelo.dao.EjecucionDao;
 import modelo.dao.PreferenciaDao;
-import modelo.dao.RespuestaDao;
 import modelo.dao.UsuarioDao;
 import modelo.dto.ConexionDto;
 import modelo.dto.EjecucionDto;
 import modelo.dto.PreferenciaDto;
-import modelo.dto.RespuestaDto;
 import modelo.dto.UsuarioDto;
 import src.Info;
 import src.Recursos;
 import src.idiomas.Idiomas;
+import vista.ventanas.VentanaHome;
 import vista.ventanas.VentanaInicio;
-import vista.ventanas.VentanaPrincipal;
 
 public class Veontec {
     
-    private VentanaPrincipal ventana;
+    public static VentanaHome ventanaHome;
     public static Properties idioma = new Idiomas("en");
     public static long ctrlID;
     public static String IdiomaDefinido;
@@ -42,9 +39,14 @@ public class Veontec {
         Recursos.dataConexion().exists();
         
         // * Establecer conexion..
-        ConexionDto conec = new ConexionDto("3306", "sql3.freesqldatabase.com", "sql3432572", "sql3432572", "R9p2mht4YB");
+        //ConexionDto conec = new ConexionDto("3306", "sql3.freesqldatabase.com", "sql3432572", "sql3432572", "R9p2mht4YB");
+        ConexionDto conec = new ConexionDto("3306", "localhost", "sql3432572", "root", "");
         CtrlHiloConexion.ctrlDatos = conec;
-        CtrlHiloConexion.mtdEstablecer();
+        
+        if(!CtrlHiloConexion.mtdEstablecer()){
+            JOptionPane.showMessageDialog(null, "No hay conexion al servidor.");
+            System.exit(0);
+        }
         
         mtdCargarPreferencias();
         HiloConexion hc = new HiloConexion();

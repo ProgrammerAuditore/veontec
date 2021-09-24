@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 import modelo.dto.ProductoDto;
 import modelo.interfaces.keyword_query;
-import modelo.interfaces.keyword_extra;
 import modelo.interfaces.keyword_producto;
 
 public class ProductoDao implements keyword_query<ProductoDto>, keyword_producto<ProductoDto>{
@@ -132,12 +131,12 @@ public class ProductoDao implements keyword_query<ProductoDto>, keyword_producto
             ResultSet rs = ps.executeQuery();
             
             if( rs.next() ){
-                prod = new ProductoDto();
                 prod.setProdID( rs.getInt("prodID") );
                 prod.setProdTitulo(rs.getString("prodTitulo") );
                 prod.setProdDescripcion(rs.getString("prodDescripcion") );
                 prod.setProdCategoria(rs.getString("prodCategoria") );
                 prod.setProdPrecio( rs.getDouble("prodPrecio") );
+                prod.setProdStock(rs.getInt("prodStock"));
                 prod.setProdTipo(rs.getInt("prodTipo") );
                 prod.setProdEnlace(rs.getString("prodEnlace") );
                 prod.setProdUsuario(rs.getInt("prodUsuario") );
@@ -173,6 +172,7 @@ public class ProductoDao implements keyword_query<ProductoDto>, keyword_producto
                 prod.setProdDescripcion(rs.getString("prodDescripcion") );
                 prod.setProdCategoria(rs.getString("prodCategoria") );
                 prod.setProdPrecio( rs.getDouble("prodPrecio") );
+                prod.setProdStock(rs.getInt("prodStock"));
                 prod.setProdTipo(rs.getInt("prodTipo") );
                 prod.setProdEnlace(rs.getString("prodEnlace") );
                 prod.setProdUsuario(rs.getInt("prodUsuario") );
@@ -212,6 +212,7 @@ public class ProductoDao implements keyword_query<ProductoDto>, keyword_producto
                 prod.setProdDescripcion(rs.getString("prodDescripcion") );
                 prod.setProdCategoria(rs.getString("prodCategoria") );
                 prod.setProdPrecio( rs.getDouble("prodPrecio") );
+                prod.setProdStock(rs.getInt("prodStock"));
                 prod.setProdTipo(rs.getInt("prodTipo") );
                 prod.setProdEnlace(rs.getString("prodEnlace") );
                 prod.setProdUsuario(rs.getInt("prodUsuario") );
@@ -251,6 +252,7 @@ public class ProductoDao implements keyword_query<ProductoDto>, keyword_producto
                 prod.setProdDescripcion(rs.getString("prodDescripcion") );
                 prod.setProdCategoria(rs.getString("prodCategoria") );
                 prod.setProdPrecio( rs.getDouble("prodPrecio") );
+                prod.setProdStock(rs.getInt("prodStock"));
                 prod.setProdTipo(rs.getInt("prodTipo") );
                 prod.setProdEnlace(rs.getString("prodEnlace") );
                 prod.setProdUsuario(rs.getInt("prodUsuario") );
@@ -293,6 +295,7 @@ public class ProductoDao implements keyword_query<ProductoDto>, keyword_producto
                 prod.setProdDescripcion(rs.getString("prodDescripcion") );
                 prod.setProdCategoria(rs.getString("prodCategoria") );
                 prod.setProdPrecio( rs.getDouble("prodPrecio") );
+                prod.setProdStock(rs.getInt("prodStock"));
                 prod.setProdTipo(rs.getInt("prodTipo") );
                 prod.setProdEnlace(rs.getString("prodEnlace") );
                 prod.setProdUsuario(rs.getInt("prodUsuario") );

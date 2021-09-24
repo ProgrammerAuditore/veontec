@@ -49,11 +49,11 @@ public class VentanaHome extends javax.swing.JFrame {
         panelVentas1 = new vista.paneles.PanelVentas();
         jPanelBackground5 = new vista.componentes.jpanelbackground.JPanelBackground();
         panelPreguntas1 = new vista.paneles.PanelPreguntas();
-        jPanelBackground4 = new vista.componentes.jpanelbackground.JPanelBackground();
-        panelMiCuenta1 = new vista.paneles.PanelMiCuenta();
+        JPanelBackground4 = new vista.componentes.jpanelbackground.JPanelBackground();
+        pnMiCuenta = new vista.paneles.PanelMiCuenta();
+        jPanel1 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setResizable(false);
 
         pnTabMenu.setTabPlacement(javax.swing.JTabbedPane.LEFT);
 
@@ -61,15 +61,11 @@ public class VentanaHome extends javax.swing.JFrame {
         pnInicio.setLayout(pnInicioLayout);
         pnInicioLayout.setHorizontalGroup(
             pnInicioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnInicioLayout.createSequentialGroup()
-                .addComponent(panelHome1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 24, Short.MAX_VALUE))
+            .addComponent(panelHome1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         pnInicioLayout.setVerticalGroup(
             pnInicioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnInicioLayout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(panelHome1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addComponent(panelHome1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pnTabMenu.addTab("Inicio", pnInicio);
@@ -78,15 +74,11 @@ public class VentanaHome extends javax.swing.JFrame {
         jPanelBackground6.setLayout(jPanelBackground6Layout);
         jPanelBackground6Layout.setHorizontalGroup(
             jPanelBackground6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelBackground6Layout.createSequentialGroup()
-                .addComponent(pnMiTienda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 24, Short.MAX_VALUE))
+            .addComponent(pnMiTienda, javax.swing.GroupLayout.DEFAULT_SIZE, 1080, Short.MAX_VALUE)
         );
         jPanelBackground6Layout.setVerticalGroup(
             jPanelBackground6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelBackground6Layout.createSequentialGroup()
-                .addComponent(pnMiTienda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(pnMiTienda, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pnTabMenu.addTab("Mi tienda", jPanelBackground6);
@@ -95,15 +87,11 @@ public class VentanaHome extends javax.swing.JFrame {
         jPanelBackground2.setLayout(jPanelBackground2Layout);
         jPanelBackground2Layout.setHorizontalGroup(
             jPanelBackground2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelBackground2Layout.createSequentialGroup()
-                .addComponent(panelCompras1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 24, Short.MAX_VALUE))
+            .addComponent(panelCompras1, javax.swing.GroupLayout.DEFAULT_SIZE, 1080, Short.MAX_VALUE)
         );
         jPanelBackground2Layout.setVerticalGroup(
             jPanelBackground2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelBackground2Layout.createSequentialGroup()
-                .addComponent(panelCompras1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(panelCompras1, javax.swing.GroupLayout.DEFAULT_SIZE, 727, Short.MAX_VALUE)
         );
 
         pnTabMenu.addTab("Compras", jPanelBackground2);
@@ -112,15 +100,11 @@ public class VentanaHome extends javax.swing.JFrame {
         jPanelBackground3.setLayout(jPanelBackground3Layout);
         jPanelBackground3Layout.setHorizontalGroup(
             jPanelBackground3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelBackground3Layout.createSequentialGroup()
-                .addComponent(panelVentas1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 24, Short.MAX_VALUE))
+            .addComponent(panelVentas1, javax.swing.GroupLayout.DEFAULT_SIZE, 1080, Short.MAX_VALUE)
         );
         jPanelBackground3Layout.setVerticalGroup(
             jPanelBackground3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelBackground3Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(panelVentas1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addComponent(panelVentas1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pnTabMenu.addTab("Ventas", jPanelBackground3);
@@ -129,45 +113,50 @@ public class VentanaHome extends javax.swing.JFrame {
         jPanelBackground5.setLayout(jPanelBackground5Layout);
         jPanelBackground5Layout.setHorizontalGroup(
             jPanelBackground5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelBackground5Layout.createSequentialGroup()
-                .addComponent(panelPreguntas1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 24, Short.MAX_VALUE))
+            .addComponent(panelPreguntas1, javax.swing.GroupLayout.DEFAULT_SIZE, 1080, Short.MAX_VALUE)
         );
         jPanelBackground5Layout.setVerticalGroup(
             jPanelBackground5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelBackground5Layout.createSequentialGroup()
-                .addComponent(panelPreguntas1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(panelPreguntas1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pnTabMenu.addTab("Preguntas", jPanelBackground5);
 
-        javax.swing.GroupLayout jPanelBackground4Layout = new javax.swing.GroupLayout(jPanelBackground4);
-        jPanelBackground4.setLayout(jPanelBackground4Layout);
-        jPanelBackground4Layout.setHorizontalGroup(
-            jPanelBackground4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelBackground4Layout.createSequentialGroup()
-                .addComponent(panelMiCuenta1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 24, Short.MAX_VALUE))
+        javax.swing.GroupLayout JPanelBackground4Layout = new javax.swing.GroupLayout(JPanelBackground4);
+        JPanelBackground4.setLayout(JPanelBackground4Layout);
+        JPanelBackground4Layout.setHorizontalGroup(
+            JPanelBackground4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(pnMiCuenta, javax.swing.GroupLayout.DEFAULT_SIZE, 1080, Short.MAX_VALUE)
         );
-        jPanelBackground4Layout.setVerticalGroup(
-            jPanelBackground4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelBackground4Layout.createSequentialGroup()
-                .addComponent(panelMiCuenta1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+        JPanelBackground4Layout.setVerticalGroup(
+            JPanelBackground4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(pnMiCuenta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        pnTabMenu.addTab("Mi cuenta", jPanelBackground4);
+        pnTabMenu.addTab("Mi cuenta", JPanelBackground4);
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1080, Short.MAX_VALUE)
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 727, Short.MAX_VALUE)
+        );
+
+        pnTabMenu.addTab("tab7", jPanel1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pnTabMenu, javax.swing.GroupLayout.DEFAULT_SIZE, 1017, Short.MAX_VALUE)
+            .addComponent(pnTabMenu)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pnTabMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 608, Short.MAX_VALUE)
+            .addComponent(pnTabMenu, javax.swing.GroupLayout.Alignment.TRAILING)
         );
 
         pack();
@@ -209,17 +198,18 @@ public class VentanaHome extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    public vista.componentes.jpanelbackground.JPanelBackground JPanelBackground4;
+    private javax.swing.JPanel jPanel1;
     private vista.componentes.jpanelbackground.JPanelBackground jPanelBackground2;
     private vista.componentes.jpanelbackground.JPanelBackground jPanelBackground3;
-    private vista.componentes.jpanelbackground.JPanelBackground jPanelBackground4;
     private vista.componentes.jpanelbackground.JPanelBackground jPanelBackground5;
     private vista.componentes.jpanelbackground.JPanelBackground jPanelBackground6;
     private vista.paneles.PanelCompras panelCompras1;
     private vista.paneles.PanelHome panelHome1;
-    private vista.paneles.PanelMiCuenta panelMiCuenta1;
     private vista.paneles.PanelPreguntas panelPreguntas1;
     private vista.paneles.PanelVentas panelVentas1;
     public vista.componentes.jpanelbackground.JPanelBackground pnInicio;
+    public vista.paneles.PanelMiCuenta pnMiCuenta;
     public vista.paneles.PanelMiTienda pnMiTienda;
     public javax.swing.JTabbedPane pnTabMenu;
     // End of variables declaration//GEN-END:variables
