@@ -44,7 +44,7 @@ public class Veontec {
         CtrlHiloConexion.ctrlDatos = conec;
         CtrlHiloConexion.mtdEstablecer();
         
-        if(!CtrlHiloConexion.ctrlEstado){
+        if(CtrlHiloConexion.ctrlEstado == false){
             JOptionPane.showMessageDialog(null, "No hay conexion al servidor.");
             System.exit(0);
         }
