@@ -46,6 +46,7 @@ public class Recursos {
     
     // Dimension de los paneles para el modal
     public static final Dimension tamDialogModal = new Dimension(850, 534);
+    public static final Dimension tamDialogModalCrearProducto = new Dimension(630, 530);  
     public static final Dimension tamDialogInfo = new Dimension(460, 444);
     
     // Informacion del sistema

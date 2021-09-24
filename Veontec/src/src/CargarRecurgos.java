@@ -23,8 +23,8 @@ class CargarRecurgos {
             // Crear la carpteta .local
             new File(dir).mkdir();
             
-            // Crear la carpeta myfreelab
-            new File( dir + "myfreelab").mkdir();
+            // Crear la carpeta veontec
+            new File( dir + "veontec").mkdir();
             
             // Crear el archivo conn dentro de la carpeta etc 
             new File( dir + Rutas.pathDataConexion ).createNewFile(); 
@@ -52,8 +52,8 @@ class CargarRecurgos {
         // Crear la carpteta .local
         new File(dir).mkdir();
 
-        // Crear la carpeta myfreelab
-        new File( dir + "myfreelab").mkdir();
+        // Crear la carpeta veontec
+        new File( dir + "veontec").mkdir();
 
         //  * Generar la ruta del archivo
         File  archivoRun = new File( dir + Rutas.pathDataEjecucion ); 
@@ -78,8 +78,8 @@ class CargarRecurgos {
             // Crear la carpteta .local
             new File(dir).mkdir();
             
-            // Crear la carpeta myfreelab
-            new File( dir + "myfreelab").mkdir();
+            // Crear la carpeta veontec
+            new File( dir + "veontec").mkdir();
             
             // Crear el archivo pconfig dentro de la carpeta etc 
             new File( dir + Rutas.pathDataPreferencias ).createNewFile();

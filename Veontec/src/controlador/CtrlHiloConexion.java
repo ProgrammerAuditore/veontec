@@ -29,11 +29,11 @@ public class CtrlHiloConexion{
             if( ctrlConexion.isValid( CtrlHiloConexion.ctrlTime ) ){
                 
                 ////System.out.println("Conexion establecida.");
-                //ctrlEstado = true;
+                ctrlEstado = true;
                 return true;
                 
             }else{
-                //ctrlEstado = false;
+                ctrlEstado = false;
             }
             
             //return true;

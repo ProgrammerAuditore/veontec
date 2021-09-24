@@ -2,19 +2,16 @@ package controlador;
 
 import de.mkammerer.argon2.Argon2;
 import de.mkammerer.argon2.Argon2Factory;
+import index.Veontec;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import javax.swing.JOptionPane;
-import modelo.ObjEmail;
-import modelo.dao.DatosPersonalesDao;
 import modelo.dao.UsuarioDao;
-import modelo.dto.DatosPersonalesDto;
 import modelo.dto.UsuarioDto;
-import vista.paneles.veontec.PanelInicarSession;
-import vista.paneles.veontec.PanelRegistrarme;
+import vista.paneles.PanelInicarSession;
+import vista.paneles.PanelRegistrarme;
 import vista.ventanas.VentanaHome;
 import vista.ventanas.VentanaInicio;
-import vista.ventanas.VentanaPrincipal;
 
 public class CtrlInicio implements MouseListener{
     
@@ -24,8 +21,6 @@ public class CtrlInicio implements MouseListener{
     private VentanaInicio ni;
     
     // * Modelos
-    private DatosPersonalesDao dao;
-    private DatosPersonalesDto dto;
 
     public CtrlInicio(VentanaInicio ni, PanelRegistrarme pnRegistrarme, PanelInicarSession pnInicarSession) {
         this.ni = ni;
@@ -70,25 +65,35 @@ public class CtrlInicio implements MouseListener{
     private void mtdIniciarSession(){
         // * Verificar los campos de registrarme
         if( mtdCamposIncorrectos_IniciarSession() ){
-            return ;
+            return;
         }
         
         // * Registrando usuario
-        UsuarioDto usuario = new UsuarioDto();
+        UsuarioDto dto = new UsuarioDto();
         UsuarioDao dao = new UsuarioDao();
-        usuario.setCmpCorreo( pnInicarSession.campoCorreo1.getText().trim() );
-        usuario = dao.mtdConsultar(usuario);
-        //System.out.println("Iniciar Session : \n " + usuario.toString());
-            
+        dto.setCmpCorreo( pnInicarSession.campoCorreo1.getText().trim() );
+        dto = dao.mtdConsultar(dto);
+        System.out.println("Iniciar Session : \n " + dto.toString());
+        
+        if( dto.getCmpCorreo() == null || dto.getCmpPassword() == null   ){
+            JOptionPane.showMessageDialog(null, "Usuario no registrado o verifeque los datos.");
+            return;
+        }
+                    
         // * Verificar usuario
-        if( pnInicarSession.campoCorreo1.getText().trim().equals(usuario.getCmpCorreo().trim())
-            && mtdVerificarPassword(usuario.getCmpPassword().trim()) ){
-            JOptionPane.showMessageDialog(ni, "Bienvenido " + usuario.getCmpNombreCompleto() );
+        System.out.println("\n" + pnInicarSession.campoCorreo1.getText().trim() + "\n" + dto.getCmpCorreo().trim());
+        if( pnInicarSession.campoCorreo1.getText().trim().equals(dto.getCmpCorreo().trim())
+            && mtdVerificarPassword(dto.getCmpPassword().trim()) ){
+            JOptionPane.showMessageDialog(ni, "Bienvenido " + dto.getCmpNombreCompleto() );
             ni.setVisible(false);
             ni.dispose();
             
             VentanaHome vh = new VentanaHome();
-            CtrlPrincipal ctrl = new CtrlPrincipal(vh, dao, usuario );
+            Veontec.usuarioDao = dao;
+            Veontec.usuarioDto = dto;
+            Veontec.ventanaHome = vh;
+            vh.setTitle( Veontec.usuarioDto.getCmpNombreCompleto() + " | "  + Veontec.usuarioDto.getCmpCorreo());
+            CtrlHome ctrl = new CtrlHome(vh);
             ctrl.laVista.setLocationRelativeTo(null);
             ctrl.laVista.setVisible(true);
             

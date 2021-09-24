@@ -40,11 +40,12 @@ public class VentanaInicio extends javax.swing.JFrame {
 
         tabContenedor = new javax.swing.JTabbedPane();
         jPanelBackground2 = new vista.componentes.jpanelbackground.JPanelBackground();
-        pnLoggin = new vista.paneles.veontec.PanelInicarSession();
+        pnLoggin = new vista.paneles.PanelInicarSession();
         jPanelBackground3 = new vista.componentes.jpanelbackground.JPanelBackground();
-        pnRegistrarme = new vista.paneles.veontec.PanelRegistrarme();
+        pnRegistrarme = new vista.paneles.PanelRegistrarme();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
 
         tabContenedor.setTabPlacement(javax.swing.JTabbedPane.LEFT);
 
@@ -52,15 +53,11 @@ public class VentanaInicio extends javax.swing.JFrame {
         jPanelBackground2.setLayout(jPanelBackground2Layout);
         jPanelBackground2Layout.setHorizontalGroup(
             jPanelBackground2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelBackground2Layout.createSequentialGroup()
-                .addComponent(pnLoggin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 3, Short.MAX_VALUE))
+            .addComponent(pnLoggin, javax.swing.GroupLayout.DEFAULT_SIZE, 413, Short.MAX_VALUE)
         );
         jPanelBackground2Layout.setVerticalGroup(
             jPanelBackground2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelBackground2Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(pnLoggin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addComponent(pnLoggin, javax.swing.GroupLayout.DEFAULT_SIZE, 430, Short.MAX_VALUE)
         );
 
         tabContenedor.addTab("Iniciar session", jPanelBackground2);
@@ -69,15 +66,11 @@ public class VentanaInicio extends javax.swing.JFrame {
         jPanelBackground3.setLayout(jPanelBackground3Layout);
         jPanelBackground3Layout.setHorizontalGroup(
             jPanelBackground3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelBackground3Layout.createSequentialGroup()
-                .addGap(0, 10, Short.MAX_VALUE)
-                .addComponent(pnRegistrarme, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addComponent(pnRegistrarme, javax.swing.GroupLayout.DEFAULT_SIZE, 413, Short.MAX_VALUE)
         );
         jPanelBackground3Layout.setVerticalGroup(
             jPanelBackground3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelBackground3Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(pnRegistrarme, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addComponent(pnRegistrarme, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 430, Short.MAX_VALUE)
         );
 
         tabContenedor.addTab("Registrarme", jPanelBackground3);
@@ -86,13 +79,11 @@ public class VentanaInicio extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(tabContenedor, javax.swing.GroupLayout.PREFERRED_SIZE, 665, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(tabContenedor, javax.swing.GroupLayout.PREFERRED_SIZE, 515, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(tabContenedor, javax.swing.GroupLayout.DEFAULT_SIZE, 405, Short.MAX_VALUE)
+            .addComponent(tabContenedor, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 435, Short.MAX_VALUE)
         );
 
         pack();
@@ -139,8 +130,8 @@ public class VentanaInicio extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private vista.componentes.jpanelbackground.JPanelBackground jPanelBackground2;
     private vista.componentes.jpanelbackground.JPanelBackground jPanelBackground3;
-    public vista.paneles.veontec.PanelInicarSession pnLoggin;
-    public vista.paneles.veontec.PanelRegistrarme pnRegistrarme;
+    public vista.paneles.PanelInicarSession pnLoggin;
+    public vista.paneles.PanelRegistrarme pnRegistrarme;
     public javax.swing.JTabbedPane tabContenedor;
     // End of variables declaration//GEN-END:variables
 }

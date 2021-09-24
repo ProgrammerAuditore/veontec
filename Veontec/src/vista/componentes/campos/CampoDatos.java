@@ -5,7 +5,7 @@
  */
 package vista.componentes.campos;
 
-import index.MyFreeLab;
+import index.Veontec;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.FocusEvent;
@@ -108,7 +108,7 @@ public class CampoDatos extends JTextField implements FocusListener, KeyListener
     }
     
     private void setToolTip(){
-        String aqui= MyFreeLab.idioma.getProperty("componente.setToolTip.aqui");
+        String aqui= Veontec.idioma.getProperty("componente.setToolTip.aqui");
         String EstiloToolTip = "<html><b><font color=white>" + getPlaceholder() + " "+ aqui + "</font></b></html>" ;
         setToolTipText( EstiloToolTip );
     }
@@ -174,7 +174,7 @@ public class CampoDatos extends JTextField implements FocusListener, KeyListener
         }else
         if(  Character.isDigit(caracter) ){
             e.consume();
-            JOptionPane.showMessageDialog(null, MyFreeLab.idioma.getProperty("campoDatos.keyTyped.msg1"));
+            JOptionPane.showMessageDialog(null, Veontec.idioma.getProperty("campoDatos.keyTyped.msg1"));
         } else {
             e.consume();
         }

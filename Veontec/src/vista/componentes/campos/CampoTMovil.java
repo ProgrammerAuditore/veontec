@@ -5,7 +5,7 @@
  */
 package vista.componentes.campos;
 
-import index.MyFreeLab;
+import index.Veontec;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.FocusEvent;
@@ -107,7 +107,7 @@ public class CampoTMovil extends JTextField implements FocusListener, KeyListene
     }
     
     private void setToolTip(){
-        String aqui= MyFreeLab.idioma.getProperty("componente.setToolTip.aqui");
+        String aqui= Veontec.idioma.getProperty("componente.setToolTip.aqui");
         String EstiloToolTip = "<html><b><font color=white>" + getPlaceholder() + " "+aqui + "</font></b></html>" ;
         setToolTipText( EstiloToolTip );
     }
@@ -171,7 +171,7 @@ public class CampoTMovil extends JTextField implements FocusListener, KeyListene
         // * Establecer maximo 10 digitos
         if ( this.getText().length() >= 10 ){
             evt.consume(); 
-            JOptionPane.showMessageDialog(null, MyFreeLab.idioma.getProperty("campoTMovil.keyTyped.msg1"));
+            JOptionPane.showMessageDialog(null, Veontec.idioma.getProperty("campoTMovil.keyTyped.msg1"));
             return;
         }
         
@@ -180,7 +180,7 @@ public class CampoTMovil extends JTextField implements FocusListener, KeyListene
             
             if( Character.isLetter( charCap ) ){
                 evt.consume();
-                JOptionPane.showMessageDialog(null, MyFreeLab.idioma.getProperty("campoTMovil.keyTyped.msg2"));
+                JOptionPane.showMessageDialog(null, Veontec.idioma.getProperty("campoTMovil.keyTyped.msg2"));
 
             }else
             evt.consume();
