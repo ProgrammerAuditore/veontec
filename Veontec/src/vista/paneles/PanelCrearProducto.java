@@ -27,15 +27,19 @@ public class PanelCrearProducto extends javax.swing.JPanel {
     
     public boolean mtdComprobar() {
         
-        if( !cmpTitulo.isAprobado() || cmpTitulo.getText().isEmpty() || cmpTitulo.getText().length() > 60 ){
+        if( !cmpTitulo.isAprobado() || cmpTitulo.getText().trim().isEmpty() || cmpTitulo.getText().trim().length() > 60 ){
             return false;
         }
         
-        if( !cmpStock.isAprobado() || cmpStock.getText().isEmpty() ){
+        if( !cmpStock.isAprobado() || cmpStock.getText().trim().isEmpty() ){
             return false;
         }
         
-        if( !cmpPrecio.isAprobado() || cmpPrecio.getText().isEmpty() ){
+        if( !cmpPrecio.isAprobado() || cmpPrecio.getText().trim().isEmpty() ){
+            return false;
+        }
+        
+        if( cmpPrecio.getText().trim().isEmpty()  || cmpDescripcion.getText().trim().length() > 160 ){
             return false;
         }
         
@@ -62,7 +66,6 @@ public class PanelCrearProducto extends javax.swing.JPanel {
         etqNombres = new vista.componentes.etiqueta.Etiqueta();
         etqDireccion = new vista.componentes.etiqueta.Etiqueta();
         etqEmail = new vista.componentes.etiqueta.Etiqueta();
-        cmpTitulo = new vista.componentes.campos.CampoDatos();
         cmpCategoria = new javax.swing.JComboBox<>();
         jScrollPane1 = new javax.swing.JScrollPane();
         cmpDescripcion = new javax.swing.JTextArea();
@@ -76,6 +79,7 @@ public class PanelCrearProducto extends javax.swing.JPanel {
         etiqueta3 = new vista.componentes.etiqueta.Etiqueta();
         cboxBoleto = new javax.swing.JCheckBox();
         cmboxVuelos = new javax.swing.JCheckBox();
+        cmpTitulo = new vista.componentes.campos.CampoTexto();
         btnAceptar = new vista.componentes.boton.Boton();
         btnCancelar = new vista.componentes.boton.Boton();
 
@@ -106,9 +110,6 @@ public class PanelCrearProducto extends javax.swing.JPanel {
 
         etqEmail.setText("Seleccionar categoría");
 
-        cmpTitulo.setComponenteDidireccional(etqNombres);
-        cmpTitulo.setPlaceholder("Ingresa titulo del producto");
-
         cmpCategoria.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Mochilas" }));
 
         cmpDescripcion.setColumns(20);
@@ -138,6 +139,8 @@ public class PanelCrearProducto extends javax.swing.JPanel {
 
         cmboxVuelos.setText("Vuelos (Turismo, etc.)");
 
+        cmpTitulo.setComponenteDidireccional(etqNombres);
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -147,12 +150,12 @@ public class PanelCrearProducto extends javax.swing.JPanel {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(cmpTitulo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(etqNombres, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(etqDireccion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 280, Short.MAX_VALUE)
                             .addComponent(cmpCategoria, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(etqEmail, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(etqEmail, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(cmpTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(18, 18, 18)
                         .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 13, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -197,9 +200,9 @@ public class PanelCrearProducto extends javax.swing.JPanel {
                         .addGroup(jPanel2Layout.createSequentialGroup()
                             .addContainerGap()
                             .addComponent(etqNombres, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(12, 12, 12)
-                            .addComponent(cmpTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(cmpTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(12, 12, 12)
                             .addComponent(etqEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                             .addComponent(cmpCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -273,7 +276,7 @@ public class PanelCrearProducto extends javax.swing.JPanel {
     public vista.componentes.campos.CampoTexto cmpEnlace;
     public vista.componentes.campos.CampoMoneda cmpPrecio;
     public vista.componentes.campos.CampoNumerico cmpStock;
-    public vista.componentes.campos.CampoDatos cmpTitulo;
+    public vista.componentes.campos.CampoTexto cmpTitulo;
     private vista.componentes.etiqueta.Etiqueta etiqueta1;
     private vista.componentes.etiqueta.Etiqueta etiqueta2;
     private vista.componentes.etiqueta.Etiqueta etiqueta3;

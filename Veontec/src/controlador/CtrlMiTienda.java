@@ -68,7 +68,7 @@ public class CtrlMiTienda implements MouseListener{
     @Override
     public void mouseReleased(MouseEvent e) {
         if( e.getSource() == laVista.btnCrearProducto ){
-            mtdBuildCrearProducto();
+            mtdBuildModalCrearProducto();
         }
     }
    
@@ -79,7 +79,7 @@ public class CtrlMiTienda implements MouseListener{
         mtdMostrarProducto();
     }
     
-    private void mtdBuildCrearProducto(){
+    private void mtdBuildModalCrearProducto(){
         
         // * Crear objetos
         pnCrearProducto = null;
@@ -151,7 +151,6 @@ public class CtrlMiTienda implements MouseListener{
         
         pnCrearProducto.btnCancelar.addMouseListener(eventoBtnCancelar);
     }
-    
     
     private void mtdCrearProducto(){
         if( pnCrearProducto.mtdComprobar() ){
