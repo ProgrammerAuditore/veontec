@@ -25,6 +25,23 @@ public class PanelCrearProducto extends javax.swing.JPanel {
         mtdEstablecerIdioma();
     }
     
+    public boolean mtdComprobar() {
+        
+        if( !cmpTitulo.isAprobado() || cmpTitulo.getText().isEmpty() || cmpTitulo.getText().length() > 60 ){
+            return false;
+        }
+        
+        if( !cmpStock.isAprobado() || cmpStock.getText().isEmpty() ){
+            return false;
+        }
+        
+        if( !cmpPrecio.isAprobado() || cmpPrecio.getText().isEmpty() ){
+            return false;
+        }
+        
+        return true;
+    }
+    
     private void mtdEstablecerIdioma(){
         // * Etiquetas
   
@@ -45,20 +62,20 @@ public class PanelCrearProducto extends javax.swing.JPanel {
         etqNombres = new vista.componentes.etiqueta.Etiqueta();
         etqDireccion = new vista.componentes.etiqueta.Etiqueta();
         etqEmail = new vista.componentes.etiqueta.Etiqueta();
-        cmpNombres = new vista.componentes.campos.CampoDatos();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        cmpTitulo = new vista.componentes.campos.CampoDatos();
+        cmpCategoria = new javax.swing.JComboBox<>();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        cmpDescripcion = new javax.swing.JTextArea();
         etiqueta1 = new vista.componentes.etiqueta.Etiqueta();
         jSeparator1 = new javax.swing.JSeparator();
-        campoMoneda1 = new vista.componentes.campos.CampoMoneda();
+        cmpPrecio = new vista.componentes.campos.CampoMoneda();
         etiqueta2 = new vista.componentes.etiqueta.Etiqueta();
-        campoNumerico1 = new vista.componentes.campos.CampoNumerico();
-        campoTexto1 = new vista.componentes.campos.CampoTexto();
-        jCheckBox1 = new javax.swing.JCheckBox();
+        cmpStock = new vista.componentes.campos.CampoNumerico();
+        cmpEnlace = new vista.componentes.campos.CampoTexto();
+        cboxProductoExterno = new javax.swing.JCheckBox();
         etiqueta3 = new vista.componentes.etiqueta.Etiqueta();
-        jCheckBox2 = new javax.swing.JCheckBox();
-        jCheckBox3 = new javax.swing.JCheckBox();
+        cboxBoleto = new javax.swing.JCheckBox();
+        cmboxVuelos = new javax.swing.JCheckBox();
         btnAceptar = new vista.componentes.boton.Boton();
         btnCancelar = new vista.componentes.boton.Boton();
 
@@ -89,37 +106,37 @@ public class PanelCrearProducto extends javax.swing.JPanel {
 
         etqEmail.setText("Seleccionar categoría");
 
-        cmpNombres.setComponenteDidireccional(etqNombres);
-        cmpNombres.setPlaceholder("Ingresa titulo del producto");
+        cmpTitulo.setComponenteDidireccional(etqNombres);
+        cmpTitulo.setPlaceholder("Ingresa titulo del producto");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Mochilas" }));
+        cmpCategoria.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Mochilas" }));
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jTextArea1.setText("Es nueva");
-        jScrollPane1.setViewportView(jTextArea1);
+        cmpDescripcion.setColumns(20);
+        cmpDescripcion.setRows(5);
+        cmpDescripcion.setText("Es nueva");
+        jScrollPane1.setViewportView(cmpDescripcion);
 
         etiqueta1.setText("Precio X Unidad");
 
         jSeparator1.setOrientation(javax.swing.SwingConstants.VERTICAL);
 
-        campoMoneda1.setPlaceholder("Ingresa el precio");
+        cmpPrecio.setPlaceholder("Ingresa el precio");
 
         etiqueta2.setText("Stock disponible");
 
-        campoNumerico1.setPlaceholder("Ingresa una cantidad");
+        cmpStock.setPlaceholder("Ingresa una cantidad");
 
-        campoTexto1.setEditable(false);
-        campoTexto1.setEnabled(false);
-        campoTexto1.setPlaceholder("Ingrese la URL del producto");
+        cmpEnlace.setEditable(false);
+        cmpEnlace.setEnabled(false);
+        cmpEnlace.setPlaceholder("Ingrese la URL del producto");
 
-        jCheckBox1.setText("Producto externo (Amazon, etc.)");
+        cboxProductoExterno.setText("Producto externo (Amazon, etc.)");
 
         etiqueta3.setText("Tipo de producto");
 
-        jCheckBox2.setText("Boleto (Concierto, etc.)");
+        cboxBoleto.setText("Boleto (Concierto, etc.)");
 
-        jCheckBox3.setText("Vuelos (Turismo, etc.)");
+        cmboxVuelos.setText("Vuelos (Turismo, etc.)");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -130,28 +147,28 @@ public class PanelCrearProducto extends javax.swing.JPanel {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(cmpNombres, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(cmpTitulo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(etqNombres, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(etqDireccion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 280, Short.MAX_VALUE)
-                            .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(cmpCategoria, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(etqEmail, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(18, 18, 18)
                         .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 13, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(campoMoneda1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(cmpPrecio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(etiqueta2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(etiqueta1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(campoNumerico1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(cmpStock, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(etiqueta3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jCheckBox1)
-                                    .addComponent(jCheckBox2)
-                                    .addComponent(jCheckBox3))
+                                    .addComponent(cboxProductoExterno)
+                                    .addComponent(cboxBoleto)
+                                    .addComponent(cmboxVuelos))
                                 .addGap(0, 37, Short.MAX_VALUE))))
-                    .addComponent(campoTexto1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(cmpEnlace, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -162,36 +179,36 @@ public class PanelCrearProducto extends javax.swing.JPanel {
                         .addContainerGap()
                         .addComponent(etiqueta1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(campoMoneda1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(cmpPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(etiqueta2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(campoNumerico1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(cmpStock, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(26, 26, 26)
                         .addComponent(etiqueta3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jCheckBox1)
+                        .addComponent(cboxProductoExterno)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jCheckBox2)
+                        .addComponent(cboxBoleto)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jCheckBox3))
+                        .addComponent(cmboxVuelos))
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(jPanel2Layout.createSequentialGroup()
                             .addContainerGap()
                             .addComponent(etqNombres, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGap(12, 12, 12)
-                            .addComponent(cmpNombres, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cmpTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                             .addComponent(etqEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cmpCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGap(18, 18, 18)
                             .addComponent(etqDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 13, Short.MAX_VALUE)
-                .addComponent(campoTexto1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(cmpEnlace, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -248,10 +265,15 @@ public class PanelCrearProducto extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public vista.componentes.boton.Boton btnAceptar;
     public vista.componentes.boton.Boton btnCancelar;
-    private vista.componentes.campos.CampoMoneda campoMoneda1;
-    private vista.componentes.campos.CampoNumerico campoNumerico1;
-    private vista.componentes.campos.CampoTexto campoTexto1;
-    public vista.componentes.campos.CampoDatos cmpNombres;
+    public javax.swing.JCheckBox cboxBoleto;
+    public javax.swing.JCheckBox cboxProductoExterno;
+    public javax.swing.JCheckBox cmboxVuelos;
+    public javax.swing.JComboBox<String> cmpCategoria;
+    public javax.swing.JTextArea cmpDescripcion;
+    public vista.componentes.campos.CampoTexto cmpEnlace;
+    public vista.componentes.campos.CampoMoneda cmpPrecio;
+    public vista.componentes.campos.CampoNumerico cmpStock;
+    public vista.componentes.campos.CampoDatos cmpTitulo;
     private vista.componentes.etiqueta.Etiqueta etiqueta1;
     private vista.componentes.etiqueta.Etiqueta etiqueta2;
     private vista.componentes.etiqueta.Etiqueta etiqueta3;
@@ -259,14 +281,9 @@ public class PanelCrearProducto extends javax.swing.JPanel {
     private vista.componentes.etiqueta.Etiqueta etqEmail;
     private vista.componentes.etiqueta.Etiqueta etqNombres;
     public vista.componentes.etiqueta.Titulo etqTitulo;
-    private javax.swing.JCheckBox jCheckBox1;
-    private javax.swing.JCheckBox jCheckBox2;
-    private javax.swing.JCheckBox jCheckBox3;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JTextArea jTextArea1;
     // End of variables declaration//GEN-END:variables
 }

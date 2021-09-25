@@ -104,33 +104,33 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" attributes="0">
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="cmpNombres" alignment="1" max="32767" attributes="0"/>
+                              <Component id="cmpTitulo" alignment="1" max="32767" attributes="0"/>
                               <Component id="etqNombres" alignment="0" max="32767" attributes="0"/>
                               <Component id="etqDireccion" alignment="0" max="32767" attributes="0"/>
                               <Component id="jScrollPane1" alignment="0" pref="280" max="32767" attributes="0"/>
-                              <Component id="jComboBox1" alignment="0" max="32767" attributes="0"/>
+                              <Component id="cmpCategoria" alignment="0" max="32767" attributes="0"/>
                               <Component id="etqEmail" alignment="0" max="32767" attributes="0"/>
                           </Group>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Component id="jSeparator1" min="-2" pref="13" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="campoMoneda1" max="32767" attributes="0"/>
+                              <Component id="cmpPrecio" max="32767" attributes="0"/>
                               <Component id="etiqueta2" alignment="0" max="32767" attributes="0"/>
                               <Component id="etiqueta1" max="32767" attributes="0"/>
-                              <Component id="campoNumerico1" alignment="0" max="32767" attributes="0"/>
+                              <Component id="cmpStock" alignment="0" max="32767" attributes="0"/>
                               <Component id="etiqueta3" max="32767" attributes="0"/>
                               <Group type="102" attributes="0">
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="jCheckBox1" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jCheckBox2" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jCheckBox3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="cboxProductoExterno" min="-2" max="-2" attributes="0"/>
+                                      <Component id="cboxBoleto" min="-2" max="-2" attributes="0"/>
+                                      <Component id="cmboxVuelos" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace min="0" pref="37" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
-                      <Component id="campoTexto1" max="32767" attributes="0"/>
+                      <Component id="cmpEnlace" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
@@ -144,19 +144,19 @@
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="etiqueta1" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="campoMoneda1" min="-2" max="-2" attributes="0"/>
+                          <Component id="cmpPrecio" min="-2" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Component id="etiqueta2" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="campoNumerico1" min="-2" max="-2" attributes="0"/>
+                          <Component id="cmpStock" min="-2" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
                           <Component id="etiqueta3" min="-2" max="-2" attributes="0"/>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Component id="jCheckBox1" min="-2" max="-2" attributes="0"/>
+                          <Component id="cboxProductoExterno" min="-2" max="-2" attributes="0"/>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Component id="jCheckBox2" min="-2" max="-2" attributes="0"/>
+                          <Component id="cboxBoleto" min="-2" max="-2" attributes="0"/>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Component id="jCheckBox3" min="-2" max="-2" attributes="0"/>
+                          <Component id="cmboxVuelos" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
                           <Component id="jSeparator1" alignment="0" max="32767" attributes="0"/>
@@ -164,11 +164,11 @@
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="etqNombres" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
-                              <Component id="cmpNombres" min="-2" max="-2" attributes="0"/>
+                              <Component id="cmpTitulo" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Component id="etqEmail" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Component id="jComboBox1" min="-2" max="-2" attributes="0"/>
+                              <Component id="cmpCategoria" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="etqDireccion" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
@@ -177,7 +177,7 @@
                       </Group>
                   </Group>
                   <EmptySpace pref="13" max="32767" attributes="0"/>
-                  <Component id="campoTexto1" min="-2" max="-2" attributes="0"/>
+                  <Component id="cmpEnlace" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
@@ -199,7 +199,7 @@
             <Property name="text" type="java.lang.String" value="Seleccionar categor&#xed;a"/>
           </Properties>
         </Component>
-        <Component class="vista.componentes.campos.CampoDatos" name="cmpNombres">
+        <Component class="vista.componentes.campos.CampoDatos" name="cmpTitulo">
           <Properties>
             <Property name="componenteDidireccional" type="javax.swing.JLabel" editor="org.netbeans.modules.form.ComponentChooserEditor">
               <ComponentRef name="etqNombres"/>
@@ -210,7 +210,7 @@
             <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
           </AuxValues>
         </Component>
-        <Component class="javax.swing.JComboBox" name="jComboBox1">
+        <Component class="javax.swing.JComboBox" name="cmpCategoria">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
               <StringArray count="1">
@@ -220,6 +220,7 @@
           </Properties>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
           </AuxValues>
         </Component>
         <Container class="javax.swing.JScrollPane" name="jScrollPane1">
@@ -229,12 +230,15 @@
 
           <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
           <SubComponents>
-            <Component class="javax.swing.JTextArea" name="jTextArea1">
+            <Component class="javax.swing.JTextArea" name="cmpDescripcion">
               <Properties>
                 <Property name="columns" type="int" value="20"/>
                 <Property name="rows" type="int" value="5"/>
                 <Property name="text" type="java.lang.String" value="Es nueva"/>
               </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+              </AuxValues>
             </Component>
           </SubComponents>
         </Container>
@@ -248,47 +252,65 @@
             <Property name="orientation" type="int" value="1"/>
           </Properties>
         </Component>
-        <Component class="vista.componentes.campos.CampoMoneda" name="campoMoneda1">
+        <Component class="vista.componentes.campos.CampoMoneda" name="cmpPrecio">
           <Properties>
             <Property name="placeholder" type="java.lang.String" value="Ingresa el precio"/>
           </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+          </AuxValues>
         </Component>
         <Component class="vista.componentes.etiqueta.Etiqueta" name="etiqueta2">
           <Properties>
             <Property name="text" type="java.lang.String" value="Stock disponible"/>
           </Properties>
         </Component>
-        <Component class="vista.componentes.campos.CampoNumerico" name="campoNumerico1">
+        <Component class="vista.componentes.campos.CampoNumerico" name="cmpStock">
           <Properties>
             <Property name="placeholder" type="java.lang.String" value="Ingresa una cantidad"/>
           </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+          </AuxValues>
         </Component>
-        <Component class="vista.componentes.campos.CampoTexto" name="campoTexto1">
+        <Component class="vista.componentes.campos.CampoTexto" name="cmpEnlace">
           <Properties>
             <Property name="editable" type="boolean" value="false"/>
             <Property name="enabled" type="boolean" value="false"/>
             <Property name="placeholder" type="java.lang.String" value="Ingrese la URL del producto"/>
           </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+          </AuxValues>
         </Component>
-        <Component class="javax.swing.JCheckBox" name="jCheckBox1">
+        <Component class="javax.swing.JCheckBox" name="cboxProductoExterno">
           <Properties>
             <Property name="text" type="java.lang.String" value="Producto externo (Amazon, etc.)"/>
           </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+          </AuxValues>
         </Component>
         <Component class="vista.componentes.etiqueta.Etiqueta" name="etiqueta3">
           <Properties>
             <Property name="text" type="java.lang.String" value="Tipo de producto"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JCheckBox" name="jCheckBox2">
+        <Component class="javax.swing.JCheckBox" name="cboxBoleto">
           <Properties>
             <Property name="text" type="java.lang.String" value="Boleto (Concierto, etc.)"/>
           </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+          </AuxValues>
         </Component>
-        <Component class="javax.swing.JCheckBox" name="jCheckBox3">
+        <Component class="javax.swing.JCheckBox" name="cmboxVuelos">
           <Properties>
             <Property name="text" type="java.lang.String" value="Vuelos (Turismo, etc.)"/>
           </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+          </AuxValues>
         </Component>
       </SubComponents>
     </Container>

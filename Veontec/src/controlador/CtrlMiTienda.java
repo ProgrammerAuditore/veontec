@@ -3,6 +3,7 @@ package controlador;
 import index.Veontec;
 import java.awt.Dialog;
 import java.awt.GridBagLayout;
+import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.WindowAdapter;
@@ -35,6 +36,7 @@ public class CtrlMiTienda implements MouseListener{
     // Atributos
     private static CtrlMiTienda instancia;
     private List<ProductoDto> lstMisProductos;
+    private PanelCrearProducto pnCrearProducto;
 
     // Constructor
     public CtrlMiTienda(PanelMiTienda laVista, UsuarioDto dto, UsuarioDao dao) {
@@ -66,7 +68,7 @@ public class CtrlMiTienda implements MouseListener{
     @Override
     public void mouseReleased(MouseEvent e) {
         if( e.getSource() == laVista.btnCrearProducto ){
-            mtdCrearProducto();
+            mtdBuildCrearProducto();
         }
     }
    
@@ -77,24 +79,26 @@ public class CtrlMiTienda implements MouseListener{
         mtdMostrarProducto();
     }
     
-    private void mtdCrearProducto(){
+    private void mtdBuildCrearProducto(){
         
         // * Crear objetos
-        PanelCrearProducto  pp = new PanelCrearProducto();
+        pnCrearProducto = null;
+        pnCrearProducto = new PanelCrearProducto();
         modalCrearProducto = new JDialog(Veontec.ventanaHome);
+        
+        mtdCrearEventoBtnCrear();
+        mtdCrearEventoBtnCancelar();
         
         // * Establecer eventos
         modalCrearProducto.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
-                modalCrearProducto.removeAll();
-                modalCrearProducto.setVisible(false);
-                modalCrearProducto.dispose();
+                mtdSalirDelModal();
             }
 
             @Override
             public void windowOpened(WindowEvent e) {
-                pp.updateUI();
+                pnCrearProducto.updateUI();
                 modalCrearProducto.validate();
                 modalCrearProducto.repaint();
                 JOptionPane.showMessageDialog(laVista, "Introduce los datos del producto.");
@@ -108,13 +112,68 @@ public class CtrlMiTienda implements MouseListener{
         modalCrearProducto.setModalityType(Dialog.ModalityType.APPLICATION_MODAL);
         modalCrearProducto.setTitle("Crear un nuevo producto");
         modalCrearProducto.setResizable(false);
-        modalCrearProducto.setSize( pp.getSize() );
-        modalCrearProducto.setPreferredSize(pp.getSize() );
-        modalCrearProducto.setContentPane(pp);
+        modalCrearProducto.setSize(pnCrearProducto.getSize() );
+        modalCrearProducto.setPreferredSize(pnCrearProducto.getSize() );
+        modalCrearProducto.setContentPane(pnCrearProducto);
         modalCrearProducto.setLocationRelativeTo(Veontec.ventanaHome);
+        modalCrearProducto.validate();
+        pnCrearProducto.updateUI();
+        modalCrearProducto.repaint();
         modalCrearProducto.setVisible(true); // Mostrar modal
         
         
+    }
+    
+    private void mtdCrearEventoBtnCrear(){
+        MouseListener eventoBtnCrear = null;
+        pnCrearProducto.btnAceptar.removeMouseListener(eventoBtnCrear);
+        
+        eventoBtnCrear = new MouseAdapter() {
+            @Override
+            public void mouseReleased(MouseEvent e) {
+                mtdCrearProducto();
+            }
+        };   
+        
+        pnCrearProducto.btnAceptar.addMouseListener(eventoBtnCrear);
+    }
+    
+    private void mtdCrearEventoBtnCancelar(){
+        MouseListener eventoBtnCancelar = null;
+        pnCrearProducto.btnCancelar.removeMouseListener(eventoBtnCancelar);
+        
+        eventoBtnCancelar = new MouseAdapter() {
+            @Override
+            public void mouseReleased(MouseEvent e) {
+                mtdSalirDelModal();
+            }
+        };   
+        
+        pnCrearProducto.btnCancelar.addMouseListener(eventoBtnCancelar);
+    }
+    
+    
+    private void mtdCrearProducto(){
+        if( pnCrearProducto.mtdComprobar() ){
+            producto_dto.setProdUsuario( usuario_dto.getCmpID() );
+            producto_dto.setProdCategoria( String.valueOf( pnCrearProducto.cmpCategoria.getSelectedItem() ) );
+            producto_dto.setProdTitulo( pnCrearProducto.cmpTitulo.getText().trim() );
+            producto_dto.setProdDescripcion( pnCrearProducto.cmpDescripcion.getText().trim() );
+            producto_dto.setProdPrecio( Double.parseDouble( pnCrearProducto.cmpPrecio.getText().trim() ) );
+            producto_dto.setProdStock( Integer.parseInt( pnCrearProducto.cmpStock.getText().trim() ) );
+            producto_dto.setProdTipo(0);
+            producto_dto.setProdEnlace("Vacio");
+            
+            if( producto_dao.mtdInsetar(producto_dto) ){
+                JOptionPane.showMessageDialog(null, "Producto creado exitosamente.");
+                mtdSalirDelModal();
+                mtdRecargarDatos();
+                mtdMostrarProducto();
+            }
+            
+        }else{
+            JOptionPane.showMessageDialog(null, "Verifica que los datos sean correctos.");
+        }
     }
     
     private void mtdMostrarProducto(){
@@ -147,6 +206,12 @@ public class CtrlMiTienda implements MouseListener{
     public void mtdRecargarDatos(){
         treeNode1 = new DefaultMutableTreeNode("Categorias");
         laVista.lstProductos.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
+    }
+    
+    private void mtdSalirDelModal(){
+        modalCrearProducto.removeAll();
+        modalCrearProducto.setVisible(false);
+        modalCrearProducto.dispose();
     }
     
     @Override
