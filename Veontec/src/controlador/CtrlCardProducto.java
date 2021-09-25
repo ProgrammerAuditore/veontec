@@ -8,12 +8,13 @@ import java.awt.event.MouseListener;
 import modelo.dao.ProductoDao;
 import modelo.dto.ProductoDto;
 import vista.paneles.PanelCardMiProducto;
+import vista.paneles.PanelCardProducto;
 
 public class CtrlCardProducto {
 
     
     // * Vista
-    private PanelCardMiProducto tarjeta;
+    private PanelCardProducto tarjeta;
     
     // * Modelo
     private ProductoDto prodDto;
@@ -22,10 +23,11 @@ public class CtrlCardProducto {
     // * Atributos
     private GridBagConstraints tarjeta_dimensiones;
     private Integer item;
+    private Integer columna;
     
     // Constructor
     public CtrlCardProducto(ProductoDto prodDto, ProductoDao prodDao) {
-        this.tarjeta = new PanelCardMiProducto();
+        this.tarjeta = new PanelCardProducto();
         this.prodDto = prodDto;
         this.prodDao = prodDao;
         this.tarjeta_dimensiones = new GridBagConstraints();
@@ -34,7 +36,7 @@ public class CtrlCardProducto {
     // Eventos
     private void mtdCrearEventoBtnGuardar(){
         MouseListener eventoBtnComprar = null;
-        tarjeta.btnEliminar.removeMouseListener(eventoBtnComprar);
+        tarjeta.btnHacerCompra.removeMouseListener(eventoBtnComprar);
         
         eventoBtnComprar =  new MouseAdapter(){
             @Override
@@ -43,7 +45,7 @@ public class CtrlCardProducto {
             }
         };
         
-        tarjeta.btnEliminar.addMouseListener(eventoBtnComprar);
+        tarjeta.btnHacerCompra.addMouseListener(eventoBtnComprar);
     }
     
     // Métodos
@@ -61,27 +63,27 @@ public class CtrlCardProducto {
     }
     
     private void mtdEstablecerOpciones(){
-        tarjeta.btnEliminar.setTexto("Hacer compra");
-        tarjeta.btnEditar.setTexto("Hacer pregunta");
+        //tarjeta.btnHacerCompra.setTexto("Hacer compra");
+        //tarjeta.btnHacerPregunta.setTexto("Hacer pregunta");
     }
 
     private void mtdEstablecerDimensiones(){
-        tarjeta_dimensiones.gridx = 0; // Columna 
+        tarjeta_dimensiones.gridx = columna; // Columna 
         tarjeta_dimensiones.gridy = item; // Fila
         tarjeta_dimensiones.gridheight = 1; // Cantidad de columnas a ocupar
         tarjeta_dimensiones.gridwidth = 1; // Cantidad de filas a ocupar
         tarjeta_dimensiones.weightx = 0.0; // Estirar en ancho
         tarjeta_dimensiones.weighty = 0.0;// Estirar en alto
-        tarjeta_dimensiones.insets = new Insets(30, 0, 30, 0);  //top padding
+        tarjeta_dimensiones.insets = new Insets(20, 10, 20, 10);  //top padding
         tarjeta_dimensiones.fill = GridBagConstraints.BOTH; // El modo de estirar
         //tarjeta.setVisible(true);
     }
     
-    public PanelCardMiProducto getLaVista() {
+    public PanelCardProducto getLaVista() {
         return tarjeta;
     }
 
-    public void setLaVista(PanelCardMiProducto laVista) {
+    public void setLaVista(PanelCardProducto laVista) {
         this.tarjeta = laVista;
     }
 
@@ -99,6 +101,14 @@ public class CtrlCardProducto {
 
     public void setTarjeta_dimensiones(GridBagConstraints tarjeta_dimensiones) {
         this.tarjeta_dimensiones = tarjeta_dimensiones;
+    }
+
+    public Integer getColumna() {
+        return columna;
+    }
+
+    public void setColumna(Integer columna) {
+        this.columna = columna;
     }
     
 }

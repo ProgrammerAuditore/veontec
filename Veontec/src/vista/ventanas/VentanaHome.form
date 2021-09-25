@@ -68,7 +68,7 @@
             </DimensionLayout>
           </Layout>
           <SubComponents>
-            <Component class="vista.paneles.PanelHome" name="panelHome">
+            <Component class="vista.paneles.PanelBienvenida" name="panelHome">
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
               </AuxValues>

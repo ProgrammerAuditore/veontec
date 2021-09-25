@@ -13,7 +13,7 @@ import modelo.dto.CompraDto;
 import modelo.dto.ProductoDto;
 import modelo.dto.UsuarioDto;
 import vista.paneles.PanelCompras;
-import vista.paneles.PanelHome;
+import vista.paneles.PanelBienvenida;
 
 public class CtrlCompras{
     

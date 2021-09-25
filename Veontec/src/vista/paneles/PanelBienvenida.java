@@ -20,13 +20,16 @@ package vista.paneles;
  *
  * @author victor
  */
-public class PanelHome extends javax.swing.JPanel {
+public class PanelBienvenida extends javax.swing.JPanel {
 
     /**
      * Creates new form PanelLoggin
      */
-    public PanelHome() {
+    public PanelBienvenida() {
         initComponents();
+        
+        this.scpContenedor.getVerticalScrollBar().setUnitIncrement(16);
+        this.scpContenedor.getHorizontalScrollBar().setUnitIncrement(16);
     }
 
     /**
@@ -46,8 +49,7 @@ public class PanelHome extends javax.swing.JPanel {
         boton1 = new vista.componentes.boton.Boton();
         boton2 = new vista.componentes.boton.Boton();
         boton3 = new vista.componentes.boton.Boton();
-        jPanel3 = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
+        scpContenedor = new javax.swing.JScrollPane();
         pnContenedor = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
 
@@ -89,7 +91,7 @@ public class PanelHome extends javax.swing.JPanel {
                 .addComponent(campoTexto1, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(boton1, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 512, Short.MAX_VALUE)
                 .addComponent(boton3, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(boton2, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -112,19 +114,6 @@ public class PanelHome extends javax.swing.JPanel {
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
 
-        jPanel3.setBackground(new java.awt.Color(204, 204, 204));
-
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 280, Short.MAX_VALUE)
-        );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel1.setText("Sin productos");
 
@@ -133,7 +122,7 @@ public class PanelHome extends javax.swing.JPanel {
         pnContenedorLayout.setHorizontalGroup(
             pnContenedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnContenedorLayout.createSequentialGroup()
-                .addContainerGap(357, Short.MAX_VALUE)
+                .addContainerGap(637, Short.MAX_VALUE)
                 .addComponent(jLabel1)
                 .addGap(283, 283, 283))
         );
@@ -145,7 +134,7 @@ public class PanelHome extends javax.swing.JPanel {
                 .addContainerGap(324, Short.MAX_VALUE))
         );
 
-        jScrollPane1.setViewportView(pnContenedor);
+        scpContenedor.setViewportView(pnContenedor);
 
         javax.swing.GroupLayout jPanelBackground1Layout = new javax.swing.GroupLayout(jPanelBackground1);
         jPanelBackground1.setLayout(jPanelBackground1Layout);
@@ -157,9 +146,8 @@ public class PanelHome extends javax.swing.JPanel {
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanelBackground1Layout.createSequentialGroup()
-                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
+                        .addGap(10, 10, 10)
+                        .addComponent(scpContenedor)))
                 .addContainerGap())
         );
         jPanelBackground1Layout.setVerticalGroup(
@@ -170,9 +158,7 @@ public class PanelHome extends javax.swing.JPanel {
                 .addGap(18, 18, 18)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanelBackground1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1))
+                .addComponent(scpContenedor)
                 .addContainerGap())
         );
 
@@ -197,10 +183,9 @@ public class PanelHome extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
     private vista.componentes.jpanelbackground.JPanelBackground jPanelBackground1;
-    private javax.swing.JScrollPane jScrollPane1;
     public javax.swing.JPanel pnContenedor;
+    private javax.swing.JScrollPane scpContenedor;
     private vista.componentes.etiqueta.Titulo titulo1;
     // End of variables declaration//GEN-END:variables
 }

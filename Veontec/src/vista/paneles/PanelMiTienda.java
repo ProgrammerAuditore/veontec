@@ -36,6 +36,7 @@ public class PanelMiTienda extends javax.swing.JPanel {
         this.scpContenedor.getViewport().setBorder(null);
         */
         this.scpContenedor.getVerticalScrollBar().setUnitIncrement(16);
+        this.scpContenedor.getHorizontalScrollBar().setUnitIncrement(16);
     
     }
 

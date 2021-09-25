@@ -10,7 +10,7 @@ import modelo.dao.ProductoDao;
 import modelo.dao.UsuarioDao;
 import modelo.dto.ProductoDto;
 import modelo.dto.UsuarioDto;
-import vista.paneles.PanelHome;
+import vista.paneles.PanelBienvenida;
 import vista.paneles.PanelVentas;
 
 public class CtrlVenta{
