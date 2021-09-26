@@ -2,14 +2,22 @@ package controlador;
 
 import index.Veontec;
 import java.awt.Dialog;
+import java.awt.Dimension;
 import java.awt.GridBagConstraints;
+import java.awt.Image;
 import java.awt.Insets;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.JDialog;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import modelo.dao.ProductoDao;
 import modelo.dto.ProductoDto;
@@ -31,6 +39,7 @@ public class CtrlCardMiProducto {
     private GridBagConstraints tarjeta_dimensiones;
     private Integer item;
     private PanelCrearProducto pnCrearProducto;
+    private ImageIcon portada;
     
     // Constructor
     public CtrlCardMiProducto(ProductoDto prodDto, ProductoDao prodDao) {
@@ -85,6 +94,30 @@ public class CtrlCardMiProducto {
         // * Descripción de detalles
         tarjeta.cmpDetalleMiProducto.setText( prodDto.getProdDescripcion() );
         tarjeta.etqFecha.setText( "15/09/2021" );
+        
+        if( prodDto.getProdImg() != null ){
+            // * Establecer imagen de portada
+            try {
+                byte[] img = prodDto.getProdImg();
+                BufferedImage buffimg = null;
+                InputStream inputimg = new ByteArrayInputStream(img);
+                buffimg = ImageIO.read(inputimg);
+                tarjeta.pnImgPortafa.removeAll();
+                portada = new ImageIcon(buffimg.getScaledInstance(tarjeta.pnImgPortafa.getWidth(), tarjeta.pnImgPortafa.getHeight(), Image.SCALE_SMOOTH));
+                JLabel iconocc = new JLabel(portada);
+                iconocc.setBounds(0, 0, tarjeta.pnImgPortafa.getWidth(), tarjeta.pnImgPortafa.getHeight());
+                iconocc.setSize(tarjeta.pnImgPortafa.getWidth(), tarjeta.pnImgPortafa.getHeight());
+                iconocc.setLocation(0, 0);
+                iconocc.setPreferredSize(new Dimension(tarjeta.pnImgPortafa.getWidth(), tarjeta.pnImgPortafa.getHeight()));
+                tarjeta.pnImgPortafa.add(iconocc);
+                //tarjeta.updateUI();
+                tarjeta.validate();
+                tarjeta.revalidate();
+                tarjeta.repaint();
+                
+            } catch (Exception e) {
+            }
+        }
         
     }
 

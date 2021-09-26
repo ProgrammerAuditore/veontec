@@ -8,15 +8,22 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStream;
 import java.util.List;
+import javax.swing.ImageIcon;
 import javax.swing.JDialog;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.tree.DefaultMutableTreeNode;
+import modelo.dao.ImagesDao;
 import modelo.dao.ProductoDao;
 import modelo.dao.UsuarioDao;
+import modelo.dto.ImagesDto;
 import modelo.dto.ProductoDto;
 import modelo.dto.UsuarioDto;
-import vista.paneles.PanelCardMiProducto;
 import vista.paneles.PanelCrearProducto;
 import vista.paneles.PanelMiTienda;
 
@@ -31,6 +38,8 @@ public class CtrlMiTienda implements MouseListener{
     private UsuarioDao usuario_dao;
     private ProductoDao producto_dao;
     private ProductoDto producto_dto;
+    private ImagesDao images_dao;
+    private ImagesDto images_dto;
     private DefaultMutableTreeNode treeNode1;
     
     // Atributos
@@ -45,6 +54,8 @@ public class CtrlMiTienda implements MouseListener{
         this.usuario_dao = dao;
         producto_dao = new ProductoDao();
         producto_dto = new ProductoDto();
+        images_dao = new ImagesDao();
+        images_dto = new ImagesDto();
         
     }
     
@@ -85,6 +96,7 @@ public class CtrlMiTienda implements MouseListener{
     // Métodos
     private void mtdInit(){
         laVista.pnContenedor.setLayout(new GridBagLayout());
+        images_dto.setImagUsuario( usuario_dto.getCmpID() );
         mtdEstablecerEventos();
         mtdMostrarProducto();
     }
@@ -96,6 +108,7 @@ public class CtrlMiTienda implements MouseListener{
         pnCrearProducto = new PanelCrearProducto();
         modalCrearProducto = new JDialog(Veontec.ventanaHome);
         
+        mtdCrearEventoBtnSeleccionarImg();
         mtdCrearEventoBtnCrear();
         mtdCrearEventoBtnCancelar();
         
@@ -160,6 +173,57 @@ public class CtrlMiTienda implements MouseListener{
         };   
         
         pnCrearProducto.btnCancelar.addMouseListener(eventoBtnCancelar);
+    }
+    
+    private void mtdCrearEventoBtnSeleccionarImg(){
+        MouseListener eventoBtnSeleccionarImg = null;
+        pnCrearProducto.btnSeleccionarImg.removeMouseListener(eventoBtnSeleccionarImg);
+        
+        eventoBtnSeleccionarImg = new MouseAdapter() {
+            @Override
+            public void mouseReleased(MouseEvent e) {
+                mtdSeleccionarImg();
+            }
+        };   
+        
+        pnCrearProducto.btnSeleccionarImg.addMouseListener(eventoBtnSeleccionarImg);
+    }
+    
+    private void mtdSeleccionarImg(){
+        JFileChooser seleccionarArchivo = new JFileChooser();
+        FileNameExtensionFilter fill = new FileNameExtensionFilter("JPG, PNG, &GIF", "jpg", "png", "gif");
+        
+        seleccionarArchivo.setFileFilter(fill);
+        seleccionarArchivo.showOpenDialog(laVista);
+        File archivo = seleccionarArchivo.getSelectedFile();
+        
+        if( archivo != null ){
+            String path_img = archivo.getAbsolutePath();
+            ImageIcon img = new ImageIcon(path_img);
+            pnCrearProducto.cmpImagenPath.setText( archivo.getAbsolutePath() );
+          
+            if( archivo.length() > 805867 ){
+                JOptionPane.showMessageDialog(null, "La imágen es demasiado grande.");
+                pnCrearProducto.cmpImagenPath.rechazarCampo();
+            }else{
+                producto_dto.setProdImg(getImagen(path_img));
+                pnCrearProducto.cmpImagenPath.aceptarCampo();
+            }
+        }        
+        
+    }
+    
+    private byte[] getImagen(String ruta){
+        File imagen = new File(ruta);
+        try {
+            byte[] icono = new byte[(int) imagen.length() ];
+            InputStream inpu = new FileInputStream(imagen);
+            inpu.read(icono);
+            return icono;
+            
+        } catch (Exception e) {
+            return null;
+        }
     }
     
     private void mtdCrearProducto(){

@@ -5,8 +5,6 @@
  */
 package vista.paneles;
 
-import vista.paneles.*;
-import index.Veontec;
 import src.Recursos;
 
 /**
@@ -80,6 +78,9 @@ public class PanelCrearProducto extends javax.swing.JPanel {
         cboxBoleto = new javax.swing.JCheckBox();
         cmboxVuelos = new javax.swing.JCheckBox();
         cmpTitulo = new vista.componentes.campos.CampoTexto();
+        etqImagen = new vista.componentes.etiqueta.Etiqueta();
+        btnSeleccionarImg = new javax.swing.JButton();
+        cmpImagenPath = new vista.componentes.campos.CampoTexto();
         btnAceptar = new vista.componentes.boton.Boton();
         btnCancelar = new vista.componentes.boton.Boton();
 
@@ -141,6 +142,13 @@ public class PanelCrearProducto extends javax.swing.JPanel {
 
         cmpTitulo.setComponenteDidireccional(etqNombres);
 
+        etqImagen.setText("Seleccionar imagen...");
+
+        btnSeleccionarImg.setText("...");
+
+        cmpImagenPath.setEditable(false);
+        cmpImagenPath.setComponenteDidireccional(etqImagen);
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -171,7 +179,14 @@ public class PanelCrearProducto extends javax.swing.JPanel {
                                     .addComponent(cboxBoleto)
                                     .addComponent(cmboxVuelos))
                                 .addGap(0, 37, Short.MAX_VALUE))))
-                    .addComponent(cmpEnlace, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(cmpEnlace, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(cmpImagenPath, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(etqImagen, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnSeleccionarImg)
+                        .addGap(4, 4, 4)))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -210,9 +225,15 @@ public class PanelCrearProducto extends javax.swing.JPanel {
                             .addComponent(etqDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 13, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(cmpEnlace, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(etqImagen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cmpImagenPath, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnSeleccionarImg))
+                .addContainerGap(18, Short.MAX_VALUE))
         );
 
         btnAceptar.setImgButtonType("success");
@@ -268,12 +289,14 @@ public class PanelCrearProducto extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public vista.componentes.boton.Boton btnAceptar;
     public vista.componentes.boton.Boton btnCancelar;
+    public javax.swing.JButton btnSeleccionarImg;
     public javax.swing.JCheckBox cboxBoleto;
     public javax.swing.JCheckBox cboxProductoExterno;
     public javax.swing.JCheckBox cmboxVuelos;
     public javax.swing.JComboBox<String> cmpCategoria;
     public javax.swing.JTextArea cmpDescripcion;
     public vista.componentes.campos.CampoTexto cmpEnlace;
+    public vista.componentes.campos.CampoTexto cmpImagenPath;
     public vista.componentes.campos.CampoMoneda cmpPrecio;
     public vista.componentes.campos.CampoNumerico cmpStock;
     public vista.componentes.campos.CampoTexto cmpTitulo;
@@ -282,6 +305,7 @@ public class PanelCrearProducto extends javax.swing.JPanel {
     private vista.componentes.etiqueta.Etiqueta etiqueta3;
     private vista.componentes.etiqueta.Etiqueta etqDireccion;
     private vista.componentes.etiqueta.Etiqueta etqEmail;
+    private vista.componentes.etiqueta.Etiqueta etqImagen;
     private vista.componentes.etiqueta.Etiqueta etqNombres;
     public vista.componentes.etiqueta.Titulo etqTitulo;
     private javax.swing.JPanel jPanel1;
