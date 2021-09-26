@@ -1,10 +1,18 @@
 package controlador;
 
+import java.awt.Dimension;
 import java.awt.GridBagConstraints;
+import java.awt.Image;
 import java.awt.Insets;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import modelo.dao.CompraDao;
 import modelo.dao.ProductoDao;
@@ -32,6 +40,7 @@ public class CtrlCardCompra {
     // * Atributos
     private GridBagConstraints tarjeta_dimensiones;
     private Integer item;
+    private ImageIcon portada;
     
     // Constructor
     public CtrlCardCompra(CompraDto compDto) {
@@ -70,8 +79,9 @@ public class CtrlCardCompra {
             mtdCrearEventoBtnGuardar();
         }
         
-        mtdEstablecerDimensiones();
+        mtdEstablecerImagen();
         mtdEstablecerDatos();
+        mtdEstablecerDimensiones();
     }
     
     private void mtdEstablecerDatos(){
@@ -94,6 +104,44 @@ public class CtrlCardCompra {
         tarjeta.cmpVendedor.setText( usuaDto == null ? "Desconocido " : usuaDto.getCmpNombreCompleto() );
         
     }
+    
+    private void mtdEstablecerImagen(){
+        prodDto = new ProductoDto();  
+        prodDto.setProdUsuario( compDto.getCompVendedor() );
+        prodDto.setProdID( compDto.getCompProducto() );
+        prodDto = prodDao.mtdConsultar(prodDto);
+        
+        //System.out.println("********** mtdEstablecerImagen ## Inicio ## ");
+        //System.out.println("CompraDto :: " + compDto.toString());
+        //System.out.println("CompraDto :: " + prodDto.toString());
+        //System.out.println("********** mtdEstablecerImagen ## Fin ## ");
+        
+        if( prodDto != null  ){
+            if( prodDto.getProdImg() != null ){
+                // * Establecer imagen de portada
+                try {
+                    byte[] img = prodDto.getProdImg();
+                    BufferedImage buffimg = null;
+                    InputStream inputimg = new ByteArrayInputStream(img);
+                    buffimg = ImageIO.read(inputimg);
+                    tarjeta.pnImgPortada.removeAll();
+                    portada = new ImageIcon(buffimg.getScaledInstance(tarjeta.pnImgPortada.getWidth(), tarjeta.pnImgPortada.getHeight(), Image.SCALE_SMOOTH));
+                    JLabel iconocc = new JLabel(portada);
+                    iconocc.setBounds(0, 0, tarjeta.pnImgPortada.getWidth(), tarjeta.pnImgPortada.getHeight());
+                    iconocc.setSize(tarjeta.pnImgPortada.getWidth(), tarjeta.pnImgPortada.getHeight());
+                    iconocc.setLocation(0, 0);
+                    iconocc.setPreferredSize(new Dimension(tarjeta.pnImgPortada.getWidth(), tarjeta.pnImgPortada.getHeight()));
+                    tarjeta.pnImgPortada.add(iconocc);
+                    //tarjeta.updateUI();
+                    tarjeta.validate();
+                    tarjeta.revalidate();
+                    tarjeta.repaint();
+
+                } catch (Exception e) {
+                }
+            }
+        }
+    }
 
     private void mtdEstablecerDimensiones(){
         tarjeta_dimensiones.gridx = 0; // Columna 
@@ -104,7 +152,7 @@ public class CtrlCardCompra {
         tarjeta_dimensiones.weighty = 0.0;// Estirar en alto
         tarjeta_dimensiones.insets = new Insets(30, 0, 30, 0);  //top padding
         tarjeta_dimensiones.fill = GridBagConstraints.BOTH; // El modo de estirar
-        //tarjeta.setVisible(true);
+        tarjeta.setVisible(true);
     }
     
     private void mtdCancelarCompra(){        

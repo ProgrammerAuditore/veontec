@@ -26,6 +26,10 @@ public class PanelCardCompra extends javax.swing.JPanel {
         this.panelBackground.setBackground(new Color(40,175,176));
         this.panelBackground.setEnabled(true);
         this.panelBackground.setVisible(true);
+        
+        Dimension tamImg = new Dimension(200, 232);
+        this.pnImgPortada.setSize(tamImg);
+        this.pnImgPortada.setPreferredSize(tamImg);
        
     }
     
@@ -42,7 +46,7 @@ public class PanelCardCompra extends javax.swing.JPanel {
 
         jPanel1 = new javax.swing.JPanel();
         panelBackground = new vista.componentes.jpanelbackground.JPanelBackground();
-        pnImagen = new javax.swing.JPanel();
+        pnImgPortada = new javax.swing.JPanel();
         etqTitulo = new vista.componentes.etiqueta.Etiqueta();
         etqPrecioUnidad = new vista.componentes.etiqueta.Etiqueta();
         etqStockDisponible = new vista.componentes.etiqueta.Etiqueta();
@@ -73,16 +77,16 @@ public class PanelCardCompra extends javax.swing.JPanel {
         panelBackground.setImgOpacidad(1.0F);
         panelBackground.setImgRutaInternoActivo(false);
 
-        pnImagen.setBackground(new java.awt.Color(0, 0, 0));
+        pnImgPortada.setBackground(new java.awt.Color(0, 0, 0));
 
-        javax.swing.GroupLayout pnImagenLayout = new javax.swing.GroupLayout(pnImagen);
-        pnImagen.setLayout(pnImagenLayout);
-        pnImagenLayout.setHorizontalGroup(
-            pnImagenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout pnImgPortadaLayout = new javax.swing.GroupLayout(pnImgPortada);
+        pnImgPortada.setLayout(pnImgPortadaLayout);
+        pnImgPortadaLayout.setHorizontalGroup(
+            pnImgPortadaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 200, Short.MAX_VALUE)
         );
-        pnImagenLayout.setVerticalGroup(
-            pnImagenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        pnImgPortadaLayout.setVerticalGroup(
+            pnImgPortadaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 0, Short.MAX_VALUE)
         );
 
@@ -135,7 +139,7 @@ public class PanelCardCompra extends javax.swing.JPanel {
         panelBackgroundLayout.setHorizontalGroup(
             panelBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelBackgroundLayout.createSequentialGroup()
-                .addComponent(pnImagen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(pnImgPortada, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(panelBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(etqTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, 430, Short.MAX_VALUE)
@@ -182,7 +186,7 @@ public class PanelCardCompra extends javax.swing.JPanel {
                     .addComponent(btnCancelarCompra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnHacerPregunta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addComponent(pnImagen, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(pnImgPortada, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -220,6 +224,6 @@ public class PanelCardCompra extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private vista.componentes.jpanelbackground.JPanelBackground panelBackground;
-    public javax.swing.JPanel pnImagen;
+    public javax.swing.JPanel pnImgPortada;
     // End of variables declaration//GEN-END:variables
 }
