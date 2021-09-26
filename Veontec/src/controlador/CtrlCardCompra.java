@@ -5,12 +5,14 @@ import java.awt.Insets;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import javax.swing.JOptionPane;
 import modelo.dao.CompraDao;
 import modelo.dao.ProductoDao;
+import modelo.dao.UsuarioDao;
 import modelo.dto.CompraDto;
 import modelo.dto.ProductoDto;
+import modelo.dto.UsuarioDto;
 import vista.paneles.PanelCardCompra;
-import vista.paneles.PanelCardMiProducto;
 
 public class CtrlCardCompra {
 
@@ -21,6 +23,9 @@ public class CtrlCardCompra {
     // * Modelo
     private ProductoDto prodDto;
     private ProductoDao prodDao;
+    private UsuarioDao usuaDao;
+    private UsuarioDto usuaDto;
+    
     private CompraDto compDto;
     private CompraDao compDao;
     
@@ -29,10 +34,14 @@ public class CtrlCardCompra {
     private Integer item;
     
     // Constructor
-    public CtrlCardCompra(ProductoDto prodDto, CompraDto compDto) {
+    public CtrlCardCompra(CompraDto compDto) {
         this.tarjeta = new PanelCardCompra();
-        this.prodDto = prodDto;
         this.compDto = compDto;
+        this.compDao = new CompraDao();
+        this.usuaDao = new UsuarioDao();
+        this.usuaDto = new UsuarioDto();
+        this.prodDao = new ProductoDao();
+        this.prodDto = new ProductoDto();
         this.tarjeta_dimensiones = new GridBagConstraints();
     }
     
@@ -44,7 +53,7 @@ public class CtrlCardCompra {
         eventoBtnComprar =  new MouseAdapter(){
             @Override
             public void mouseReleased(MouseEvent e) {
-                System.out.println("" + prodDto.getProdTitulo());
+                mtdCancelarCompra();
             }
         };
         
@@ -66,15 +75,23 @@ public class CtrlCardCompra {
     }
     
     private void mtdEstablecerDatos(){
-        tarjeta.etqTitulo.setText( prodDto.getProdTitulo() );
+        tarjeta.etqTitulo.setText( compDto.getCompTitulo() );
         tarjeta.cmpPrecioUnidad.setText( "" + compDto.getCompPrecio() );
-        tarjeta.cmpStockCompra.setText( ""  + compDto.getCompCantidad());
+        tarjeta.cmpStockCompra.setText( ""  + compDto.getCompCantidad() );
+        tarjeta.cmpFecha.setText( compDto.getCompFecha() );
         
-        // * Establecer los detalles de compra
-        String detalles_de_compra = tarjeta.cmpDetalleCompra.getText();
-        detalles_de_compra = detalles_de_compra.replaceAll("<FechaDeCompra>", compDto.getCompFecha());
-        detalles_de_compra = detalles_de_compra.replaceAll("<Descripcion>", prodDto.getProdDescripcion());
-        tarjeta.cmpDetalleCompra.setText(detalles_de_compra);
+        // * El usuario actual es el comprador
+        prodDto.setProdUsuario( compDto.getCompComprador() );
+        
+        // * Establecer la descripción
+        prodDto.setProdID( compDto.getCompID() );
+        prodDto = prodDao.mtdConsultar(prodDto);
+        tarjeta.cmpDetalleCompra.setText( prodDto == null ? "Sin Descripción" : prodDto.getProdDescripcion() );
+        
+        // * Establecer el vendedor
+        System.out.println("" + compDto.getCompVendedor());
+        usuaDto = usuaDao.mtdConsultar(compDto.getCompVendedor());
+        tarjeta.cmpVendedor.setText( usuaDto == null ? "Desconocido " : usuaDto.getCmpNombreCompleto() );
         
     }
 
@@ -88,6 +105,44 @@ public class CtrlCardCompra {
         tarjeta_dimensiones.insets = new Insets(30, 0, 30, 0);  //top padding
         tarjeta_dimensiones.fill = GridBagConstraints.BOTH; // El modo de estirar
         //tarjeta.setVisible(true);
+    }
+    
+    private void mtdCancelarCompra(){        
+        compDto = compDao.mtdConsultar(compDto);
+            
+        if( compDto == null ){
+            JOptionPane.showMessageDialog(tarjeta, "Compra no encontrado.");
+            return;
+        }
+        
+        int opc = JOptionPane.showConfirmDialog(tarjeta, 
+                    "¿Seguro que deseas cancelar el producto?",
+                    "Cancelar | " + compDto.getCompTitulo(),
+                    JOptionPane.YES_NO_OPTION );
+            
+        if( opc == JOptionPane.YES_NO_OPTION ){
+            if( compDao.mtdRemover(compDto) ){
+                CtrlCompras.mtdRecargarCompras();
+                JOptionPane.showMessageDialog(tarjeta, "Producto cancelado exitosamente.");
+            }
+        }
+        
+        /*
+        if( prodDto != null ){
+            int opc = JOptionPane.showConfirmDialog(tarjeta, 
+                    "¿Seguro que deseas cancelar el producto?",
+                    "Cancelar | " + prodDto.getProdTitulo(),
+                    JOptionPane.YES_NO_OPTION );
+            
+            if( opc == JOptionPane.YES_NO_OPTION ){
+                
+            }
+            
+        }else{
+            JOptionPane.showMessageDialog(tarjeta, "No hay registro sobre el producto.");
+        }
+        */
+        
     }
     
     public PanelCardCompra getLaVista() {

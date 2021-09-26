@@ -64,6 +64,14 @@ public class CtrlCompras{
     private void mtdInit(){
     }
     
+    public static boolean mtdRecargarCompras(){
+        //if( instancia == null ){
+            //instancia.mtdInit();
+        //}
+        
+        instancia.mtdMostrarProducto();
+        return true;
+    }
     
     private void mtdMostrarProducto(){
         //lstMisProductos.clear();
@@ -79,17 +87,15 @@ public class CtrlCompras{
         
         if( totalProductos == 0 ){
             System.out.println(" No hay producto para mostrar. ");
-            return;
-        }
         
-        for (int i = 0; i < totalProductos; i++) {
-            producto_dto.setProdUsuario( usuario_dto.getCmpID() );
-            producto_dto.setProdID( lstMisCompras.get(i).getCompProducto() );
-            producto_dto = producto_dao.mtdConsultar(producto_dto);
-            CtrlCardCompra tarjeta = new CtrlCardCompra(producto_dto, lstMisCompras.get(i));
-            tarjeta.setItem(i);
-            tarjeta.mtdInit();
-            laVista.pnContenedor.add(tarjeta.getLaVista(), tarjeta.getTarjeta_dimensiones());
+        }else{
+            for (int i = 0; i < totalProductos; i++) {
+                CtrlCardCompra tarjeta = new CtrlCardCompra(lstMisCompras.get(i));
+                tarjeta.setItem(i);
+                tarjeta.mtdInit();
+                laVista.pnContenedor.add(tarjeta.getLaVista(), tarjeta.getTarjeta_dimensiones());
+            }
+            
         }
         
         laVista.pnContenedor.validate();

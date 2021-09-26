@@ -41,14 +41,14 @@ public class CtrlCardMiProducto {
     }
     
     // Eventos
-    private void mtdCrearEventoBtnGuardar(){
+    private void mtdCrearEventoBtnRemover(){
         MouseListener eventoBtnComprar = null;
         tarjeta.btnEliminar.removeMouseListener(eventoBtnComprar);
         
         eventoBtnComprar =  new MouseAdapter(){
             @Override
             public void mouseReleased(MouseEvent e) {
-                System.out.println("" + prodDto.getProdTitulo());
+                mtdModalEliminarProducto();
             }
         };
         
@@ -72,7 +72,7 @@ public class CtrlCardMiProducto {
     // Métodos
     public void mtdInit(){
         mtdEstablecerDimensiones();
-        mtdCrearEventoBtnGuardar();
+        mtdCrearEventoBtnRemover();
         mtdCrearEventoBtnEditar();
         mtdCardEstablecerDatos();
     }
@@ -208,6 +208,21 @@ public class CtrlCardMiProducto {
             pnCrearProducto.cmpEnlace.setText( prodDto.getProdEnlace() );
             pnCrearProducto.cmpEnlace.setEnabled(true);
             pnCrearProducto.cmpEnlace.setEditable(true);
+        }
+        
+    }
+    
+    private void mtdModalEliminarProducto(){
+        int opc = JOptionPane.showConfirmDialog(tarjeta, 
+                "Eliminar | " + prodDto.getProdTitulo(), 
+                "¿Seguro que desar eliminar este producto?", 
+                JOptionPane.YES_NO_OPTION );
+        
+        if( opc == JOptionPane.YES_OPTION ){
+            if( prodDao.mtdRemover(prodDto) ){
+                CtrlMiTienda.mtdRecargarMisProductos();
+                JOptionPane.showMessageDialog(tarjeta, "Producto eliminado exitosamente.");
+            }
         }
         
     }

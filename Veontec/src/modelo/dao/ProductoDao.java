@@ -141,6 +141,8 @@ public class ProductoDao implements keyword_query<ProductoDto>, keyword_producto
                 prod.setProdTipo(rs.getInt("prodTipo") );
                 prod.setProdEnlace(rs.getString("prodEnlace") );
                 prod.setProdUsuario(rs.getInt("prodUsuario") );
+                
+                System.out.println("" + prod.toString());
             }
             
         } catch (SQLException e) {

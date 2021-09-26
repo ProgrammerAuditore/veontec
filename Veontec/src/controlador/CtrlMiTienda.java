@@ -60,6 +60,16 @@ public class CtrlMiTienda implements MouseListener{
         return instancia;
     }
     
+    public static boolean mtdRecargarMisProductos(){
+        //if( instancia == null ){
+            //instancia.mtdInit();
+        //}
+        
+        instancia.mtdRecargarDatos();
+        instancia.mtdMostrarProducto();
+        return true;
+    }
+    
     // Eventos
     public void mtdEstablecerEventos(){
         this.laVista.btnCrearProducto.addMouseListener(this);
@@ -186,14 +196,15 @@ public class CtrlMiTienda implements MouseListener{
         
         if( totalProductos == 0 ){
             System.out.println(" No hay producto para mostrar. ");
-            return;
-        }
         
-        for (int i = 0; i < totalProductos; i++) {
-            CtrlCardMiProducto tarjeta = new CtrlCardMiProducto(lstMisProductos.get(i), producto_dao);
-            tarjeta.setItem(i);
-            tarjeta.mtdInit();
-            laVista.pnContenedor.add(tarjeta.getLaVista(), tarjeta.getTarjeta_dimensiones());
+        } else {
+            for (int i = 0; i < totalProductos; i++) {
+                CtrlCardMiProducto tarjeta = new CtrlCardMiProducto(lstMisProductos.get(i), producto_dao);
+                tarjeta.setItem(i);
+                tarjeta.mtdInit();
+                laVista.pnContenedor.add(tarjeta.getLaVista(), tarjeta.getTarjeta_dimensiones());
+            }
+            
         }
         
         laVista.pnContenedor.validate();
