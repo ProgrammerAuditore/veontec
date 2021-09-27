@@ -79,8 +79,8 @@ public class CtrlCardCompra {
             mtdCrearEventoBtnGuardar();
         }
         
-        mtdEstablecerImagen();
         mtdEstablecerDatos();
+        mtdEstablecerImagen();
         mtdEstablecerDimensiones();
     }
     

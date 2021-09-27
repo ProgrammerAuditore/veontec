@@ -15,12 +15,9 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import modelo.dao.ProductoDao;
 import modelo.dto.ProductoDto;
-import vista.paneles.PanelCardMiProducto;
 import vista.paneles.PanelCardProducto;
 
 public class CtrlCardProducto {
-
-    
     // * Vista
     private PanelCardProducto tarjeta;
     
@@ -36,21 +33,22 @@ public class CtrlCardProducto {
     
     // Constructor
     public CtrlCardProducto(ProductoDto prodDto, ProductoDao prodDao) {
-        this.tarjeta = new PanelCardProducto();
         this.prodDto = prodDto;
         this.prodDao = prodDao;
+        this.tarjeta = new PanelCardProducto();
         this.tarjeta_dimensiones = new GridBagConstraints();
     }
     
     // Eventos
-    private void mtdCrearEventoBtnGuardar(){
+    private void mtdCrearEventoBtnComprar(){
         MouseListener eventoBtnComprar = null;
         tarjeta.btnHacerCompra.removeMouseListener(eventoBtnComprar);
         
-        eventoBtnComprar =  new MouseAdapter(){
+        eventoBtnComprar = new MouseAdapter(){
             @Override
             public void mouseReleased(MouseEvent e) {
-                System.out.println("" + prodDto.getProdTitulo());
+                CtrlModalComprar comprar = new CtrlModalComprar(prodDto);
+                comprar.mtdInit();
             }
         };
         
@@ -60,10 +58,10 @@ public class CtrlCardProducto {
     // Métodos
     public void mtdInit(){
         mtdEstablecerImagen();
-        mtdEstablecerDimensiones();
         mtdEstablecerOpciones();
-        mtdCrearEventoBtnGuardar();
+        mtdCrearEventoBtnComprar();
         mtdEstablecerDatos();
+        mtdEstablecerDimensiones();
     }
     
     private void mtdEstablecerDatos(){
@@ -112,9 +110,9 @@ public class CtrlCardProducto {
         tarjeta_dimensiones.weighty = 0.0;// Estirar en alto
         tarjeta_dimensiones.insets = new Insets(20, 10, 20, 10);  //top padding
         tarjeta_dimensiones.fill = GridBagConstraints.BOTH; // El modo de estirar
-        //tarjeta.setVisible(true);
+        tarjeta.setVisible(true);
     }
-    
+
     public PanelCardProducto getLaVista() {
         return tarjeta;
     }
