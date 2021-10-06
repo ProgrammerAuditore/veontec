@@ -1,5 +1,6 @@
 package controlador;
 
+import controlador.componentes.CtrlCardCompra;
 import java.awt.GridBagLayout;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;

@@ -1,4 +1,4 @@
-package controlador;
+package controlador.componentes;
 
 import java.awt.GridBagConstraints;
 import java.awt.Insets;

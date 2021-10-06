@@ -1,8 +1,7 @@
 package controlador;
 
+import controlador.componentes.CtrlCardProducto;
 import java.awt.GridBagLayout;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.util.List;
 import javax.swing.JDialog;
 import javax.swing.tree.DefaultMutableTreeNode;
@@ -72,7 +71,7 @@ public class CtrlBienvenida{
         }
         
         int columna = 0;
-        int col_total = 5;
+        int col_total = 3;
         int fila = 0;
         for (int i = 0; i < totalProductos; i++) {
             CtrlCardProducto tarjeta = new CtrlCardProducto(lstMisProductos.get(i), producto_dao);

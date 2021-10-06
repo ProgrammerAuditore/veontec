@@ -1,5 +1,6 @@
-package controlador;
+package controlador.componentes;
 
+import controlador.CtrlCompras;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.Image;

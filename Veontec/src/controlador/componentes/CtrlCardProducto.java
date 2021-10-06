@@ -1,5 +1,6 @@
-package controlador;
+package controlador.componentes;
 
+import controlador.acciones.CtrlModalComprar;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.Image;
@@ -14,7 +15,9 @@ import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import modelo.dao.ProductoDao;
+import modelo.dao.UsuarioDao;
 import modelo.dto.ProductoDto;
+import modelo.dto.UsuarioDto;
 import vista.paneles.PanelCardProducto;
 
 public class CtrlCardProducto {
@@ -24,6 +27,8 @@ public class CtrlCardProducto {
     // * Modelo
     private ProductoDto prodDto;
     private ProductoDao prodDao;
+    private UsuarioDto usuaDto;
+    private UsuarioDao usuaDao;
     
     // * Atributos
     private GridBagConstraints tarjeta_dimensiones;
@@ -37,6 +42,8 @@ public class CtrlCardProducto {
         this.prodDao = prodDao;
         this.tarjeta = new PanelCardProducto();
         this.tarjeta_dimensiones = new GridBagConstraints();
+        this.usuaDao = new UsuarioDao();
+        this.usuaDto = new UsuarioDto();
     }
     
     // Eventos
@@ -57,6 +64,8 @@ public class CtrlCardProducto {
     
     // Métodos
     public void mtdInit(){
+        // * Inicializar componentes
+        
         mtdEstablecerImagen();
         mtdEstablecerOpciones();
         mtdCrearEventoBtnComprar();
@@ -68,6 +77,20 @@ public class CtrlCardProducto {
         tarjeta.etqTitulo.setText( prodDto.getProdTitulo() );
         tarjeta.cmpPrecioUnidad.setText( "" + prodDto.getProdPrecio() );
         tarjeta.cmpStockDisponible.setText( ""  + prodDto.getProdStock());
+        
+        String detalles = tarjeta.cmpDetalleProducto.getText();
+        String vendedor = "";
+        
+        // Establecer el vendedor 
+        usuaDto = usuaDao.mtdConsultar(prodDto.getProdUsuario());
+        vendedor = usuaDto == null ? "Desconocido" : usuaDto.getCmpNombreCompleto();
+        tarjeta.cmpVendedor.setText(vendedor);
+
+        // Establecer descripcion
+        detalles = detalles.replaceAll("<Descripcion>", prodDto.getProdDescripcion());
+        
+        // * Establecer los detalles del producto
+        tarjeta.cmpDetalleProducto.setText(detalles);
     }
     
     private void mtdEstablecerImagen(){

@@ -1,4 +1,4 @@
-package controlador;
+package controlador.acciones;
 
 import index.Veontec;
 import java.awt.Dialog;

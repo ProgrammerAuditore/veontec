@@ -1,5 +1,6 @@
 package controlador;
 
+import controlador.componentes.CtrlCardMiProducto;
 import index.Veontec;
 import java.awt.Dialog;
 import java.awt.GridBagLayout;

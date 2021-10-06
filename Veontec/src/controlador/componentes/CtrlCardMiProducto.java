@@ -1,5 +1,6 @@
-package controlador;
+package controlador.componentes;
 
+import controlador.CtrlMiTienda;
 import index.Veontec;
 import java.awt.Dialog;
 import java.awt.Dimension;
