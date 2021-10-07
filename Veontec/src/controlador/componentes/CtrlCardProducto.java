@@ -54,6 +54,7 @@ public class CtrlCardProducto {
         eventoBtnComprar = new MouseAdapter(){
             @Override
             public void mouseReleased(MouseEvent e) {
+                // * Llamar al controlador de accion para comprar 
                 CtrlModalComprar comprar = new CtrlModalComprar(prodDto);
                 comprar.mtdInit();
             }
