@@ -1,6 +1,7 @@
 package controlador.componentes;
 
 import controlador.acciones.CtrlModalComprar;
+import index.Veontec;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.Image;
@@ -11,6 +12,7 @@ import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
+import java.util.Objects;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -48,6 +50,12 @@ public class CtrlCardProducto {
     
     // Eventos
     private void mtdCrearEventoBtnComprar(){
+        
+        if( Objects.equals(Veontec.usuarioDto.getCmpID(), prodDto.getProdUsuario()) ){
+            tarjeta.btnHacerCompra.setEnabled(false);
+            return;
+        }
+        
         MouseListener eventoBtnComprar = null;
         tarjeta.btnHacerCompra.removeMouseListener(eventoBtnComprar);
         
@@ -63,6 +71,27 @@ public class CtrlCardProducto {
         tarjeta.btnHacerCompra.addMouseListener(eventoBtnComprar);
     }
     
+    private void mtdCrearEventoBtnPreguntar(){
+        
+        if( Objects.equals(Veontec.usuarioDto.getCmpID(), prodDto.getProdUsuario()) ){
+            tarjeta.btnHacerPregunta.setEnabled(false);
+            return;
+        }
+        
+        MouseListener eventoBtnPregunta = null;
+        tarjeta.btnHacerPregunta.removeMouseListener(eventoBtnPregunta);
+        
+        eventoBtnPregunta = new MouseAdapter(){
+            @Override
+            public void mouseReleased(MouseEvent e) {
+                // * Llamar al controlador de accion para preguntar
+                
+            }
+        };
+        
+        tarjeta.btnHacerPregunta.addMouseListener(eventoBtnPregunta);
+    }
+    
     // Métodos
     public void mtdInit(){
         // * Inicializar componentes
@@ -70,6 +99,7 @@ public class CtrlCardProducto {
         mtdEstablecerImagen();
         mtdEstablecerOpciones();
         mtdCrearEventoBtnComprar();
+        mtdCrearEventoBtnPreguntar();
         mtdEstablecerDatos();
         mtdEstablecerDimensiones();
     }
@@ -136,7 +166,7 @@ public class CtrlCardProducto {
         tarjeta_dimensiones.fill = GridBagConstraints.BOTH; // El modo de estirar
         tarjeta.setVisible(true);
     }
-
+    
     public PanelCardProducto getLaVista() {
         return tarjeta;
     }

@@ -95,7 +95,9 @@ public class CtrlCardCompra {
         prodDto.setProdUsuario( compDto.getCompComprador() );
         
         // * Establecer la descripción
-        prodDto.setProdID( compDto.getCompID() );
+        prodDto = new ProductoDto();
+        prodDto.setProdUsuario( compDto.getCompVendedor() );
+        prodDto.setProdID( compDto.getCompProducto() );
         prodDto = prodDao.mtdConsultar(prodDto);
         tarjeta.cmpDetalleCompra.setText( prodDto == null ? "Sin Descripción" : prodDto.getProdDescripcion() );
         

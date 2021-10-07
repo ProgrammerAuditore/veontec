@@ -2,8 +2,6 @@ package controlador;
 
 import controlador.componentes.CtrlCardCompra;
 import java.awt.GridBagLayout;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.util.List;
 import javax.swing.JDialog;
 import javax.swing.tree.DefaultMutableTreeNode;
@@ -14,7 +12,6 @@ import modelo.dto.CompraDto;
 import modelo.dto.ProductoDto;
 import modelo.dto.UsuarioDto;
 import vista.paneles.PanelCompras;
-import vista.paneles.PanelBienvenida;
 
 public class CtrlCompras{
     

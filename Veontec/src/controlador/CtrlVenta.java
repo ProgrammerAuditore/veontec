@@ -1,17 +1,17 @@
 package controlador;
 
 import controlador.componentes.CtrlCardVenta;
+import index.Veontec;
 import java.awt.GridBagLayout;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.util.List;
 import javax.swing.JDialog;
 import javax.swing.tree.DefaultMutableTreeNode;
 import modelo.dao.ProductoDao;
 import modelo.dao.UsuarioDao;
+import modelo.dao.VentaDao;
 import modelo.dto.ProductoDto;
 import modelo.dto.UsuarioDto;
-import vista.paneles.PanelBienvenida;
+import modelo.dto.VentaDto;
 import vista.paneles.PanelVentas;
 
 public class CtrlVenta{
@@ -25,11 +25,13 @@ public class CtrlVenta{
     private UsuarioDao usuario_dao;
     private ProductoDao producto_dao;
     private ProductoDto producto_dto;
+    private VentaDto ventDto;
+    private VentaDao ventDao;
     private DefaultMutableTreeNode treeNode1;
     
     // Atributos
     private static CtrlVenta instancia;
-    private List<ProductoDto> lstMisProductos;
+    private List<VentaDto> lstMisVentas;
 
     // Constructor
     public CtrlVenta(PanelVentas laVista, UsuarioDto dto, UsuarioDao dao) {
@@ -38,6 +40,8 @@ public class CtrlVenta{
         this.usuario_dao = dao;
         producto_dao = new ProductoDao();
         producto_dto = new ProductoDto();
+        ventDao = new VentaDao();
+        ventDto = new VentaDto();
         
     }
     
@@ -65,8 +69,10 @@ public class CtrlVenta{
         laVista.pnContenedor.setLayout(new GridBagLayout());
         laVista.pnContenedor.removeAll();
         
-        lstMisProductos = producto_dao.mtdListar();
-        int totalProductos = lstMisProductos.size();
+        
+        ventDto.setVentVendedor( Veontec.usuarioDto.getCmpID() );
+        lstMisVentas = ventDao.mtdListar(ventDto);
+        int totalProductos = lstMisVentas.size();
         
         if( totalProductos == 0 ){
             System.out.println(" No hay producto para mostrar. ");
@@ -74,10 +80,17 @@ public class CtrlVenta{
         }
         
         for (int i = 0; i < totalProductos; i++) {
-            CtrlCardVenta tarjeta = new CtrlCardVenta(lstMisProductos.get(i), producto_dao);
-            tarjeta.setItem(i);
-            tarjeta.mtdInit();
-            laVista.pnContenedor.add(tarjeta.getLaVista(), tarjeta.getTarjeta_dimensiones());
+            producto_dto.setProdID( lstMisVentas.get(i).getVentProducto() );
+            producto_dto.setProdUsuario( lstMisVentas.get(i).getVentVendedor() );
+            producto_dto = producto_dao.mtdConsultar(producto_dto);
+            
+            if( producto_dto != null){ 
+                CtrlCardVenta tarjeta = new CtrlCardVenta(lstMisVentas.get(i), producto_dto);
+                tarjeta.setItem(i);
+                tarjeta.mtdInit();
+                laVista.pnContenedor.add(tarjeta.getLaVista(), tarjeta.getTarjeta_dimensiones());
+            }
+            
         }
         
         laVista.pnContenedor.validate();

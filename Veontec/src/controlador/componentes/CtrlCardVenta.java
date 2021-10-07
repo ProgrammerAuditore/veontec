@@ -6,8 +6,11 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import modelo.dao.ProductoDao;
+import modelo.dao.UsuarioDao;
+import modelo.dao.VentaDao;
 import modelo.dto.ProductoDto;
-import vista.paneles.PanelCardMiProducto;
+import modelo.dto.UsuarioDto;
+import modelo.dto.VentaDto;
 import vista.paneles.PanelCardVenta;
 
 public class CtrlCardVenta {
@@ -17,18 +20,26 @@ public class CtrlCardVenta {
     private PanelCardVenta tarjeta;
     
     // * Modelo
+    private VentaDto ventDto;
+    private VentaDao ventDao;
     private ProductoDto prodDto;
     private ProductoDao prodDao;
+    private UsuarioDto usuaDto;
+    private UsuarioDao usuaDao;
     
     // * Atributos
     private GridBagConstraints tarjeta_dimensiones;
     private Integer item;
     
     // Constructor
-    public CtrlCardVenta(ProductoDto prodDto, ProductoDao prodDao) {
+    public CtrlCardVenta(VentaDto ventDto, ProductoDto prodDto) {
         this.tarjeta = new PanelCardVenta();
+        this.ventDto = ventDto;
+        this.ventDao = new VentaDao();
         this.prodDto = prodDto;
-        this.prodDao = prodDao;
+        this.prodDao = new ProductoDao();
+        this.usuaDao = new UsuarioDao();
+        this.usuaDto = new UsuarioDto();
         this.tarjeta_dimensiones = new GridBagConstraints();
     }
     
@@ -40,7 +51,7 @@ public class CtrlCardVenta {
         eventoBtnComprar =  new MouseAdapter(){
             @Override
             public void mouseReleased(MouseEvent e) {
-                System.out.println("" + prodDto.getProdTitulo());
+                //System.out.println("" + prodDto.getProdTitulo());
             }
         };
         
@@ -56,9 +67,24 @@ public class CtrlCardVenta {
     }
     
     private void mtdEstablecerDatos(){
-        tarjeta.etqTitulo.setText( prodDto.getProdTitulo() );
-        tarjeta.cmpPrecioUnidad.setText( "" + prodDto.getProdPrecio() );
-        tarjeta.cmpStockVendido.setText( ""  + prodDto.getProdStock());
+        String detalles = tarjeta.cmpDetalleVenta.getText();
+        
+        tarjeta.etqTitulo.setText(ventDto.getVentTitulo() );
+        tarjeta.cmpPrecioUnidad.setText("" + ventDto.getVentPrecio() );
+        tarjeta.cmpStockVendido.setText(""  + ventDto.getVentCantidad() );
+        
+        detalles = detalles.replaceAll("<FechaVendido>", ventDto.getVentFecha());
+        
+        // * Establecer el comprador
+        usuaDto = usuaDao.mtdConsultar( ventDto.getVentComprador() );
+        String comprador = usuaDto == null ? "Desconocido" : usuaDto.getCmpNombreCompleto();
+        detalles = detalles.replaceAll("<Comprador>", comprador);
+        
+        // * Establecer descripción
+        detalles = detalles.replaceAll("<Descripcion>", prodDto.getProdDescripcion());
+        
+        tarjeta.cmpDetalleVenta.setText(detalles);
+        
     }
     
     private void mtdEstablecerOpciones(){
