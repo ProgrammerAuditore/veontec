@@ -1,10 +1,18 @@
 package controlador.componentes;
 
+import java.awt.Dimension;
 import java.awt.GridBagConstraints;
+import java.awt.Image;
 import java.awt.Insets;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 import modelo.dao.ProductoDao;
 import modelo.dao.UsuarioDao;
 import modelo.dao.VentaDao;
@@ -30,6 +38,7 @@ public class CtrlCardVenta {
     // * Atributos
     private GridBagConstraints tarjeta_dimensiones;
     private Integer item;
+    private ImageIcon portada;
     
     // Constructor
     public CtrlCardVenta(VentaDto ventDto, ProductoDto prodDto) {
@@ -64,6 +73,7 @@ public class CtrlCardVenta {
         mtdEstablecerOpciones();
         mtdCrearEventoBtnGuardar();
         mtdEstablecerDatos();
+        mtdEstablecerImagen();
     }
     
     private void mtdEstablecerDatos(){
@@ -85,6 +95,39 @@ public class CtrlCardVenta {
         
         tarjeta.cmpDetalleVenta.setText(detalles);
         
+    }
+    
+    private void mtdEstablecerImagen(){
+        prodDto = new ProductoDto();  
+        prodDto.setProdUsuario(  ventDto.getVentVendedor()  );
+        prodDto.setProdID( ventDto.getVentProducto() );
+        prodDto = prodDao.mtdConsultar(prodDto);
+      
+        if( prodDto != null  ){
+            if( prodDto.getProdImg() != null ){
+                // * Establecer imagen de portada
+                try {
+                    byte[] img = prodDto.getProdImg();
+                    BufferedImage buffimg = null;
+                    InputStream inputimg = new ByteArrayInputStream(img);
+                    buffimg = ImageIO.read(inputimg);
+                    tarjeta.pnImgPortada.removeAll();
+                    portada = new ImageIcon(buffimg.getScaledInstance(tarjeta.pnImgPortada.getWidth(), tarjeta.pnImgPortada.getHeight(), Image.SCALE_SMOOTH));
+                    JLabel iconocc = new JLabel(portada);
+                    iconocc.setBounds(0, 0, tarjeta.pnImgPortada.getWidth(), tarjeta.pnImgPortada.getHeight());
+                    iconocc.setSize(tarjeta.pnImgPortada.getWidth(), tarjeta.pnImgPortada.getHeight());
+                    iconocc.setLocation(0, 0);
+                    iconocc.setPreferredSize(new Dimension(tarjeta.pnImgPortada.getWidth(), tarjeta.pnImgPortada.getHeight()));
+                    tarjeta.pnImgPortada.add(iconocc);
+                    //tarjeta.updateUI();
+                    tarjeta.validate();
+                    tarjeta.revalidate();
+                    tarjeta.repaint();
+
+                } catch (Exception e) {
+                }
+            }
+        }
     }
     
     private void mtdEstablecerOpciones(){

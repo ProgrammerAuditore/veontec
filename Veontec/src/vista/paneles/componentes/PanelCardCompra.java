@@ -20,14 +20,14 @@ public class PanelCardCompra extends javax.swing.JPanel {
      */
     public PanelCardCompra() {
         initComponents();
-        Dimension tam = new Dimension(654, 236);
+        Dimension tam = new Dimension(654, 247);
         this.setPreferredSize( tam );
         this.setSize( tam );
         this.panelBackground.setBackground(new Color(40,175,176));
         this.panelBackground.setEnabled(true);
         this.panelBackground.setVisible(true);
         
-        Dimension tamImg = new Dimension(200, 232);
+        Dimension tamImg = new Dimension(202, 245);
         this.pnImgPortada.setSize(tamImg);
         this.pnImgPortada.setPreferredSize(tamImg);
        
@@ -142,7 +142,7 @@ public class PanelCardCompra extends javax.swing.JPanel {
                 .addComponent(pnImgPortada, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(panelBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(etqTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, 430, Short.MAX_VALUE)
+                    .addComponent(etqTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, 426, Short.MAX_VALUE)
                     .addComponent(jScrollPane1)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelBackgroundLayout.createSequentialGroup()
                         .addGroup(panelBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -197,7 +197,7 @@ public class PanelCardCompra extends javax.swing.JPanel {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panelBackground, javax.swing.GroupLayout.DEFAULT_SIZE, 236, Short.MAX_VALUE)
+            .addComponent(panelBackground, javax.swing.GroupLayout.DEFAULT_SIZE, 247, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
