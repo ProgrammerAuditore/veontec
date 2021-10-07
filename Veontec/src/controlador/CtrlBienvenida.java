@@ -1,8 +1,7 @@
 package controlador;
 
+import controlador.componentes.CtrlCardProducto;
 import java.awt.GridBagLayout;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.util.List;
 import javax.swing.JDialog;
 import javax.swing.tree.DefaultMutableTreeNode;
@@ -10,12 +9,12 @@ import modelo.dao.ProductoDao;
 import modelo.dao.UsuarioDao;
 import modelo.dto.ProductoDto;
 import modelo.dto.UsuarioDto;
-import vista.paneles.PanelHome;
+import vista.paneles.PanelBienvenida;
 
 public class CtrlBienvenida{
     
     // Vista
-    public PanelHome laVista;
+    public PanelBienvenida laVista;
     public JDialog modalCrearProducto;
     
     // Modelos
@@ -30,7 +29,7 @@ public class CtrlBienvenida{
     private List<ProductoDto> lstMisProductos;
 
     // Constructor
-    public CtrlBienvenida(PanelHome laVista, UsuarioDto dto, UsuarioDao dao) {
+    public CtrlBienvenida(PanelBienvenida laVista, UsuarioDto dto, UsuarioDao dao) {
         this.laVista = laVista;
         this.usuario_dto = dto;
         this.usuario_dao = dao;
@@ -40,7 +39,7 @@ public class CtrlBienvenida{
     }
     
     // Obtener instancia | Singleton
-    public static CtrlBienvenida getInstancia(PanelHome laVista, UsuarioDto dto, UsuarioDao dao){
+    public static CtrlBienvenida getInstancia(PanelBienvenida laVista, UsuarioDto dto, UsuarioDao dao){
         if( instancia == null ){
             instancia = new CtrlBienvenida(laVista, dto, dao);
             instancia.mtdInit();
@@ -71,11 +70,22 @@ public class CtrlBienvenida{
             return;
         }
         
+        int columna = 0;
+        int col_total = 3;
+        int fila = 0;
         for (int i = 0; i < totalProductos; i++) {
             CtrlCardProducto tarjeta = new CtrlCardProducto(lstMisProductos.get(i), producto_dao);
-            tarjeta.setItem(i);
+            tarjeta.setItem(fila);
+            tarjeta.setColumna(columna);
+            
             tarjeta.mtdInit();
             laVista.pnContenedor.add(tarjeta.getLaVista(), tarjeta.getTarjeta_dimensiones());
+            columna++;
+            
+            if( columna >= col_total ){
+                columna = 0;
+                fila++;
+            }
         }
         
         laVista.pnContenedor.validate();

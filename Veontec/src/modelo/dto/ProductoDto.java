@@ -1,5 +1,6 @@
 package modelo.dto;
 
+import java.awt.Image;
 import java.math.BigDecimal;
 
 public class ProductoDto {
@@ -13,6 +14,8 @@ public class ProductoDto {
     private Integer prodTipo;
     private String prodEnlace;
     private Integer prodUsuario;
+    private Image prodMedia;
+    private byte[] prodImg;
 
     public Integer getProdID() {
         return prodID;
@@ -86,6 +89,22 @@ public class ProductoDto {
         this.prodUsuario = prodUsuario;
     }
 
+    public Image getProdMedia() {
+        return prodMedia;
+    }
+
+    public void setProdMedia(Image prodMedia) {
+        this.prodMedia = prodMedia;
+    }
+
+    public byte[] getProdImg() {
+        return prodImg;
+    }
+
+    public void setProdImg(byte[] prodImg) {
+        this.prodImg = prodImg;
+    }
+    
     @Override
     public String toString() {
         String msg = "";

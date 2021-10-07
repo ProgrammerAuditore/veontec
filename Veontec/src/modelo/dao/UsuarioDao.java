@@ -72,6 +72,36 @@ public class UsuarioDao implements keyword_query<UsuarioDto>{
         
         return usuario;
     }
+    
+    public UsuarioDto mtdConsultar(Integer usuario_id) {
+        UsuarioDto usuario = null;
+        PreparedStatement ps = null;
+        Connection conn = CtrlHiloConexion.getConexion();
+        String sql = "SELECT * FROM tblusuarios WHERE usuaID = ?; ";        
+        
+        try {
+            // * Preparar la consulta
+            ps = conn.prepareStatement(sql.toLowerCase());
+            ps.setInt(1, usuario_id);
+            
+            // * Obtener registros
+            ResultSet rs = ps.executeQuery();
+            
+            usuario = new UsuarioDto();
+            while ( rs.next() ) {
+                usuario.setCmpID( rs.getInt("usuaID") );
+                usuario.setCmpNombreCompleto( rs.getString("usuaNombre") );
+                usuario.setCmpCorreo( rs.getString("usuaCorreo") );
+                usuario.setCmpPassword( rs.getString("usuaPassword") );
+                System.out.println("mtdConsultar \n" + usuario.toString());
+            }
+            
+        } catch (SQLException e) {
+            System.out.println("" + e.getMessage());
+        }
+        
+        return usuario;
+    }
 
     public boolean mtdComprobar(UsuarioDto obj_dto) {
         PreparedStatement ps = null;
@@ -83,6 +113,29 @@ public class UsuarioDao implements keyword_query<UsuarioDto>{
             // * Preparar la consulta
             ps = conn.prepareStatement(sql.toLowerCase());
             ps.setString(1, obj_dto.getCmpCorreo());
+            
+            // * Contar los registros
+            ResultSet rs = ps.executeQuery();
+            rs.next();
+            
+            registros = rs.getInt(1);
+            
+        } catch (SQLException e) {
+            System.out.println("" + e.getMessage());
+        }
+        return ( registros == 0 );
+    }
+    
+    public boolean mtdComprobar(Integer usuario_id) {
+        PreparedStatement ps = null;
+        Connection conn = CtrlHiloConexion.getConexion();
+        String sql = "SELECT COUNT(*) FROM tblusuarios WHERE usuaID = ?; ";        
+        long registros = 0;
+        
+        try {
+            // * Preparar la consulta
+            ps = conn.prepareStatement(sql.toLowerCase());
+            ps.setInt(1, usuario_id);
             
             // * Contar los registros
             ResultSet rs = ps.executeQuery();

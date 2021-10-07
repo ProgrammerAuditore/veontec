@@ -40,7 +40,7 @@ public class VentanaHome extends javax.swing.JFrame {
 
         pnTabMenu = new javax.swing.JTabbedPane();
         pnNose = new vista.componentes.jpanelbackground.JPanelBackground();
-        panelHome = new vista.paneles.PanelHome();
+        panelHome = new vista.paneles.PanelBienvenida();
         jPanelBackground6 = new vista.componentes.jpanelbackground.JPanelBackground();
         pnMiTienda = new vista.paneles.PanelMiTienda();
         jPanelBackground2 = new vista.componentes.jpanelbackground.JPanelBackground();
@@ -204,7 +204,7 @@ public class VentanaHome extends javax.swing.JFrame {
     private vista.componentes.jpanelbackground.JPanelBackground jPanelBackground3;
     private vista.componentes.jpanelbackground.JPanelBackground jPanelBackground5;
     private vista.componentes.jpanelbackground.JPanelBackground jPanelBackground6;
-    public vista.paneles.PanelHome panelHome;
+    public vista.paneles.PanelBienvenida panelHome;
     private vista.paneles.PanelPreguntas panelPreguntas1;
     public vista.paneles.PanelCompras pnCompras;
     public vista.paneles.PanelMiCuenta pnMiCuenta;
