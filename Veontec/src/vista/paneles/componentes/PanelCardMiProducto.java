@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package vista.paneles;
+package vista.paneles.componentes;
 
 import index.Veontec;
 import java.awt.Color;
@@ -13,12 +13,12 @@ import java.awt.Dimension;
  *
  * @author victo
  */
-public class PanelCardRespPreg extends javax.swing.JPanel {
+public class PanelCardMiProducto extends javax.swing.JPanel {
 
     /**
      * Creates new form PanelCard
      */
-    public PanelCardRespPreg() {
+    public PanelCardMiProducto() {
         initComponents();
         Dimension tam = new Dimension(654, 236);
         this.setPreferredSize( tam );
@@ -26,6 +26,11 @@ public class PanelCardRespPreg extends javax.swing.JPanel {
         this.panelBackground.setBackground(new Color(40,175,176));
         this.panelBackground.setEnabled(true);
         this.panelBackground.setVisible(true);
+        
+        
+        Dimension tamImg = new Dimension(200, 236);
+        this.pnImgPortafa.setSize(tamImg);
+        this.pnImgPortafa.setPreferredSize(tamImg);
        
     }
     
@@ -42,7 +47,8 @@ public class PanelCardRespPreg extends javax.swing.JPanel {
 
         jPanel1 = new javax.swing.JPanel();
         panelBackground = new vista.componentes.jpanelbackground.JPanelBackground();
-        pnImagen = new javax.swing.JPanel();
+        pnImgPortafa = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
         etqTitulo = new vista.componentes.etiqueta.Etiqueta();
         etqPrecioUnidad = new vista.componentes.etiqueta.Etiqueta();
         etqStockDisponible = new vista.componentes.etiqueta.Etiqueta();
@@ -52,6 +58,7 @@ public class PanelCardRespPreg extends javax.swing.JPanel {
         cmpDetalleMiProducto = new javax.swing.JTextArea();
         btnEliminar = new vista.componentes.boton.Boton();
         btnEditar = new vista.componentes.boton.Boton();
+        etqFecha = new vista.componentes.etiqueta.Mensaje();
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -71,17 +78,27 @@ public class PanelCardRespPreg extends javax.swing.JPanel {
         panelBackground.setImgOpacidad(1.0F);
         panelBackground.setImgRutaInternoActivo(false);
 
-        pnImagen.setBackground(new java.awt.Color(0, 0, 0));
+        pnImgPortafa.setBackground(new java.awt.Color(255, 255, 255));
 
-        javax.swing.GroupLayout pnImagenLayout = new javax.swing.GroupLayout(pnImagen);
-        pnImagen.setLayout(pnImagenLayout);
-        pnImagenLayout.setHorizontalGroup(
-            pnImagenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 200, Short.MAX_VALUE)
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("Sin imagen");
+
+        javax.swing.GroupLayout pnImgPortafaLayout = new javax.swing.GroupLayout(pnImgPortafa);
+        pnImgPortafa.setLayout(pnImgPortafaLayout);
+        pnImgPortafaLayout.setHorizontalGroup(
+            pnImgPortafaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnImgPortafaLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE)
+                .addContainerGap())
         );
-        pnImagenLayout.setVerticalGroup(
-            pnImagenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+        pnImgPortafaLayout.setVerticalGroup(
+            pnImgPortafaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnImgPortafaLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addGap(95, 95, 95))
         );
 
         etqTitulo.setForeground(new java.awt.Color(255, 255, 255));
@@ -116,7 +133,6 @@ public class PanelCardRespPreg extends javax.swing.JPanel {
         cmpDetalleMiProducto.setEditable(false);
         cmpDetalleMiProducto.setColumns(20);
         cmpDetalleMiProducto.setRows(5);
-        cmpDetalleMiProducto.setText("<Usuario>\n<FechaDePublicacion>\n\n<Description>\n\n");
         cmpDetalleMiProducto.setEnabled(false);
         jScrollPane1.setViewportView(cmpDetalleMiProducto);
 
@@ -131,7 +147,7 @@ public class PanelCardRespPreg extends javax.swing.JPanel {
         panelBackgroundLayout.setHorizontalGroup(
             panelBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelBackgroundLayout.createSequentialGroup()
-                .addComponent(pnImagen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(pnImgPortafa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(panelBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(etqTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -147,15 +163,18 @@ public class PanelCardRespPreg extends javax.swing.JPanel {
                     .addGroup(panelBackgroundLayout.createSequentialGroup()
                         .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(btnEditar, javax.swing.GroupLayout.DEFAULT_SIZE, 192, Short.MAX_VALUE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(btnEditar, javax.swing.GroupLayout.DEFAULT_SIZE, 192, Short.MAX_VALUE))
+                    .addComponent(etqFecha, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(20, Short.MAX_VALUE))
         );
         panelBackgroundLayout.setVerticalGroup(
             panelBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelBackgroundLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(etqTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(etqFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(16, 16, 16)
                 .addGroup(panelBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelBackgroundLayout.createSequentialGroup()
                         .addComponent(etqStockDisponible, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -166,13 +185,13 @@ public class PanelCardRespPreg extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(cmpPrecioUnidad, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panelBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addComponent(pnImagen, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(pnImgPortafa, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -202,12 +221,14 @@ public class PanelCardRespPreg extends javax.swing.JPanel {
     public javax.swing.JTextArea cmpDetalleMiProducto;
     public vista.componentes.campos.CampoTexto cmpPrecioUnidad;
     public vista.componentes.campos.CampoTexto cmpStockDisponible;
+    public vista.componentes.etiqueta.Mensaje etqFecha;
     private vista.componentes.etiqueta.Etiqueta etqPrecioUnidad;
     private vista.componentes.etiqueta.Etiqueta etqStockDisponible;
     public vista.componentes.etiqueta.Etiqueta etqTitulo;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private vista.componentes.jpanelbackground.JPanelBackground panelBackground;
-    public javax.swing.JPanel pnImagen;
+    public javax.swing.JPanel pnImgPortafa;
     // End of variables declaration//GEN-END:variables
 }

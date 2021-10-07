@@ -20,7 +20,7 @@ import modelo.dao.ProductoDao;
 import modelo.dao.UsuarioDao;
 import modelo.dto.ProductoDto;
 import modelo.dto.UsuarioDto;
-import vista.paneles.PanelCardProducto;
+import vista.paneles.componentes.PanelCardProducto;
 
 public class CtrlCardProducto {
     // * Vista

@@ -25,7 +25,7 @@ import modelo.dao.UsuarioDao;
 import modelo.dto.ImagesDto;
 import modelo.dto.ProductoDto;
 import modelo.dto.UsuarioDto;
-import vista.paneles.PanelCrearProducto;
+import vista.paneles.acciones.PanelCrearProducto;
 import vista.paneles.PanelMiTienda;
 
 public class CtrlMiTienda implements MouseListener{

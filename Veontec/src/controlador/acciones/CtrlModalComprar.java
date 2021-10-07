@@ -20,7 +20,7 @@ import modelo.dao.UsuarioDao;
 import modelo.dto.CompraDto;
 import modelo.dto.ProductoDto;
 import modelo.dto.UsuarioDto;
-import vista.paneles.PanelHacerCompra;
+import vista.paneles.acciones.PanelHacerCompra;
 
 public class CtrlModalComprar {
 

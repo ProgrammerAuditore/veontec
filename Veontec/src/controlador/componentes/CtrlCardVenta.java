@@ -11,7 +11,7 @@ import modelo.dao.VentaDao;
 import modelo.dto.ProductoDto;
 import modelo.dto.UsuarioDto;
 import modelo.dto.VentaDto;
-import vista.paneles.PanelCardVenta;
+import vista.paneles.componentes.PanelCardVenta;
 
 public class CtrlCardVenta {
 

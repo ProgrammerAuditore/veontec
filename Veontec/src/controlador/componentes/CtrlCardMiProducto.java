@@ -22,8 +22,8 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import modelo.dao.ProductoDao;
 import modelo.dto.ProductoDto;
-import vista.paneles.PanelCardMiProducto;
-import vista.paneles.PanelCrearProducto;
+import vista.paneles.componentes.PanelCardMiProducto;
+import vista.paneles.acciones.PanelCrearProducto;
 
 public class CtrlCardMiProducto {
 
