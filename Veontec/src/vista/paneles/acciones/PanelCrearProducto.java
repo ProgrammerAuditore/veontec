@@ -39,7 +39,7 @@ public class PanelCrearProducto extends javax.swing.JPanel {
             return false;
         }
         
-        if( cmpPrecio.getText().trim().isEmpty()  || cmpDescripcion.getText().trim().length() > 160 ){
+        if( cmpDescripcion.getText().trim().isEmpty()  || cmpDescripcion.getText().trim().length() > 6700 ){
             return false;
         }
         
