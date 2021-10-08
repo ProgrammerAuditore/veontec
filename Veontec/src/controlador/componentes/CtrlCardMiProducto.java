@@ -1,6 +1,7 @@
 package controlador.componentes;
 
 import controlador.CtrlMiTienda;
+import controlador.acciones.CtrlModalEditarProducto;
 import index.Veontec;
 import java.awt.Dialog;
 import java.awt.Dimension;
@@ -72,7 +73,9 @@ public class CtrlCardMiProducto {
         eventoBtnEditar =  new MouseAdapter(){
             @Override
             public void mouseReleased(MouseEvent e) {
-                mtdBuildModalEditarProducto();
+                CtrlModalEditarProducto editar = new CtrlModalEditarProducto(prodDto);
+                editar.mtdInit();
+                //editar.modal.setVisible(true);
             }
         };
         

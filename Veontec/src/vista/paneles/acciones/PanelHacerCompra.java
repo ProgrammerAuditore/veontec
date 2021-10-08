@@ -211,11 +211,6 @@ public class PanelHacerCompra extends javax.swing.JPanel {
 
         btnAceptar.setImgButtonType("success");
         btnAceptar.setTexto("Aceptar");
-        btnAceptar.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseReleased(java.awt.event.MouseEvent evt) {
-                btnAceptarMouseReleased(evt);
-            }
-        });
 
         btnCancelar.setImgButtonType("secondary");
         btnCancelar.setTexto("Cancelar");
@@ -249,13 +244,6 @@ public class PanelHacerCompra extends javax.swing.JPanel {
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
-
-    private void btnAceptarMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAceptarMouseReleased
-        // TODO add your handling code here:
-        
-        
-        
-    }//GEN-LAST:event_btnAceptarMouseReleased
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

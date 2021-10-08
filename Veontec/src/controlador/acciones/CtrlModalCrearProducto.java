@@ -10,7 +10,7 @@ import javax.swing.tree.DefaultMutableTreeNode;
 import modelo.dto.UsuarioDto;
 import vista.paneles.PanelMiTienda;
 
-public class CtrlCrearProducto implements MouseListener{
+public class CtrlModalCrearProducto implements MouseListener{
     
     // Vista
     public PanelMiTienda laVista;
@@ -21,16 +21,16 @@ public class CtrlCrearProducto implements MouseListener{
     private DefaultMutableTreeNode treeNode1;
     
     // Atributos
-    private static CtrlCrearProducto instancia;
+    private static CtrlModalCrearProducto instancia;
 
-    public CtrlCrearProducto(PanelMiTienda laVista) {
+    public CtrlModalCrearProducto(PanelMiTienda laVista) {
         this.laVista = laVista;
         
     }
 
-    public static CtrlCrearProducto getInstancia(PanelMiTienda laVista){
+    public static CtrlModalCrearProducto getInstancia(PanelMiTienda laVista){
         if( instancia == null ){
-            instancia = new CtrlCrearProducto(laVista);
+            instancia = new CtrlModalCrearProducto(laVista);
             instancia.mtdInit();
         }
         
