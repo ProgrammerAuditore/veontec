@@ -25,7 +25,7 @@ public class CtrlModalEditarProducto {
     
     // * Vista
     private PanelCrearProducto laVista;
-    public JDialog modal;
+    private JDialog modal;
     
     // * Modelo
     private ProductoDao productoDao;
@@ -63,7 +63,7 @@ public class CtrlModalEditarProducto {
         btnCancelar = new MouseAdapter() {
             @Override
             public void mouseReleased(MouseEvent e) {
-                mtdCerrarVentana();
+                mtdCerrarModal();
             }
         };
         
@@ -77,7 +77,7 @@ public class CtrlModalEditarProducto {
         evtWindow = new WindowAdapter(){
             @Override
             public void windowClosed(WindowEvent e) {
-                mtdCerrarVentana();
+                mtdCerrarModal();
             }
 
             @Override
@@ -85,7 +85,7 @@ public class CtrlModalEditarProducto {
                 laVista.updateUI();
                 modal.validate();
                 modal.repaint();
-                JOptionPane.showMessageDialog(null, "Editando producto...");
+                JOptionPane.showMessageDialog(laVista, "Editando producto...");
             }
         };
         
@@ -144,17 +144,26 @@ public class CtrlModalEditarProducto {
     }
     
     private void mtdEditarProducto() {
-        productoDto.setProdDescripcion( laVista.cmpDescripcion.getText() );
-        productoDto.setProdTitulo( laVista.cmpTitulo.getText() );
-        productoDto.setProdEnlace( laVista.cmpEnlace.getText() );
-        productoDto.setProdPrecio( Double.parseDouble(laVista.cmpPrecio.getText()) );
-        productoDto.setProdStock( Integer.parseInt(laVista.cmpStock.getText()) );
+        if( laVista.mtdComprobar() ){
+            productoDto.setProdUsuario(Veontec.usuarioDto.getCmpID() );
+            productoDto.setProdCategoria( String.valueOf( laVista.cmpCategoria.getSelectedItem() ) );
+            productoDto.setProdDescripcion( laVista.cmpDescripcion.getText() );
+            productoDto.setProdTitulo( laVista.cmpTitulo.getText() );
+            productoDto.setProdEnlace( laVista.cmpEnlace.getText() );
+            productoDto.setProdPrecio( Double.parseDouble(laVista.cmpPrecio.getText()) );
+            productoDto.setProdStock( Integer.parseInt(laVista.cmpStock.getText()) );
+            productoDto.setProdTipo(0);            
+            productoDto.setProdEnlace("Vacio");
+
+            if( productoDao.mtdActualizar(productoDto) ){
+                CtrlMiTienda.mtdRecargarMisProductos();
+                JOptionPane.showMessageDialog(null, "Producto actualizado exitosamente.");
+            }
         
-        if( productoDao.mtdActualizar(productoDto) ){
-            CtrlMiTienda.mtdRecargarMisProductos();
-            JOptionPane.showMessageDialog(null, "Producto actualizado exitosamente.");
+        }else{
+            JOptionPane.showMessageDialog(null, "Verifica que los datos sean correctos.");
+        
         }
-        
     }
     
     private void mtdSeleccionarImagen(){
@@ -193,7 +202,7 @@ public class CtrlModalEditarProducto {
         }
     }
     
-    private void mtdCerrarVentana(){
+    private void mtdCerrarModal(){
         modal.removeAll();
         modal.setVisible(false);
         modal.dispose();
