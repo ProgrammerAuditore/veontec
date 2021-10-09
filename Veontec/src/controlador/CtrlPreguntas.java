@@ -30,6 +30,7 @@ public class CtrlPreguntas implements MouseListener{
     // * Atributos
     private static CtrlPreguntas instancia;
     private List<PreguntaDto> lstPreguntas;
+    Integer usuarioID;
     
     // * Constructor
     private CtrlPreguntas(PanelPreguntas laVista, UsuarioDto dto, UsuarioDao dao){
@@ -56,14 +57,13 @@ public class CtrlPreguntas implements MouseListener{
         
         if( instancia == null ){
             instancia = new CtrlPreguntas(laVista, dto, dao);
-            instancia.mtdInit();
         }
         
+        instancia.mtdInit();
         return instancia;
     }
     
     private void mtdInit(){
-        laVista.pnContenedor.setLayout(new GridBagLayout());
         mtdMostrarPreguntas();
     }
     
@@ -79,11 +79,24 @@ public class CtrlPreguntas implements MouseListener{
         if( totalPreguntas > 0 ){
             
             for (int i = 0; i < totalPreguntas; i++) {
-                System.out.println("Pregunta : " + i + ": \n " + lstPreguntas.get(i).toString());
-                CtrlCardPregunta card_pregunta = new CtrlCardPregunta( lstPreguntas.get(i) );
-                card_pregunta.setItem(i);
-                card_pregunta.mtdInit();
-                laVista.pnContenedor.add(card_pregunta.getLaVista(), card_pregunta.getTarjeta_dimensiones() );
+                producto_dto = producto_dao.mtdConsultar( lstPreguntas.get(i).getPregProducto() );
+                
+                // * Verificar si soy un vendedor 
+                // Si lo soy, muestrame al comprador; en caso contrario muestrame al vendedor
+                if( lstPreguntas.get(i).getPregVendedor().equals(Veontec.usuarioDto.getCmpID()) ){
+                    usuarioID = lstPreguntas.get(i).getPregComprador();
+                }else{
+                    usuarioID = lstPreguntas.get(i).getPregVendedor();
+                }
+                
+                usuarioDto = usuarioDao.mtdConsultar( usuarioID );
+                
+                if( producto_dto != null && usuarioDto != null ){
+                    CtrlCardPregunta card_pregunta = new CtrlCardPregunta( lstPreguntas.get(i), producto_dto, usuarioDto );
+                    card_pregunta.setItem(i);
+                    card_pregunta.mtdInit();
+                    laVista.pnContenedor.add(card_pregunta.getLaVista(), card_pregunta.getTarjeta_dimensiones() );
+                }
             }
             
         }
