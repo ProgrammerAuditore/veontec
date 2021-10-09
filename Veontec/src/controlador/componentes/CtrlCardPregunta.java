@@ -1,21 +1,29 @@
 package controlador.componentes;
 
+import controlador.CtrlPreguntas;
+import controlador.acciones.CtrlModalHacerPregunta;
+import index.Veontec;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.Image;
 import java.awt.Insets;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import modelo.dao.PreguntaDao;
 import modelo.dao.ProductoDao;
 import modelo.dao.UsuarioDao;
 import modelo.dto.PreguntaDto;
 import modelo.dto.ProductoDto;
 import modelo.dto.UsuarioDto;
+import static org.bouncycastle.asn1.x500.style.RFC4519Style.l;
 import vista.paneles.componentes.PanelCardPregunta;
 
 public class CtrlCardPregunta {
@@ -52,12 +60,40 @@ public class CtrlCardPregunta {
     }
     
     // ***** Eventos
+    private void mtdEventoBtnPreguntar(){
+        MouseListener evtBtnPreguntar = null;
+        laVista.btnResponder.removeMouseListener(evtBtnPreguntar);
+        
+        evtBtnPreguntar = new MouseAdapter() {
+            @Override
+            public void mouseReleased(MouseEvent e) {
+                CtrlModalHacerPregunta preguntar = new CtrlModalHacerPregunta(productoDto);
+                preguntar.mtdInit();
+            }
+        };
+        
+        laVista.btnResponder.addMouseListener(evtBtnPreguntar);
+    }
     
+    private void mtdEventoBtnEliminar(){
+        MouseListener evtBtnEliminar = null;
+        laVista.btnCancelarCompra.removeMouseListener(evtBtnEliminar);
+        
+        evtBtnEliminar = new MouseAdapter() {
+            @Override
+            public void mouseReleased(MouseEvent e) {
+                mtdEliminarPregunta();
+            }
+        };
+        
+        laVista.btnCancelarCompra.addMouseListener(evtBtnEliminar);
+    }
     
     // ***** Metodos
     public void mtdInit(){
-        mtdEstablecerImagen();
         mtdEstablecerDatos();
+        mtdEstablecerImagen();
+        mtdEstablecerEventos();
         mtdEstablecerDimensiones();
     }
     
@@ -74,10 +110,30 @@ public class CtrlCardPregunta {
     }
     
     private void mtdEstablecerDatos(){
+        // * Establecer datos en los campos
         laVista.etqTitulo.setText( productoDto.getProdTitulo() );
         laVista.cmpVendedor.setText( usuarioDto.getCmpNombreCompleto() );
         laVista.cmpDetalleCompra.setText( preguntaDto.getPregPregunta() );
         laVista.cmpFecha.setText( preguntaDto.getPregFecha() );
+        
+        // * Establecer los botones
+        if( preguntaDto.getPregVendedor().equals(Veontec.usuarioDto.getCmpID()) ){
+            laVista.btnCancelarCompra.setEnabled(false);
+            laVista.btnCancelarCompra.setVisible(false);
+            laVista.btnResponder.setTexto("Contestar +1");
+        }else{
+            laVista.btnCancelarCompra.setTexto("Eliminar");
+            laVista.btnResponder.setTexto("Preguntar +1");
+        }
+    }
+    
+    private void mtdEstablecerEventos(){
+        if( preguntaDto.getPregVendedor().equals(Veontec.usuarioDto.getCmpID()) ){
+            
+        }else{
+            mtdEventoBtnEliminar();
+            mtdEventoBtnPreguntar();
+        }
     }
     
     private void mtdEstablecerImagen(){
@@ -104,6 +160,20 @@ public class CtrlCardPregunta {
             } catch (Exception e) {
             }
         }
+    }
+    
+    private void mtdEliminarPregunta(){
+        int opc  = JOptionPane.showConfirmDialog(laVista, 
+                "¿Seguro que deseas eliminar la pregunta?", 
+                "Eliminar pregunta", JOptionPane.YES_NO_OPTION);
+        
+        if( opc == JOptionPane.YES_OPTION ){
+            if( preguntaDao.mtdRemover(preguntaDto) ){
+                CtrlPreguntas.mtdRecargarPreguntas();
+                JOptionPane.showMessageDialog(laVista, "Pregunta eliminada exitosamente.");
+            }
+        }
+        
     }
 
     public PanelCardPregunta getLaVista() {

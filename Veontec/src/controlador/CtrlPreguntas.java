@@ -63,6 +63,11 @@ public class CtrlPreguntas implements MouseListener{
         return instancia;
     }
     
+    public static boolean mtdRecargarPreguntas(){
+        instancia.mtdMostrarPreguntas();
+        return true;
+    }
+    
     private void mtdInit(){
         mtdMostrarPreguntas();
     }

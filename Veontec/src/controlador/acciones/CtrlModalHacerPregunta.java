@@ -1,5 +1,6 @@
 package controlador.acciones;
 
+import controlador.CtrlPreguntas;
 import index.Veontec;
 import java.awt.Dialog;
 import java.awt.event.MouseAdapter;
@@ -138,6 +139,8 @@ public class CtrlModalHacerPregunta {
             preguntaDto.setPregVendedor( productoDto.getProdUsuario() );
             
             if( preguntaDao.mtdInsetar(preguntaDto) ){
+                try { CtrlPreguntas.mtdRecargarPreguntas(); } catch (Exception e) { }
+                
                 JOptionPane.showMessageDialog(laVista, "La pregunta se envio al vendedor....");
                 mtdCerrarModal();
             }
