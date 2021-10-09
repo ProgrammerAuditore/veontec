@@ -151,6 +151,7 @@ public class PreguntaDao implements keyword_query<PreguntaDto> , keyword_extra<P
             while( rs.next() ){
                 PreguntaDto pregunta = new PreguntaDto();
                 pregunta.setPregID( rs.getInt("pregID") );
+                pregunta.setPregProducto( rs.getInt("pregProducto") );
                 pregunta.setPregComprador( rs.getInt("pregComprador") );
                 pregunta.setPregVendedor( rs.getInt("pregVendedor") );
                 pregunta.setPregPregunta( rs.getString("pregPregunta") );
@@ -196,6 +197,7 @@ public class PreguntaDao implements keyword_query<PreguntaDto> , keyword_extra<P
             while( rs.next() ){
                 PreguntaDto pregunta = new PreguntaDto();
                 pregunta.setPregID( rs.getInt("pregID") );
+                pregunta.setPregProducto( rs.getInt("pregProducto") );
                 pregunta.setPregComprador( rs.getInt("pregComprador") );
                 pregunta.setPregVendedor( rs.getInt("pregVendedor") );
                 pregunta.setPregPregunta( rs.getString("pregPregunta") );

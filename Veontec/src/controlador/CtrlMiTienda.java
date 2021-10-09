@@ -118,12 +118,6 @@ public class CtrlMiTienda implements MouseListener{
         laVista.lstProductos.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
     }
     
-    private void mtdSalirDelModal(){
-        modalCrearProducto.removeAll();
-        modalCrearProducto.setVisible(false);
-        modalCrearProducto.dispose();
-    }
-    
     @Override
     public void mouseClicked(MouseEvent e) {}
 

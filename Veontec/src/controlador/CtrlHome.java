@@ -74,6 +74,7 @@ public class CtrlHome implements MouseListener{
         if( laVista.pnTabMenu.getSelectedIndex() == TabsHome.Preguntas.ordinal() 
             && tabPreviaSeleccionada != TabsHome.Preguntas.ordinal() ){
             
+            mtdCargarPreguntas();
             System.out.println("Estas en Preguntas....");
             
             tabPreviaSeleccionada = TabsHome.Preguntas.ordinal();
@@ -113,6 +114,12 @@ public class CtrlHome implements MouseListener{
         CtrlCompras ctrl = CtrlCompras.getInstancia(laVista.pnCompras, Veontec.usuarioDto, Veontec.usuarioDao);
         
     }
+    
+    private void mtdCargarPreguntas(){
+        CtrlPreguntas ctrl = CtrlPreguntas.getInstancia(laVista.panelPreguntas, Veontec.usuarioDto, Veontec.usuarioDao);
+        
+    }
+    
     
     @Override
     public void mouseClicked(MouseEvent e) {}

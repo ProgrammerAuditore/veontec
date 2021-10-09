@@ -48,7 +48,7 @@ public class PanelPreguntas extends javax.swing.JPanel {
         boton3 = new vista.componentes.boton.Boton();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jPanel4 = new javax.swing.JPanel();
+        pnContenedor = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
 
         jPanel1.setBackground(new java.awt.Color(0, 102, 102));
@@ -128,24 +128,24 @@ public class PanelPreguntas extends javax.swing.JPanel {
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel1.setText("Sin preguntas");
 
-        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
+        javax.swing.GroupLayout pnContenedorLayout = new javax.swing.GroupLayout(pnContenedor);
+        pnContenedor.setLayout(pnContenedorLayout);
+        pnContenedorLayout.setHorizontalGroup(
+            pnContenedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnContenedorLayout.createSequentialGroup()
                 .addGap(261, 261, 261)
                 .addComponent(jLabel1)
                 .addContainerGap(379, Short.MAX_VALUE))
         );
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
+        pnContenedorLayout.setVerticalGroup(
+            pnContenedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnContenedorLayout.createSequentialGroup()
                 .addGap(168, 168, 168)
                 .addComponent(jLabel1)
                 .addContainerGap(305, Short.MAX_VALUE))
         );
 
-        jScrollPane1.setViewportView(jPanel4);
+        jScrollPane1.setViewportView(pnContenedor);
 
         javax.swing.GroupLayout jPanelBackground1Layout = new javax.swing.GroupLayout(jPanelBackground1);
         jPanelBackground1.setLayout(jPanelBackground1Layout);
@@ -198,9 +198,9 @@ public class PanelPreguntas extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
     private vista.componentes.jpanelbackground.JPanelBackground jPanelBackground1;
     private javax.swing.JScrollPane jScrollPane1;
+    public javax.swing.JPanel pnContenedor;
     private vista.componentes.etiqueta.Titulo titulo1;
     // End of variables declaration//GEN-END:variables
 }
