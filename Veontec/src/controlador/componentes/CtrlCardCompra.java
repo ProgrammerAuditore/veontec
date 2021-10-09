@@ -1,6 +1,7 @@
 package controlador.componentes;
 
 import controlador.CtrlCompras;
+import controlador.acciones.CtrlModalHacerPregunta;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.Image;
@@ -56,7 +57,7 @@ public class CtrlCardCompra {
     }
     
     // Eventos
-    private void mtdCrearEventoBtnGuardar(){
+    private void mtdCrearEventoBtnCancelarCompra(){
         MouseListener eventoBtnComprar = null;
         tarjeta.btnCancelarCompra.removeMouseListener(eventoBtnComprar);
         
@@ -70,6 +71,22 @@ public class CtrlCardCompra {
         tarjeta.btnCancelarCompra.addMouseListener(eventoBtnComprar);
     }
     
+    private void mtdCrearEventoBtnPreguntar(){
+        MouseListener eventoBtnHacePregunta = null;
+        tarjeta.btnHacerPregunta.removeMouseListener(eventoBtnHacePregunta);
+        
+        eventoBtnHacePregunta =  new MouseAdapter(){
+            @Override
+            public void mouseReleased(MouseEvent e) {
+                // * Llamar al controlador de accion para preguntar
+                CtrlModalHacerPregunta preguntar = new CtrlModalHacerPregunta(prodDto);
+                preguntar.mtdInit();
+            }
+        };
+        
+        tarjeta.btnHacerPregunta.addMouseListener(eventoBtnHacePregunta);
+    }
+    
     // Métodos
     public void mtdInit(){
         
@@ -77,7 +94,8 @@ public class CtrlCardCompra {
             tarjeta.btnCancelarCompra.setVisible(false);
             tarjeta.btnHacerPregunta.setVisible(false);
         }else{
-            mtdCrearEventoBtnGuardar();
+            mtdCrearEventoBtnCancelarCompra();
+            mtdCrearEventoBtnPreguntar();
         }
         
         mtdEstablecerDatos();

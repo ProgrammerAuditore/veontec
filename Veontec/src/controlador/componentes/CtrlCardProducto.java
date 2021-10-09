@@ -1,6 +1,7 @@
 package controlador.componentes;
 
 import controlador.acciones.CtrlModalComprarProducto;
+import controlador.acciones.CtrlModalHacerPregunta;
 import index.Veontec;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
@@ -85,7 +86,8 @@ public class CtrlCardProducto {
             @Override
             public void mouseReleased(MouseEvent e) {
                 // * Llamar al controlador de accion para preguntar
-                
+                CtrlModalHacerPregunta preguntar = new CtrlModalHacerPregunta(prodDto);
+                preguntar.mtdInit();
             }
         };
         

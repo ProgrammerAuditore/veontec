@@ -251,8 +251,8 @@ public class CtrlCardMiProducto {
     
     private void mtdModalEliminarProducto(){
         int opc = JOptionPane.showConfirmDialog(tarjeta, 
+                "¿Seguro que desar eliminar este producto?",
                 "Eliminar | " + prodDto.getProdTitulo(), 
-                "¿Seguro que desar eliminar este producto?", 
                 JOptionPane.YES_NO_OPTION );
         
         if( opc == JOptionPane.YES_OPTION ){
