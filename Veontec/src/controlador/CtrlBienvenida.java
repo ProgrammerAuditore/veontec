@@ -40,12 +40,12 @@ public class CtrlBienvenida{
     
     // Obtener instancia | Singleton
     public static CtrlBienvenida getInstancia(PanelBienvenida laVista, UsuarioDto dto, UsuarioDao dao){
+        
         if( instancia == null ){
             instancia = new CtrlBienvenida(laVista, dto, dao);
-            instancia.mtdInit();
         }
         
-        instancia.mtdMostrarProducto();
+        instancia.mtdInit();
         return instancia;
     }
     
@@ -54,6 +54,7 @@ public class CtrlBienvenida{
     
     // Métodos
     private void mtdInit(){
+        mtdMostrarProducto();
     }
     
     

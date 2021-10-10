@@ -1,6 +1,7 @@
 package controlador.componentes;
 
 import controlador.CtrlCompras;
+import controlador.acciones.CtrlModalHacerPregunta;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.Image;
@@ -56,18 +57,43 @@ public class CtrlCardCompra {
     }
     
     // Eventos
-    private void mtdCrearEventoBtnGuardar(){
+    private void mtdCrearEventoBtnCancelarCompra(){
         MouseListener eventoBtnComprar = null;
         tarjeta.btnCancelarCompra.removeMouseListener(eventoBtnComprar);
         
         eventoBtnComprar =  new MouseAdapter(){
             @Override
             public void mouseReleased(MouseEvent e) {
-                mtdCancelarCompra();
+                try {
+                    mtdCancelarCompra();
+                } catch (Exception err) {
+                    JOptionPane.showMessageDialog(tarjeta, "Producto no encontrado.");
+                }
             }
         };
         
         tarjeta.btnCancelarCompra.addMouseListener(eventoBtnComprar);
+    }
+    
+    private void mtdCrearEventoBtnPreguntar(){
+        MouseListener eventoBtnHacePregunta = null;
+        tarjeta.btnHacerPregunta.removeMouseListener(eventoBtnHacePregunta);
+        
+        eventoBtnHacePregunta =  new MouseAdapter(){
+            @Override
+            public void mouseReleased(MouseEvent e) {
+                try {
+                    // * Llamar al controlador de accion para preguntar
+                    CtrlModalHacerPregunta preguntar = new CtrlModalHacerPregunta(prodDto);
+                    preguntar.mtdInit();
+                    
+                } catch (Exception err) {
+                    JOptionPane.showMessageDialog(tarjeta, "Producto no encontrado.");
+                }
+            }
+        };
+        
+        tarjeta.btnHacerPregunta.addMouseListener(eventoBtnHacePregunta);
     }
     
     // Métodos
@@ -77,7 +103,8 @@ public class CtrlCardCompra {
             tarjeta.btnCancelarCompra.setVisible(false);
             tarjeta.btnHacerPregunta.setVisible(false);
         }else{
-            mtdCrearEventoBtnGuardar();
+            mtdCrearEventoBtnCancelarCompra();
+            mtdCrearEventoBtnPreguntar();
         }
         
         mtdEstablecerDatos();

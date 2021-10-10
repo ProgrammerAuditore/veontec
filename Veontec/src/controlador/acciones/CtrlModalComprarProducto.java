@@ -22,7 +22,7 @@ import modelo.dto.ProductoDto;
 import modelo.dto.UsuarioDto;
 import vista.paneles.acciones.PanelHacerCompra;
 
-public class CtrlModalComprar {
+public class CtrlModalComprarProducto {
 
     // * Vista
     private PanelHacerCompra pnHacerCompra;
@@ -39,7 +39,7 @@ public class CtrlModalComprar {
     // * Atributos
 
     // * Controlador
-    public CtrlModalComprar(ProductoDto producto_dto) {
+    public CtrlModalComprarProducto(ProductoDto producto_dto) {
         this.prodDto = producto_dto;
         this.prodDao = new ProductoDao();
         this.usuaDto = new UsuarioDto();

@@ -65,15 +65,10 @@ public class PreguntaDto {
     public void setPregEstado(Integer pregEstado) {
         this.pregEstado = pregEstado;
     }
-    
+
     @Override
     public String toString() {
-        String msg = "";
-        msg += "pregID = " + pregID + "\n";
-        msg += "pregComprador = " + pregComprador + "\n";
-        msg += "pregVendedor = " + pregVendedor + "\n";
-        msg += "pregProducto = " + pregProducto + "\n";
-        return msg; 
+        return "PreguntaDto{" + "pregID=" + pregID + ", pregProducto=" + pregProducto + ", pregVendedor=" + pregVendedor + ", pregComprador=" + pregComprador + ", pregPregunta=" + pregPregunta + ", pregFecha=" + pregFecha + ", pregEstado=" + pregEstado + '}';
     }
     
 }

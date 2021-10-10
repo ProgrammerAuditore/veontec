@@ -84,7 +84,7 @@ public class ProductoDao implements keyword_query<ProductoDto>, keyword_producto
         PreparedStatement ps = null;
         Connection conn = CtrlHiloConexion.getConexion();
         String query = "UPDATE tblproductos SET prodTitulo = ?, prodDescripcion = ?, prodCategoria = ?, "
-                + "prodPrecio = ?, prodStock = ?, prodTipo = ?, prodEnlace = ? "
+                + "prodPrecio = ?, prodStock = ?, prodTipo = ?, prodEnlace = ?, prodMedia = ? "
                 // * Buscamos el producto del usuario respectivo
                 + "WHERE prodUsuario = ? AND prodID = ? ;";
         
@@ -98,8 +98,9 @@ public class ProductoDao implements keyword_query<ProductoDto>, keyword_producto
             ps.setInt(5, obj_dto.getProdStock());
             ps.setInt(6, obj_dto.getProdTipo());
             ps.setString(7, obj_dto.getProdEnlace());
-            ps.setInt(8, obj_dto.getProdUsuario());
-            ps.setInt(9, obj_dto.getProdID());
+            ps.setBytes(8, obj_dto.getProdImg());
+            ps.setInt(9, obj_dto.getProdUsuario());
+            ps.setInt(10, obj_dto.getProdID());
             int respuesta = ps.executeUpdate();
             
             // * Si la respuesta es mayor a 0 significa que la consulta fue exitosa.
@@ -129,6 +130,45 @@ public class ProductoDao implements keyword_query<ProductoDto>, keyword_producto
             ps = conn.prepareStatement(query.toLowerCase());
             ps.setInt(1, obj_dto.getProdUsuario());
             ps.setInt(2, obj_dto.getProdID());
+            ResultSet rs = ps.executeQuery();
+            
+            if( rs.next() ){
+                prod = new ProductoDto();
+                prod.setProdID( rs.getInt("prodID") );
+                prod.setProdTitulo(rs.getString("prodTitulo") );
+                prod.setProdDescripcion(rs.getString("prodDescripcion") );
+                prod.setProdCategoria(rs.getString("prodCategoria") );
+                prod.setProdPrecio( rs.getDouble("prodPrecio") );
+                prod.setProdStock(rs.getInt("prodStock"));
+                prod.setProdTipo(rs.getInt("prodTipo") );
+                prod.setProdEnlace(rs.getString("prodEnlace") );
+                prod.setProdUsuario(rs.getInt("prodUsuario") );
+                prod.setProdImg( rs.getBytes("prodMedia") );
+                
+                System.out.println("" + prod.toString());
+            }
+            
+        } catch (SQLException e) {
+            System.out.println("" + e.getMessage());
+        }
+        
+        return prod;
+    }
+    
+    public ProductoDto mtdConsultar(Integer idProducto) {
+        // * Funciona perfectamente
+        
+        ProductoDto prod = null;
+        PreparedStatement ps = null;
+        Connection conn = CtrlHiloConexion.getConexion();
+        String query = "SELECT * FROM tblproductos "
+                // * Buscamos el producto del usuario respectivo
+                + "WHERE prodID = ? ;";
+        
+        try {
+            
+            ps = conn.prepareStatement(query.toLowerCase());
+            ps.setInt(1, idProducto);
             ResultSet rs = ps.executeQuery();
             
             if( rs.next() ){

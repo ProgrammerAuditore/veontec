@@ -138,14 +138,14 @@ public class RespuestaDao implements keyword_query<RespuestaDto> , keyword_extra
         Connection conn = CtrlHiloConexion.getConexion();
         String query = "SELECT * FROM " + nombreTabla + " "
                 // * Buscamos el producto del usuario respectivo
-                + "WHERE respVendedor = ? OR respComprador = ? ;";
+                + "WHERE respPregunta = ? AND respProducto = ? ;";
         
         try {
             
             // * Preparar la consulta
             ps = conn.prepareStatement(query.toLowerCase());
-            ps.setInt(1, obj_dto.getRespVendedor());
-            ps.setInt(2, obj_dto.getRespComprador());
+            ps.setInt(1, obj_dto.getRespPregunta());
+            ps.setInt(2, obj_dto.getRespProducto());
             
             // * Ejecutar la consulta
             ResultSet rs = ps.executeQuery();

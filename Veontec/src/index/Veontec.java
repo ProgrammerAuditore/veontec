@@ -40,7 +40,7 @@ public class Veontec {
         
         // * Establecer conexion..
         //ConexionDto conec = new ConexionDto("3306", "sql3.freesqldatabase.com", "sql3432572", "sql3432572", "R9p2mht4YB");
-        ConexionDto conec = new ConexionDto("3306", "localhost", "sql3432572", "root", "");
+        ConexionDto conec = new ConexionDto("3306", "localhost", "veontecdb", "root", "");
         CtrlHiloConexion.ctrlDatos = conec;
         CtrlHiloConexion.mtdEstablecer();
         

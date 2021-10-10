@@ -18,7 +18,6 @@ public class CtrlVenta{
     
     // Vista
     public PanelVentas laVista;
-    public JDialog modalCrearProducto;
     
     // Modelos
     private UsuarioDto usuario_dto;

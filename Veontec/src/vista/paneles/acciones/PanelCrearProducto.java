@@ -5,6 +5,7 @@
  */
 package vista.paneles.acciones;
 
+import java.awt.Dimension;
 import src.Recursos;
 
 /**
@@ -18,8 +19,9 @@ public class PanelCrearProducto extends javax.swing.JPanel {
      */
     public PanelCrearProducto() {
         initComponents();
-        this.setSize(Recursos.tamDialogModalCrearProducto );
-        this.setPreferredSize(Recursos.tamDialogModalCrearProducto );
+        Dimension tam = new Dimension(621, 612);
+        this.setSize( tam );
+        this.setPreferredSize( tam );
         mtdEstablecerIdioma();
     }
     
@@ -37,7 +39,7 @@ public class PanelCrearProducto extends javax.swing.JPanel {
             return false;
         }
         
-        if( cmpPrecio.getText().trim().isEmpty()  || cmpDescripcion.getText().trim().length() > 160 ){
+        if( cmpDescripcion.getText().trim().isEmpty()  || cmpDescripcion.getText().trim().length() > 6700 ){
             return false;
         }
         
@@ -215,9 +217,9 @@ public class PanelCrearProducto extends javax.swing.JPanel {
                         .addGroup(jPanel2Layout.createSequentialGroup()
                             .addContainerGap()
                             .addComponent(etqNombres, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                             .addComponent(cmpTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(12, 12, 12)
+                            .addGap(17, 17, 17)
                             .addComponent(etqEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                             .addComponent(cmpCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)

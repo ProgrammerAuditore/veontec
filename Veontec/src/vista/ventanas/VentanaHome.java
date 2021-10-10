@@ -48,7 +48,7 @@ public class VentanaHome extends javax.swing.JFrame {
         jPanelBackground3 = new vista.componentes.jpanelbackground.JPanelBackground();
         pnVentas = new vista.paneles.PanelVentas();
         jPanelBackground5 = new vista.componentes.jpanelbackground.JPanelBackground();
-        panelPreguntas1 = new vista.paneles.PanelPreguntas();
+        panelPreguntas = new vista.paneles.PanelPreguntas();
         JPanelBackground4 = new vista.componentes.jpanelbackground.JPanelBackground();
         pnMiCuenta = new vista.paneles.PanelMiCuenta();
         jPanel1 = new javax.swing.JPanel();
@@ -113,11 +113,11 @@ public class VentanaHome extends javax.swing.JFrame {
         jPanelBackground5.setLayout(jPanelBackground5Layout);
         jPanelBackground5Layout.setHorizontalGroup(
             jPanelBackground5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panelPreguntas1, javax.swing.GroupLayout.DEFAULT_SIZE, 1080, Short.MAX_VALUE)
+            .addComponent(panelPreguntas, javax.swing.GroupLayout.DEFAULT_SIZE, 1080, Short.MAX_VALUE)
         );
         jPanelBackground5Layout.setVerticalGroup(
             jPanelBackground5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panelPreguntas1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(panelPreguntas, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pnTabMenu.addTab("Preguntas", jPanelBackground5);
@@ -205,7 +205,7 @@ public class VentanaHome extends javax.swing.JFrame {
     private vista.componentes.jpanelbackground.JPanelBackground jPanelBackground5;
     private vista.componentes.jpanelbackground.JPanelBackground jPanelBackground6;
     public vista.paneles.PanelBienvenida panelHome;
-    private vista.paneles.PanelPreguntas panelPreguntas1;
+    public vista.paneles.PanelPreguntas panelPreguntas;
     public vista.paneles.PanelCompras pnCompras;
     public vista.paneles.PanelMiCuenta pnMiCuenta;
     public vista.paneles.PanelMiTienda pnMiTienda;
