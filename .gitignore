@@ -25,10 +25,18 @@ hs_err_pid*
 /SimuladorDado/build/
 /dist/
 
-//Veontec/nbproject/private/
+/Veontec/nbproject/private/
 /Veontec/build/
 /Veontec/dist/
 /Veontec/nbproject/private/*
 /Veontec/build/*
 /Veontec/dist/*
+
+Veontec/nbproject/private/
+Veontec/build/
+Veontec/dist/
+Veontec/nbproject/private/*
+Veontec/build/*
+Veontec/dist/*
+
 

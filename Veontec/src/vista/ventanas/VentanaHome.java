@@ -39,17 +39,17 @@ public class VentanaHome extends javax.swing.JFrame {
     private void initComponents() {
 
         pnTabMenu = new javax.swing.JTabbedPane();
-        pnNose = new vista.componentes.jpanelbackground.JPanelBackground();
+        pnTabBienvenida = new vista.componentes.jpanelbackground.JPanelBackground();
         panelHome = new vista.paneles.PanelBienvenida();
-        jPanelBackground6 = new vista.componentes.jpanelbackground.JPanelBackground();
+        pnTabMiTienda = new vista.componentes.jpanelbackground.JPanelBackground();
         pnMiTienda = new vista.paneles.PanelMiTienda();
-        jPanelBackground2 = new vista.componentes.jpanelbackground.JPanelBackground();
+        pnTabCompras = new vista.componentes.jpanelbackground.JPanelBackground();
         pnCompras = new vista.paneles.PanelCompras();
-        jPanelBackground3 = new vista.componentes.jpanelbackground.JPanelBackground();
+        pnTabVentas = new vista.componentes.jpanelbackground.JPanelBackground();
         pnVentas = new vista.paneles.PanelVentas();
-        jPanelBackground5 = new vista.componentes.jpanelbackground.JPanelBackground();
+        pnTabPreguntas = new vista.componentes.jpanelbackground.JPanelBackground();
         panelPreguntas = new vista.paneles.PanelPreguntas();
-        JPanelBackground4 = new vista.componentes.jpanelbackground.JPanelBackground();
+        pnTabCuenta = new vista.componentes.jpanelbackground.JPanelBackground();
         pnMiCuenta = new vista.paneles.PanelMiCuenta();
         jPanel1 = new javax.swing.JPanel();
 
@@ -57,83 +57,83 @@ public class VentanaHome extends javax.swing.JFrame {
 
         pnTabMenu.setTabPlacement(javax.swing.JTabbedPane.LEFT);
 
-        javax.swing.GroupLayout pnNoseLayout = new javax.swing.GroupLayout(pnNose);
-        pnNose.setLayout(pnNoseLayout);
-        pnNoseLayout.setHorizontalGroup(
-            pnNoseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout pnTabBienvenidaLayout = new javax.swing.GroupLayout(pnTabBienvenida);
+        pnTabBienvenida.setLayout(pnTabBienvenidaLayout);
+        pnTabBienvenidaLayout.setHorizontalGroup(
+            pnTabBienvenidaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(panelHome, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
-        pnNoseLayout.setVerticalGroup(
-            pnNoseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        pnTabBienvenidaLayout.setVerticalGroup(
+            pnTabBienvenidaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(panelHome, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        pnTabMenu.addTab("Inicio", pnNose);
+        pnTabMenu.addTab("Inicio", pnTabBienvenida);
 
-        javax.swing.GroupLayout jPanelBackground6Layout = new javax.swing.GroupLayout(jPanelBackground6);
-        jPanelBackground6.setLayout(jPanelBackground6Layout);
-        jPanelBackground6Layout.setHorizontalGroup(
-            jPanelBackground6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout pnTabMiTiendaLayout = new javax.swing.GroupLayout(pnTabMiTienda);
+        pnTabMiTienda.setLayout(pnTabMiTiendaLayout);
+        pnTabMiTiendaLayout.setHorizontalGroup(
+            pnTabMiTiendaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(pnMiTienda, javax.swing.GroupLayout.DEFAULT_SIZE, 1080, Short.MAX_VALUE)
         );
-        jPanelBackground6Layout.setVerticalGroup(
-            jPanelBackground6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        pnTabMiTiendaLayout.setVerticalGroup(
+            pnTabMiTiendaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(pnMiTienda, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        pnTabMenu.addTab("Mi tienda", jPanelBackground6);
+        pnTabMenu.addTab("Mi tienda", pnTabMiTienda);
 
-        javax.swing.GroupLayout jPanelBackground2Layout = new javax.swing.GroupLayout(jPanelBackground2);
-        jPanelBackground2.setLayout(jPanelBackground2Layout);
-        jPanelBackground2Layout.setHorizontalGroup(
-            jPanelBackground2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout pnTabComprasLayout = new javax.swing.GroupLayout(pnTabCompras);
+        pnTabCompras.setLayout(pnTabComprasLayout);
+        pnTabComprasLayout.setHorizontalGroup(
+            pnTabComprasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(pnCompras, javax.swing.GroupLayout.DEFAULT_SIZE, 1080, Short.MAX_VALUE)
         );
-        jPanelBackground2Layout.setVerticalGroup(
-            jPanelBackground2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        pnTabComprasLayout.setVerticalGroup(
+            pnTabComprasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(pnCompras, javax.swing.GroupLayout.DEFAULT_SIZE, 727, Short.MAX_VALUE)
         );
 
-        pnTabMenu.addTab("Compras", jPanelBackground2);
+        pnTabMenu.addTab("Compras", pnTabCompras);
 
-        javax.swing.GroupLayout jPanelBackground3Layout = new javax.swing.GroupLayout(jPanelBackground3);
-        jPanelBackground3.setLayout(jPanelBackground3Layout);
-        jPanelBackground3Layout.setHorizontalGroup(
-            jPanelBackground3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout pnTabVentasLayout = new javax.swing.GroupLayout(pnTabVentas);
+        pnTabVentas.setLayout(pnTabVentasLayout);
+        pnTabVentasLayout.setHorizontalGroup(
+            pnTabVentasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(pnVentas, javax.swing.GroupLayout.DEFAULT_SIZE, 1080, Short.MAX_VALUE)
         );
-        jPanelBackground3Layout.setVerticalGroup(
-            jPanelBackground3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        pnTabVentasLayout.setVerticalGroup(
+            pnTabVentasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(pnVentas, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        pnTabMenu.addTab("Ventas", jPanelBackground3);
+        pnTabMenu.addTab("Ventas", pnTabVentas);
 
-        javax.swing.GroupLayout jPanelBackground5Layout = new javax.swing.GroupLayout(jPanelBackground5);
-        jPanelBackground5.setLayout(jPanelBackground5Layout);
-        jPanelBackground5Layout.setHorizontalGroup(
-            jPanelBackground5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout pnTabPreguntasLayout = new javax.swing.GroupLayout(pnTabPreguntas);
+        pnTabPreguntas.setLayout(pnTabPreguntasLayout);
+        pnTabPreguntasLayout.setHorizontalGroup(
+            pnTabPreguntasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(panelPreguntas, javax.swing.GroupLayout.DEFAULT_SIZE, 1080, Short.MAX_VALUE)
         );
-        jPanelBackground5Layout.setVerticalGroup(
-            jPanelBackground5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        pnTabPreguntasLayout.setVerticalGroup(
+            pnTabPreguntasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(panelPreguntas, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        pnTabMenu.addTab("Preguntas", jPanelBackground5);
+        pnTabMenu.addTab("Preguntas", pnTabPreguntas);
 
-        javax.swing.GroupLayout JPanelBackground4Layout = new javax.swing.GroupLayout(JPanelBackground4);
-        JPanelBackground4.setLayout(JPanelBackground4Layout);
-        JPanelBackground4Layout.setHorizontalGroup(
-            JPanelBackground4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout pnTabCuentaLayout = new javax.swing.GroupLayout(pnTabCuenta);
+        pnTabCuenta.setLayout(pnTabCuentaLayout);
+        pnTabCuentaLayout.setHorizontalGroup(
+            pnTabCuentaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(pnMiCuenta, javax.swing.GroupLayout.DEFAULT_SIZE, 1080, Short.MAX_VALUE)
         );
-        JPanelBackground4Layout.setVerticalGroup(
-            JPanelBackground4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        pnTabCuentaLayout.setVerticalGroup(
+            pnTabCuentaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(pnMiCuenta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        pnTabMenu.addTab("Mi cuenta", JPanelBackground4);
+        pnTabMenu.addTab("Mi cuenta", pnTabCuenta);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -188,6 +188,9 @@ public class VentanaHome extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(VentanaHome.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -198,19 +201,19 @@ public class VentanaHome extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    public vista.componentes.jpanelbackground.JPanelBackground JPanelBackground4;
     private javax.swing.JPanel jPanel1;
-    private vista.componentes.jpanelbackground.JPanelBackground jPanelBackground2;
-    private vista.componentes.jpanelbackground.JPanelBackground jPanelBackground3;
-    private vista.componentes.jpanelbackground.JPanelBackground jPanelBackground5;
-    private vista.componentes.jpanelbackground.JPanelBackground jPanelBackground6;
     public vista.paneles.PanelBienvenida panelHome;
     public vista.paneles.PanelPreguntas panelPreguntas;
     public vista.paneles.PanelCompras pnCompras;
     public vista.paneles.PanelMiCuenta pnMiCuenta;
     public vista.paneles.PanelMiTienda pnMiTienda;
-    public vista.componentes.jpanelbackground.JPanelBackground pnNose;
+    public vista.componentes.jpanelbackground.JPanelBackground pnTabBienvenida;
+    public vista.componentes.jpanelbackground.JPanelBackground pnTabCompras;
+    public vista.componentes.jpanelbackground.JPanelBackground pnTabCuenta;
     public javax.swing.JTabbedPane pnTabMenu;
+    public vista.componentes.jpanelbackground.JPanelBackground pnTabMiTienda;
+    public vista.componentes.jpanelbackground.JPanelBackground pnTabPreguntas;
+    public vista.componentes.jpanelbackground.JPanelBackground pnTabVentas;
     public vista.paneles.PanelVentas pnVentas;
     // End of variables declaration//GEN-END:variables
 }

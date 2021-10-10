@@ -102,6 +102,8 @@ public class CtrlCompras{
         
     }
     
-    
+    public static void mtdEliminarInstancia(){
+        instancia = null;
+    }
     
 }

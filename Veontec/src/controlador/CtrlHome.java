@@ -23,6 +23,7 @@ public class CtrlHome implements MouseListener{
     private int tabPreviaSeleccionada;
 
     public CtrlHome(VentanaHome laVista) {
+        System.out.println("Regitrar el id del componente: ");
         this.laVista = laVista;
         this.tabPreviaSeleccionada = 0;
         

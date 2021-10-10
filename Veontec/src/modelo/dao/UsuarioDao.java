@@ -34,7 +34,23 @@ public class UsuarioDao implements keyword_query<UsuarioDto>{
 
     @Override
     public boolean mtdRemover(UsuarioDto obj_dto) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        PreparedStatement ps = null;
+        Connection conn = CtrlHiloConexion.getConexion();
+        String sql = "DELETE FROM tblusuarios "
+                + "WHERE usuaID = ? AND usuaCorreo = ? ; ";        
+        try {
+            ps = conn.prepareStatement(sql.toLowerCase());
+            ps.setInt(1, obj_dto.getCmpID());
+            ps.setString(2, obj_dto.getCmpCorreo());
+            int rs = ps.executeUpdate();
+            
+            if( rs > 0 )
+            return true;
+            
+        } catch (SQLException e) {
+            System.out.println("" + e.getMessage());
+        }
+        return false;
     }
 
     @Override
@@ -63,7 +79,6 @@ public class UsuarioDao implements keyword_query<UsuarioDto>{
                 usuario.setCmpNombreCompleto( rs.getString("usuaNombre") );
                 usuario.setCmpCorreo( rs.getString("usuaCorreo") );
                 usuario.setCmpPassword( rs.getString("usuaPassword") );
-                System.out.println("mtdConsultar \n" + usuario.toString());
             }
             
         } catch (SQLException e) {

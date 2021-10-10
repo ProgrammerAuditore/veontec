@@ -62,7 +62,7 @@ public class PanelMiCuenta extends javax.swing.JPanel {
         campoCorreo1.setEditable(false);
 
         btnEliminarCuenta.setImgButtonType("danger");
-        btnEliminarCuenta.setTexto("Elimiinar cuenta");
+        btnEliminarCuenta.setTexto("Eliminar cuenta");
 
         etiqueta2.setText("Contraseña");
 

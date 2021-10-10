@@ -43,7 +43,7 @@
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout"/>
       <SubComponents>
-        <Container class="vista.componentes.jpanelbackground.JPanelBackground" name="pnNose">
+        <Container class="vista.componentes.jpanelbackground.JPanelBackground" name="pnTabBienvenida">
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
           </AuxValues>
@@ -75,7 +75,10 @@
             </Component>
           </SubComponents>
         </Container>
-        <Container class="vista.componentes.jpanelbackground.JPanelBackground" name="jPanelBackground6">
+        <Container class="vista.componentes.jpanelbackground.JPanelBackground" name="pnTabMiTienda">
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+          </AuxValues>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
               <JTabbedPaneConstraints tabName="Mi tienda">
@@ -104,7 +107,10 @@
             </Component>
           </SubComponents>
         </Container>
-        <Container class="vista.componentes.jpanelbackground.JPanelBackground" name="jPanelBackground2">
+        <Container class="vista.componentes.jpanelbackground.JPanelBackground" name="pnTabCompras">
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+          </AuxValues>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
               <JTabbedPaneConstraints tabName="Compras">
@@ -133,7 +139,10 @@
             </Component>
           </SubComponents>
         </Container>
-        <Container class="vista.componentes.jpanelbackground.JPanelBackground" name="jPanelBackground3">
+        <Container class="vista.componentes.jpanelbackground.JPanelBackground" name="pnTabVentas">
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+          </AuxValues>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
               <JTabbedPaneConstraints tabName="Ventas">
@@ -162,7 +171,10 @@
             </Component>
           </SubComponents>
         </Container>
-        <Container class="vista.componentes.jpanelbackground.JPanelBackground" name="jPanelBackground5">
+        <Container class="vista.componentes.jpanelbackground.JPanelBackground" name="pnTabPreguntas">
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+          </AuxValues>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
               <JTabbedPaneConstraints tabName="Preguntas">
@@ -191,7 +203,7 @@
             </Component>
           </SubComponents>
         </Container>
-        <Container class="vista.componentes.jpanelbackground.JPanelBackground" name="JPanelBackground4">
+        <Container class="vista.componentes.jpanelbackground.JPanelBackground" name="pnTabCuenta">
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
           </AuxValues>

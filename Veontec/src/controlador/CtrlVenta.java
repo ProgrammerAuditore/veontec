@@ -99,6 +99,8 @@ public class CtrlVenta{
         
     }
     
-    
+    public static void mtdEliminarInstancia(){
+        instancia = null;
+    }
     
 }

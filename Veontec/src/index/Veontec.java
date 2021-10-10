@@ -1,7 +1,7 @@
 package index;
 
 import controlador.CtrlHiloConexion;
-import controlador.CtrlInicio;
+import controlador.CtrlSignUp;
 import hilos.HiloConexion;
 import hilos.HiloPrincipal;
 import java.io.File;
@@ -21,11 +21,12 @@ import src.Info;
 import src.Recursos;
 import src.idiomas.Idiomas;
 import vista.ventanas.VentanaHome;
-import vista.ventanas.VentanaInicio;
+import vista.ventanas.VentanaSingUp;
 
 public class Veontec {
     
     public static VentanaHome ventanaHome;
+    public static VentanaSingUp ventanaSession;
     public static Properties idioma = new Idiomas("en");
     public static long ctrlID;
     public static String IdiomaDefinido;
@@ -57,8 +58,8 @@ public class Veontec {
         hp.setDaemon(true);
         //hs.setDaemon(true);
         
-        VentanaInicio ni = new VentanaInicio();
-        CtrlInicio ctrl = new CtrlInicio(ni, ni.pnRegistrarme, ni.pnLoggin); 
+        Veontec.ventanaSession = new VentanaSingUp();
+        CtrlSignUp ctrl = new CtrlSignUp(Veontec.ventanaSession, Veontec.ventanaSession.pnRegistrarme, Veontec.ventanaSession.pnLoggin); 
         ctrl.mtdInit();
         
         // * Ejecutar hilos

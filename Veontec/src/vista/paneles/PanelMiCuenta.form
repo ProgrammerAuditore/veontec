@@ -123,7 +123,7 @@
         <Component class="vista.componentes.boton.Boton" name="btnEliminarCuenta">
           <Properties>
             <Property name="imgButtonType" type="java.lang.String" value="danger"/>
-            <Property name="texto" type="java.lang.String" value="Elimiinar cuenta"/>
+            <Property name="texto" type="java.lang.String" value="Eliminar cuenta"/>
           </Properties>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>

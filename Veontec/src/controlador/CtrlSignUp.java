@@ -11,18 +11,18 @@ import modelo.dto.UsuarioDto;
 import vista.paneles.PanelInicarSession;
 import vista.paneles.PanelRegistrarme;
 import vista.ventanas.VentanaHome;
-import vista.ventanas.VentanaInicio;
+import vista.ventanas.VentanaSingUp;
 
-public class CtrlInicio implements MouseListener{
+public class CtrlSignUp implements MouseListener{
     
     // * Vistas
     private PanelRegistrarme pnRegistrarme;
     private PanelInicarSession pnInicarSession;
-    private VentanaInicio ni;
+    private VentanaSingUp ni;
     
     // * Modelos
 
-    public CtrlInicio(VentanaInicio ni, PanelRegistrarme pnRegistrarme, PanelInicarSession pnInicarSession) {
+    public CtrlSignUp(VentanaSingUp ni, PanelRegistrarme pnRegistrarme, PanelInicarSession pnInicarSession) {
         this.ni = ni;
         this.pnRegistrarme = pnRegistrarme;
         this.pnInicarSession = pnInicarSession;
@@ -73,7 +73,6 @@ public class CtrlInicio implements MouseListener{
         UsuarioDao dao = new UsuarioDao();
         dto.setCmpCorreo( pnInicarSession.campoCorreo1.getText().trim() );
         dto = dao.mtdConsultar(dto);
-        System.out.println("Iniciar Session : \n " + dto.toString());
         
         if( dto.getCmpCorreo() == null || dto.getCmpPassword() == null   ){
             JOptionPane.showMessageDialog(null, "Usuario no registrado o verifeque los datos.");
@@ -84,18 +83,23 @@ public class CtrlInicio implements MouseListener{
         System.out.println("\n" + pnInicarSession.campoCorreo1.getText().trim() + "\n" + dto.getCmpCorreo().trim());
         if( pnInicarSession.campoCorreo1.getText().trim().equals(dto.getCmpCorreo().trim())
             && mtdVerificarPassword(dto.getCmpPassword().trim()) ){
-            JOptionPane.showMessageDialog(ni, "Bienvenido " + dto.getCmpNombreCompleto() );
-            ni.setVisible(false);
-            ni.dispose();
             
-            VentanaHome vh = new VentanaHome();
-            Veontec.usuarioDao = dao;
-            Veontec.usuarioDto = dto;
-            Veontec.ventanaHome = vh;
-            vh.setTitle( Veontec.usuarioDto.getCmpNombreCompleto() + " | "  + Veontec.usuarioDto.getCmpCorreo());
-            CtrlHome ctrl = new CtrlHome(vh);
-            ctrl.laVista.setLocationRelativeTo(null);
-            ctrl.laVista.setVisible(true);
+            
+            if( Veontec.ventanaHome == null ){
+                JOptionPane.showMessageDialog(ni, "Bienvenido " + dto.getCmpNombreCompleto() );
+                
+                Veontec.ventanaHome = new VentanaHome();
+                Veontec.usuarioDao = dao;
+                Veontec.usuarioDto = dto;
+                Veontec.ventanaHome.setTitle( Veontec.usuarioDto.getCmpNombreCompleto() + " | "  + Veontec.usuarioDto.getCmpCorreo());
+                CtrlHome ctrl = new CtrlHome(Veontec.ventanaHome);
+                ctrl.laVista.setLocationRelativeTo(null);
+                ctrl.laVista.setVisible(true);
+
+                Veontec.ventanaSession.setVisible(false);
+                Veontec.ventanaSession.dispose();
+                Veontec.ventanaSession = null;
+            }
             
         }else{
             JOptionPane.showMessageDialog(ni, "Vefica que los datos sean correctos.");

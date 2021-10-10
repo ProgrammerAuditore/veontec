@@ -130,4 +130,8 @@ public class CtrlMiTienda implements MouseListener{
     @Override
     public void mouseExited(MouseEvent e) {}
     
+    public static void mtdEliminarInstancia(){
+        instancia = null;
+    }
+    
 }

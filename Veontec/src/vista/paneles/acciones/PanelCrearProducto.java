@@ -136,6 +136,7 @@ public class PanelCrearProducto extends javax.swing.JPanel {
         cmpCategoria.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Mochilas" }));
 
         cmpDescripcion.setColumns(20);
+        cmpDescripcion.setLineWrap(true);
         cmpDescripcion.setRows(5);
         cmpDescripcion.setText("Es nueva");
         jScrollPane1.setViewportView(cmpDescripcion);
