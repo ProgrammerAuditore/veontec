@@ -3,6 +3,8 @@ package controlador.acciones;
 import controlador.CtrlMiTienda;
 import index.Veontec;
 import java.awt.Dialog;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -13,6 +15,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
 import javax.swing.ImageIcon;
+import javax.swing.JCheckBox;
 import javax.swing.JDialog;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
@@ -21,7 +24,7 @@ import modelo.dao.ProductoDao;
 import modelo.dto.ProductoDto;
 import vista.paneles.acciones.PanelCrearProducto;
 
-public class CtrlModalCrearProducto {
+public class CtrlModalCrearProducto implements ActionListener{
     
     // * Vista
     private PanelCrearProducto laVista;
@@ -108,6 +111,10 @@ public class CtrlModalCrearProducto {
     
     // * Métodos
     public void mtdInit(){
+        laVista.cboxBoleto.addActionListener(this);
+        laVista.cboxProductoExterno.addActionListener(this);
+        laVista.cmboxVuelos.addActionListener(this);
+        
         mtdAgregerEventoWindow();
         mtdEventoBtnAceptar();
         mtdEventoBtnCancelar();
@@ -195,6 +202,52 @@ public class CtrlModalCrearProducto {
         modal.removeAll();
         modal.setVisible(false);
         modal.dispose();
+    }
+    
+    private void mtdDeseleccionar( JCheckBox opcion, boolean marca){
+        laVista.cboxBoleto.setSelected(false);
+        laVista.cboxProductoExterno.setSelected(false);
+        laVista.cmboxVuelos.setSelected(false);
+        laVista.cmpEnlace.setEditable(false);
+        laVista.cmpEnlace.setEnabled(false);
+        laVista.cmpEnlace.setVerificarCampo(false);
+        laVista.cmpEnlace.getEstiloTextEstablecido();
+        
+        if(marca){
+            opcion.setSelected(true);
+            laVista.cmpEnlace.setEditable(true);
+            laVista.cmpEnlace.setEnabled(true);
+            laVista.cmpEnlace.setVerificarCampo(true);
+        }
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        
+        if( e.getSource() == laVista.cmboxVuelos ){
+            if( laVista.cmboxVuelos.isSelected() ){
+                mtdDeseleccionar(laVista.cmboxVuelos , true);
+            }else{
+                mtdDeseleccionar(null, false);
+            }
+        }
+        
+        if( e.getSource() == laVista.cboxBoleto ){
+            if( laVista.cboxBoleto.isSelected() ){
+                mtdDeseleccionar(laVista.cboxBoleto , true);
+            }else{
+                mtdDeseleccionar(null, false);
+            }
+        }
+        
+        if( e.getSource() == laVista.cboxProductoExterno ){
+            if( laVista.cboxProductoExterno.isSelected() ){
+                mtdDeseleccionar(laVista.cboxProductoExterno , true);
+            }else{
+                mtdDeseleccionar(null, false);
+            }
+        }
+        
     }
     
 }
