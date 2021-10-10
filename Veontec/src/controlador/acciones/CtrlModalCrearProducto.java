@@ -88,7 +88,7 @@ public class CtrlModalCrearProducto implements ActionListener{
                 laVista.updateUI();
                 modal.validate();
                 modal.repaint();
-                JOptionPane.showMessageDialog(null, "Editando producto...");
+                JOptionPane.showMessageDialog(null, "Crear un producto...");
             }
         };
         
@@ -147,8 +147,7 @@ public class CtrlModalCrearProducto implements ActionListener{
             productoDto.setProdEnlace( laVista.cmpEnlace.getText() );
             productoDto.setProdPrecio( Double.parseDouble(laVista.cmpPrecio.getText()) );
             productoDto.setProdStock( Integer.parseInt(laVista.cmpStock.getText()) );
-            productoDto.setProdTipo(0);            
-            productoDto.setProdEnlace("Vacio");
+            mtdEstablecerTipoProductoYEnlace();
 
             if( productoDao.mtdInsetar(productoDto) ){
                 CtrlMiTienda.mtdRecargarMisProductos();
@@ -218,6 +217,39 @@ public class CtrlModalCrearProducto implements ActionListener{
             laVista.cmpEnlace.setEditable(true);
             laVista.cmpEnlace.setEnabled(true);
             laVista.cmpEnlace.setVerificarCampo(true);
+        }
+    }
+    
+    private void mtdEstablecerTipoProductoYEnlace(){
+        // Tipos de productos
+        // 1 ; Significa producto interno
+        // 3 ; Significa producto externo para Producto Externo
+        // 7 ; Significa producto externo para Boletos
+        // 9 ; Significa producto externo para Vuelos
+        String strEnlace = "";
+        
+        if( laVista.cboxProductoExterno.isSelected() ){
+            productoDto.setProdTipo(3);
+            
+        }else 
+        if( laVista.cboxBoleto.isSelected() ){
+            productoDto.setProdTipo(7);
+            
+        }else 
+        if( laVista.cmboxVuelos.isSelected() ){
+            productoDto.setProdTipo(9);
+            
+        } 
+        else{
+            productoDto.setProdTipo(1);
+            
+        }
+        
+        if( productoDto.getProdTipo().intValue() == 1 ){
+            productoDto.setProdEnlace("Vacio");
+        }else{
+            strEnlace = laVista.cmpEnlace.getText().trim();
+            productoDto.setProdEnlace(strEnlace);
         }
     }
 

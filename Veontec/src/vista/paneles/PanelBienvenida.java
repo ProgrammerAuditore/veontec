@@ -28,8 +28,8 @@ public class PanelBienvenida extends javax.swing.JPanel {
     public PanelBienvenida() {
         initComponents();
         
-        this.scpContenedor.getVerticalScrollBar().setUnitIncrement(16);
-        this.scpContenedor.getHorizontalScrollBar().setUnitIncrement(16);
+        this.scpContenedor.getVerticalScrollBar().setUnitIncrement(64);
+        this.scpContenedor.getHorizontalScrollBar().setUnitIncrement(64);
     }
 
     /**

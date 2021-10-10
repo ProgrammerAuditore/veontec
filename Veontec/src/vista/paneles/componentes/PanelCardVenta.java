@@ -27,7 +27,7 @@ public class PanelCardVenta extends javax.swing.JPanel {
         this.panelBackground.setEnabled(true);
         this.panelBackground.setVisible(true);
         
-        Dimension tamImgPortada = new Dimension(202, 212);
+        Dimension tamImgPortada = new Dimension(225, 228);
         this.pnImgPortada.setPreferredSize(tamImgPortada);
         this.pnImgPortada.setSize(tamImgPortada);
        
@@ -46,7 +46,6 @@ public class PanelCardVenta extends javax.swing.JPanel {
 
         jPanel1 = new javax.swing.JPanel();
         panelBackground = new vista.componentes.jpanelbackground.JPanelBackground();
-        pnImgPortada = new javax.swing.JPanel();
         etqTitulo = new vista.componentes.etiqueta.Etiqueta();
         etqPrecioUnidad = new vista.componentes.etiqueta.Etiqueta();
         etqStockDisponible = new vista.componentes.etiqueta.Etiqueta();
@@ -54,6 +53,7 @@ public class PanelCardVenta extends javax.swing.JPanel {
         cmpStockVendido = new vista.componentes.campos.CampoTexto();
         jScrollPane1 = new javax.swing.JScrollPane();
         cmpDetalleVenta = new javax.swing.JTextArea();
+        pnImgPortada = new vista.componentes.jpanelbackground.JPanelBackground();
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -72,19 +72,6 @@ public class PanelCardVenta extends javax.swing.JPanel {
         panelBackground.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, java.awt.Color.white, java.awt.Color.lightGray, java.awt.Color.white, java.awt.Color.lightGray));
         panelBackground.setImgOpacidad(1.0F);
         panelBackground.setImgRutaInternoActivo(false);
-
-        pnImgPortada.setBackground(new java.awt.Color(0, 0, 0));
-
-        javax.swing.GroupLayout pnImgPortadaLayout = new javax.swing.GroupLayout(pnImgPortada);
-        pnImgPortada.setLayout(pnImgPortadaLayout);
-        pnImgPortadaLayout.setHorizontalGroup(
-            pnImgPortadaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 200, Short.MAX_VALUE)
-        );
-        pnImgPortadaLayout.setVerticalGroup(
-            pnImgPortadaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 210, Short.MAX_VALUE)
-        );
 
         etqTitulo.setForeground(new java.awt.Color(255, 255, 255));
         etqTitulo.setText("Titulo del producto para vender el la tienda");
@@ -116,27 +103,39 @@ public class PanelCardVenta extends javax.swing.JPanel {
         });
 
         cmpDetalleVenta.setColumns(20);
+        cmpDetalleVenta.setLineWrap(true);
         cmpDetalleVenta.setRows(5);
         cmpDetalleVenta.setText("<Comporador>\n<FechaVendido>\n\n<Descripcion>");
         jScrollPane1.setViewportView(cmpDetalleVenta);
+
+        javax.swing.GroupLayout pnImgPortadaLayout = new javax.swing.GroupLayout(pnImgPortada);
+        pnImgPortada.setLayout(pnImgPortadaLayout);
+        pnImgPortadaLayout.setHorizontalGroup(
+            pnImgPortadaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 223, Short.MAX_VALUE)
+        );
+        pnImgPortadaLayout.setVerticalGroup(
+            pnImgPortadaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
 
         javax.swing.GroupLayout panelBackgroundLayout = new javax.swing.GroupLayout(panelBackground);
         panelBackground.setLayout(panelBackgroundLayout);
         panelBackgroundLayout.setHorizontalGroup(
             panelBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelBackgroundLayout.createSequentialGroup()
-                .addComponent(pnImgPortada, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(pnImgPortada, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panelBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelBackgroundLayout.createSequentialGroup()
                         .addGroup(panelBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(etqStockDisponible, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(cmpStockVendido, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 100, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 88, Short.MAX_VALUE)
                         .addGroup(panelBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(cmpPrecioUnidad, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(etqPrecioUnidad, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(etqTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(etqTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, 408, Short.MAX_VALUE)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addContainerGap())
         );
@@ -156,9 +155,9 @@ public class PanelCardVenta extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(cmpPrecioUnidad, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 108, Short.MAX_VALUE)
                 .addContainerGap())
-            .addComponent(pnImgPortada, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(pnImgPortada, javax.swing.GroupLayout.DEFAULT_SIZE, 226, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -169,7 +168,7 @@ public class PanelCardVenta extends javax.swing.JPanel {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panelBackground, javax.swing.GroupLayout.DEFAULT_SIZE, 214, Short.MAX_VALUE)
+            .addComponent(panelBackground, javax.swing.GroupLayout.DEFAULT_SIZE, 230, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -192,6 +191,6 @@ public class PanelCardVenta extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private vista.componentes.jpanelbackground.JPanelBackground panelBackground;
-    public javax.swing.JPanel pnImgPortada;
+    public vista.componentes.jpanelbackground.JPanelBackground pnImgPortada;
     // End of variables declaration//GEN-END:variables
 }

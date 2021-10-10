@@ -79,6 +79,7 @@ public class CtrlVenta{
         }
         
         for (int i = 0; i < totalProductos; i++) {
+            producto_dto = new ProductoDto();
             producto_dto.setProdID( lstMisVentas.get(i).getVentProducto() );
             producto_dto.setProdUsuario( lstMisVentas.get(i).getVentVendedor() );
             producto_dto = producto_dao.mtdConsultar(producto_dto);

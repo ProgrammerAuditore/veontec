@@ -23,9 +23,7 @@ public class PanelCardProducto extends javax.swing.JPanel {
         Dimension tam = new Dimension(362, 580);
         this.setPreferredSize( tam );
         this.setSize( tam );
-        this.panelBackground.setBackground(new Color(40,175,176));
-        this.panelBackground.setEnabled(true);
-        this.panelBackground.setVisible(true);
+        mtdBackgroundProductoInterno();
        
         Dimension tamImg = new Dimension(361, 326);
         this.pnImgPortada.setSize(tamImg);
@@ -34,6 +32,18 @@ public class PanelCardProducto extends javax.swing.JPanel {
         this.cmpPrecioUnidad.setToolTipText(null);
         this.cmpStockDisponible.setToolTipText(null);
         
+    }
+    
+    public void mtdBackgroundProductoInterno(){
+        this.panelBackground.setBackground(new Color(0, 102, 102));
+        this.panelBackground.setEnabled(true);
+        this.panelBackground.setVisible(true);
+    }
+    
+    public void mtdBackgroundProductoExterno(){
+        this.panelBackground.setBackground(new Color(51, 51, 51));
+        this.panelBackground.setEnabled(true);
+        this.panelBackground.setVisible(true);
     }
     
     
@@ -56,8 +66,8 @@ public class PanelCardProducto extends javax.swing.JPanel {
         cmpStockDisponible = new vista.componentes.campos.CampoTexto();
         jScrollPane1 = new javax.swing.JScrollPane();
         cmpDetalleProducto = new javax.swing.JTextArea();
-        btnHacerCompra = new vista.componentes.boton.Boton();
-        btnHacerPregunta = new vista.componentes.boton.Boton();
+        btnComprar = new vista.componentes.boton.Boton();
+        btnPreguntar = new vista.componentes.boton.Boton();
         pnImgPortada = new vista.componentes.jpanelbackground.JPanelBackground();
         cmpVendedor = new vista.componentes.etiqueta.Etiqueta();
 
@@ -74,17 +84,19 @@ public class PanelCardProducto extends javax.swing.JPanel {
 
         setBackground(new java.awt.Color(204, 204, 204));
 
-        panelBackground.setBackground(new java.awt.Color(40, 175, 176));
+        panelBackground.setBackground(new java.awt.Color(0, 102, 102));
         panelBackground.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, java.awt.Color.white, java.awt.Color.lightGray, java.awt.Color.white, java.awt.Color.lightGray));
         panelBackground.setImgOpacidad(1.0F);
         panelBackground.setImgRutaInternoActivo(false);
 
-        etqTitulo.setForeground(new java.awt.Color(255, 255, 255));
+        etqTitulo.setForeground(new java.awt.Color(153, 153, 153));
         etqTitulo.setText("Titulo del producto para vender el la tienda");
 
+        etqPrecioUnidad.setForeground(new java.awt.Color(255, 255, 255));
         etqPrecioUnidad.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         etqPrecioUnidad.setText("Precio x Unidad");
 
+        etqStockDisponible.setForeground(new java.awt.Color(255, 255, 255));
         etqStockDisponible.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         etqStockDisponible.setText("Stock disponible");
 
@@ -112,14 +124,15 @@ public class PanelCardProducto extends javax.swing.JPanel {
 
         cmpDetalleProducto.setEditable(false);
         cmpDetalleProducto.setColumns(20);
+        cmpDetalleProducto.setLineWrap(true);
         cmpDetalleProducto.setRows(5);
         cmpDetalleProducto.setText("<Descripcion>");
         jScrollPane1.setViewportView(cmpDetalleProducto);
 
-        btnHacerCompra.setImgButtonType("success");
-        btnHacerCompra.setTexto("Comprar");
+        btnComprar.setImgButtonType("success");
+        btnComprar.setTexto("Comprar");
 
-        btnHacerPregunta.setTexto("Preguntar");
+        btnPreguntar.setTexto("Preguntar");
 
         pnImgPortada.setImgBackgroundEnabled(true);
 
@@ -133,6 +146,8 @@ public class PanelCardProducto extends javax.swing.JPanel {
             pnImgPortadaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 326, Short.MAX_VALUE)
         );
+
+        cmpVendedor.setForeground(new java.awt.Color(255, 255, 255));
 
         javax.swing.GroupLayout panelBackgroundLayout = new javax.swing.GroupLayout(panelBackground);
         panelBackground.setLayout(panelBackgroundLayout);
@@ -148,12 +163,12 @@ public class PanelCardProducto extends javax.swing.JPanel {
                         .addGroup(panelBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(etqStockDisponible, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE)
                             .addComponent(cmpStockDisponible, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE)
-                            .addComponent(btnHacerCompra, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(btnComprar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(18, 18, 18)
                         .addGroup(panelBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(cmpPrecioUnidad, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(etqPrecioUnidad, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE)
-                            .addComponent(btnHacerPregunta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addComponent(btnPreguntar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addComponent(cmpVendedor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -179,8 +194,8 @@ public class PanelCardProducto extends javax.swing.JPanel {
                         .addComponent(cmpPrecioUnidad, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
                 .addGroup(panelBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnHacerPregunta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnHacerCompra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnPreguntar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnComprar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
@@ -206,8 +221,8 @@ public class PanelCardProducto extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    public vista.componentes.boton.Boton btnHacerCompra;
-    public vista.componentes.boton.Boton btnHacerPregunta;
+    public vista.componentes.boton.Boton btnComprar;
+    public vista.componentes.boton.Boton btnPreguntar;
     public javax.swing.JTextArea cmpDetalleProducto;
     public vista.componentes.campos.CampoTexto cmpPrecioUnidad;
     public vista.componentes.campos.CampoTexto cmpStockDisponible;
