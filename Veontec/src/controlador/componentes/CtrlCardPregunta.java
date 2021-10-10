@@ -13,17 +13,19 @@ import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
+import java.util.List;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import modelo.dao.PreguntaDao;
 import modelo.dao.ProductoDao;
+import modelo.dao.RespuestaDao;
 import modelo.dao.UsuarioDao;
 import modelo.dto.PreguntaDto;
 import modelo.dto.ProductoDto;
+import modelo.dto.RespuestaDto;
 import modelo.dto.UsuarioDto;
-import static org.bouncycastle.asn1.x500.style.RFC4519Style.l;
 import vista.paneles.componentes.PanelCardPregunta;
 
 public class CtrlCardPregunta {
@@ -36,6 +38,8 @@ public class CtrlCardPregunta {
     PreguntaDto preguntaDto;
     ProductoDto productoDto;
     ProductoDao productoDao;
+    RespuestaDao respuestaDao;
+    RespuestaDto respuestaDto;
     UsuarioDto usuarioDto;
     UsuarioDao usuarioDao;
     
@@ -43,6 +47,7 @@ public class CtrlCardPregunta {
     private GridBagConstraints laVista_dimensiones;
     private Integer item;
     private ImageIcon portada;
+    private List<RespuestaDto> lstRespuestas;
     
     // ***** Controlador
     public CtrlCardPregunta(PreguntaDto preguntaDto, ProductoDto productoDto, UsuarioDto usuarioDto) {
@@ -56,13 +61,15 @@ public class CtrlCardPregunta {
         this.laVista = new PanelCardPregunta();
         this.preguntaDao = new PreguntaDao();
         this.usuarioDao = new UsuarioDao();
+        this.respuestaDao = new RespuestaDao();
+        this.respuestaDto = new RespuestaDto();
         this.laVista_dimensiones = new GridBagConstraints();
     }
     
     // ***** Eventos
     private void mtdEventoBtnPreguntar(){
         MouseListener evtBtnPreguntar = null;
-        laVista.btnResponder.removeMouseListener(evtBtnPreguntar);
+        laVista.btnRespCons.removeMouseListener(evtBtnPreguntar);
         
         evtBtnPreguntar = new MouseAdapter() {
             @Override
@@ -72,12 +79,12 @@ public class CtrlCardPregunta {
             }
         };
         
-        laVista.btnResponder.addMouseListener(evtBtnPreguntar);
+        laVista.btnRespCons.addMouseListener(evtBtnPreguntar);
     }
     
     private void mtdEventoBtnEliminar(){
         MouseListener evtBtnEliminar = null;
-        laVista.btnCancelarCompra.removeMouseListener(evtBtnEliminar);
+        laVista.btnEliminarPregunta.removeMouseListener(evtBtnEliminar);
         
         evtBtnEliminar = new MouseAdapter() {
             @Override
@@ -86,7 +93,21 @@ public class CtrlCardPregunta {
             }
         };
         
-        laVista.btnCancelarCompra.addMouseListener(evtBtnEliminar);
+        laVista.btnEliminarPregunta.addMouseListener(evtBtnEliminar);
+    }
+    
+    private void mtdEventoBtnContestar(){
+        MouseListener evtBtnContestar = null;
+        laVista.btnRespCons.removeMouseListener(evtBtnContestar);
+        
+        evtBtnContestar = new MouseAdapter() {
+            @Override
+            public void mouseReleased(MouseEvent e) {
+               mtdContestarPregunta();
+            }
+        };
+        
+        laVista.btnRespCons.addMouseListener(evtBtnContestar);
     }
     
     // ***** Metodos
@@ -113,24 +134,48 @@ public class CtrlCardPregunta {
         // * Establecer datos en los campos
         laVista.etqTitulo.setText( productoDto.getProdTitulo() );
         laVista.cmpVendedor.setText( usuarioDto.getCmpNombreCompleto() );
-        laVista.cmpDetalleCompra.setText( preguntaDto.getPregPregunta() );
         laVista.cmpFecha.setText( preguntaDto.getPregFecha() );
+        
+        // * Establecer Pregunta
+        String detallePregunta = laVista.cmpDetallePregunta.getText();
+        detallePregunta = detallePregunta.replace("<Pregunta>", preguntaDto.getPregPregunta());
+        
+        // * Obtener todas las respuestas
+        String respuestas = "";
+        respuestaDto.setRespPregunta( preguntaDto.getPregID() );
+        respuestaDto.setRespProducto( preguntaDto.getPregProducto() );
+        lstRespuestas = respuestaDao.mtdListar(respuestaDto);
+        
+        // * Ordenar todas las respuestas
+        if( lstRespuestas.size() > 0 ){
+            for (int i = 0; i < lstRespuestas.size(); i++) {
+                respuestas += lstRespuestas.get(i).getRespFecha() + " : ";
+                respuestas += lstRespuestas.get(i).getRespRespuesta();
+                respuestas += "\n[...]\n";
+            }
+        }
+        
+        // * Establecer respuestas
+        detallePregunta = detallePregunta.replace("<Respuesta>", lstRespuestas.size() == 0 ? "Sin respuesta" : respuestas );
+        laVista.cmpDetallePregunta.setText(detallePregunta);
         
         // * Establecer los botones
         if( preguntaDto.getPregVendedor().equals(Veontec.usuarioDto.getCmpID()) ){
-            laVista.btnCancelarCompra.setEnabled(false);
-            laVista.btnCancelarCompra.setVisible(false);
-            laVista.btnResponder.setTexto("Contestar +1");
+            laVista.btnEliminarPregunta.setEnabled(false);
+            laVista.btnEliminarPregunta.setVisible(false);
+            laVista.btnRespCons.setTexto("Contestar +1");
         }else{
-            laVista.btnCancelarCompra.setTexto("Eliminar");
-            laVista.btnResponder.setTexto("Preguntar +1");
+            laVista.btnEliminarPregunta.setTexto("Eliminar");
+            laVista.btnRespCons.setTexto("Preguntar +1");
         }
     }
     
     private void mtdEstablecerEventos(){
         if( preguntaDto.getPregVendedor().equals(Veontec.usuarioDto.getCmpID()) ){
-            
+            laVista.mtdBackgroundVendedor();
+            mtdEventoBtnContestar();
         }else{
+            laVista.mtdBackgroundComprador();
             mtdEventoBtnEliminar();
             mtdEventoBtnPreguntar();
         }
@@ -174,6 +219,27 @@ public class CtrlCardPregunta {
             }
         }
         
+    }
+    
+    private void mtdContestarPregunta(){
+        String respuesta = JOptionPane.showInputDialog(laVista,"Responder", productoDto.getProdTitulo(), JOptionPane.QUESTION_MESSAGE);
+        if( respuesta != null && !respuesta.trim().isEmpty() ){
+            RespuestaDto dto = new RespuestaDto();
+            
+            dto.setRespPregunta( preguntaDto.getPregID() );
+            dto.setRespProducto( preguntaDto.getPregProducto() );
+            dto.setRespComprador( preguntaDto.getPregComprador() );
+            dto.setRespVendedor(preguntaDto.getPregVendedor() );
+            dto.setRespRespuesta(respuesta);
+            dto.setRespFecha("89/12/1020");
+            dto.setRespEstado(1);
+            
+            if( respuestaDao.mtdInsetar(dto) ){
+                try { CtrlPreguntas.mtdRecargarPreguntas(); } catch (Exception e) { }
+                JOptionPane.showMessageDialog(laVista, "Respuesta enviado exitosamente.");
+            }
+            
+        }
     }
 
     public PanelCardPregunta getLaVista() {

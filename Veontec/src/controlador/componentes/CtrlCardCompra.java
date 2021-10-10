@@ -64,7 +64,11 @@ public class CtrlCardCompra {
         eventoBtnComprar =  new MouseAdapter(){
             @Override
             public void mouseReleased(MouseEvent e) {
-                mtdCancelarCompra();
+                try {
+                    mtdCancelarCompra();
+                } catch (Exception err) {
+                    JOptionPane.showMessageDialog(tarjeta, "Producto no encontrado.");
+                }
             }
         };
         
@@ -78,9 +82,14 @@ public class CtrlCardCompra {
         eventoBtnHacePregunta =  new MouseAdapter(){
             @Override
             public void mouseReleased(MouseEvent e) {
-                // * Llamar al controlador de accion para preguntar
-                CtrlModalHacerPregunta preguntar = new CtrlModalHacerPregunta(prodDto);
-                preguntar.mtdInit();
+                try {
+                    // * Llamar al controlador de accion para preguntar
+                    CtrlModalHacerPregunta preguntar = new CtrlModalHacerPregunta(prodDto);
+                    preguntar.mtdInit();
+                    
+                } catch (Exception err) {
+                    JOptionPane.showMessageDialog(tarjeta, "Producto no encontrado.");
+                }
             }
         };
         
