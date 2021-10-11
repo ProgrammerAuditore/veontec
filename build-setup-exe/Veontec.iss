@@ -2,19 +2,19 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 ; Variables para el proceso de instalacion
-#define MyAppName "MyFreeLab"
-#define MyAppVersion "v1.1.0"
-#define MyAppProduccion "Beta"
+#define MyAppName "Veontec"
+#define MyAppVersion "v0.9.0"
+#define MyAppProduccion "Alpha"
 #define MyAppNameFull MyAppName + " " + MyAppVersion + MyAppProduccion
 #define MyAppPublisher "ProgrammerAuditore <victorvj098@gmail.com>"
-#define MyAppPublisherURL "https://programmerauditore.gitlab.io/myfreelab"
-#define AppCopyright "Copyright Victor J. Maximo (c) 2021"
+#define MyAppPublisherURL "https://programmerauditore.gitlab.io/veontec"
+#define AppCopyright "Copyright Equipo TEC (c) 2021"
 
 ; Variables para compilar y crear la instalacion (Modificar)
 #define MyAppRunName MyAppName + ".jar" ; Sin JRE
 #define MyAppExeName MyAppName + ".jar" ; Sin JRE
-#define MyAppDir "MyFreeLab" ; Sin JRE
-#define MyAppIconoDefault "icons/myfreelab.ico"
+#define MyAppDir "Veontec" ; Sin JRE
+#define MyAppIconoDefault "icons/veontec.ico"
 #define MyAppIconoDesinstall "icons/uninstall.ico"
 
 [Setup]
@@ -39,7 +39,7 @@ AllowNoIcons=no
 ; Uncomment the following line to run in non administrative install mode (install for current user only.)
 PrivilegesRequired=admin
 ;PrivilegesRequiredOverridesAllowed=dialog
-OutputDir=Setup MyFreeLab
+OutputDir=Setup Veontec
 OutputBaseFilename=Setup - {#MyAppNameFull}
 ;SetupIconFile=
 Compression=lzma
@@ -80,16 +80,16 @@ Name: "{autodesktop}\{#MyAppNameFull}"; Filename: "{app}\{#MyAppRunName}"; IconF
 Name: "{group}\{cm:UninstallProgram,{#MyAppNameFull}}"; Filename: "{uninstallexe}"; WorkingDir: {app}; IconFilename: "{app}\{#MyAppIconoDesinstall}"
 
 [Registry]
-; Create "Software\ProgrammerAuditore\MyFreeLab" keys under CURRENT_USER or
+; Create "Software\ProgrammerAuditore\Veontec" keys under CURRENT_USER or
 ; LOCAL_MACHINE depending on administrative or non administrative install
-; mode. The flags tell it to always delete the "MyFreeLab" key upon
+; mode. The flags tell it to always delete the "Veontec" key upon
 ; uninstall, and delete the "ProgrammerAuditore" key if there is nothing left in it.
 Root: HKA; Subkey: "Software\ProgrammerAuditore"; Flags: uninsdeletekeyifempty
-Root: HKA; Subkey: "Software\ProgrammerAuditore\MyFreeLab"; Flags: uninsdeletekey
-Root: HKA; Subkey: "Software\ProgrammerAuditore\MyFreeLab\Settings"; ValueType: string; ValueName: "Language"; ValueData: "{language}"
-; Associate .myp files with MyFreeLab (requires ChangesAssociations=yes)
+Root: HKA; Subkey: "Software\ProgrammerAuditore\Veontec"; Flags: uninsdeletekey
+Root: HKA; Subkey: "Software\ProgrammerAuditore\Veontec\Settings"; ValueType: string; ValueName: "Language"; ValueData: "{language}"
+; Associate .myp files with Veontec (requires ChangesAssociations=yes)
 ;Root: HKA; Subkey: "Software\Classes\.myp\OpenWithProgids"; ValueType: string; ValueName: "MyProgramFile.myp"; ValueData: ""; Flags: uninsdeletevalue
-;Root: HKA; Subkey: "Software\Classes\MyProgramFile.myp"; ValueType: string; ValueName: ""; ValueData: "MyFreeLab File"; Flags: uninsdeletekey
+;Root: HKA; Subkey: "Software\Classes\MyProgramFile.myp"; ValueType: string; ValueName: ""; ValueData: "Veontec File"; Flags: uninsdeletekey
 ;Root: HKA; Subkey: "Software\Classes\MyProgramFile.myp\DefaultIcon"; ValueType: string; ValueName: ""; ValueData: "{app}\App.jar,0"
 ;Root: HKA; Subkey: "Software\Classes\MyProgramFile.myp\shell\open\command"; ValueType: string; ValueName: ""; ValueData: """{app}\App.jar"" ""%1"""
 ;Root: HKA; Subkey: "Software\Classes\Applications\App.jar\SupportedTypes"; ValueType: string; ValueName: ".myp"; ValueData: ""
@@ -97,12 +97,12 @@ Root: HKA; Subkey: "Software\ProgrammerAuditore\MyFreeLab\Settings"; ValueType: 
 ; roaming profiles so settings like paths should be written to HKLM, which
 ; is only possible in administrative install mode.
 Root: HKLM; Subkey: "Software\ProgrammerAuditore"; Flags: uninsdeletekeyifempty; Check: IsAdminInstallMode
-Root: HKLM; Subkey: "Software\ProgrammerAuditore\MyFreeLab"; Flags: uninsdeletekey; Check: IsAdminInstallMode
-Root: HKLM; Subkey: "Software\ProgrammerAuditore\MyFreeLab\Settings"; ValueType: string; ValueName: "InstallPath"; ValueData: "{app}"; Check: IsAdminInstallMode
+Root: HKLM; Subkey: "Software\ProgrammerAuditore\Veontec"; Flags: uninsdeletekey; Check: IsAdminInstallMode
+Root: HKLM; Subkey: "Software\ProgrammerAuditore\Veontec\Settings"; ValueType: string; ValueName: "InstallPath"; ValueData: "{app}"; Check: IsAdminInstallMode
 ; User specific settings should always be written to HKCU, which should only
 ; be done in non administrative install mode.
-Root: HKCU; Subkey: "Software\ProgrammerAuditore\MyFreeLab\Settings"; ValueType: string; ValueName: "UserName"; ValueData: "{userinfoname}"; Check: not IsAdminInstallMode
-Root: HKCU; Subkey: "Software\ProgrammerAuditore\MyFreeLab\Settings"; ValueType: string; ValueName: "UserOrganization"; ValueData: "{userinfoorg}"; Check: not IsAdminInstallMode
+Root: HKCU; Subkey: "Software\ProgrammerAuditore\Veontec\Settings"; ValueType: string; ValueName: "UserName"; ValueData: "{userinfoname}"; Check: not IsAdminInstallMode
+Root: HKCU; Subkey: "Software\ProgrammerAuditore\Veontec\Settings"; ValueType: string; ValueName: "UserOrganization"; ValueData: "{userinfoorg}"; Check: not IsAdminInstallMode
 
 [Code]
 function ShouldSkipPage(PageID: Integer): Boolean;
