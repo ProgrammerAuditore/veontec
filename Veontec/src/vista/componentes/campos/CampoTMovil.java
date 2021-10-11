@@ -5,7 +5,7 @@
  */
 package vista.componentes.campos;
 
-import index.MyFreeLab;
+import index.Veontec;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.FocusEvent;
@@ -27,6 +27,7 @@ public class CampoTMovil extends JTextField implements FocusListener, KeyListene
     
     // * Propiedadades
     public String Placeholder = "Establezca un placeholder";
+    public boolean verificarCampo = true;
     private final Border BorderMargin = BorderFactory.createEmptyBorder(0, 10, 0, 10);
     private final Color borderColor = new Color(192, 192, 192);
     private final Color backgroundColor = new Color(255, 255, 255);
@@ -107,7 +108,7 @@ public class CampoTMovil extends JTextField implements FocusListener, KeyListene
     }
     
     private void setToolTip(){
-        String aqui= MyFreeLab.idioma.getProperty("componente.setToolTip.aqui");
+        String aqui= Veontec.idioma.getProperty("componente.setToolTip.aqui");
         String EstiloToolTip = "<html><b><font color=white>" + getPlaceholder() + " "+aqui + "</font></b></html>" ;
         setToolTipText( EstiloToolTip );
     }
@@ -138,20 +139,23 @@ public class CampoTMovil extends JTextField implements FocusListener, KeyListene
     
     @Override
     public void focusGained(FocusEvent e) {
-        getEstiloTextEscritura();
-        if( getText().equals( getPlaceholder() ) ){
-            setText(null);
+        if( verificarCampo ){
+            getEstiloTextEscritura();
+            if( getText().equals( getPlaceholder() ) ){
+                setText(null);
+            }
         }
-        
     }
 
     @Override
     public void focusLost(FocusEvent e) {
-        if( getText().isEmpty() ){
-            setText(getPlaceholder());
-            getEstiloTextEmpty();
-        }else{
-            getEstiloAprobado();
+        if( verificarCampo ){
+            if( getText().isEmpty() ){
+                setText(getPlaceholder());
+                getEstiloTextEmpty();
+            }else{
+                getEstiloAprobado();
+            }
         }
     }
 
@@ -171,7 +175,7 @@ public class CampoTMovil extends JTextField implements FocusListener, KeyListene
         // * Establecer maximo 10 digitos
         if ( this.getText().length() >= 10 ){
             evt.consume(); 
-            JOptionPane.showMessageDialog(null, MyFreeLab.idioma.getProperty("campoTMovil.keyTyped.msg1"));
+            JOptionPane.showMessageDialog(null, Veontec.idioma.getProperty("campoTMovil.keyTyped.msg1"));
             return;
         }
         
@@ -180,7 +184,7 @@ public class CampoTMovil extends JTextField implements FocusListener, KeyListene
             
             if( Character.isLetter( charCap ) ){
                 evt.consume();
-                JOptionPane.showMessageDialog(null, MyFreeLab.idioma.getProperty("campoTMovil.keyTyped.msg2"));
+                JOptionPane.showMessageDialog(null, Veontec.idioma.getProperty("campoTMovil.keyTyped.msg2"));
 
             }else
             evt.consume();
@@ -194,5 +198,13 @@ public class CampoTMovil extends JTextField implements FocusListener, KeyListene
 
     @Override
     public void keyReleased(KeyEvent e) {}
+
+    public boolean isVerificarCampo() {
+        return verificarCampo;
+    }
+
+    public void setVerificarCampo(boolean verificarCampo) {
+        this.verificarCampo = verificarCampo;
+    }
     
 }

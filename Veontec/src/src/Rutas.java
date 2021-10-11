@@ -3,14 +3,14 @@ package src;
 class Rutas {
     
     // * Obtener recursos desde la raíz el ejecutable .jar (Recursos Externo)
-    public static String pathDataConexion = "myfreelab/conn";
-    public static String pathDataEjecucion = "myfreelab/.run";
-    public static String pathDataPreferencias = "myfreelab/.pconfig";
-    public static String pathSharedLinux = "/opt/myfreelab/shared";
+    public static String pathDataConexion = "veontec/conn";
+    public static String pathDataEjecucion = "veontec/.run";
+    public static String pathDataPreferencias = "veontec/.pconfig";
+    public static String pathSharedLinux = "/opt/veontec/shared";
     public static String pathSharedWin = "shared";
     
     // * Obtener recursos desde el ejecutable .jar (Recursos Interno)
-    public static String pathBkgDefault =  "/storage/img/background_main.png";
+    public static String pathBkgDefault =  "/storage/img/nopicture.jpg";
     public static String pahtContenedorBotones = "/storage/buttons/";
     public static String pathContenedorFuentes = "/storage/fonts/";
     public static String pathContenedorImagenes = "/storage/img/";

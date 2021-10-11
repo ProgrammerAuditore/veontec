@@ -5,7 +5,7 @@
  */
 package vista.componentes.campos;
 
-import index.MyFreeLab;
+import index.Veontec;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -27,6 +27,7 @@ public class CampoTexto extends JTextField implements FocusListener{
     
     // * Propiedadades
     public String Placeholder = "Establezca un placeholder";
+    public boolean verificarCampo = true;
     private final Border BorderMargin = BorderFactory.createEmptyBorder(0, 10, 0, 10);
     private final Color borderColor = new Color(192, 192, 192);
     private final Color backgroundColor = new Color(255, 255, 255);
@@ -66,21 +67,21 @@ public class CampoTexto extends JTextField implements FocusListener{
     }
     
     // Métodos custom
-    private void getEstiloTextEmpty(){
+    public void getEstiloTextEmpty(){
         setBackground( backgroundColor );
         setBorderMargin( Color.RED );
         setForeground( placeholderColor );
         setCaretColor( cursorColor );
     }
     
-    private void getEstiloTextEscritura(){
+    public void getEstiloTextEscritura(){
         setBackground( backgroundColor );
         setBorderMargin( borderColor );
         setForeground( textoColor );
         setCaretColor( cursorColor );
     }
     
-    private void getEstiloTextEstablecido(){
+    public void getEstiloTextEstablecido(){
         setBackground( backgroundColor );
         setBorderMargin( borderColor );
         setForeground( textoColor );
@@ -106,7 +107,7 @@ public class CampoTexto extends JTextField implements FocusListener{
     }
     
     private void setToolTip(){
-        String aqui= MyFreeLab.idioma.getProperty("componente.setToolTip.aqui");
+        String aqui= Veontec.idioma.getProperty("componente.setToolTip.aqui");
         String EstiloToolTip = "<html><b><font color=white>" + getPlaceholder() + " "+aqui + "</font></b></html>" ;
         setToolTipText( EstiloToolTip );
     }
@@ -137,20 +138,23 @@ public class CampoTexto extends JTextField implements FocusListener{
     
     @Override
     public void focusGained(FocusEvent e) {
-        getEstiloTextEscritura();
-        if( getText().equals( getPlaceholder() ) ){
-            setText(null);
+        if( verificarCampo ){
+            getEstiloTextEscritura();
+            if( getText().equals( getPlaceholder() ) ){
+                setText(null);
+            }
         }
-        
     }
 
     @Override
     public void focusLost(FocusEvent e) {
-        if( getText().isEmpty() ){
-            setText(getPlaceholder());
-            getEstiloTextEmpty();
-        }else{
-            getEstiloAprobado();
+        if( verificarCampo ){
+            if( getText().isEmpty() ){
+                setText(getPlaceholder());
+                getEstiloTextEmpty();
+            }else{
+                getEstiloAprobado();
+            }
         }
     }
 
@@ -162,5 +166,13 @@ public class CampoTexto extends JTextField implements FocusListener{
         this.componenteDidireccional = componenteDidireccional;
         setPlaceholder(componenteDidireccional.getText());
     }
-    
+
+    public boolean isVerificarCampo() {
+        return verificarCampo;
+    }
+
+    public void setVerificarCampo(boolean verificarCampo) {
+        this.verificarCampo = verificarCampo;
+    }
+
 }

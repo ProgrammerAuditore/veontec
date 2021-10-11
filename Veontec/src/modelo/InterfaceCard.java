@@ -2,7 +2,7 @@ package modelo;
 
 import java.awt.GridBagConstraints;
 import javax.swing.JPanel;
-import vista.paneles.PanelCardProyectos;
+import vista.paneles.componentes.PanelCardProyectos;
 
 public abstract class InterfaceCard {
     protected  String tipoTarjeta;

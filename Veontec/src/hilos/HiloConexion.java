@@ -1,6 +1,7 @@
 package hilos;
 
 import controlador.CtrlHiloConexion;
+import javax.swing.JOptionPane;
 
 // * Este hilo se sincroniza con el Hilo Principal
 public class HiloConexion extends Thread {
@@ -21,20 +22,26 @@ public class HiloConexion extends Thread {
                         // * Esperaré a terminar la conexion
                         //System.out.println("HiloConexion :: Wait... ");
                         //System.out.println(" Esperaré a terminar la conexion ");
+                        System.out.println("Voentec::NOTA [ Conexión establecida ] ");
                         CtrlHiloConexion.ctrlHiloC.wait();
                     } catch (Exception e) {
                     }
                 }
 
                 // * Conexion cerrada
-                //System.out.println("HiloConexion :: Funcionando... ");
+                System.out.println("Sin conexión ... ");
                 try {
 
                     // Verificando cada 1s Si la conexin está establecida 
                     if (CtrlHiloConexion.ctrlConexion != null) {
-                        if (CtrlHiloConexion.ctrlConexion.isValid(1000)) {
+                        if (CtrlHiloConexion.mtdEstablecer()) {
                             CtrlHiloConexion.ctrlEstado = true;
                             CtrlHiloConexion.ctrlHiloC.notify();
+                            //System.out.println("Voentec::NOTA [ Conexión restablecida ] ");
+                        }else{
+                            System.out.println("Voentec::NOTA [ Sin conexión al servidor ] ");
+                            JOptionPane.showMessageDialog(null, "Voentec::NOTA [ Sin conexión al servidor ] ");
+                            System.exit(0);
                         }
                     }
 
