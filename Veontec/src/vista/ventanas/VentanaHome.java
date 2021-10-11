@@ -16,6 +16,8 @@
  */
 package vista.ventanas;
 
+import java.awt.Dimension;
+
 /**
  *
  * @author victor
@@ -27,6 +29,13 @@ public class VentanaHome extends javax.swing.JFrame {
      */
     public VentanaHome() {
         initComponents();
+        mtdInit();
+    }
+    
+    private void mtdInit(){
+        Dimension tamVentana = new Dimension(1160, 734);
+        this.setSize(tamVentana);
+        this.setPreferredSize(tamVentana);
     }
 
     /**
@@ -51,7 +60,6 @@ public class VentanaHome extends javax.swing.JFrame {
         panelPreguntas = new vista.paneles.PanelPreguntas();
         pnTabCuenta = new vista.componentes.jpanelbackground.JPanelBackground();
         pnMiCuenta = new vista.paneles.PanelMiCuenta();
-        jPanel1 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -135,19 +143,6 @@ public class VentanaHome extends javax.swing.JFrame {
 
         pnTabMenu.addTab("Mi cuenta", pnTabCuenta);
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1080, Short.MAX_VALUE)
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 727, Short.MAX_VALUE)
-        );
-
-        pnTabMenu.addTab("tab7", jPanel1);
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -201,7 +196,6 @@ public class VentanaHome extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel jPanel1;
     public vista.paneles.PanelBienvenida panelHome;
     public vista.paneles.PanelPreguntas panelPreguntas;
     public vista.paneles.PanelCompras pnCompras;

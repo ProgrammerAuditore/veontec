@@ -40,7 +40,7 @@ public class VentanaSingUp extends javax.swing.JFrame {
 
         tabContenedor = new javax.swing.JTabbedPane();
         jPanelBackground2 = new vista.componentes.jpanelbackground.JPanelBackground();
-        pnLoggin = new vista.paneles.PanelInicarSession();
+        pnLoggin = new vista.paneles.PanelSignUp();
         jPanelBackground3 = new vista.componentes.jpanelbackground.JPanelBackground();
         pnRegistrarme = new vista.paneles.PanelRegistrarme();
 
@@ -134,7 +134,7 @@ public class VentanaSingUp extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private vista.componentes.jpanelbackground.JPanelBackground jPanelBackground2;
     private vista.componentes.jpanelbackground.JPanelBackground jPanelBackground3;
-    public vista.paneles.PanelInicarSession pnLoggin;
+    public vista.paneles.PanelSignUp pnLoggin;
     public vista.paneles.PanelRegistrarme pnRegistrarme;
     public javax.swing.JTabbedPane tabContenedor;
     // End of variables declaration//GEN-END:variables

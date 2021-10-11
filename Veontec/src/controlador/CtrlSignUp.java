@@ -9,7 +9,7 @@ import javax.swing.JOptionPane;
 import modelo.dao.UsuarioDao;
 import modelo.dto.UsuarioDto;
 import src.Info;
-import vista.paneles.PanelInicarSession;
+import vista.paneles.PanelSignUp;
 import vista.paneles.PanelRegistrarme;
 import vista.ventanas.VentanaHome;
 import vista.ventanas.VentanaSingUp;
@@ -18,12 +18,12 @@ public class CtrlSignUp implements MouseListener{
     
     // * Vistas
     private PanelRegistrarme pnRegistrarme;
-    private PanelInicarSession pnInicarSession;
+    private PanelSignUp pnInicarSession;
     private VentanaSingUp ni;
     
     // * Modelos
 
-    public CtrlSignUp(VentanaSingUp ni, PanelRegistrarme pnRegistrarme, PanelInicarSession pnInicarSession) {
+    public CtrlSignUp(VentanaSingUp ni, PanelRegistrarme pnRegistrarme, PanelSignUp pnInicarSession) {
         this.ni = ni;
         this.pnRegistrarme = pnRegistrarme;
         this.pnInicarSession = pnInicarSession;
@@ -124,6 +124,8 @@ public class CtrlSignUp implements MouseListener{
         usuario.setCmpCorreo( pnRegistrarme.campoCorreo1.getText().trim() );
         usuario.setCmpPassword(mtdObtenerPasswordEncry());
         
+        // * Comprobar si el correo está disponible
+        // es decir, si no está registrado
         if( !dao.mtdComprobar(usuario) ){
             JOptionPane.showMessageDialog(null, "El correo ya está registrado.");
         }else{

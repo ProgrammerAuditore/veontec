@@ -3,7 +3,6 @@ package controlador;
 import index.Veontec;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import javax.swing.JDialog;
 import modelo.dao.UsuarioDao;
 import modelo.dto.UsuarioDto;
 import vista.ventanas.VentanaHome;

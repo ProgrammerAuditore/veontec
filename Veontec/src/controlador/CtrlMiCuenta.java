@@ -192,54 +192,6 @@ public class CtrlMiCuenta{
         }
     }
     
-    private boolean mtdVerificarPassword(String passwdDB, char[] passwdCmp){
-        // Create instance
-        Argon2 argon2 = Argon2Factory.create();
-
-        // Read password from user
-        char[] password = passwdCmp;
-        
-        try {
-            // Hash password
-            //String hash = argon2.hash(10, 65536, 1, password);
-            // // Estará almacenado en la base de datos
-            String hash = passwdDB;
-            
-            // Verify password
-            if (argon2.verify(hash, password)) {
-                // Hash matches password
-                System.out.println("Hash matches password");
-                return true;
-            } else {
-                // Hash doesn't match password
-                System.out.println("Hash doesn't match password");
-            }
-            
-        } finally {
-            // Wipe confidential data
-            argon2.wipeArray(password);
-        }
-        
-        return false;
-    }
-    
-    private void mtdCerrarSession(){
-        try {
-            Veontec.ventanaHome.setVisible(false);
-            Veontec.ventanaHome.dispose();
-            Veontec.ventanaHome = null;
-        } catch (Exception e) {}
-
-            if( Veontec.ventanaSession == null ){
-                mtdEliminarInstancias();
-                Veontec.ventanaSession = new VentanaSingUp();
-                CtrlSignUp ctrl = new CtrlSignUp(Veontec.ventanaSession, Veontec.ventanaSession.pnRegistrarme, Veontec.ventanaSession.pnLoggin); 
-                ctrl.mtdInit();
-            }
-            
-        
-    }
-    
     private void mtdCambiarContrasena() {
         String passwdActual="", passwdNueva="", passwdRepetir="";
         Box boxPassword = Box.createVerticalBox();
@@ -326,18 +278,27 @@ public class CtrlMiCuenta{
                         // * Encriptar contraseña y alamacenarlo en el DTO 
                         usuarioDto.setCmpCorreo( correoRepetir.trim() );
                         
-                        // * Intetamos actualizar los datos del usuario
-                        if(usuarioDao.mtdActualizar(usuarioDto)){
-                            Veontec.usuarioDto = usuarioDto;
-                            
-                            // * Establecer el titulo de la ventana
-                            Veontec.ventanaHome.setTitle( Veontec.usuarioDto.getCmpNombreCompleto() 
-                            + " | "  + Veontec.usuarioDto.getCmpCorreo() + " - " + Info.NombreSoftware );
-                            // * Actualizar los datos
-                            mtdEstablecerDatos();
-                            JOptionPane.showMessageDialog(laVista, "Correo modificado exitosamnete.");
-                        }
+                        logger.info("Correo existente: " + usuarioDao.mtdComprobar(usuarioDto));
                         
+                        // * Comprobar si el correo está disponible
+                        // es decir, si no está registrado
+                        if( usuarioDao.mtdComprobar(usuarioDto) == true ){
+                            
+                            // * Intetamos actualizar los datos del usuario
+                            if(usuarioDao.mtdActualizar(usuarioDto)){
+                                Veontec.usuarioDto = usuarioDto;
+
+                                // * Establecer el titulo de la ventana
+                                Veontec.ventanaHome.setTitle( Veontec.usuarioDto.getCmpNombreCompleto() 
+                                + " | "  + Veontec.usuarioDto.getCmpCorreo() + " - " + Info.NombreSoftware );
+                                // * Actualizar los datos
+                                mtdEstablecerDatos();
+                                JOptionPane.showMessageDialog(laVista, "Correo modificado exitosamnete.");
+                            }
+                            
+                        }else{
+                            JOptionPane.showMessageDialog(laVista, "El nuevo correo no está disponible.");
+                        }
                     }else{
                         JOptionPane.showMessageDialog(laVista, "El correo nuevo no coinciden.");
                     }
@@ -394,6 +355,54 @@ public class CtrlMiCuenta{
         
         //System.out.println("" + hash);
         return hash;
+    }
+    
+    private boolean mtdVerificarPassword(String passwdDB, char[] passwdCmp){
+        // Create instance
+        Argon2 argon2 = Argon2Factory.create();
+
+        // Read password from user
+        char[] password = passwdCmp;
+        
+        try {
+            // Hash password
+            //String hash = argon2.hash(10, 65536, 1, password);
+            // // Estará almacenado en la base de datos
+            String hash = passwdDB;
+            
+            // Verify password
+            if (argon2.verify(hash, password)) {
+                // Hash matches password
+                System.out.println("Hash matches password");
+                return true;
+            } else {
+                // Hash doesn't match password
+                System.out.println("Hash doesn't match password");
+            }
+            
+        } finally {
+            // Wipe confidential data
+            argon2.wipeArray(password);
+        }
+        
+        return false;
+    }
+    
+    private void mtdCerrarSession(){
+        try {
+            Veontec.ventanaHome.setVisible(false);
+            Veontec.ventanaHome.dispose();
+            Veontec.ventanaHome = null;
+        } catch (Exception e) {}
+
+            if( Veontec.ventanaSession == null ){
+                mtdEliminarInstancias();
+                Veontec.ventanaSession = new VentanaSingUp();
+                CtrlSignUp ctrl = new CtrlSignUp(Veontec.ventanaSession, Veontec.ventanaSession.pnRegistrarme, Veontec.ventanaSession.pnLoggin); 
+                ctrl.mtdInit();
+            }
+            
+        
     }
     
     private void mtdEliminarInstancias(){
