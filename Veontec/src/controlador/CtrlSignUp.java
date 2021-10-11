@@ -40,9 +40,9 @@ public class CtrlSignUp implements MouseListener{
         if(CtrlHiloConexion.checkConexion() == false){
             ni.tabContenedor.getTabComponentAt(1).setEnabled(false);
             ni.tabContenedor.getTabComponentAt(2).setEnabled(false);
-            System.out.println("No hay conexion a la base de datos");
+            //System.out.println("No hay conexion a la base de datos");
         }else{
-            System.out.println("Existe conexion a la base de datos... ");
+            //System.out.println("Existe conexion a la base de datos... ");
         }
         
         // * Mostrar las ventana
@@ -81,7 +81,7 @@ public class CtrlSignUp implements MouseListener{
         }
                     
         // * Verificar usuario
-        System.out.println("\n" + pnInicarSession.campoCorreo1.getText().trim() + "\n" + dto.getCmpCorreo().trim());
+        //System.out.println("\n" + pnInicarSession.campoCorreo1.getText().trim() + "\n" + dto.getCmpCorreo().trim());
         if( pnInicarSession.campoCorreo1.getText().trim().equals(dto.getCmpCorreo().trim())
             && mtdVerificarPassword(dto.getCmpPassword().trim()) ){
             
@@ -153,11 +153,11 @@ public class CtrlSignUp implements MouseListener{
             // Verify password
             if (argon2.verify(hash, password)) {
                 // Hash matches password
-                System.out.println("Hash matches password");
+                //System.out.println("Hash matches password");
                 return true;
             } else {
                 // Hash doesn't match password
-                System.out.println("Hash doesn't match password");
+                //System.out.println("Hash doesn't match password");
             }
             
         } finally {

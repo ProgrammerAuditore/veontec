@@ -129,7 +129,7 @@ public class CtrlCardCompra {
         tarjeta.cmpDetalleCompra.setText( prodDto == null ? "Sin Descripción" : prodDto.getProdDescripcion() );
         
         // * Establecer el vendedor
-        System.out.println("" + compDto.getCompVendedor());
+        //System.out.println("" + compDto.getCompVendedor());
         usuaDto = usuaDao.mtdConsultar(compDto.getCompVendedor());
         tarjeta.cmpVendedor.setText( usuaDto == null ? "Desconocido " : usuaDto.getCmpNombreCompleto() );
         

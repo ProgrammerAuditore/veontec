@@ -11,6 +11,8 @@ import modelo.dao.UsuarioDao;
 import modelo.dto.CompraDto;
 import modelo.dto.ProductoDto;
 import modelo.dto.UsuarioDto;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import vista.paneles.PanelCompras;
 
 public class CtrlCompras{
@@ -29,6 +31,7 @@ public class CtrlCompras{
     private DefaultMutableTreeNode treeNode1;
     
     // Atributos
+    static Log logger = LogFactory.getLog(CtrlCompras.class);
     private static CtrlCompras instancia;
     private List<CompraDto> lstMisCompras;
 
@@ -46,12 +49,18 @@ public class CtrlCompras{
     
     // Obtener instancia | Singleton
     public static CtrlCompras getInstancia(PanelCompras laVista, UsuarioDto dto, UsuarioDao dao){
+        logger.info("Inicializando controlador");
+        
         if( instancia == null ){
+            logger.warn("Creando instancia");
             instancia = new CtrlCompras(laVista, dto, dao);
             instancia.mtdInit();
+        
+        }else{
+            instancia.mtdMostrarProducto();
+        
         }
         
-        instancia.mtdMostrarProducto();
         return instancia;
     }
     
@@ -60,9 +69,11 @@ public class CtrlCompras{
     
     // Métodos
     private void mtdInit(){
+        logger.info("Ejecutando metodo una vez (obligatorio)");
     }
     
     public static boolean mtdRecargarCompras(){
+        logger.warn("Ejecutando metodo ");
         //if( instancia == null ){
             //instancia.mtdInit();
         //}
@@ -72,6 +83,7 @@ public class CtrlCompras{
     }
     
     private void mtdMostrarProducto(){
+        logger.info("Iniciando...");
         //lstMisProductos.clear();
         laVista.pnContenedor.setLayout(new GridBagLayout());
         laVista.pnContenedor.removeAll();
@@ -80,13 +92,13 @@ public class CtrlCompras{
         // El usuario actual es el comprador
         compra_dto.setCompComprador( usuario_dto.getCmpID() );
 
+        logger.info("listando...");
         lstMisCompras = compra_dao.mtdListar(compra_dto);
         int totalProductos = lstMisCompras.size();
         
-        if( totalProductos == 0 ){
-            System.out.println(" No hay producto para mostrar. ");
-        
-        }else{
+        if( totalProductos > 0 ){
+            
+            logger.warn("Recorriendo productos");
             for (int i = 0; i < totalProductos; i++) {
                 CtrlCardCompra tarjeta = new CtrlCardCompra(lstMisCompras.get(i));
                 tarjeta.setItem(i);
@@ -95,6 +107,7 @@ public class CtrlCompras{
             }
             
         }
+            
         
         laVista.pnContenedor.validate();
         laVista.pnContenedor.revalidate();

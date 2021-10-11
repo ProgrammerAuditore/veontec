@@ -16,6 +16,7 @@ import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.border.Border;
+import org.apache.commons.validator.routines.EmailValidator;
 import src.Recursos;
 
 /**
@@ -155,7 +156,7 @@ public class CampoCorreo extends JTextField implements FocusListener, KeyListene
         }
         */
         
-        return true;
+        return EmailValidator.getInstance().isValid(campo);
     }
     
     public boolean isAprobado(){

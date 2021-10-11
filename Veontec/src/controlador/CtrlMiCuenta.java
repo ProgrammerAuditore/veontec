@@ -1,5 +1,6 @@
 package controlador;
 
+import static controlador.CtrlMiTienda.logger;
 import de.mkammerer.argon2.Argon2;
 import de.mkammerer.argon2.Argon2Factory;
 import index.Veontec;
@@ -137,8 +138,10 @@ public class CtrlMiCuenta{
     }
     
     private void mtdEstablecerDatos(){
+        logger.info("Iniciando ...");
         instancia.usuarioDto = Veontec.usuarioDto;
         
+        logger.warn("Estableciendo datos ....");
         laVista.cmpCorreo.setText(usuarioDto.getCmpCorreo() );
         laVista.cmpNombreCompleto.setText(usuarioDto.getCmpNombreCompleto() );
         laVista.cmpDireccion.setText( usuarioDto.getCmpDireccion() );
@@ -373,11 +376,11 @@ public class CtrlMiCuenta{
             // Verify password
             if (argon2.verify(hash, password)) {
                 // Hash matches password
-                System.out.println("Hash matches password");
+                //System.out.println("Hash matches password");
                 return true;
             } else {
                 // Hash doesn't match password
-                System.out.println("Hash doesn't match password");
+                //System.out.println("Hash doesn't match password");
             }
             
         } finally {
@@ -411,7 +414,7 @@ public class CtrlMiCuenta{
         CtrlMiTienda.mtdEliminarInstancia();
         CtrlMiCuenta.mtdEliminarInstancia();
         CtrlPreguntas.mtdEliminarInstancia();
-        CtrlVenta.mtdEliminarInstancia();
+        CtrlVentas.mtdEliminarInstancia();
     }
     
     public static void mtdEliminarInstancia(){

@@ -4,7 +4,6 @@ import controlador.componentes.CtrlCardVenta;
 import index.Veontec;
 import java.awt.GridBagLayout;
 import java.util.List;
-import javax.swing.JDialog;
 import javax.swing.tree.DefaultMutableTreeNode;
 import modelo.dao.ProductoDao;
 import modelo.dao.UsuarioDao;
@@ -12,9 +11,11 @@ import modelo.dao.VentaDao;
 import modelo.dto.ProductoDto;
 import modelo.dto.UsuarioDto;
 import modelo.dto.VentaDto;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import vista.paneles.PanelVentas;
 
-public class CtrlVenta{
+public class CtrlVentas{
     
     // Vista
     public PanelVentas laVista;
@@ -29,11 +30,12 @@ public class CtrlVenta{
     private DefaultMutableTreeNode treeNode1;
     
     // Atributos
-    private static CtrlVenta instancia;
+    static Log logger = LogFactory.getLog(CtrlVentas.class);
+    private static CtrlVentas instancia;
     private List<VentaDto> lstMisVentas;
 
     // Constructor
-    public CtrlVenta(PanelVentas laVista, UsuarioDto dto, UsuarioDao dao) {
+    public CtrlVentas(PanelVentas laVista, UsuarioDto dto, UsuarioDao dao) {
         this.laVista = laVista;
         this.usuario_dto = dto;
         this.usuario_dao = dao;
@@ -45,13 +47,18 @@ public class CtrlVenta{
     }
     
     // Obtener instancia | Singleton
-    public static CtrlVenta getInstancia(PanelVentas laVista, UsuarioDto dto, UsuarioDao dao){
+    public static CtrlVentas getInstancia(PanelVentas laVista, UsuarioDto dto, UsuarioDao dao){
+        logger.warn("Inicializando controlador.... ");
         if( instancia == null ){
-            instancia = new CtrlVenta(laVista, dto, dao);
+            logger.warn("Creando instancia.... ");
+            instancia = new CtrlVentas(laVista, dto, dao);
             instancia.mtdInit();
+        
+        }else{
+            instancia.mtdMostrarProducto();
+        
         }
         
-        instancia.mtdMostrarProducto();
         return instancia;
     }
     
@@ -60,35 +67,37 @@ public class CtrlVenta{
     
     // Métodos
     private void mtdInit(){
+        logger.info("Ejecutando metodo una vez (Obligatorio)");
     }
     
     
     private void mtdMostrarProducto(){
+        logger.info("Iniciando ...");
         //lstMisProductos.clear();
         laVista.pnContenedor.setLayout(new GridBagLayout());
         laVista.pnContenedor.removeAll();
         
-        
+        logger.info("Listando ventas...");
         ventDto.setVentVendedor( Veontec.usuarioDto.getCmpID() );
         lstMisVentas = ventDao.mtdListar(ventDto);
         int totalProductos = lstMisVentas.size();
         
-        if( totalProductos == 0 ){
-            System.out.println(" No hay producto para mostrar. ");
-            return;
-        }
-        
-        for (int i = 0; i < totalProductos; i++) {
-            producto_dto = new ProductoDto();
-            producto_dto.setProdID( lstMisVentas.get(i).getVentProducto() );
-            producto_dto.setProdUsuario( lstMisVentas.get(i).getVentVendedor() );
-            producto_dto = producto_dao.mtdConsultar(producto_dto);
+        if(  totalProductos > 0 ){
             
-            if( producto_dto != null){ 
-                CtrlCardVenta tarjeta = new CtrlCardVenta(lstMisVentas.get(i), producto_dto);
-                tarjeta.setItem(i);
-                tarjeta.mtdInit();
-                laVista.pnContenedor.add(tarjeta.getLaVista(), tarjeta.getTarjeta_dimensiones());
+            logger.warn("Recorriendo productos ....");
+            for (int i = 0; i < totalProductos; i++) {
+                producto_dto = new ProductoDto();
+                producto_dto.setProdID( lstMisVentas.get(i).getVentProducto() );
+                producto_dto.setProdUsuario( lstMisVentas.get(i).getVentVendedor() );
+                producto_dto = producto_dao.mtdConsultar(producto_dto);
+
+                if( producto_dto != null){ 
+                    CtrlCardVenta tarjeta = new CtrlCardVenta(lstMisVentas.get(i), producto_dto);
+                    tarjeta.setItem(i);
+                    tarjeta.mtdInit();
+                    laVista.pnContenedor.add(tarjeta.getLaVista(), tarjeta.getTarjeta_dimensiones());
+                }
+
             }
             
         }

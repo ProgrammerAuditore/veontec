@@ -47,10 +47,13 @@ public class CtrlBienvenida{
         if( instancia == null ){
             logger.info("Creado || CtrlBienvenida::getInstancia ");
             instancia = new CtrlBienvenida(laVista, dto, dao);
+            instancia.mtdInit();
+            
+        }else{
+            instancia.mtdMostrarProducto();
+            
         }
         
-        
-        instancia.mtdInit();
         return instancia;
     }
     
@@ -73,30 +76,27 @@ public class CtrlBienvenida{
         lstMisProductos = producto_dao.mtdListar();
         int totalProductos = lstMisProductos.size();
         
-        if( totalProductos == 0 ){
-            System.out.println(" No hay producto para mostrar. ");
-            logger.warn(" No hay producto para mostrar. ");
-            return;
-        }
+        if( totalProductos > 0 ){
         
-        int columna = 0;
-        int col_total = 3;
-        int fila = 0;
-        logger.warn(" Recorriendo productos. ");
-        for (int i = 0; i < totalProductos; i++) {
-            CtrlCardProducto tarjeta = new CtrlCardProducto(lstMisProductos.get(i), producto_dao);
-            tarjeta.setItem(fila);
-            tarjeta.setColumna(columna);
-            
-            tarjeta.mtdInit();
-            logger.warn(" Agregando producto: #" + i);
-            laVista.pnContenedor.add(tarjeta.getLaVista(), tarjeta.getTarjeta_dimensiones());
-            columna++;
-            
-            if( columna >= col_total ){
-                columna = 0;
-                fila++;
+            int columna = 0, fila = 0; // Establecer contadores para columnas y filas
+            int productos = 3; // Establecer cantida de producto a mostrar por fila
+            logger.warn(" Recorriendo productos. ");
+            for (int i = 0; i < totalProductos; i++) {
+                CtrlCardProducto tarjeta = new CtrlCardProducto(lstMisProductos.get(i), producto_dao);
+                tarjeta.setItem(fila);
+                tarjeta.setColumna(columna);
+
+                tarjeta.mtdInit();
+                logger.warn(" Agregando producto: #" + i);
+                laVista.pnContenedor.add(tarjeta.getLaVista(), tarjeta.getTarjeta_dimensiones());
+                columna++;
+
+                if( columna >= productos ){
+                    columna = 0;
+                    fila++;
+                }
             }
+            
         }
         
         laVista.pnContenedor.validate();

@@ -1,9 +1,9 @@
 package controlador;
 
+import static controlador.CtrlPreguntas.logger;
 import controlador.acciones.CtrlModalCrearProducto;
 import controlador.componentes.CtrlCardMiProducto;
 import java.awt.GridBagLayout;
-import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.List;
@@ -15,6 +15,8 @@ import modelo.dao.UsuarioDao;
 import modelo.dto.ImagesDto;
 import modelo.dto.ProductoDto;
 import modelo.dto.UsuarioDto;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import vista.paneles.acciones.PanelCrearProducto;
 import vista.paneles.PanelMiTienda;
 
@@ -34,6 +36,7 @@ public class CtrlMiTienda implements MouseListener{
     private DefaultMutableTreeNode treeNode1;
     
     // Atributos
+    static Log logger = LogFactory.getLog(CtrlMiTienda.class);
     private static CtrlMiTienda instancia;
     private List<ProductoDto> lstMisProductos;
     private PanelCrearProducto pnCrearProducto;
@@ -52,13 +55,19 @@ public class CtrlMiTienda implements MouseListener{
     
     // Obtener instancia | Singleton
     public static CtrlMiTienda getInstancia(PanelMiTienda laVista, UsuarioDto dto, UsuarioDao dao){
+        logger.warn("Inicializando controlador.... ");
+        
         if( instancia == null ){
+            logger.warn("Creando instancia.... ");
             instancia = new CtrlMiTienda(laVista, dto, dao);
             instancia.mtdInit();
+            
+        }else{
+            instancia.mtdRecargarDatos();
+            instancia.mtdMostrarProducto();
+        
         }
         
-        instancia.mtdRecargarDatos();
-        instancia.mtdMostrarProducto();
         return instancia;
     }
     
@@ -79,6 +88,7 @@ public class CtrlMiTienda implements MouseListener{
    
     // Métodos
     private void mtdInit(){
+        logger.info("Ejecutando metodo una vez (Obligatorio)");
         laVista.pnContenedor.setLayout(new GridBagLayout());
         images_dto.setImagUsuario( usuario_dto.getCmpID() );
         this.laVista.btnCrearProducto.addMouseListener(this);
@@ -86,18 +96,19 @@ public class CtrlMiTienda implements MouseListener{
     }
     
     private void mtdMostrarProducto(){
+        logger.info("Iniciando ...");
         //lstMisProductos.clear();
         laVista.pnContenedor.removeAll();
         laVista.pnContenedor.setLayout(new GridBagLayout());
         
+        logger.info("Listando mis productos...");
         producto_dto.setProdUsuario( usuario_dto.getCmpID() );
         lstMisProductos = producto_dao.mtdListar(producto_dto);
         int totalProductos = lstMisProductos.size();
         
-        if( totalProductos == 0 ){
-            System.out.println(" No hay producto para mostrar. ");
-        
-        } else {
+        if( totalProductos > 0){
+            
+            logger.warn("Recorriendo productos ....");
             for (int i = 0; i < totalProductos; i++) {
                 CtrlCardMiProducto tarjeta = new CtrlCardMiProducto(lstMisProductos.get(i), producto_dao);
                 tarjeta.setItem(i);

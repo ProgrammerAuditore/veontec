@@ -37,7 +37,7 @@ public class CtrlHome implements MouseListener{
             && tabPreviaSeleccionada != TabsHome.Inicio.ordinal() ){
             
             mtdCargarBienvenida();
-            System.out.println("Estas en Inicio....");
+            //System.out.println("Estas en Inicio....");
             
             tabPreviaSeleccionada = TabsHome.Inicio.ordinal();
         }
@@ -46,7 +46,7 @@ public class CtrlHome implements MouseListener{
             && tabPreviaSeleccionada != TabsHome.MiTienda.ordinal() ){
             
             mtdCargarMiTienda();
-            System.out.println("Estas en MiTienda....");
+            //System.out.println("Estas en MiTienda....");
             
             
             tabPreviaSeleccionada = TabsHome.MiTienda.ordinal();
@@ -56,7 +56,7 @@ public class CtrlHome implements MouseListener{
             && tabPreviaSeleccionada != TabsHome.Compras.ordinal() ){
             
             mtdCargarCompras();
-            System.out.println("Estas en Compras....");
+            //System.out.println("Estas en Compras....");
             
             tabPreviaSeleccionada = TabsHome.Compras.ordinal();
         }
@@ -65,7 +65,7 @@ public class CtrlHome implements MouseListener{
             && tabPreviaSeleccionada != TabsHome.Ventas.ordinal() ){
             
             mtdCargarVentas();
-            System.out.println("Estas en Ventas....");
+            //System.out.println("Estas en Ventas....");
             
             tabPreviaSeleccionada = TabsHome.Ventas.ordinal();
         }
@@ -74,7 +74,7 @@ public class CtrlHome implements MouseListener{
             && tabPreviaSeleccionada != TabsHome.Preguntas.ordinal() ){
             
             mtdCargarPreguntas();
-            System.out.println("Estas en Preguntas....");
+            //System.out.println("Estas en Preguntas....");
             
             tabPreviaSeleccionada = TabsHome.Preguntas.ordinal();
         }
@@ -82,8 +82,8 @@ public class CtrlHome implements MouseListener{
         if( laVista.pnTabMenu.getSelectedIndex() == TabsHome.MiCuenta.ordinal() 
             && tabPreviaSeleccionada != TabsHome.MiCuenta.ordinal() ){
             
-            System.out.println("Estas en MiCuenta....");
             mtdCargarMiCuenta();
+            //System.out.println("Estas en MiCuenta....");
            
             tabPreviaSeleccionada = TabsHome.MiCuenta.ordinal();
         }
@@ -105,7 +105,7 @@ public class CtrlHome implements MouseListener{
     }
     
     private void mtdCargarVentas(){
-        CtrlVenta ctrl = CtrlVenta.getInstancia(laVista.pnVentas, Veontec.usuarioDto, Veontec.usuarioDao);
+        CtrlVentas ctrl = CtrlVentas.getInstancia(laVista.pnVentas, Veontec.usuarioDto, Veontec.usuarioDao);
         
     }
     
