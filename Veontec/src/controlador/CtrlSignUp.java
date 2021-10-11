@@ -64,75 +64,83 @@ public class CtrlSignUp implements MouseListener{
     }
     
     private void mtdIniciarSession(){
-        // * Verificar los campos de registrarme
-        if( mtdCamposIncorrectos_IniciarSession() ){
-            return;
-        }
-        
-        // * Registrando usuario
-        UsuarioDto dto = new UsuarioDto();
-        UsuarioDao dao = new UsuarioDao();
-        dto.setCmpCorreo( pnInicarSession.campoCorreo1.getText().trim() );
-        dto = dao.mtdConsultar(dto);
-        
-        if( dto.getCmpCorreo() == null || dto.getCmpPassword() == null   ){
-            JOptionPane.showMessageDialog(null, "Usuario no registrado o verifeque los datos.");
-            return;
-        }
-                    
-        // * Verificar usuario
-        //System.out.println("\n" + pnInicarSession.campoCorreo1.getText().trim() + "\n" + dto.getCmpCorreo().trim());
-        if( pnInicarSession.campoCorreo1.getText().trim().equals(dto.getCmpCorreo().trim())
-            && mtdVerificarPassword(dto.getCmpPassword().trim()) ){
-            
-            
-            if( Veontec.ventanaHome == null ){
-                JOptionPane.showMessageDialog(ni, "Bienvenido " + dto.getCmpNombreCompleto() );
-                
-                Veontec.ventanaHome = new VentanaHome();
-                Veontec.usuarioDao = dao;
-                Veontec.usuarioDto = dto;
-                Veontec.ventanaHome.setTitle( Veontec.usuarioDto.getCmpNombreCompleto() 
-                        + " | "  + Veontec.usuarioDto.getCmpCorreo() 
-                        + " - " + Info.NombreSoftware );
-                CtrlHome ctrl = new CtrlHome(Veontec.ventanaHome);
-                ctrl.laVista.setLocationRelativeTo(null);
-                ctrl.laVista.setVisible(true);
-
-                Veontec.ventanaSession.setVisible(false);
-                Veontec.ventanaSession.dispose();
-                Veontec.ventanaSession = null;
+        if( CtrlHiloConexion.ctrlEstado ){
+            // * Verificar los campos de registrarme
+            if( mtdCamposIncorrectos_IniciarSession() ){
+                return;
             }
-            
+
+            // * Registrando usuario
+            UsuarioDto dto = new UsuarioDto();
+            UsuarioDao dao = new UsuarioDao();
+            dto.setCmpCorreo( pnInicarSession.campoCorreo1.getText().trim() );
+            dto = dao.mtdConsultar(dto);
+
+            if( dto.getCmpCorreo() == null || dto.getCmpPassword() == null   ){
+                JOptionPane.showMessageDialog(null, "Usuario no registrado o verifeque los datos.");
+                return;
+            }
+
+            // * Verificar usuario
+            //System.out.println("\n" + pnInicarSession.campoCorreo1.getText().trim() + "\n" + dto.getCmpCorreo().trim());
+            if( pnInicarSession.campoCorreo1.getText().trim().equals(dto.getCmpCorreo().trim())
+                && mtdVerificarPassword(dto.getCmpPassword().trim()) ){
+
+
+                if( Veontec.ventanaHome == null ){
+                    JOptionPane.showMessageDialog(ni, "Bienvenido " + dto.getCmpNombreCompleto() );
+
+                    Veontec.ventanaHome = new VentanaHome();
+                    Veontec.usuarioDao = dao;
+                    Veontec.usuarioDto = dto;
+                    Veontec.ventanaHome.setTitle( Veontec.usuarioDto.getCmpNombreCompleto() 
+                            + " | "  + Veontec.usuarioDto.getCmpCorreo() 
+                            + " - " + Info.NombreSoftware );
+                    CtrlHome ctrl = new CtrlHome(Veontec.ventanaHome);
+                    ctrl.laVista.setLocationRelativeTo(null);
+                    ctrl.laVista.setVisible(true);
+
+                    Veontec.ventanaSession.setVisible(false);
+                    Veontec.ventanaSession.dispose();
+                    Veontec.ventanaSession = null;
+                }
+
+            }else{
+                JOptionPane.showMessageDialog(ni, "Vefica que los datos sean correctos.");
+            }
         }else{
-            JOptionPane.showMessageDialog(ni, "Vefica que los datos sean correctos.");
+            JOptionPane.showMessageDialog(ni, "No hay conexión");
         }
-        
     }
     
     private void mtdRegistrarme(){
         
-        // * Verificar los campos de registrarme
-        if( mtdCamposIncorrectos_Registrarme() ){
-            return ;
-        }
-        
-        // * Registrando usuario
-        UsuarioDto usuario = new UsuarioDto();
-        UsuarioDao dao = new UsuarioDao();
-        usuario.setCmpNombreCompleto(pnRegistrarme.campoTexto1.getText().trim() );
-        usuario.setCmpCorreo( pnRegistrarme.campoCorreo1.getText().trim() );
-        usuario.setCmpPassword(mtdObtenerPasswordEncry());
-        
-        // * Comprobar si el correo está disponible
-        // es decir, si no está registrado
-        if( !dao.mtdComprobar(usuario) ){
-            JOptionPane.showMessageDialog(null, "El correo ya está registrado.");
-        }else{
-            if( dao.mtdInsetar(usuario) ){
-                mtdVaciarCampos_Registrarme();
-                JOptionPane.showMessageDialog(ni, "Se registro exitosamente.");
+        if( CtrlHiloConexion.ctrlEstado ){
+            // * Verificar los campos de registrarme
+            if( mtdCamposIncorrectos_Registrarme() ){
+                return ;
             }
+
+            // * Registrando usuario
+            UsuarioDto usuario = new UsuarioDto();
+            UsuarioDao dao = new UsuarioDao();
+            usuario.setCmpNombreCompleto(pnRegistrarme.campoTexto1.getText().trim() );
+            usuario.setCmpCorreo( pnRegistrarme.campoCorreo1.getText().trim() );
+            usuario.setCmpPassword(mtdObtenerPasswordEncry());
+
+            // * Comprobar si el correo está disponible
+            // es decir, si no está registrado
+            if( !dao.mtdComprobar(usuario) ){
+                JOptionPane.showMessageDialog(null, "El correo ya está registrado.");
+            }else{
+                if( dao.mtdInsetar(usuario) ){
+                    mtdVaciarCampos_Registrarme();
+                    JOptionPane.showMessageDialog(ni, "Se registro exitosamente.");
+                }
+            }
+            
+        }else{
+            JOptionPane.showMessageDialog(ni, "No hay conexión");
         }
         
     }

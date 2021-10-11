@@ -55,8 +55,8 @@ public class CtrlHiloConexion{
                     ctrlConexion.close();
                     ctrlConn = null;
                     ctrlConexion = null;
-                    //ctrlEstado = false;
-                    ////System.out.println("Conexion cerrada.");
+                    ctrlEstado = false;
+                    System.out.println("Conexion cerrada.");
                     
                     return true;
                 }
