@@ -1,21 +1,21 @@
 #!/bin/sh
 
-# PATH run MyFreeLab
-MFL_RUN=/opt/myfreelab/run.sh
+# PATH run Veontec
+SFW_RUN=/opt/veontec/run.sh
 
-# PATH MyFreeLab BIN
-MFL_BIN=/usr/bin/myfreelab
+# PATH Veontec BIN
+SFW_RUN=/usr/bin/veontec
 
-# Create MyFreeLab BIN
-if [ -f "$MFL_RUN" ]; then
-    cp $MFL_RUN $MFL_BIN
+# Create Veontec BIN
+if [ -f "$SFW_RUN" ]; then
+    cp $SFW_RUN $SFW_RUN
     
-    # Remove run MyFreeLab
-    if [ -f "$MFL_BIN" ]; then
-            rm $MFL_RUN
+    # Remove run Veontec
+    if [ -f "$SFW_RUN" ]; then
+            rm $SFW_RUN
     fi
     
-    echo "myfreelab bin created success"
+    echo "veontec bin created success"
 fi
 
 
