@@ -46,10 +46,11 @@ public class CtrlMiCuenta{
         if( instancia == null ){
             logger.info("Creando instancia ");
             instancia = new CtrlMiCuenta(laVista, dto, dao);
+            instancia.mtdInit();
             
         }
         
-        instancia.mtdInit();
+        instancia.mtdEstablecerDatos();
         return instancia;
     }
     
@@ -126,8 +127,8 @@ public class CtrlMiCuenta{
     
     // Métodos
     private void  mtdInit(){
+        // * Se inicializa o ejecuta una sola vez (Obligatorio)
         logger.warn("Ejecutando controlador");
-        mtdEstablecerDatos();
         mtdEventoBtnEliminarCuenta();
         mtdEventoBtnCerrarSession();
         mtdEventoBtnCambiarPasswd();
@@ -136,8 +137,12 @@ public class CtrlMiCuenta{
     }
     
     private void mtdEstablecerDatos(){
+        instancia.usuarioDto = Veontec.usuarioDto;
+        
         laVista.cmpCorreo.setText(usuarioDto.getCmpCorreo() );
         laVista.cmpNombreCompleto.setText(usuarioDto.getCmpNombreCompleto() );
+        laVista.cmpDireccion.setText( usuarioDto.getCmpDireccion() );
+        laVista.cmpTelefono.setText( usuarioDto.getCmpTelefono() );
     }
     
     private void mtdEliminarCuenta(){
@@ -348,6 +353,9 @@ public class CtrlMiCuenta{
             
             // * Establecer los nuevos datos
             usuarioDto.setCmpNombreCompleto(laVista.cmpNombreCompleto.getText().trim());
+            usuarioDto.setCmpDireccion( laVista.cmpDireccion.getText().trim() );
+            usuarioDto.setCmpTelefono( laVista.cmpTelefono.getText().trim() );
+            usuarioDto.setCmpCorreo( laVista.cmpCorreo.getText().trim() );
             
             // * Intentar actualizar los datos con una consulta
             // a la base de datos

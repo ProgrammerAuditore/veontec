@@ -197,6 +197,9 @@
               </Properties>
             </Component>
             <Component class="vista.componentes.campos.CampoTMovil" name="cmpTelefono">
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+              </AuxValues>
             </Component>
             <Component class="vista.componentes.etiqueta.Etiqueta" name="etiqueta5">
               <Properties>
@@ -204,6 +207,9 @@
               </Properties>
             </Component>
             <Component class="vista.componentes.campos.CampoTexto" name="cmpDireccion">
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+              </AuxValues>
             </Component>
             <Component class="vista.componentes.boton.Boton" name="btnEditar">
               <Properties>

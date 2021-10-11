@@ -60,7 +60,7 @@ public class UsuarioDao implements keyword_query<UsuarioDto>{
         PreparedStatement ps = null;
         Connection conn = CtrlHiloConexion.getConexion();
         String query = "UPDATE tblusuarios SET "
-                + "usuaNombre = ?, usuaCorreo = ?, usuaPassword = ? "
+                + "usuaNombre = ?, usuaCorreo = ?, usuaPassword = ?, usuaDireccion = ?, usuaTelefono = ? "
                 // * Buscamos el producto del usuario respectivo
                 + "WHERE usuaID = ? ;";
         
@@ -70,7 +70,9 @@ public class UsuarioDao implements keyword_query<UsuarioDto>{
             ps.setString(1, obj_dto.getCmpNombreCompleto());
             ps.setString(2, obj_dto.getCmpCorreo());
             ps.setString(3, obj_dto.getCmpPassword());
-            ps.setInt(4, obj_dto.getCmpID());
+            ps.setString(4, obj_dto.getCmpDireccion());
+            ps.setString(5, obj_dto.getCmpTelefono());
+            ps.setInt(6, obj_dto.getCmpID());
             int respuesta = ps.executeUpdate();
             
             // * Si la respuesta es mayor a 0 significa que la consulta fue exitosa.
@@ -105,6 +107,8 @@ public class UsuarioDao implements keyword_query<UsuarioDto>{
                 usuario.setCmpNombreCompleto( rs.getString("usuaNombre") );
                 usuario.setCmpCorreo( rs.getString("usuaCorreo") );
                 usuario.setCmpPassword( rs.getString("usuaPassword") );
+                usuario.setCmpDireccion( rs.getString("usuaDireccion") );
+                usuario.setCmpTelefono( rs.getString("usuaTelefono") );
             }
             
         } catch (SQLException e) {
@@ -134,7 +138,8 @@ public class UsuarioDao implements keyword_query<UsuarioDto>{
                 usuario.setCmpNombreCompleto( rs.getString("usuaNombre") );
                 usuario.setCmpCorreo( rs.getString("usuaCorreo") );
                 usuario.setCmpPassword( rs.getString("usuaPassword") );
-                System.out.println("mtdConsultar \n" + usuario.toString());
+                usuario.setCmpDireccion( rs.getString("usuaDireccion") );
+                usuario.setCmpTelefono( rs.getString("usuaTelefono") );
             }
             
         } catch (SQLException e) {

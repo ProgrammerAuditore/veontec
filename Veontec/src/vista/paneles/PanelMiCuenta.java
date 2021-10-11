@@ -246,9 +246,9 @@ public class PanelMiCuenta extends javax.swing.JPanel {
     public vista.componentes.boton.Boton btnEditar;
     public vista.componentes.boton.Boton btnEliminarCuenta;
     public vista.componentes.campos.CampoCorreo cmpCorreo;
-    private vista.componentes.campos.CampoTexto cmpDireccion;
+    public vista.componentes.campos.CampoTexto cmpDireccion;
     public vista.componentes.campos.CampoTexto cmpNombreCompleto;
-    private vista.componentes.campos.CampoTMovil cmpTelefono;
+    public vista.componentes.campos.CampoTMovil cmpTelefono;
     private vista.componentes.etiqueta.Etiqueta etiqueta1;
     private vista.componentes.etiqueta.Etiqueta etiqueta3;
     private vista.componentes.etiqueta.Etiqueta etiqueta4;
