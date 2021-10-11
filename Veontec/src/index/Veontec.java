@@ -1,7 +1,7 @@
 package index;
 
 import controlador.CtrlHiloConexion;
-import controlador.CtrlInicio;
+import controlador.CtrlSignUp;
 import hilos.HiloConexion;
 import hilos.HiloPrincipal;
 import java.io.File;
@@ -21,11 +21,12 @@ import src.Info;
 import src.Recursos;
 import src.idiomas.Idiomas;
 import vista.ventanas.VentanaHome;
-import vista.ventanas.VentanaInicio;
+import vista.ventanas.VentanaSingUp;
 
 public class Veontec {
     
     public static VentanaHome ventanaHome;
+    public static VentanaSingUp ventanaSession;
     public static Properties idioma = new Idiomas("en");
     public static long ctrlID;
     public static String IdiomaDefinido;
@@ -57,8 +58,8 @@ public class Veontec {
         hp.setDaemon(true);
         //hs.setDaemon(true);
         
-        VentanaInicio ni = new VentanaInicio();
-        CtrlInicio ctrl = new CtrlInicio(ni, ni.pnRegistrarme, ni.pnLoggin); 
+        Veontec.ventanaSession = new VentanaSingUp();
+        CtrlSignUp ctrl = new CtrlSignUp(Veontec.ventanaSession, Veontec.ventanaSession.pnRegistrarme, Veontec.ventanaSession.pnLoggin); 
         ctrl.mtdInit();
         
         // * Ejecutar hilos
@@ -88,13 +89,13 @@ public class Veontec {
             // Si tiene un PID no en ejecucion
             if( mtdVerificarPID() == false ){
                 Recursos.dataRun().delete();
-                //System.out.println("Tienes un PID no valido");
+                System.out.println("Tienes un PID no valido");
                 //System.exit(0);
             }
             
             // Si no se puede eliminar el archivo .run
             if( Recursos.dataRun().exists() && !Recursos.dataRun().delete() ){
-                //System.out.println("El archivo .run no se puede eliminar, alguien esta usandolo.");
+                System.out.println("El archivo .run no se puede eliminar, alguien esta usandolo.");
                 System.exit(0);
             }
             
@@ -102,7 +103,7 @@ public class Veontec {
             
         // ***** FASE 1  | Verificar ID
         //System.out.println("***** FASE 1 | Verificar ID");
-        System.out.println(Info.NombreSoftware + " running.");
+        //System.out.println(Info.NombreSoftware + " running.");
         Veontec.ctrlID = Recursos.PID * 3 + 7;
 
         // * Guardar datos de inicialización del programa

@@ -51,7 +51,7 @@
     <Container class="vista.componentes.jpanelbackground.JPanelBackground" name="panelBackground">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="b0" green="af" red="28" type="rgb"/>
+          <Color blue="66" green="66" red="0" type="rgb"/>
         </Property>
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
           <Border info="org.netbeans.modules.form.compat2.border.BevelBorderInfo">
@@ -80,13 +80,13 @@
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
                               <Component id="etqStockDisponible" alignment="0" pref="160" max="32767" attributes="0"/>
                               <Component id="cmpStockDisponible" alignment="0" pref="160" max="32767" attributes="0"/>
-                              <Component id="btnHacerCompra" max="32767" attributes="0"/>
+                              <Component id="btnComprar" max="32767" attributes="0"/>
                           </Group>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="1" max="-2" attributes="0">
                               <Component id="cmpPrecioUnidad" max="32767" attributes="0"/>
                               <Component id="etqPrecioUnidad" pref="160" max="32767" attributes="0"/>
-                              <Component id="btnHacerPregunta" max="32767" attributes="0"/>
+                              <Component id="btnPreguntar" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                       <Component id="cmpVendedor" alignment="0" max="32767" attributes="0"/>
@@ -120,8 +120,8 @@
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="btnHacerPregunta" min="-2" max="-2" attributes="0"/>
-                      <Component id="btnHacerCompra" min="-2" max="-2" attributes="0"/>
+                      <Component id="btnPreguntar" min="-2" max="-2" attributes="0"/>
+                      <Component id="btnComprar" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
@@ -132,7 +132,7 @@
         <Component class="vista.componentes.etiqueta.Etiqueta" name="etqTitulo">
           <Properties>
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="ff" green="ff" red="ff" type="rgb"/>
+              <Color blue="99" green="99" red="99" type="rgb"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Titulo del producto para vender el la tienda"/>
           </Properties>
@@ -142,12 +142,18 @@
         </Component>
         <Component class="vista.componentes.etiqueta.Etiqueta" name="etqPrecioUnidad">
           <Properties>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="ff" red="ff" type="rgb"/>
+            </Property>
             <Property name="horizontalAlignment" type="int" value="0"/>
             <Property name="text" type="java.lang.String" value="Precio x Unidad"/>
           </Properties>
         </Component>
         <Component class="vista.componentes.etiqueta.Etiqueta" name="etqStockDisponible">
           <Properties>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="ff" red="ff" type="rgb"/>
+            </Property>
             <Property name="horizontalAlignment" type="int" value="0"/>
             <Property name="text" type="java.lang.String" value="Stock disponible"/>
           </Properties>
@@ -197,6 +203,7 @@
               <Properties>
                 <Property name="editable" type="boolean" value="false"/>
                 <Property name="columns" type="int" value="20"/>
+                <Property name="lineWrap" type="boolean" value="true"/>
                 <Property name="rows" type="int" value="5"/>
                 <Property name="text" type="java.lang.String" value="&lt;Descripcion&gt;"/>
               </Properties>
@@ -206,7 +213,7 @@
             </Component>
           </SubComponents>
         </Container>
-        <Component class="vista.componentes.boton.Boton" name="btnHacerCompra">
+        <Component class="vista.componentes.boton.Boton" name="btnComprar">
           <Properties>
             <Property name="imgButtonType" type="java.lang.String" value="success"/>
             <Property name="texto" type="java.lang.String" value="Comprar"/>
@@ -215,7 +222,7 @@
             <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
           </AuxValues>
         </Component>
-        <Component class="vista.componentes.boton.Boton" name="btnHacerPregunta">
+        <Component class="vista.componentes.boton.Boton" name="btnPreguntar">
           <Properties>
             <Property name="texto" type="java.lang.String" value="Preguntar"/>
           </Properties>
@@ -245,6 +252,11 @@
           </Layout>
         </Container>
         <Component class="vista.componentes.etiqueta.Etiqueta" name="cmpVendedor">
+          <Properties>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="ff" red="ff" type="rgb"/>
+            </Property>
+          </Properties>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
           </AuxValues>

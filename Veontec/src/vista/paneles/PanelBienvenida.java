@@ -28,8 +28,8 @@ public class PanelBienvenida extends javax.swing.JPanel {
     public PanelBienvenida() {
         initComponents();
         
-        this.scpContenedor.getVerticalScrollBar().setUnitIncrement(16);
-        this.scpContenedor.getHorizontalScrollBar().setUnitIncrement(16);
+        this.scpContenedor.getVerticalScrollBar().setUnitIncrement(64);
+        this.scpContenedor.getHorizontalScrollBar().setUnitIncrement(64);
     }
 
     /**
@@ -57,7 +57,7 @@ public class PanelBienvenida extends javax.swing.JPanel {
 
         titulo1.setForeground(new java.awt.Color(255, 255, 255));
         titulo1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        titulo1.setText("Bienvenida a Veontec");
+        titulo1.setText("HOME VEONTEC");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);

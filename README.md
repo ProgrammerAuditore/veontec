@@ -1,4 +1,4 @@
-# Veontec v0.8.0Alpha
+# Veontec v0.9.0Alpha
 Este proyecto contiene un proyecto usando netbeans 8.2 y Java JRE [8 > 11]
 
 # Veontec
@@ -21,8 +21,11 @@ El software tiene las siguientes secciones principales: <br>
 
 Sección para la cuenta | Estado 
 :------------ | :-------------
-Eliminar cuenta | :white_large_square:
-Modificar datos de cuenta | :white_large_square:
+Eliminar cuenta | :white_check_mark:
+Modificar datos de cuenta | :white_check_mark:
+Modificar correo | :white_check_mark:
+Modificar contraseña | :white_check_mark:
+Cerrar sesión | :white_check_mark:
 
 Sección principal (bienvenida) | Estado
 :------------ | :------------- 

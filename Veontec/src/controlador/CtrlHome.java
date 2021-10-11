@@ -3,7 +3,7 @@ package controlador;
 import index.Veontec;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import javax.swing.JDialog;
+import javax.swing.JOptionPane;
 import modelo.dao.UsuarioDao;
 import modelo.dto.UsuarioDto;
 import vista.ventanas.VentanaHome;
@@ -38,7 +38,7 @@ public class CtrlHome implements MouseListener{
             && tabPreviaSeleccionada != TabsHome.Inicio.ordinal() ){
             
             mtdCargarBienvenida();
-            System.out.println("Estas en Inicio....");
+            //System.out.println("Estas en Inicio....");
             
             tabPreviaSeleccionada = TabsHome.Inicio.ordinal();
         }
@@ -47,7 +47,7 @@ public class CtrlHome implements MouseListener{
             && tabPreviaSeleccionada != TabsHome.MiTienda.ordinal() ){
             
             mtdCargarMiTienda();
-            System.out.println("Estas en MiTienda....");
+            //System.out.println("Estas en MiTienda....");
             
             
             tabPreviaSeleccionada = TabsHome.MiTienda.ordinal();
@@ -57,7 +57,7 @@ public class CtrlHome implements MouseListener{
             && tabPreviaSeleccionada != TabsHome.Compras.ordinal() ){
             
             mtdCargarCompras();
-            System.out.println("Estas en Compras....");
+            //System.out.println("Estas en Compras....");
             
             tabPreviaSeleccionada = TabsHome.Compras.ordinal();
         }
@@ -66,7 +66,7 @@ public class CtrlHome implements MouseListener{
             && tabPreviaSeleccionada != TabsHome.Ventas.ordinal() ){
             
             mtdCargarVentas();
-            System.out.println("Estas en Ventas....");
+            //System.out.println("Estas en Ventas....");
             
             tabPreviaSeleccionada = TabsHome.Ventas.ordinal();
         }
@@ -75,7 +75,7 @@ public class CtrlHome implements MouseListener{
             && tabPreviaSeleccionada != TabsHome.Preguntas.ordinal() ){
             
             mtdCargarPreguntas();
-            System.out.println("Estas en Preguntas....");
+            //System.out.println("Estas en Preguntas....");
             
             tabPreviaSeleccionada = TabsHome.Preguntas.ordinal();
         }
@@ -83,41 +83,83 @@ public class CtrlHome implements MouseListener{
         if( laVista.pnTabMenu.getSelectedIndex() == TabsHome.MiCuenta.ordinal() 
             && tabPreviaSeleccionada != TabsHome.MiCuenta.ordinal() ){
             
-            System.out.println("Estas en MiCuenta....");
             mtdCargarMiCuenta();
+            //System.out.println("Estas en MiCuenta....");
            
             tabPreviaSeleccionada = TabsHome.MiCuenta.ordinal();
         }
     }
     
     private void mtdCargarBienvenida(){
-        CtrlBienvenida ctrl = CtrlBienvenida.getInstancia(laVista.panelHome, Veontec.usuarioDto, Veontec.usuarioDao);
-
+        try {
+            
+            if(CtrlHiloConexion.ctrlEstado == true){
+                CtrlBienvenida ctrl = CtrlBienvenida.getInstancia(laVista.panelHome, Veontec.usuarioDto, Veontec.usuarioDao);
+            }else{
+                JOptionPane.showMessageDialog(laVista, "No hay conexión");
+            }
+        
+        } catch (Exception e) {}
     }
     
     private void mtdCargarMiTienda(){
-        CtrlMiTienda ctrl = CtrlMiTienda.getInstancia(laVista.pnMiTienda, Veontec.usuarioDto, Veontec.usuarioDao);
-
+        try {
+            
+            if(CtrlHiloConexion.ctrlEstado == true){
+                CtrlMiTienda ctrl = CtrlMiTienda.getInstancia(laVista.pnMiTienda, Veontec.usuarioDto, Veontec.usuarioDao);
+            }else{
+                JOptionPane.showMessageDialog(laVista, "No hay conexión");
+            }
+        
+        } catch (Exception e) {}
     }
     
     private void mtdCargarMiCuenta(){
-        CtrlMiCuenta ctrl = CtrlMiCuenta.getInstancia(laVista.pnMiCuenta, Veontec.usuarioDto, Veontec.usuarioDao);
+        try {
+            
+            if(CtrlHiloConexion.ctrlEstado == true){
+                CtrlMiCuenta ctrl = CtrlMiCuenta.getInstancia(laVista.pnMiCuenta, Veontec.usuarioDto, Veontec.usuarioDao);
+            }else{
+                JOptionPane.showMessageDialog(laVista, "No hay conexión");
+            }
         
+        } catch (Exception e) {}
     }
     
     private void mtdCargarVentas(){
-        CtrlVenta ctrl = CtrlVenta.getInstancia(laVista.pnVentas, Veontec.usuarioDto, Veontec.usuarioDao);
+        try {
+            
+            if(CtrlHiloConexion.ctrlEstado == true){
+                 CtrlVentas ctrl = CtrlVentas.getInstancia(laVista.pnVentas, Veontec.usuarioDto, Veontec.usuarioDao);
+            }else{
+                JOptionPane.showMessageDialog(laVista, "No hay conexión");
+            }
         
+        } catch (Exception e) {}
     }
     
     private void mtdCargarCompras(){
-        CtrlCompras ctrl = CtrlCompras.getInstancia(laVista.pnCompras, Veontec.usuarioDto, Veontec.usuarioDao);
+        try {
+            
+            if(CtrlHiloConexion.ctrlEstado == true){
+                CtrlCompras ctrl = CtrlCompras.getInstancia(laVista.pnCompras, Veontec.usuarioDto, Veontec.usuarioDao);
+            }else{
+                JOptionPane.showMessageDialog(laVista, "No hay conexión");
+            }
         
+        } catch (Exception e) {}
     }
     
     private void mtdCargarPreguntas(){
-        CtrlPreguntas ctrl = CtrlPreguntas.getInstancia(laVista.panelPreguntas, Veontec.usuarioDto, Veontec.usuarioDao);
+        try {
+            
+            if(CtrlHiloConexion.ctrlEstado == true){
+                CtrlPreguntas ctrl = CtrlPreguntas.getInstancia(laVista.panelPreguntas, Veontec.usuarioDto, Veontec.usuarioDao);
+            }else{
+                JOptionPane.showMessageDialog(laVista, "No hay conexión");
+            }
         
+        } catch (Exception e) {}
     }
     
     

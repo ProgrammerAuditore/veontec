@@ -120,10 +120,10 @@ public class CtrlModalComprarProducto {
                             }
                         }
 
-                        System.out.println("" + ( cantidad * prodDto.getProdPrecio()  ) );
+                        //System.out.println("" + ( cantidad * prodDto.getProdPrecio()  ) );
                 } catch (NumberFormatException err) {
                     e.consume();
-                    System.out.println("" + err.getMessage() );
+                    //System.out.println("" + err.getMessage() );
                 }
             }
         };

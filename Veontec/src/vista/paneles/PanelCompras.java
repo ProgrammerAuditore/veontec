@@ -55,7 +55,7 @@ public class PanelCompras extends javax.swing.JPanel {
 
         titulo1.setForeground(new java.awt.Color(255, 255, 255));
         titulo1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        titulo1.setText("Compras");
+        titulo1.setText("MIS COMPRAS");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);

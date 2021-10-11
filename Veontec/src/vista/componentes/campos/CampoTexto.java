@@ -67,21 +67,21 @@ public class CampoTexto extends JTextField implements FocusListener{
     }
     
     // Métodos custom
-    private void getEstiloTextEmpty(){
+    public void getEstiloTextEmpty(){
         setBackground( backgroundColor );
         setBorderMargin( Color.RED );
         setForeground( placeholderColor );
         setCaretColor( cursorColor );
     }
     
-    private void getEstiloTextEscritura(){
+    public void getEstiloTextEscritura(){
         setBackground( backgroundColor );
         setBorderMargin( borderColor );
         setForeground( textoColor );
         setCaretColor( cursorColor );
     }
     
-    private void getEstiloTextEstablecido(){
+    public void getEstiloTextEstablecido(){
         setBackground( backgroundColor );
         setBorderMargin( borderColor );
         setForeground( textoColor );

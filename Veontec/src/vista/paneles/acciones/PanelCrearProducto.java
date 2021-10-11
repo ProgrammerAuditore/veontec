@@ -6,7 +6,8 @@
 package vista.paneles.acciones;
 
 import java.awt.Dimension;
-import src.Recursos;
+import java.net.URL;
+import org.apache.commons.validator.routines.UrlValidator;
 
 /**
  *
@@ -22,7 +23,6 @@ public class PanelCrearProducto extends javax.swing.JPanel {
         Dimension tam = new Dimension(621, 612);
         this.setSize( tam );
         this.setPreferredSize( tam );
-        mtdEstablecerIdioma();
     }
     
     public boolean mtdComprobar() {
@@ -43,12 +43,32 @@ public class PanelCrearProducto extends javax.swing.JPanel {
             return false;
         }
         
+        if( cboxBoleto.isSelected() || cboxProductoExterno.isSelected() || cmboxVuelos.isSelected() ){
+            if( !mtdVerificarEnlace( cmpEnlace.getText().trim() ) || !mtdValidarUrl( cmpEnlace.getText().trim() ) ){
+                return false;
+            }
+        }
+        
         return true;
     }
     
-    private void mtdEstablecerIdioma(){
-        // * Etiquetas
-  
+    public boolean mtdVerificarEnlace(String url) {
+        try {
+            new URL(url.trim());
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+    
+    public boolean mtdValidarUrl(String url){
+        String[] schemes = {"http","https"};
+        UrlValidator urlValidator = new UrlValidator(schemes);
+        if (urlValidator.isValid(url.trim())) {
+           return true;
+        } else {
+           return false;
+        }
     }
 
     /**
@@ -116,6 +136,7 @@ public class PanelCrearProducto extends javax.swing.JPanel {
         cmpCategoria.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Mochilas" }));
 
         cmpDescripcion.setColumns(20);
+        cmpDescripcion.setLineWrap(true);
         cmpDescripcion.setRows(5);
         cmpDescripcion.setText("Es nueva");
         jScrollPane1.setViewportView(cmpDescripcion);

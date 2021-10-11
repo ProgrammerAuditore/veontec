@@ -8,21 +8,22 @@ import java.awt.event.MouseListener;
 import javax.swing.JOptionPane;
 import modelo.dao.UsuarioDao;
 import modelo.dto.UsuarioDto;
-import vista.paneles.PanelInicarSession;
+import src.Info;
+import vista.paneles.PanelSignUp;
 import vista.paneles.PanelRegistrarme;
 import vista.ventanas.VentanaHome;
-import vista.ventanas.VentanaInicio;
+import vista.ventanas.VentanaSingUp;
 
-public class CtrlInicio implements MouseListener{
+public class CtrlSignUp implements MouseListener{
     
     // * Vistas
     private PanelRegistrarme pnRegistrarme;
-    private PanelInicarSession pnInicarSession;
-    private VentanaInicio ni;
+    private PanelSignUp pnInicarSession;
+    private VentanaSingUp ni;
     
     // * Modelos
 
-    public CtrlInicio(VentanaInicio ni, PanelRegistrarme pnRegistrarme, PanelInicarSession pnInicarSession) {
+    public CtrlSignUp(VentanaSingUp ni, PanelRegistrarme pnRegistrarme, PanelSignUp pnInicarSession) {
         this.ni = ni;
         this.pnRegistrarme = pnRegistrarme;
         this.pnInicarSession = pnInicarSession;
@@ -34,14 +35,14 @@ public class CtrlInicio implements MouseListener{
     }
     
     public void mtdInit(){
-        
+        ni.setTitle(Info.NombreSoftware);
         
         if(CtrlHiloConexion.checkConexion() == false){
             ni.tabContenedor.getTabComponentAt(1).setEnabled(false);
             ni.tabContenedor.getTabComponentAt(2).setEnabled(false);
-            System.out.println("No hay conexion a la base de datos");
+            //System.out.println("No hay conexion a la base de datos");
         }else{
-            System.out.println("Existe conexion a la base de datos... ");
+            //System.out.println("Existe conexion a la base de datos... ");
         }
         
         // * Mostrar las ventana
@@ -63,67 +64,83 @@ public class CtrlInicio implements MouseListener{
     }
     
     private void mtdIniciarSession(){
-        // * Verificar los campos de registrarme
-        if( mtdCamposIncorrectos_IniciarSession() ){
-            return;
-        }
-        
-        // * Registrando usuario
-        UsuarioDto dto = new UsuarioDto();
-        UsuarioDao dao = new UsuarioDao();
-        dto.setCmpCorreo( pnInicarSession.campoCorreo1.getText().trim() );
-        dto = dao.mtdConsultar(dto);
-        System.out.println("Iniciar Session : \n " + dto.toString());
-        
-        if( dto.getCmpCorreo() == null || dto.getCmpPassword() == null   ){
-            JOptionPane.showMessageDialog(null, "Usuario no registrado o verifeque los datos.");
-            return;
-        }
-                    
-        // * Verificar usuario
-        System.out.println("\n" + pnInicarSession.campoCorreo1.getText().trim() + "\n" + dto.getCmpCorreo().trim());
-        if( pnInicarSession.campoCorreo1.getText().trim().equals(dto.getCmpCorreo().trim())
-            && mtdVerificarPassword(dto.getCmpPassword().trim()) ){
-            JOptionPane.showMessageDialog(ni, "Bienvenido " + dto.getCmpNombreCompleto() );
-            ni.setVisible(false);
-            ni.dispose();
-            
-            VentanaHome vh = new VentanaHome();
-            Veontec.usuarioDao = dao;
-            Veontec.usuarioDto = dto;
-            Veontec.ventanaHome = vh;
-            vh.setTitle( Veontec.usuarioDto.getCmpNombreCompleto() + " | "  + Veontec.usuarioDto.getCmpCorreo());
-            CtrlHome ctrl = new CtrlHome(vh);
-            ctrl.laVista.setLocationRelativeTo(null);
-            ctrl.laVista.setVisible(true);
-            
+        if( CtrlHiloConexion.ctrlEstado ){
+            // * Verificar los campos de registrarme
+            if( mtdCamposIncorrectos_IniciarSession() ){
+                return;
+            }
+
+            // * Registrando usuario
+            UsuarioDto dto = new UsuarioDto();
+            UsuarioDao dao = new UsuarioDao();
+            dto.setCmpCorreo( pnInicarSession.campoCorreo1.getText().trim() );
+            dto = dao.mtdConsultar(dto);
+
+            if( dto.getCmpCorreo() == null || dto.getCmpPassword() == null   ){
+                JOptionPane.showMessageDialog(null, "Usuario no registrado o verifeque los datos.");
+                return;
+            }
+
+            // * Verificar usuario
+            //System.out.println("\n" + pnInicarSession.campoCorreo1.getText().trim() + "\n" + dto.getCmpCorreo().trim());
+            if( pnInicarSession.campoCorreo1.getText().trim().equals(dto.getCmpCorreo().trim())
+                && mtdVerificarPassword(dto.getCmpPassword().trim()) ){
+
+
+                if( Veontec.ventanaHome == null ){
+                    JOptionPane.showMessageDialog(ni, "Bienvenido " + dto.getCmpNombreCompleto() );
+
+                    Veontec.ventanaHome = new VentanaHome();
+                    Veontec.usuarioDao = dao;
+                    Veontec.usuarioDto = dto;
+                    Veontec.ventanaHome.setTitle( Veontec.usuarioDto.getCmpNombreCompleto() 
+                            + " | "  + Veontec.usuarioDto.getCmpCorreo() 
+                            + " - " + Info.NombreSoftware );
+                    CtrlHome ctrl = new CtrlHome(Veontec.ventanaHome);
+                    ctrl.laVista.setLocationRelativeTo(null);
+                    ctrl.laVista.setVisible(true);
+
+                    Veontec.ventanaSession.setVisible(false);
+                    Veontec.ventanaSession.dispose();
+                    Veontec.ventanaSession = null;
+                }
+
+            }else{
+                JOptionPane.showMessageDialog(ni, "Vefica que los datos sean correctos.");
+            }
         }else{
-            JOptionPane.showMessageDialog(ni, "Vefica que los datos sean correctos.");
+            JOptionPane.showMessageDialog(ni, "No hay conexión");
         }
-        
     }
     
     private void mtdRegistrarme(){
         
-        // * Verificar los campos de registrarme
-        if( mtdCamposIncorrectos_Registrarme() ){
-            return ;
-        }
-        
-        // * Registrando usuario
-        UsuarioDto usuario = new UsuarioDto();
-        UsuarioDao dao = new UsuarioDao();
-        usuario.setCmpNombreCompleto(pnRegistrarme.campoTexto1.getText().trim() );
-        usuario.setCmpCorreo( pnRegistrarme.campoCorreo1.getText().trim() );
-        usuario.setCmpPassword(mtdObtenerPasswordEncry());
-        
-        if( !dao.mtdComprobar(usuario) ){
-            JOptionPane.showMessageDialog(null, "El correo ya está registrado.");
-        }else{
-            if( dao.mtdInsetar(usuario) ){
-                mtdVaciarCampos_Registrarme();
-                JOptionPane.showMessageDialog(ni, "Se registro exitosamente.");
+        if( CtrlHiloConexion.ctrlEstado ){
+            // * Verificar los campos de registrarme
+            if( mtdCamposIncorrectos_Registrarme() ){
+                return ;
             }
+
+            // * Registrando usuario
+            UsuarioDto usuario = new UsuarioDto();
+            UsuarioDao dao = new UsuarioDao();
+            usuario.setCmpNombreCompleto(pnRegistrarme.campoTexto1.getText().trim() );
+            usuario.setCmpCorreo( pnRegistrarme.campoCorreo1.getText().trim() );
+            usuario.setCmpPassword(mtdObtenerPasswordEncry());
+
+            // * Comprobar si el correo está disponible
+            // es decir, si no está registrado
+            if( !dao.mtdComprobar(usuario) ){
+                JOptionPane.showMessageDialog(null, "El correo ya está registrado.");
+            }else{
+                if( dao.mtdInsetar(usuario) ){
+                    mtdVaciarCampos_Registrarme();
+                    JOptionPane.showMessageDialog(ni, "Se registro exitosamente.");
+                }
+            }
+            
+        }else{
+            JOptionPane.showMessageDialog(ni, "No hay conexión");
         }
         
     }
@@ -144,11 +161,11 @@ public class CtrlInicio implements MouseListener{
             // Verify password
             if (argon2.verify(hash, password)) {
                 // Hash matches password
-                System.out.println("Hash matches password");
+                //System.out.println("Hash matches password");
                 return true;
             } else {
                 // Hash doesn't match password
-                System.out.println("Hash doesn't match password");
+                //System.out.println("Hash doesn't match password");
             }
             
         } finally {

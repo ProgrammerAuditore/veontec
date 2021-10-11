@@ -145,7 +145,7 @@ public class ProductoDao implements keyword_query<ProductoDto>, keyword_producto
                 prod.setProdUsuario(rs.getInt("prodUsuario") );
                 prod.setProdImg( rs.getBytes("prodMedia") );
                 
-                System.out.println("" + prod.toString());
+                //System.out.println("" + prod.toString());
             }
             
         } catch (SQLException e) {
@@ -184,7 +184,7 @@ public class ProductoDao implements keyword_query<ProductoDto>, keyword_producto
                 prod.setProdUsuario(rs.getInt("prodUsuario") );
                 prod.setProdImg( rs.getBytes("prodMedia") );
                 
-                System.out.println("" + prod.toString());
+                //System.out.println("" + prod.toString());
             }
             
         } catch (SQLException e) {

@@ -16,12 +16,12 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="jPanelBackground1" alignment="0" pref="1060" max="32767" attributes="0"/>
+          <Component id="jPanelBackground1" alignment="0" pref="1062" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="jPanelBackground1" alignment="0" pref="705" max="32767" attributes="0"/>
+          <Component id="jPanelBackground1" alignment="0" pref="738" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
   </Layout>
@@ -32,33 +32,20 @@
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" attributes="0">
-                  <EmptySpace max="-2" attributes="0"/>
+                  <EmptySpace min="-2" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="campoTexto1" alignment="0" max="32767" attributes="0"/>
-                      <Component id="campoCorreo1" max="32767" attributes="0"/>
-                      <Component id="campoPassword1" alignment="0" max="32767" attributes="0"/>
-                      <Group type="102" alignment="1" attributes="0">
-                          <Component id="btnEliminarCuenta" min="-2" pref="140" max="-2" attributes="0"/>
-                          <EmptySpace max="32767" attributes="0"/>
-                          <Component id="btnGuardar" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Component id="btnCerrarSession" min="-2" max="-2" attributes="0"/>
-                      </Group>
                       <Component id="jPanel1" alignment="0" max="32767" attributes="0"/>
-                      <Component id="campoTMovil1" alignment="0" max="32767" attributes="0"/>
                       <Group type="102" attributes="0">
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="etiqueta4" min="-2" pref="170" max="-2" attributes="0"/>
-                              <Component id="etiqueta1" alignment="0" min="-2" pref="170" max="-2" attributes="0"/>
-                              <Component id="etiqueta2" alignment="0" min="-2" pref="170" max="-2" attributes="0"/>
-                              <Component id="etiqueta5" alignment="0" min="-2" pref="180" max="-2" attributes="0"/>
-                              <Component id="etiqueta3" alignment="0" min="-2" pref="180" max="-2" attributes="0"/>
-                          </Group>
+                          <Component id="btnCerrarSession" min="-2" max="-2" attributes="0"/>
                           <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                       </Group>
-                      <Component id="campoTexto2" alignment="0" max="32767" attributes="0"/>
+                      <Group type="102" alignment="0" attributes="0">
+                          <Component id="jPanel2" max="32767" attributes="0"/>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <Component id="jPanel3" min="-2" max="-2" attributes="0"/>
+                      </Group>
                   </Group>
-                  <EmptySpace max="-2" attributes="0"/>
+                  <EmptySpace min="-2" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -67,89 +54,22 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
-                  <Component id="etiqueta4" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Component id="campoTexto1" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Component id="etiqueta1" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Component id="campoCorreo1" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
-                  <Component id="etiqueta2" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Component id="campoPassword1" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Component id="etiqueta3" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Component id="campoTMovil1" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Component id="etiqueta5" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Component id="campoTexto2" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="214" max="32767" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="btnEliminarCuenta" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Component id="btnCerrarSession" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Component id="btnGuardar" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                      <Component id="jPanel3" max="32767" attributes="0"/>
+                      <Component id="jPanel2" max="32767" attributes="0"/>
                   </Group>
+                  <EmptySpace pref="214" max="32767" attributes="0"/>
+                  <Component id="btnCerrarSession" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Component class="vista.componentes.etiqueta.Etiqueta" name="etiqueta1">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Correo electronico"/>
-          </Properties>
-        </Component>
-        <Component class="vista.componentes.campos.CampoPassword" name="campoPassword1">
-          <Properties>
-            <Property name="editable" type="boolean" value="false"/>
-          </Properties>
-          <AuxValues>
-            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
-          </AuxValues>
-        </Component>
-        <Component class="vista.componentes.campos.CampoCorreo" name="campoCorreo1">
-          <Properties>
-            <Property name="editable" type="boolean" value="false"/>
-          </Properties>
-          <AuxValues>
-            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
-          </AuxValues>
-        </Component>
-        <Component class="vista.componentes.boton.Boton" name="btnEliminarCuenta">
-          <Properties>
-            <Property name="imgButtonType" type="java.lang.String" value="danger"/>
-            <Property name="texto" type="java.lang.String" value="Elimiinar cuenta"/>
-          </Properties>
-          <AuxValues>
-            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
-          </AuxValues>
-        </Component>
-        <Component class="vista.componentes.etiqueta.Etiqueta" name="etiqueta2">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Contrase&#xf1;a"/>
-          </Properties>
-        </Component>
-        <Component class="vista.componentes.campos.CampoTexto" name="campoTexto1">
-          <Properties>
-            <Property name="editable" type="boolean" value="false"/>
-          </Properties>
-          <AuxValues>
-            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
-          </AuxValues>
-        </Component>
-        <Component class="vista.componentes.etiqueta.Etiqueta" name="etiqueta4">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Nombre completo"/>
-          </Properties>
-        </Component>
         <Component class="vista.componentes.boton.Boton" name="btnCerrarSession">
           <Properties>
-            <Property name="imgButtonType" type="java.lang.String" value="warning"/>
+            <Property name="imgButtonType" type="java.lang.String" value="danger"/>
             <Property name="texto" type="java.lang.String" value="Cerrrar sesion"/>
           </Properties>
           <AuxValues>
@@ -166,20 +86,12 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="353" max="-2" attributes="0"/>
-                      <Component id="titulo1" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="568" max="32767" attributes="0"/>
-                  </Group>
+                  <Component id="titulo1" alignment="0" max="32767" attributes="0"/>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="titulo1" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="24" max="32767" attributes="0"/>
-                  </Group>
+                  <Component id="titulo1" alignment="0" pref="85" max="32767" attributes="0"/>
               </Group>
             </DimensionLayout>
           </Layout>
@@ -189,33 +101,193 @@
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="ff" green="ff" red="ff" type="rgb"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Cuenta"/>
+                <Property name="horizontalAlignment" type="int" value="0"/>
+                <Property name="text" type="java.lang.String" value="MI CUENTA"/>
               </Properties>
             </Component>
           </SubComponents>
         </Container>
-        <Component class="vista.componentes.boton.Boton" name="btnGuardar">
+        <Container class="javax.swing.JPanel" name="jPanel2">
           <Properties>
-            <Property name="texto" type="java.lang.String" value="Guardar"/>
+            <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+              <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
+                <TitledBorder title="Datos"/>
+              </Border>
+            </Property>
           </Properties>
-          <AuxValues>
-            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
-          </AuxValues>
-        </Component>
-        <Component class="vista.componentes.etiqueta.Etiqueta" name="etiqueta3">
+
+          <Layout>
+            <DimensionLayout dim="0">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" attributes="0">
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="cmpCorreo" alignment="0" max="32767" attributes="0"/>
+                          <Component id="cmpNombreCompleto" max="32767" attributes="0"/>
+                          <Component id="cmpTelefono" alignment="0" max="32767" attributes="0"/>
+                          <Component id="cmpDireccion" alignment="0" max="32767" attributes="0"/>
+                          <Group type="102" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="btnEditar" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="etiqueta1" alignment="0" min="-2" pref="170" max="-2" attributes="0"/>
+                                  <Component id="etiqueta4" alignment="0" min="-2" pref="170" max="-2" attributes="0"/>
+                                  <Component id="etiqueta3" alignment="0" min="-2" pref="180" max="-2" attributes="0"/>
+                                  <Component id="etiqueta5" alignment="0" min="-2" pref="180" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace min="0" pref="505" max="32767" attributes="0"/>
+                          </Group>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                  </Group>
+              </Group>
+            </DimensionLayout>
+            <DimensionLayout dim="1">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="etiqueta1" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="cmpCorreo" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="etiqueta4" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="cmpNombreCompleto" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="etiqueta3" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="cmpTelefono" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="etiqueta5" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="cmpDireccion" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="btnEditar" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
+                  </Group>
+              </Group>
+            </DimensionLayout>
+          </Layout>
+          <SubComponents>
+            <Component class="vista.componentes.etiqueta.Etiqueta" name="etiqueta4">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Nombre completo"/>
+              </Properties>
+            </Component>
+            <Component class="vista.componentes.campos.CampoTexto" name="cmpNombreCompleto">
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+              </AuxValues>
+            </Component>
+            <Component class="vista.componentes.campos.CampoCorreo" name="cmpCorreo">
+              <Properties>
+                <Property name="editable" type="boolean" value="false"/>
+              </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+              </AuxValues>
+            </Component>
+            <Component class="vista.componentes.etiqueta.Etiqueta" name="etiqueta1">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Correo electronico"/>
+              </Properties>
+            </Component>
+            <Component class="vista.componentes.etiqueta.Etiqueta" name="etiqueta3">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="No. T&#xe9;lefono / Movil"/>
+              </Properties>
+            </Component>
+            <Component class="vista.componentes.campos.CampoTMovil" name="cmpTelefono">
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+              </AuxValues>
+            </Component>
+            <Component class="vista.componentes.etiqueta.Etiqueta" name="etiqueta5">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Direcci&#xf3;n"/>
+              </Properties>
+            </Component>
+            <Component class="vista.componentes.campos.CampoTexto" name="cmpDireccion">
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+              </AuxValues>
+            </Component>
+            <Component class="vista.componentes.boton.Boton" name="btnEditar">
+              <Properties>
+                <Property name="imgButtonType" type="java.lang.String" value="warning"/>
+                <Property name="texto" type="java.lang.String" value="Actualizar"/>
+              </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+              </AuxValues>
+            </Component>
+          </SubComponents>
+        </Container>
+        <Container class="javax.swing.JPanel" name="jPanel3">
           <Properties>
-            <Property name="text" type="java.lang.String" value="No. T&#xe9;lefono / Movil"/>
+            <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+              <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
+                <TitledBorder title="Opciones avanzadas"/>
+              </Border>
+            </Property>
           </Properties>
-        </Component>
-        <Component class="vista.componentes.campos.CampoTMovil" name="campoTMovil1">
-        </Component>
-        <Component class="vista.componentes.etiqueta.Etiqueta" name="etiqueta5">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Direcci&#xf3;n"/>
-          </Properties>
-        </Component>
-        <Component class="vista.componentes.campos.CampoTexto" name="campoTexto2">
-        </Component>
+
+          <Layout>
+            <DimensionLayout dim="0">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" attributes="0">
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="btnChgPasswd" pref="263" max="32767" attributes="0"/>
+                          <Component id="btnChgCorreo" max="32767" attributes="0"/>
+                          <Component id="btnEliminarCuenta" alignment="0" max="32767" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                  </Group>
+              </Group>
+            </DimensionLayout>
+            <DimensionLayout dim="1">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="1" attributes="0">
+                      <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
+                      <Component id="btnChgPasswd" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
+                      <Component id="btnChgCorreo" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
+                      <Component id="btnEliminarCuenta" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
+                  </Group>
+              </Group>
+            </DimensionLayout>
+          </Layout>
+          <SubComponents>
+            <Component class="vista.componentes.boton.Boton" name="btnChgPasswd">
+              <Properties>
+                <Property name="texto" type="java.lang.String" value="Cambiar contrase&#xf1;a"/>
+              </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+              </AuxValues>
+            </Component>
+            <Component class="vista.componentes.boton.Boton" name="btnChgCorreo">
+              <Properties>
+                <Property name="imgButtonType" type="java.lang.String" value="warnig"/>
+                <Property name="texto" type="java.lang.String" value="Cambiar correo"/>
+              </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+              </AuxValues>
+            </Component>
+            <Component class="vista.componentes.boton.Boton" name="btnEliminarCuenta">
+              <Properties>
+                <Property name="imgButtonType" type="java.lang.String" value="danger"/>
+                <Property name="texto" type="java.lang.String" value="Eliminar cuenta"/>
+              </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+              </AuxValues>
+            </Component>
+          </SubComponents>
+        </Container>
       </SubComponents>
     </Container>
   </SubComponents>

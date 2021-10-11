@@ -10,7 +10,7 @@ class Rutas {
     public static String pathSharedWin = "shared";
     
     // * Obtener recursos desde el ejecutable .jar (Recursos Interno)
-    public static String pathBkgDefault =  "/storage/img/background_main.png";
+    public static String pathBkgDefault =  "/storage/img/nopicture.jpg";
     public static String pahtContenedorBotones = "/storage/buttons/";
     public static String pathContenedorFuentes = "/storage/fonts/";
     public static String pathContenedorImagenes = "/storage/img/";

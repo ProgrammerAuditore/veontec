@@ -3,6 +3,8 @@ package controlador.acciones;
 import controlador.CtrlMiTienda;
 import index.Veontec;
 import java.awt.Dialog;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -13,6 +15,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
 import javax.swing.ImageIcon;
+import javax.swing.JCheckBox;
 import javax.swing.JDialog;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
@@ -21,7 +24,7 @@ import modelo.dao.ProductoDao;
 import modelo.dto.ProductoDto;
 import vista.paneles.acciones.PanelCrearProducto;
 
-public class CtrlModalEditarProducto {
+public class CtrlModalEditarProducto implements ActionListener{
     
     // * Vista
     private PanelCrearProducto laVista;
@@ -108,6 +111,10 @@ public class CtrlModalEditarProducto {
     
     // * Métodos
     public void mtdInit(){
+        laVista.cboxBoleto.addActionListener(this);
+        laVista.cboxProductoExterno.addActionListener(this);
+        laVista.cmboxVuelos.addActionListener(this);
+        
         mtdEstablecerDatos();
         mtdAgregerEventoWindow();
         mtdEventoBtnAceptar();
@@ -139,8 +146,26 @@ public class CtrlModalEditarProducto {
         laVista.cmpDescripcion.setText( productoDto.getProdDescripcion() );
         laVista.cmpPrecio.setText( "" + productoDto.getProdPrecio() );
         laVista.cmpStock.setText( "" + productoDto.getProdStock());
-        laVista.cmpEnlace.setText( productoDto.getProdEnlace() );
+        mtdEstablecerTipoProducto();
         
+    }
+    
+    private void mtdEstablecerTipoProducto(){
+        if( null != productoDto.getProdTipo() )switch (productoDto.getProdTipo()) {
+            case 3:
+                laVista.cboxProductoExterno.setSelected(true);
+                break;
+            case 7:
+                laVista.cboxBoleto.setSelected(true);
+                break;
+            case 9:
+                laVista.cmboxVuelos.setSelected(true);
+                break;
+            default:
+                break;
+        }
+        
+        laVista.cmpEnlace.setText( productoDto.getProdEnlace() );
     }
     
     private void mtdEditarProducto() {
@@ -152,8 +177,7 @@ public class CtrlModalEditarProducto {
             productoDto.setProdEnlace( laVista.cmpEnlace.getText() );
             productoDto.setProdPrecio( Double.parseDouble(laVista.cmpPrecio.getText()) );
             productoDto.setProdStock( Integer.parseInt(laVista.cmpStock.getText()) );
-            productoDto.setProdTipo(0);            
-            productoDto.setProdEnlace("Vacio");
+            mtdEstablecerTipoProductoYEnlace();
 
             if( productoDao.mtdActualizar(productoDto) ){
                 CtrlMiTienda.mtdRecargarMisProductos();
@@ -206,6 +230,85 @@ public class CtrlModalEditarProducto {
         modal.removeAll();
         modal.setVisible(false);
         modal.dispose();
+    }
+    
+    private void mtdDeseleccionar( JCheckBox opcion, boolean marca){
+        laVista.cboxBoleto.setSelected(false);
+        laVista.cboxProductoExterno.setSelected(false);
+        laVista.cmboxVuelos.setSelected(false);
+        laVista.cmpEnlace.setEditable(false);
+        laVista.cmpEnlace.setEnabled(false);
+        laVista.cmpEnlace.setVerificarCampo(false);
+        laVista.cmpEnlace.getEstiloTextEstablecido();
+        
+        if(marca){
+            opcion.setSelected(true);
+            laVista.cmpEnlace.setEditable(true);
+            laVista.cmpEnlace.setEnabled(true);
+            laVista.cmpEnlace.setVerificarCampo(true);
+        }
+    }
+    
+    private void mtdEstablecerTipoProductoYEnlace(){
+        // Tipos de productos
+        // 1 ; Significa producto interno
+        // 3 ; Significa producto externo para Producto Externo
+        // 7 ; Significa producto externo para Boletos
+        // 9 ; Significa producto externo para Vuelos
+        String strEnlace = "";
+        
+        if( laVista.cboxProductoExterno.isSelected() ){
+            productoDto.setProdTipo(3);
+            
+        }else 
+        if( laVista.cboxBoleto.isSelected() ){
+            productoDto.setProdTipo(7);
+            
+        }else 
+        if( laVista.cmboxVuelos.isSelected() ){
+            productoDto.setProdTipo(9);
+            
+        } 
+        else{
+            productoDto.setProdTipo(1);
+            
+        }
+        
+        if( productoDto.getProdTipo().intValue() == 1 ){
+            productoDto.setProdEnlace("Vacio");
+        }else{
+            strEnlace = laVista.cmpEnlace.getText().trim();
+            productoDto.setProdEnlace(strEnlace);
+        }
+    }
+    
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        
+        if( e.getSource() == laVista.cmboxVuelos ){
+            if( laVista.cmboxVuelos.isSelected() ){
+                mtdDeseleccionar(laVista.cmboxVuelos , true);
+            }else{
+                mtdDeseleccionar(null, false);
+            }
+        }
+        
+        if( e.getSource() == laVista.cboxBoleto ){
+            if( laVista.cboxBoleto.isSelected() ){
+                mtdDeseleccionar(laVista.cboxBoleto , true);
+            }else{
+                mtdDeseleccionar(null, false);
+            }
+        }
+        
+        if( e.getSource() == laVista.cboxProductoExterno ){
+            if( laVista.cboxProductoExterno.isSelected() ){
+                mtdDeseleccionar(laVista.cboxProductoExterno , true);
+            }else{
+                mtdDeseleccionar(null, false);
+            }
+        }
+        
     }
     
 }

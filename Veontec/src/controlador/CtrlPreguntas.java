@@ -1,5 +1,6 @@
 package controlador;
 
+import static controlador.CtrlVentas.logger;
 import controlador.componentes.CtrlCardPregunta;
 import index.Veontec;
 import java.awt.GridBagLayout;
@@ -12,6 +13,8 @@ import modelo.dao.UsuarioDao;
 import modelo.dto.PreguntaDto;
 import modelo.dto.ProductoDto;
 import modelo.dto.UsuarioDto;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import vista.paneles.PanelPreguntas;
 
 public class CtrlPreguntas implements MouseListener{
@@ -28,6 +31,7 @@ public class CtrlPreguntas implements MouseListener{
     private UsuarioDto usuarioDto;
     
     // * Atributos
+    static Log logger = LogFactory.getLog(CtrlPreguntas.class);
     private static CtrlPreguntas instancia;
     private List<PreguntaDto> lstPreguntas;
     Integer usuarioID;
@@ -54,12 +58,17 @@ public class CtrlPreguntas implements MouseListener{
     
     // * Métodos
     public static CtrlPreguntas getInstancia(PanelPreguntas laVista, UsuarioDto dto, UsuarioDao dao){
-        
+        logger.warn("Inicializando controlador.... ");
         if( instancia == null ){
+            logger.warn("Creando instancia.... ");
             instancia = new CtrlPreguntas(laVista, dto, dao);
+            instancia.mtdInit();
+        
+        }else{
+            instancia.mtdMostrarPreguntas();
+        
         }
         
-        instancia.mtdInit();
         return instancia;
     }
     
@@ -69,13 +78,16 @@ public class CtrlPreguntas implements MouseListener{
     }
     
     private void mtdInit(){
+        logger.info("Ejecutando metodo una vez (Obligatorio)");
         mtdMostrarPreguntas();
     }
     
     private void mtdMostrarPreguntas(){
+        logger.info("Iniciando ...");
         laVista.pnContenedor.removeAll();
         laVista.pnContenedor.setLayout(new GridBagLayout());
         
+        logger.info("Listando preguntas...");
         preguntaDto.setPregComprador( Veontec.usuarioDto.getCmpID() );
         preguntaDto.setPregVendedor( Veontec.usuarioDto.getCmpID() );
         lstPreguntas = preguntaDao.mtdListar(preguntaDto);
@@ -83,6 +95,7 @@ public class CtrlPreguntas implements MouseListener{
         
         if( totalPreguntas > 0 ){
             
+            logger.warn("Recorriendo productos ....");
             for (int i = 0; i < totalPreguntas; i++) {
                 producto_dto = producto_dao.mtdConsultar( lstPreguntas.get(i).getPregProducto() );
                 
@@ -129,6 +142,10 @@ public class CtrlPreguntas implements MouseListener{
     @Override
     public void mouseExited(MouseEvent e) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+    public static void mtdEliminarInstancia(){
+        instancia = null;
     }
     
 }

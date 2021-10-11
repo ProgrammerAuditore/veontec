@@ -238,6 +238,7 @@
             <Component class="javax.swing.JTextArea" name="cmpDescripcion">
               <Properties>
                 <Property name="columns" type="int" value="20"/>
+                <Property name="lineWrap" type="boolean" value="true"/>
                 <Property name="rows" type="int" value="5"/>
                 <Property name="text" type="java.lang.String" value="Es nueva"/>
               </Properties>

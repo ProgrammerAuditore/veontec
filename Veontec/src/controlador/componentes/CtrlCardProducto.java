@@ -1,8 +1,10 @@
 package controlador.componentes;
 
+import static com.lowagie.text.pdf.PdfFileSpecification.url;
 import controlador.acciones.CtrlModalComprarProducto;
 import controlador.acciones.CtrlModalHacerPregunta;
 import index.Veontec;
+import java.awt.Desktop;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.Image;
@@ -12,7 +14,10 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
+import java.io.IOException;
 import java.io.InputStream;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.Objects;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
@@ -51,14 +56,15 @@ public class CtrlCardProducto {
     
     // Eventos
     private void mtdCrearEventoBtnComprar(){
+        tarjeta.btnComprar.setTexto("Comparar");
         
         if( Objects.equals(Veontec.usuarioDto.getCmpID(), prodDto.getProdUsuario()) ){
-            tarjeta.btnHacerCompra.setEnabled(false);
+            tarjeta.btnComprar.setEnabled(false);
             return;
         }
         
         MouseListener eventoBtnComprar = null;
-        tarjeta.btnHacerCompra.removeMouseListener(eventoBtnComprar);
+        tarjeta.btnComprar.removeMouseListener(eventoBtnComprar);
         
         eventoBtnComprar = new MouseAdapter(){
             @Override
@@ -69,18 +75,19 @@ public class CtrlCardProducto {
             }
         };
         
-        tarjeta.btnHacerCompra.addMouseListener(eventoBtnComprar);
+        tarjeta.btnComprar.addMouseListener(eventoBtnComprar);
     }
     
     private void mtdCrearEventoBtnPreguntar(){
+        tarjeta.btnPreguntar.setTexto("Preguntar");
         
         if( Objects.equals(Veontec.usuarioDto.getCmpID(), prodDto.getProdUsuario()) ){
-            tarjeta.btnHacerPregunta.setEnabled(false);
+            tarjeta.btnPreguntar.setEnabled(false);
             return;
         }
         
         MouseListener eventoBtnPregunta = null;
-        tarjeta.btnHacerPregunta.removeMouseListener(eventoBtnPregunta);
+        tarjeta.btnPreguntar.removeMouseListener(eventoBtnPregunta);
         
         eventoBtnPregunta = new MouseAdapter(){
             @Override
@@ -91,16 +98,44 @@ public class CtrlCardProducto {
             }
         };
         
-        tarjeta.btnHacerPregunta.addMouseListener(eventoBtnPregunta);
+        tarjeta.btnPreguntar.addMouseListener(eventoBtnPregunta);
+    }
+    
+    private void mtdCrearEventoBtnVerProducto(){
+        tarjeta.btnComprar.setTexto("Ver producto");
+        
+        if( Objects.equals(Veontec.usuarioDto.getCmpID(), prodDto.getProdUsuario()) ){
+            tarjeta.btnComprar.setEnabled(false);
+            return;
+        }
+        
+        MouseListener eventoBtnPregunta = null;
+        tarjeta.btnComprar.removeMouseListener(eventoBtnPregunta);
+        
+        eventoBtnPregunta = new MouseAdapter(){
+            @Override
+            public void mouseReleased(MouseEvent e) {
+                mtdVerProducto();
+            }
+        };
+        
+        tarjeta.btnComprar.addMouseListener(eventoBtnPregunta);
     }
     
     // Métodos
     public void mtdInit(){
-        // * Inicializar componentes
-        
         mtdEstablecerImagen();
         mtdEstablecerOpciones();
-        mtdCrearEventoBtnComprar();
+        
+        // * Establecer boton
+        if( prodDto.getProdTipo() == 1 ){
+            tarjeta.mtdBackgroundProductoInterno();
+            mtdCrearEventoBtnComprar();
+        }else{
+            tarjeta.mtdBackgroundProductoExterno();
+            mtdCrearEventoBtnVerProducto();
+        }
+        
         mtdCrearEventoBtnPreguntar();
         mtdEstablecerDatos();
         mtdEstablecerDimensiones();
@@ -167,6 +202,26 @@ public class CtrlCardProducto {
         tarjeta_dimensiones.insets = new Insets(20, 10, 20, 10);  //top padding
         tarjeta_dimensiones.fill = GridBagConstraints.BOTH; // El modo de estirar
         tarjeta.setVisible(true);
+    }
+    
+    private void mtdVerProducto(){
+        if(Desktop.isDesktopSupported()){
+            Desktop desktop = Desktop.getDesktop();
+            try {
+                desktop.browse(new URI(prodDto.getProdEnlace()));
+            } catch (IOException | URISyntaxException e) {
+                // TODO Auto-generated catch block
+                //e.printStackTrace();
+            }
+        }else{
+            Runtime runtime = Runtime.getRuntime();
+            try {
+                runtime.exec("xdg-open " + prodDto.getProdEnlace());
+            } catch (IOException e) {
+                // TODO Auto-generated catch block
+                //e.printStackTrace();
+            }
+        }
     }
     
     public PanelCardProducto getLaVista() {

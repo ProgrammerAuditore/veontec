@@ -54,11 +54,6 @@
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
-              <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Component id="enlace1" min="-2" pref="173" max="-2" attributes="0"/>
-                  <EmptySpace max="32767" attributes="0"/>
-              </Group>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
@@ -72,9 +67,7 @@
                   <Component id="etiqueta2" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="campoPassword1" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Component id="enlace1" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="196" max="32767" attributes="0"/>
+                  <EmptySpace pref="233" max="32767" attributes="0"/>
                   <Component id="btnIniciarSession" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
@@ -109,11 +102,6 @@
         <Component class="vista.componentes.etiqueta.Etiqueta" name="etiqueta2">
           <Properties>
             <Property name="text" type="java.lang.String" value="Contrase&#xf1;a"/>
-          </Properties>
-        </Component>
-        <Component class="vista.componentes.etiqueta.Enlace" name="enlace1">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Olvide mi contrase&#xf1;a"/>
           </Properties>
         </Component>
       </SubComponents>
