@@ -27,6 +27,7 @@ public class CampoMoneda extends JTextField implements FocusListener, KeyListene
     
     // * Propiedadades
     public String Placeholder = "Establezca un placeholder";
+    public boolean verificarCampo = true;
     private final Border BorderMargin = BorderFactory.createEmptyBorder(0, 10, 0, 10);
     private final Color borderColor = new Color(192, 192, 192);
     private final Color backgroundColor = new Color(255, 255, 255);
@@ -138,20 +139,23 @@ public class CampoMoneda extends JTextField implements FocusListener, KeyListene
     
     @Override
     public void focusGained(FocusEvent e) {
-        getEstiloTextEscritura();
-        if( getText().equals( getPlaceholder() ) ){
-            setText(null);
+        if( verificarCampo ){
+            getEstiloTextEscritura();
+            if( getText().equals( getPlaceholder() ) ){
+                setText(null);
+            }
         }
-        
     }
 
     @Override
     public void focusLost(FocusEvent e) {
-        if( getText().isEmpty() ){
-            setText(getPlaceholder());
-            getEstiloTextEmpty();
-        }else{
-            getEstiloAprobado();
+        if( verificarCampo ){
+            if( getText().isEmpty() ){
+                setText(getPlaceholder());
+                getEstiloTextEmpty();
+            }else{
+                getEstiloAprobado();
+            }
         }
     }
 
@@ -194,6 +198,14 @@ public class CampoMoneda extends JTextField implements FocusListener, KeyListene
 
     @Override
     public void keyReleased(KeyEvent e) {
+    }
+
+    public boolean isVerificarCampo() {
+        return verificarCampo;
+    }
+
+    public void setVerificarCampo(boolean verificarCampo) {
+        this.verificarCampo = verificarCampo;
     }
     
 }

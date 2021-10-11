@@ -55,7 +55,33 @@ public class UsuarioDao implements keyword_query<UsuarioDto>{
 
     @Override
     public boolean mtdActualizar(UsuarioDto obj_dto) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        // * Funciona perfectamente
+        
+        PreparedStatement ps = null;
+        Connection conn = CtrlHiloConexion.getConexion();
+        String query = "UPDATE tblusuarios SET "
+                + "usuaNombre = ?, usuaCorreo = ?, usuaPassword = ? "
+                // * Buscamos el producto del usuario respectivo
+                + "WHERE usuaID = ? ;";
+        
+        try {
+            
+            ps = conn.prepareStatement(query.toLowerCase());
+            ps.setString(1, obj_dto.getCmpNombreCompleto());
+            ps.setString(2, obj_dto.getCmpCorreo());
+            ps.setString(3, obj_dto.getCmpPassword());
+            ps.setInt(4, obj_dto.getCmpID());
+            int respuesta = ps.executeUpdate();
+            
+            // * Si la respuesta es mayor a 0 significa que la consulta fue exitosa.
+            if( respuesta > 0 )
+                return true;
+            
+        } catch (SQLException e) {
+            System.out.println("" + e.getMessage());
+        }
+        
+        return false;
     }
 
     @Override

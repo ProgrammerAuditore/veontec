@@ -15,6 +15,7 @@ public class CampoPassword extends JPasswordField implements FocusListener{
     
      // * Propiedadades
     public String Placeholder = "Establezca un placeholder";
+    public boolean verificarCampo = true;
     private final Border BorderMargin = BorderFactory.createEmptyBorder(0, 10, 0, 10);
     private final Color borderColor = new Color(192, 192, 192);
     private final Color backgroundColor = new Color(255, 255, 255);
@@ -125,20 +126,23 @@ public class CampoPassword extends JPasswordField implements FocusListener{
     
     @Override
     public void focusGained(FocusEvent e) {
-        getEstiloTextEscritura();
-        if( String.valueOf(getPassword()).equals( getPlaceholder() ) ){
-            setText(null);
+        if( verificarCampo ){
+            getEstiloTextEscritura();
+            if( String.valueOf(getPassword()).equals( getPlaceholder() ) ){
+                setText(null);
+            }
         }
-        
     }
 
     @Override
     public void focusLost(FocusEvent e) {
-        if( String.valueOf(getPassword()).isEmpty() ){
-            setText(getPlaceholder());
-            getEstiloTextEmpty();
-        }else{
-            getEstiloAprobado();
+        if( verificarCampo ){
+            if( String.valueOf(getPassword()).isEmpty() ){
+                setText(getPlaceholder());
+                getEstiloTextEmpty();
+            }else{
+                getEstiloAprobado();
+            }
         }
     }
 
@@ -149,6 +153,14 @@ public class CampoPassword extends JPasswordField implements FocusListener{
     public void setComponenteDidireccional(JLabel componenteDidireccional) {
         this.componenteDidireccional = componenteDidireccional;
         setPlaceholder(componenteDidireccional.getText());
+    }
+
+    public boolean isVerificarCampo() {
+        return verificarCampo;
+    }
+
+    public void setVerificarCampo(boolean verificarCampo) {
+        this.verificarCampo = verificarCampo;
     }
     
 }

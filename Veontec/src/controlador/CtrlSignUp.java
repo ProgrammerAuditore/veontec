@@ -8,6 +8,7 @@ import java.awt.event.MouseListener;
 import javax.swing.JOptionPane;
 import modelo.dao.UsuarioDao;
 import modelo.dto.UsuarioDto;
+import src.Info;
 import vista.paneles.PanelInicarSession;
 import vista.paneles.PanelRegistrarme;
 import vista.ventanas.VentanaHome;
@@ -34,7 +35,7 @@ public class CtrlSignUp implements MouseListener{
     }
     
     public void mtdInit(){
-        
+        ni.setTitle(Info.NombreSoftware);
         
         if(CtrlHiloConexion.checkConexion() == false){
             ni.tabContenedor.getTabComponentAt(1).setEnabled(false);
@@ -91,7 +92,9 @@ public class CtrlSignUp implements MouseListener{
                 Veontec.ventanaHome = new VentanaHome();
                 Veontec.usuarioDao = dao;
                 Veontec.usuarioDto = dto;
-                Veontec.ventanaHome.setTitle( Veontec.usuarioDto.getCmpNombreCompleto() + " | "  + Veontec.usuarioDto.getCmpCorreo());
+                Veontec.ventanaHome.setTitle( Veontec.usuarioDto.getCmpNombreCompleto() 
+                        + " | "  + Veontec.usuarioDto.getCmpCorreo() 
+                        + " - " + Info.NombreSoftware );
                 CtrlHome ctrl = new CtrlHome(Veontec.ventanaHome);
                 ctrl.laVista.setLocationRelativeTo(null);
                 ctrl.laVista.setVisible(true);
