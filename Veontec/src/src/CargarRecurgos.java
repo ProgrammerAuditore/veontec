@@ -64,8 +64,8 @@ class CargarRecurgos {
         return data;
     }
     
-    public File dataPreferencias() {
-        //System.out.println("Método: dataPreferencias");
+    public File dataCuenta() {
+        //System.out.println("Método: dataCuenta");
         String UserHome = System.getProperty("user.home");
         File data = null;
         String dir = "";
@@ -82,11 +82,11 @@ class CargarRecurgos {
             new File( dir + "veontec").mkdir();
             
             // Crear el archivo pconfig dentro de la carpeta etc 
-            new File( dir + Rutas.pathDataPreferencias ).createNewFile();
+            new File( dir + Rutas.pathDataCuenta ).createNewFile();
             
             // Obtener el archivo conn
-            //System.out.println("Archivo conn :: " + dir + Rutas.pathDataPreferencias);
-            data = new File( dir + Rutas.pathDataPreferencias );
+            //System.out.println("Archivo conn :: " + dir + Rutas.pathDataCuenta);
+            data = new File( dir + Rutas.pathDataCuenta );
             
         } catch (IOException ex) {
             //System.out.println("CargarRecurgos :: Archivo conn no localizado...");

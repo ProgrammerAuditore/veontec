@@ -6,7 +6,9 @@ import index.Veontec;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import javax.swing.JOptionPane;
+import modelo.dao.CuentaDao;
 import modelo.dao.UsuarioDao;
+import modelo.dto.CuentaDto;
 import modelo.dto.UsuarioDto;
 import src.Info;
 import vista.paneles.PanelSignUp;
@@ -90,16 +92,30 @@ public class CtrlSignUp implements MouseListener{
                 if( Veontec.ventanaHome == null ){
                     JOptionPane.showMessageDialog(ni, "Bienvenido " + dto.getCmpNombreCompleto() );
 
+                    // * Instanciar objetos para el cuenta actual
                     Veontec.ventanaHome = new VentanaHome();
                     Veontec.usuarioDao = dao;
                     Veontec.usuarioDto = dto;
                     Veontec.ventanaHome.setTitle( Veontec.usuarioDto.getCmpNombreCompleto() 
                             + " | "  + Veontec.usuarioDto.getCmpCorreo() 
                             + " - " + Info.NombreSoftware );
+                    
+                    // * Registrar los datos del usuario
+                    CuentaDto cuenta = new CuentaDto();
+                    CuentaDao cuentaDao = new CuentaDao(); 
+                    cuenta.setCorreo(pnInicarSession.campoCorreo1.getText().trim());
+                    cuenta.setPasswd(String.valueOf(pnInicarSession.campoPassword1.getPassword()).trim());
+                    cuentaDao.regitrar_datos(cuenta);
+                    cuenta = cuentaDao.obtener_datos();
+                    System.out.println("Cuenta : " + cuenta.getCorreo());
+                    System.out.println("Cuenta : " + cuenta.getPasswd());
+                    
+                    // * Crear controlador y mostrar la ventana principal
                     CtrlHome ctrl = new CtrlHome(Veontec.ventanaHome);
                     ctrl.laVista.setLocationRelativeTo(null);
                     ctrl.laVista.setVisible(true);
-
+                    
+                    // * Cerrar y destruir la ventana de SingUp
                     Veontec.ventanaSession.setVisible(false);
                     Veontec.ventanaSession.dispose();
                     Veontec.ventanaSession = null;

@@ -11,11 +11,9 @@ import java.util.Properties;
 import java.util.Scanner;
 import javax.swing.JOptionPane;
 import modelo.dao.EjecucionDao;
-import modelo.dao.PreferenciaDao;
 import modelo.dao.UsuarioDao;
 import modelo.dto.ConexionDto;
 import modelo.dto.EjecucionDto;
-import modelo.dto.PreferenciaDto;
 import modelo.dto.UsuarioDto;
 import src.Info;
 import src.Recursos;
@@ -50,7 +48,6 @@ public class Veontec {
             System.exit(0);
         }
         
-        mtdCargarPreferencias();
         HiloConexion hc = new HiloConexion();
         HiloPrincipal hp = new HiloPrincipal();
         //HiloSplash hs = new HiloSplash();
@@ -117,29 +114,6 @@ public class Veontec {
         archivoRun.mtdRegistrarDatos(dto);
             
         
-    }
-    
-    private void mtdCargarPreferencias(){
-        PreferenciaDao dao = new PreferenciaDao();
-        PreferenciaDto dto;
-        
-        if( dao.obtener_datos() == null ){ 
-            dto = new PreferenciaDto();
-            Recursos.dataPreferencias().delete();
-        } else{
-            dto = dao.obtener_datos();
-        }
-            
-            if( dto.getIdioma().trim().equals("Español") || dto.getIdioma().trim().equals("Spanish") ){
-                idioma = new Idiomas("es");
-                Veontec.IdiomaDefinido = "ESP";
-            }else{
-                idioma = new Idiomas("en");
-                Veontec.IdiomaDefinido = "ENG";
-            }
-            Recursos.mtdCambiarFuente( dto.getFuente() );
-            Recursos.styleButtonDefault = dto.getEstilo();
-            
     }
     
     public static void mtdVerificarID(){
@@ -300,7 +274,6 @@ public class Veontec {
     
     // * Mostrar mensaje de ayuda en la terminal
     public void mtdTagHelp(){
-        mtdCargarPreferencias();
         System.out.println(Info.NombreSoftware);
         System.out.println("");
         System.out.println(Veontec.idioma.get("MyFreeLab.mtdTagHelp.msg1"));
@@ -330,7 +303,7 @@ public class Veontec {
         System.out.println("#TimeTmp : " + Recursos.timeTmp);
         System.out.println("#bkgAside : " + Recursos.bkgAside);
         System.out.println("#bkgLogo : " + Recursos.bkgLogo);
-        System.out.println("#dataPreferencias : " + Recursos.dataPreferencias().getAbsolutePath());
+        System.out.println("#dataPreferencias : " + Recursos.dataCuenta().getAbsolutePath());
         System.out.println("#dataConexion : " + Recursos.dataConexion().getAbsolutePath());
         System.out.println("#dataRun : " + Recursos.dataRun().getAbsolutePath());
         System.out.println("#docVersionesXml : " + Recursos.docVersionesXml);
