@@ -30,7 +30,7 @@ public class CuentaDao implements keyword_binario<CuentaDto>{
             
         } catch(Exception e){
             //System.out.println("Error");
-            Recursos.dataCuenta().delete();
+            //Recursos.dataCuenta().delete();
             //e.printStackTrace();
         }
         

@@ -10,9 +10,11 @@ import java.io.InputStream;
 import java.util.Properties;
 import java.util.Scanner;
 import javax.swing.JOptionPane;
+import modelo.dao.CuentaDao;
 import modelo.dao.EjecucionDao;
 import modelo.dao.UsuarioDao;
 import modelo.dto.ConexionDto;
+import modelo.dto.CuentaDto;
 import modelo.dto.EjecucionDto;
 import modelo.dto.UsuarioDto;
 import src.Info;
@@ -30,6 +32,8 @@ public class Veontec {
     public static String IdiomaDefinido;
     public static UsuarioDao usuarioDao;
     public static UsuarioDto usuarioDto;
+    public static CuentaDao cuentaDao;
+    public static CuentaDto cuentaDto;
     
     public void mtdTagInit() {
         
@@ -56,8 +60,41 @@ public class Veontec {
         //hs.setDaemon(true);
         
         Veontec.ventanaSession = new VentanaSingUp();
-        CtrlSignUp ctrl = new CtrlSignUp(Veontec.ventanaSession, Veontec.ventanaSession.pnRegistrarme, Veontec.ventanaSession.pnLoggin); 
-        ctrl.mtdInit();
+        if( Recursos.dataCuenta().exists() ){
+            CtrlSignUp ctrl = new CtrlSignUp(Veontec.ventanaSession, Veontec.ventanaSession.pnRegistrarme, Veontec.ventanaSession.pnLoggin); 
+            
+            Veontec.cuentaDto = new CuentaDto();
+            Veontec.cuentaDao = new CuentaDao(); 
+            Veontec.cuentaDto = Veontec.cuentaDao.obtener_datos();
+            
+            // * Verificar si hay datos registrados y validos
+            if( Veontec.cuentaDto == null ){
+                
+                // * Si no se elimina el archivo
+                // y se abreve la ventana de SingUp
+                Recursos.dataCuenta().delete();
+                ctrl.mtdInit();
+                
+            } else{
+                
+                // * Verificar los datos de la cuenta registrado
+                if( ctrl.mtdObtenerUsuario(Veontec.cuentaDto.getCorreo()) ){
+                    if( ctrl.mtdValidarDatosDeUsuario(Veontec.cuentaDto.getCorreo(), Veontec.cuentaDto.getPasswd()) ){
+                        ctrl.mtdAbrirVentanaHome();
+                    }
+                    
+                }else{
+                    
+                    // * Si no se elimina el archivo
+                    // y se abreve la ventana de SingUp
+                    Recursos.dataCuenta().delete();
+                    ctrl.mtdInit();
+                    
+                }
+                
+            }
+            
+        }
         
         // * Ejecutar hilos
         //hs.start();
