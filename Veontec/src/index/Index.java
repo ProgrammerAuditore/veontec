@@ -7,7 +7,7 @@ public class Index {
     public static void main(String[] args) {
         // * Inicializar el programa
         //System.out.println("Inicializando programa...");
-        MyFreeLab programa  = new MyFreeLab();
+        Veontec programa  = new Veontec();
         
         switch (args.length) {
             case 0:
@@ -16,10 +16,6 @@ public class Index {
             case 1:
                 switch( args[0] ){
                     case "--init" : programa.mtdTagInit(); break;
-                    case "-mc" :
-                    case "--mkconn" : programa.mtdTagMkConn(); break;
-                    case "-mp" :
-                    case "--mkpref" : programa.mtdTagMkPref(); break;
                     case "--pid" : programa.mtdTagPID(); break;
                     case "--test" : programa.mtdTagTest();  break;
                     case "-h" :

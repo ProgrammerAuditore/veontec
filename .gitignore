@@ -1,9 +1,42 @@
-/App/nbproject/private/
-/App/build/
-/App/dist/
-/JPanelImagen/build/
-/JPanelImagen/dist/
-/JPanelImagen/nbproject/private/
+# Compiled class file
+*.class
+
+# Log file
+*.log
+
+# BlueJ files
+*.ctxt
+
+# Mobile Tools for Java (J2ME)
+.mtj.tmp/
+
+# Package Files #
+*.war
+*.nar
+*.ear
+*.zip
+*.tar.gz
+*.rar
+
+# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
+hs_err_pid*
+/Dado/nbproject/private/
+/SimuladorDado/nbproject/private/
+/SimuladorDado/build/
+/dist/
+
 /Veontec/nbproject/private/
 /Veontec/build/
 /Veontec/dist/
+/Veontec/nbproject/private/*
+/Veontec/build/*
+/Veontec/dist/*
+
+Veontec/nbproject/private/
+Veontec/build/
+Veontec/dist/
+Veontec/nbproject/private/*
+Veontec/build/*
+Veontec/dist/*
+
+

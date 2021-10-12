@@ -6,6 +6,8 @@ public class UsuarioDto {
     private String cmpNombreCompleto;
     private String cmpCorreo;
     private String cmpPassword;
+    private String cmpDireccion;
+    private String cmpTelefono;
 
     public Integer getCmpID() {
         return cmpID;
@@ -39,14 +41,25 @@ public class UsuarioDto {
         this.cmpPassword = cmpPassword;
     }
 
+    public String getCmpDireccion() {
+        return cmpDireccion;
+    }
+
+    public void setCmpDireccion(String cmpDireccion) {
+        this.cmpDireccion = cmpDireccion;
+    }
+
+    public String getCmpTelefono() {
+        return cmpTelefono;
+    }
+
+    public void setCmpTelefono(String cmpTelefono) {
+        this.cmpTelefono = cmpTelefono;
+    }
+
     @Override
     public String toString() {
-        String info = "\n"
-                + "cmpID : " + cmpID + "\n"
-                + "cmpNombre : " + cmpNombreCompleto + "\n"
-                + "cmpPassword : " + cmpPassword + "\n"
-                + "cmpCorreo : " + cmpCorreo + "\n";
-        return info;
+        return "UsuarioDto{" + "cmpID=" + cmpID + ", cmpNombreCompleto=" + cmpNombreCompleto + ", cmpCorreo=" + cmpCorreo + ", cmpPassword=" + cmpPassword + ", cmpDireccion=" + cmpDireccion + ", cmpTelefono=" + cmpTelefono + '}';
     }
     
 }

@@ -1,20 +1,19 @@
-Package: myfreelab
-Version: 1.1.0
-Standards-Version: 1.1.0Beta
+Package: veontec
+Version: 0.9.0
+Standards-Version: 0.9.0Alpha
 Package-Type: deb
 Architecture: all
 Essential: no
 Priority: optional
 Installed-Size: 45466
 Section: java, education, base
-Homepage: https://programmerauditore.gitlab.io/myfreelab
+Homepage: https://programmerauditore.gitlab.io/veontec
 Maintainer: ProgrammerAuditore <victorvj098@gmail.com>
-Description: Gestion de proyectos para freelancer.
+Description: Software E-commerce.
  El programa sirve para poder crear, modificar, eliminar y registrar
- proyectos desarrollados para una empresa en particular.
- Asi tambien, para poder generar una cotizacion para cada empresa en particular
- y calcular el costo del proyecto, entre otras cosas.
- Tiene la funcionalidad de conexion a una base de datos MYSQL local o remoto.
+ productos dentro de la plataforma de veontec.
+ Asi tambien, para poder realizar una compra de un vendedor en particular.
+ Tiene un sistema de loggin, crud para productos, modificar datos, etc.
 Depends: default-jre | openjdk-11-jre-zero, openjdk-8-jre-zero | openjdk-8-jre
 Recommends: qapt-deb-installer | gdebi
 Suggests: apt, dpkg (>= 1.14.0) | dpkg-deb

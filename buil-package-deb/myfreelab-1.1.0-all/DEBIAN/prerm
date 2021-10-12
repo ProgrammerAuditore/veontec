@@ -1,10 +1,10 @@
 #!/bin/sh
 
 # PATH run MyFreeLab
-MFL_BIN=/usr/bin/myfreelab
+SFW_BIN=/usr/bin/veontec
 
-# Delete myfreelab BIN
-if [ -f "$MFL_BIN" ]; then
-    rm -f $MFL_BIN 
-    echo "myfreelab removed success"
+# Delete veontec BIN
+if [ -f "$SFW_BIN" ]; then
+    rm -f $SFW_BIN 
+    echo "veontec removed success"
 fi

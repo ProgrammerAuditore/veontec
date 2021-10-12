@@ -16,7 +16,7 @@
  */
 package vista.splash;
 
-import index.MyFreeLab;
+import index.Veontec;
 import src.Info;
 import src.Recursos;
 
@@ -42,8 +42,8 @@ public class Splash extends javax.swing.JFrame {
         
         // * Establace información del software
         this.etqSoftware.setText(Info.NombreSoftware);
-        this.etqIdioma.setText(MyFreeLab.IdiomaDefinido);
-        this.eqtCopyright.setText(MyFreeLab.idioma.getProperty("Splash.eqtCopyright"));
+        this.etqIdioma.setText(Veontec.IdiomaDefinido);
+        this.eqtCopyright.setText(Veontec.idioma.getProperty("Splash.eqtCopyright"));
         
         // * Realiza los cambios
         pack();
