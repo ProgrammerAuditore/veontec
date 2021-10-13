@@ -44,6 +44,7 @@ public class PanelSignUp extends javax.swing.JPanel {
         campoCorreo1 = new vista.componentes.campos.CampoCorreo();
         btnIniciarSession = new vista.componentes.boton.Boton();
         etiqueta2 = new vista.componentes.etiqueta.Etiqueta();
+        btnRecuperarCuenta = new vista.componentes.etiqueta.Enlace();
 
         etiqueta1.setText("Correo electronico");
 
@@ -51,6 +52,9 @@ public class PanelSignUp extends javax.swing.JPanel {
         btnIniciarSession.setTexto("Iniciar session");
 
         etiqueta2.setText("Contraseña");
+
+        btnRecuperarCuenta.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        btnRecuperarCuenta.setText("Olvide mi contraseña");
 
         javax.swing.GroupLayout jPanelBackground1Layout = new javax.swing.GroupLayout(jPanelBackground1);
         jPanelBackground1.setLayout(jPanelBackground1Layout);
@@ -70,7 +74,8 @@ public class PanelSignUp extends javax.swing.JPanel {
                                 .addGroup(jPanelBackground1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(etiqueta1, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(etiqueta2, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(0, 219, Short.MAX_VALUE)))))
+                                .addGap(0, 219, Short.MAX_VALUE))
+                            .addComponent(btnRecuperarCuenta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap())
         );
         jPanelBackground1Layout.setVerticalGroup(
@@ -84,7 +89,9 @@ public class PanelSignUp extends javax.swing.JPanel {
                 .addComponent(etiqueta2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(campoPassword1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 233, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(btnRecuperarCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 185, Short.MAX_VALUE)
                 .addComponent(btnIniciarSession, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -104,6 +111,7 @@ public class PanelSignUp extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public vista.componentes.boton.Boton btnIniciarSession;
+    public vista.componentes.etiqueta.Enlace btnRecuperarCuenta;
     public vista.componentes.campos.CampoCorreo campoCorreo1;
     public vista.componentes.campos.CampoPassword campoPassword1;
     private vista.componentes.etiqueta.Etiqueta etiqueta1;

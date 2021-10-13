@@ -20,7 +20,12 @@ public class CtrlHome implements MouseListener{
     // Modelos
     private UsuarioDao dao;
     private UsuarioDto dto;
+    
+    // Atributos
     private int tabPreviaSeleccionada;
+    private Integer estadoVeontec;
+    private Integer estadoSuccessVeontec;
+    private String titulo;
 
     public CtrlHome(VentanaHome laVista) {
         this.laVista = laVista;
@@ -28,6 +33,7 @@ public class CtrlHome implements MouseListener{
         
         // * Establecer oyentes
         laVista.pnTabMenu.addMouseListener(this);
+        titulo = Veontec.ventanaHome.getTitle();
         mtdCargarBienvenida();
         
     }
@@ -91,75 +97,86 @@ public class CtrlHome implements MouseListener{
     }
     
     private void mtdCargarBienvenida(){
-        try {
-            
-            if(CtrlHiloConexion.ctrlEstado == true){
-                CtrlBienvenida ctrl = CtrlBienvenida.getInstancia(laVista.panelHome, Veontec.usuarioDto, Veontec.usuarioDao);
-            }else{
-                JOptionPane.showMessageDialog(laVista, "No hay conexión");
-            }
         
-        } catch (Exception e) {}
+        mtdValidarAcceso();
+        if(  estadoVeontec >= estadoSuccessVeontec ){
+            CtrlBienvenida ctrl = CtrlBienvenida.getInstancia(laVista.panelHome, Veontec.usuarioDto, Veontec.usuarioDao);
+        }
+        
     }
     
     private void mtdCargarMiTienda(){
-        try {
-            
-            if(CtrlHiloConexion.ctrlEstado == true){
-                CtrlMiTienda ctrl = CtrlMiTienda.getInstancia(laVista.pnMiTienda, Veontec.usuarioDto, Veontec.usuarioDao);
-            }else{
-                JOptionPane.showMessageDialog(laVista, "No hay conexión");
-            }
+        mtdValidarAcceso();
+        if(  estadoVeontec >= estadoSuccessVeontec ){
+            CtrlMiTienda ctrl = CtrlMiTienda.getInstancia(laVista.pnMiTienda, Veontec.usuarioDto, Veontec.usuarioDao);
+        }
         
-        } catch (Exception e) {}
     }
     
     private void mtdCargarMiCuenta(){
-        try {
-            
-            if(CtrlHiloConexion.ctrlEstado == true){
-                CtrlMiCuenta ctrl = CtrlMiCuenta.getInstancia(laVista.pnMiCuenta, Veontec.usuarioDto, Veontec.usuarioDao);
-            }else{
-                JOptionPane.showMessageDialog(laVista, "No hay conexión");
-            }
+        mtdValidarAcceso();
+        if(  estadoVeontec > 1 ){
+            CtrlMiCuenta ctrl = CtrlMiCuenta.getInstancia(laVista.pnMiCuenta, Veontec.usuarioDto, Veontec.usuarioDao);
+        }
         
-        } catch (Exception e) {}
     }
     
     private void mtdCargarVentas(){
-        try {
-            
-            if(CtrlHiloConexion.ctrlEstado == true){
-                 CtrlVentas ctrl = CtrlVentas.getInstancia(laVista.pnVentas, Veontec.usuarioDto, Veontec.usuarioDao);
-            }else{
-                JOptionPane.showMessageDialog(laVista, "No hay conexión");
-            }
+        mtdValidarAcceso();
+        if(  estadoVeontec >= estadoSuccessVeontec ){
+            CtrlVentas ctrl = CtrlVentas.getInstancia(laVista.pnVentas, Veontec.usuarioDto, Veontec.usuarioDao);
+        }
         
-        } catch (Exception e) {}
     }
     
     private void mtdCargarCompras(){
-        try {
-            
-            if(CtrlHiloConexion.ctrlEstado == true){
-                CtrlCompras ctrl = CtrlCompras.getInstancia(laVista.pnCompras, Veontec.usuarioDto, Veontec.usuarioDao);
-            }else{
-                JOptionPane.showMessageDialog(laVista, "No hay conexión");
-            }
+        mtdValidarAcceso();
+        if(  estadoVeontec >= estadoSuccessVeontec ){
+            CtrlCompras ctrl = CtrlCompras.getInstancia(laVista.pnCompras, Veontec.usuarioDto, Veontec.usuarioDao);
+        }
         
-        } catch (Exception e) {}
     }
     
     private void mtdCargarPreguntas(){
-        try {
-            
-            if(CtrlHiloConexion.ctrlEstado == true){
-                CtrlPreguntas ctrl = CtrlPreguntas.getInstancia(laVista.panelPreguntas, Veontec.usuarioDto, Veontec.usuarioDao);
-            }else{
-                JOptionPane.showMessageDialog(laVista, "No hay conexión");
-            }
+        mtdValidarAcceso();
+        if(  estadoVeontec >= estadoSuccessVeontec ){
+            CtrlPreguntas ctrl = CtrlPreguntas.getInstancia(laVista.panelPreguntas, Veontec.usuarioDto, Veontec.usuarioDao);
+        }
         
+    }
+    
+    private void mtdValidarAcceso(){
+        estadoVeontec = mtdObtenerEstadoVeontec();
+        switch(estadoVeontec){
+            case 1 : JOptionPane.showMessageDialog(laVista, "Software Veontec, no hay conexión"); break;
+            case 2 : Veontec.ventanaHome.setTitle( titulo + " (cuenta no verificada)"); break;
+            case 3 : Veontec.ventanaHome.setTitle( titulo + " (cuenta recuperada)"); break;
+            case -1 : estadoVeontec = 4; break;
+            default: break;
+        }
+        estadoSuccessVeontec = 4;
+    }
+    
+    private Integer mtdObtenerEstadoVeontec(){
+        try {
+            // * Verificar no hay conexión   
+            if(CtrlHiloConexion.ctrlEstado == false){
+                return 1;
+            } 
+             
+            // * Verificar si la cuenta no está verificada
+            if(Veontec.usuarioDto.getCmpEstado() == 333){
+                return 2;
+            }
+            
+            // * Verificar si la cuenta no está en modo recuperada
+            if(Veontec.usuarioDto.getCmpEstado() == 777){
+                return 3;
+            }
+            
         } catch (Exception e) {}
+        
+        return -1;
     }
     
     

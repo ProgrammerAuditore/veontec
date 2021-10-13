@@ -1,5 +1,7 @@
 package modelo.dto;
 
+import java.util.logging.Logger;
+
 public class UsuarioDto {
     
     private Integer cmpID;
@@ -8,6 +10,8 @@ public class UsuarioDto {
     private String cmpPassword;
     private String cmpDireccion;
     private String cmpTelefono;
+    private String cmpKey;
+    private Integer cmpEstado;
 
     public Integer getCmpID() {
         return cmpID;
@@ -57,9 +61,25 @@ public class UsuarioDto {
         this.cmpTelefono = cmpTelefono;
     }
 
+    public String getCmpKey() {
+        return cmpKey;
+    }
+
+    public void setCmpKey(String cmpKey) {
+        this.cmpKey = cmpKey;
+    }
+
+    public Integer getCmpEstado() {
+        return cmpEstado;
+    }
+
+    public void setCmpEstado(Integer cmpEstado) {
+        this.cmpEstado = cmpEstado;
+    }
+
     @Override
     public String toString() {
-        return "UsuarioDto{" + "cmpID=" + cmpID + ", cmpNombreCompleto=" + cmpNombreCompleto + ", cmpCorreo=" + cmpCorreo + ", cmpPassword=" + cmpPassword + ", cmpDireccion=" + cmpDireccion + ", cmpTelefono=" + cmpTelefono + '}';
+        return "UsuarioDto{" + "cmpID=" + cmpID + ", cmpNombreCompleto=" + cmpNombreCompleto + ", cmpCorreo=" + cmpCorreo + ", cmpPassword=" + cmpPassword + ", cmpDireccion=" + cmpDireccion + ", cmpTelefono=" + cmpTelefono + ", cmpKey=" + cmpKey + ", cmpEstado=" + cmpEstado + '}';
     }
     
 }
