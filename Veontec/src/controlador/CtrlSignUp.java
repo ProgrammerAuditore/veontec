@@ -6,8 +6,10 @@ import index.Veontec;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import javax.swing.JOptionPane;
+import modelo.dao.CategoriaDao;
 import modelo.dao.CuentaDao;
 import modelo.dao.UsuarioDao;
+import modelo.dto.CategoriaDto;
 import modelo.dto.CuentaDto;
 import modelo.dto.UsuarioDto;
 import src.Info;
@@ -72,7 +74,7 @@ public class CtrlSignUp implements MouseListener{
                 return;
             }
 
-            // * Obtener cuenta de usuario si existe
+            // * Obtener cuenta de usuarioDto si existe
             if( mtdObtenerUsuario(pnInicarSession.campoCorreo1.getText().trim()) ){
 
             // * Verificar datos capturado son correctos
@@ -102,21 +104,34 @@ public class CtrlSignUp implements MouseListener{
                 return ;
             }
 
-            // * Registrando usuario
-            UsuarioDto usuario = new UsuarioDto();
-            UsuarioDao dao = new UsuarioDao();
-            usuario.setCmpNombreCompleto(pnRegistrarme.campoTexto1.getText().trim() );
-            usuario.setCmpCorreo( pnRegistrarme.campoCorreo1.getText().trim() );
-            usuario.setCmpPassword(mtdObtenerPasswordEncriptado());
+            // * Registrando usuarioDto
+            UsuarioDto usuarioDto = new UsuarioDto();
+            UsuarioDao usuarioDao = new UsuarioDao();
+            usuarioDto.setCmpNombreCompleto(pnRegistrarme.campoTexto1.getText().trim() );
+            usuarioDto.setCmpCorreo( pnRegistrarme.campoCorreo1.getText().trim() );
+            usuarioDto.setCmpPassword(mtdObtenerPasswordEncriptado());
 
             // * Comprobar si el correo está disponible
             // es decir, si no está registrado
-            if( !dao.mtdComprobar(usuario) ){
+            if( !usuarioDao.mtdComprobar(usuarioDto) ){
                 JOptionPane.showMessageDialog(null, "El correo ya está registrado.");
             }else{
-                if( dao.mtdInsetar(usuario) ){
+                if( usuarioDao.mtdInsetar(usuarioDto) ){
+                    
+                    // * Obtener datos de la nueva cuenta
+                    usuarioDto = usuarioDao.mtdConsultar(usuarioDto);
+                    
+                    // * Crear una categoria por defecto llamda 'nueva'
+                    CategoriaDto cateDto = new CategoriaDto();
+                    CategoriaDao cateDao = new CategoriaDao();
+                    cateDto.setCateNombre("Nueva");
+                    cateDto.setCateUsuario(usuarioDto.getCmpID());
+                    cateDto.setCateTotalProductos(0);
+                    cateDao.mtdInsetar(cateDto);
+                    
                     mtdVaciarCampos_Registrarme();
                     JOptionPane.showMessageDialog(ni, "Se registro exitosamente.");
+                
                 }
             }
             
@@ -169,7 +184,7 @@ public class CtrlSignUp implements MouseListener{
     
     private void mtdGuardarCuenta(){
         if( Veontec.cuentaDto == null ){
-            // * Registrar los datos del usuario
+            // * Registrar los datos del usuarioDto
             Veontec.cuentaDto = new CuentaDto();
             Veontec.cuentaDao = new CuentaDao(); 
             Veontec.cuentaDto.setCorreo(pnInicarSession.campoCorreo1.getText().trim());

@@ -270,7 +270,7 @@ public class CtrlMiTienda implements MouseListener{
             boxCorreo.add(info2);
 
             boxCorreo.setLocation(Veontec.ventanaHome.getLocation());
-            int opc = JOptionPane.showConfirmDialog(laVista, boxCorreo, "Cambiar nombre de categoria",
+            int opc = JOptionPane.showConfirmDialog(laVista, boxCorreo, "Eliminar categoria",
                     JOptionPane.OK_CANCEL_OPTION, JOptionPane.WARNING_MESSAGE);
 
             if( opc == JOptionPane.OK_OPTION ){
