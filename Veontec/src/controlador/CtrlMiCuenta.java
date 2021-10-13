@@ -11,6 +11,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
+import modelo.ObjEmail;
 import modelo.dao.UsuarioDao;
 import modelo.dto.UsuarioDto;
 import org.apache.commons.logging.Log;
@@ -452,12 +453,16 @@ public class CtrlMiCuenta{
 
                 if( !usuarioDao.mtdComprobar(usuarioDto) ){
                     if( usuarioDto.getCmpKey().equals(codigoVerificacion) ){
-                        usuarioDto.setCmpEstado(1333);
-                        usuarioDto.setCmpKey("No");
-                        usuarioDao.mtdActualizar(usuarioDto);
-                        Veontec.usuarioDto = usuarioDto;
-                        mtdCerrarSession();
-                        JOptionPane.showMessageDialog(laVista, "La cuenta ha sido verificada exitosamente.");
+                        
+                        if( ObjEmail.mtdEnviarBienvenida(usuarioDto) ){
+                            usuarioDto.setCmpEstado(1333);
+                            usuarioDto.setCmpKey("No");
+                            usuarioDao.mtdActualizar(usuarioDto);
+                            Veontec.usuarioDto = usuarioDto;
+                            mtdCerrarSession();
+                            JOptionPane.showMessageDialog(laVista, "La cuenta ha sido verificada exitosamente.");
+                        }
+                        
                     }
                 }
             }
