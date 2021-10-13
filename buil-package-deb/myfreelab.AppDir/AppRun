@@ -4,8 +4,8 @@
 cd "$(dirname "$0")"
 
 # Add enviroment to MyFreeLab
-MYFREELAB_LIB="./usr/lib/myfreelab"
-MYFREELAB_JAR="./MyFreeLab.jar"
+MYFREELAB_LIB="./usr/lib/veontec"
+MYFREELAB_JAR="./Veontec.jar"
 PATH=$PATH:$MYFREELAB_LIB/bin
 
 # Mostrar informacion (testing) 
