@@ -14,13 +14,16 @@ import java.awt.event.WindowListener;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
+import java.util.List;
 import javax.swing.ImageIcon;
 import javax.swing.JCheckBox;
 import javax.swing.JDialog;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import modelo.dao.CategoriaDao;
 import modelo.dao.ProductoDao;
+import modelo.dto.CategoriaDto;
 import modelo.dto.ProductoDto;
 import vista.paneles.acciones.PanelCrearProducto;
 
@@ -33,14 +36,19 @@ public class CtrlModalCrearProducto implements ActionListener{
     // * Modelo
     private ProductoDao productoDao;
     private ProductoDto productoDto;
+    private CategoriaDto categoriaDto;
+    private CategoriaDao categoriaDao;
     
     // * Atributos (Opcional)
+    List<CategoriaDto> lstCategorias;
     
     // * Constructor
     public CtrlModalCrearProducto() {
         this.laVista = new PanelCrearProducto();
         this.productoDao = new ProductoDao();
         this.productoDto = new ProductoDto();
+        this.categoriaDao = new CategoriaDao();
+        this.categoriaDto = new CategoriaDto();
         this.modal = new JDialog(Veontec.ventanaHome);
     }    
     
@@ -115,6 +123,7 @@ public class CtrlModalCrearProducto implements ActionListener{
         laVista.cboxProductoExterno.addActionListener(this);
         laVista.cmboxVuelos.addActionListener(this);
         
+        mtdMostrarCategorias();
         mtdAgregerEventoWindow();
         mtdEventoBtnAceptar();
         mtdEventoBtnCancelar();
@@ -141,7 +150,7 @@ public class CtrlModalCrearProducto implements ActionListener{
     private void mtdCrearProducto() {
         if( laVista.mtdComprobar() ){
             productoDto.setProdUsuario( Veontec.usuarioDto.getCmpID() );
-            productoDto.setProdCategoria( String.valueOf( laVista.cmpCategoria.getSelectedItem() ) );
+            productoDto.setProdCategoria( String.valueOf( laVista.cmpCategorias.getSelectedItem() ) );
             productoDto.setProdDescripcion( laVista.cmpDescripcion.getText() );
             productoDto.setProdTitulo( laVista.cmpTitulo.getText() );
             productoDto.setProdEnlace( laVista.cmpEnlace.getText() );
@@ -159,6 +168,21 @@ public class CtrlModalCrearProducto implements ActionListener{
             JOptionPane.showMessageDialog(null, "Verifica que los datos sean correctos.");
         
         }
+    }
+    
+    private void mtdMostrarCategorias(){
+        laVista.cmpCategorias.removeAllItems();
+        
+        categoriaDto.setCateUsuario(Veontec.usuarioDto.getCmpID());
+        lstCategorias = categoriaDao.mtdListar(categoriaDto);
+        int categorias = lstCategorias.size();
+        
+        if( categorias > 0 ){
+            for (int i = 0; i < categorias; i++) {
+                laVista.cmpCategorias.addItem(lstCategorias.get(i).getCateNombre());
+            }
+        }
+        
     }
     
     private void mtdSeleccionarImagen(){

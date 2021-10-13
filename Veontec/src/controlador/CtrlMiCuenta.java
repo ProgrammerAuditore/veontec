@@ -1,6 +1,5 @@
 package controlador;
 
-import static controlador.CtrlMiTienda.logger;
 import de.mkammerer.argon2.Argon2;
 import de.mkammerer.argon2.Argon2Factory;
 import index.Veontec;
@@ -17,6 +16,7 @@ import modelo.dto.UsuarioDto;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import src.Info;
+import src.Recursos;
 import vista.paneles.PanelMiCuenta;
 import vista.ventanas.VentanaSingUp;
 
@@ -233,6 +233,11 @@ public class CtrlMiCuenta{
                         // * Intetamos actualizar los datos del usuario
                         if(usuarioDao.mtdActualizar(usuarioDto)){
                             Veontec.usuarioDto = usuarioDto;
+                            
+                            // * Registrar los nuevos cambios de la cuenta
+                            Veontec.cuentaDto.setPasswd(passwdRepetir);
+                            Veontec.cuentaDao.regitrar_datos(Veontec.cuentaDto);
+                            
                             JOptionPane.showMessageDialog(laVista, "Contraseña modificado exitosamnete.");
                         }
                         
@@ -290,10 +295,15 @@ public class CtrlMiCuenta{
                             // * Intetamos actualizar los datos del usuario
                             if(usuarioDao.mtdActualizar(usuarioDto)){
                                 Veontec.usuarioDto = usuarioDto;
+                                
+                                // * Registrar los nuevos cambios de la cuenta
+                                Veontec.cuentaDto.setCorreo(correoRepetir);
+                                Veontec.cuentaDao.regitrar_datos(Veontec.cuentaDto);
 
                                 // * Establecer el titulo de la ventana
                                 Veontec.ventanaHome.setTitle( Veontec.usuarioDto.getCmpNombreCompleto() 
                                 + " | "  + Veontec.usuarioDto.getCmpCorreo() + " - " + Info.NombreSoftware );
+                                
                                 // * Actualizar los datos
                                 mtdEstablecerDatos();
                                 JOptionPane.showMessageDialog(laVista, "Correo modificado exitosamnete.");
@@ -398,17 +408,19 @@ public class CtrlMiCuenta{
             Veontec.ventanaHome = null;
         } catch (Exception e) {}
 
-            if( Veontec.ventanaSession == null ){
-                mtdEliminarInstancias();
-                Veontec.ventanaSession = new VentanaSingUp();
-                CtrlSignUp ctrl = new CtrlSignUp(Veontec.ventanaSession, Veontec.ventanaSession.pnRegistrarme, Veontec.ventanaSession.pnLoggin); 
-                ctrl.mtdInit();
-            }
-            
+        if( Veontec.ventanaSession == null ){
+            mtdEliminarInstancias();
+            Veontec.ventanaSession = new VentanaSingUp();
+            CtrlSignUp ctrl = new CtrlSignUp(Veontec.ventanaSession, Veontec.ventanaSession.pnRegistrarme, Veontec.ventanaSession.pnLoggin); 
+            ctrl.mtdInit();
+        }
         
     }
     
     private void mtdEliminarInstancias(){
+        Recursos.dataCuenta().delete();
+        Veontec.cuentaDto = null;
+        
         CtrlBienvenida.mtdEliminarInstancia();
         CtrlCompras.mtdEliminarInstancia();
         CtrlMiTienda.mtdEliminarInstancia();

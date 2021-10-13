@@ -1,172 +1,130 @@
-/*
- * Copyright (C) 2021 victor
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */
 package modelo;
 
-import java.io.UnsupportedEncodingException;
-import java.util.Properties;
+import java.io.File;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.activation.DataHandler;
-import javax.mail.Message;
-import javax.mail.MessagingException;
-import javax.mail.PasswordAuthentication;
-import javax.mail.Session;
-import javax.mail.Transport;
-import javax.mail.internet.AddressException;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeMessage;
+import org.apache.commons.mail.DefaultAuthenticator;
+import org.apache.commons.mail.Email;
+import org.apache.commons.mail.EmailAttachment;
+import org.apache.commons.mail.EmailException;
+import org.apache.commons.mail.HtmlEmail;
+import org.apache.commons.mail.MultiPartEmail;
+import org.apache.commons.mail.SimpleEmail;
 
-/**
- *
- * @author victor
- */
 public class ObjEmail {
     
-    public void mtdEnviarEmail(String recipiente){
-        System.out.println("Preparando el email ...");
-        Properties prop = new Properties();
-        prop.put("mail.smtp.auth", true);
-        prop.put("mail.smtp.starttls.enable", "true");
-        //prop.put("mail.smtp.ssl.trust", "smtp.mailtrap.io");
-        prop.put("mail.smtp.host", "in-v3.mailjet.com");
-        prop.put("mail.smtp.port", "587");
-        
-        String myCuentaGmail = "a1238bce0ca670d72a071451af6accde";
-        String password = "11218c5a874df874ef5aca4aedeada36";
-        
-        Session ss = Session.getInstance(prop, new javax.mail.Authenticator() {
-            @Override
-            protected javax.mail.PasswordAuthentication getPasswordAuthentication() {
-                return new PasswordAuthentication(myCuentaGmail, password);
-            }
-        });
-        
-        Message msg = prepararMensaje(ss, myCuentaGmail, recipiente);
+    public void mtdEnviarMensajeSimple(){
         try {
-            Transport.send(msg);
-        } catch (MessagingException ex) {
+            Email email = new SimpleEmail();
+            email.setHostName("in-v3.mailjet.com");
+            email.setSmtpPort(465);
+            email.setAuthenticator(new DefaultAuthenticator("a1238bce0ca670d72a071451af6accde", "11218c5a874df874ef5aca4aedeada36"));
+            email.setSSLOnConnect(true);
+            email.setFrom("pv19022441@vallarta.tecmm.edu.mx");
+            email.setSubject("TestMail");
+            email.setMsg("This is a test mail ... :-)");
+            email.addTo("victorvj098@gmail.com");
+            email.send();
+        } catch (EmailException ex) {
             Logger.getLogger(ObjEmail.class.getName()).log(Level.SEVERE, null, ex);
         }
-        System.out.println("Mensaje enviado exitosamente.");
     }
     
-    private Message prepararMensaje(Session ss, String mcg, String recipiente){
-        Message msg = new MimeMessage(ss);
+    public void mtdEnviarMensajeArchivoAdjunto(){
         try {
-            msg.setFrom(new InternetAddress(mcg));
-            msg.setRecipient(Message.RecipientType.TO, new InternetAddress(recipiente));
-            msg.setSubject("Probando MailJet SMS");
-            msg.setText("Estoy haciendo pruebas.");
-            return msg;
-        } catch (AddressException ex) {
-            Logger.getLogger(ObjEmail.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (MessagingException ex) {
-            Logger.getLogger(ObjEmail.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-        return null;
-    }
-    
-    public void enviarMen(){
-        // Recipient's email ID needs to be mentioned.
-        String to = "fromaddress@gmail.com";
-
-        // Sender's email ID needs to be mentioned
-        String from = "toaddress@gmail.com";
-
-        // Assuming you are sending email from through gmails smtp
-        String host = "smtp.gmail.com";
-
-        // Get system properties
-        Properties properties = System.getProperties();
-
-        // Setup mail server
-        properties.put("mail.smtp.host", host);
-        properties.put("mail.smtp.port", "465");
-        properties.put("mail.smtp.ssl.enable", "true");
-        properties.put("mail.smtp.auth", "true");
-
-        // Get the Session object.// and pass username and password
-        Session session = Session.getInstance(properties, new javax.mail.Authenticator() {
-
-            protected PasswordAuthentication getPasswordAuthentication() {
-
-                return new PasswordAuthentication("fromaddress@gmail.com", "*******");
-
-            }
-
-        });
-
-        // Used to debug SMTP issues
-        session.setDebug(true);
-
-        try {
-            // Create a default MimeMessage object.
-            MimeMessage message = new MimeMessage(session);
-
-            // Set From: header field of the header.
-            message.setFrom(new InternetAddress(from));
-
-            // Set To: header field of the header.
-            message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
-
-            // Set Subject: header field
-            message.setSubject("This is the Subject Line!");
-
-            // Now set the actual message
-            message.setText("This is actual message");
-
-            System.out.println("sending...");
-            // Send message
-            Transport.send(message);
-            System.out.println("Sent message successfully....");
-        } catch (MessagingException mex) {
-            mex.printStackTrace();
-        }
-        
-        
-    }
-    
-    public void mtdMSG(){
-        Properties props = new Properties();
-        props.put("mail.smtp.host","in-v3.mailjet.com");
-        props.put("mail.transport.protocol","smtp");
-        props.put("mail.smtp.auth", "true");
-        props.setProperty("mail.user", "a1238bce0ca670d72a071451af6accde");
-        props.setProperty("mail.password", "11218c5a874df874ef5aca4aedeada36");
-        
-        Session mailSession = Session.getInstance(props,null);
-        Message msg = new MimeMessage(mailSession);
-        
-        try {
-            msg.setSubject("Mensaje de Línea de Código");
-            msg.setFrom(new InternetAddress("victorvj098@gmail.com","Línea de Código"));
-            msg.addRecipients(Message.RecipientType.TO, new InternetAddress[] { new InternetAddress("victorvj098@gmail.com") });
+            // Create the attachment
+            EmailAttachment attachment = new EmailAttachment();
+            File archivo = new File("P:\\Pictures\\ezio.png");
             
-            //DataHandler dh = new DataHandler("sdsdss");
-            //msg.setDataHandler(dh);
-            javax.mail.Transport.send(msg);
-        } catch (MessagingException ex) {
-            Logger.getLogger(ObjEmail.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (UnsupportedEncodingException ex) {
+            attachment.setPath(archivo.getAbsolutePath());
+            attachment.setDisposition(EmailAttachment.ATTACHMENT);
+            attachment.setDescription("Picture of John");
+            attachment.setName("John");
+            
+            // Create the email message
+            MultiPartEmail email = new MultiPartEmail();
+            email.setHostName("in-v3.mailjet.com");
+            email.setSmtpPort(465);
+            email.setAuthenticator(new DefaultAuthenticator("a1238bce0ca670d72a071451af6accde", "11218c5a874df874ef5aca4aedeada36"));
+            email.setSSLOnConnect(true);
+            email.setFrom("pv19022441@vallarta.tecmm.edu.mx");
+            email.setSubject("mtdEnviarMensajeArchivoAdjunto");
+            email.setMsg("Este es un mensaje de prueba :-)");
+            email.addTo("victorvj098@gmail.com");
+            
+            // add the attachment
+            email.attach(attachment);
+            
+            // send the email
+            email.send();
+        } catch (EmailException ex) {
             Logger.getLogger(ObjEmail.class.getName()).log(Level.SEVERE, null, ex);
         }
-       
-        
+    }
+    
+    public void mtdEnviarMensajeArchivoAdjunto_URL(){
+        try {
+            // Create the attachment
+            EmailAttachment attachment = new EmailAttachment();
+            attachment.setURL(new URL("http://www.apache.org/images/asf_logo_wide.gif"));
+            attachment.setDisposition(EmailAttachment.ATTACHMENT);
+            attachment.setDescription("Apache logo");
+            attachment.setName("Apache logo");
+            
+            // Create the email message
+            MultiPartEmail email = new MultiPartEmail();
+            email.setHostName("in-v3.mailjet.com");
+            email.setSmtpPort(465);
+            email.setAuthenticator(new DefaultAuthenticator("a1238bce0ca670d72a071451af6accde", "11218c5a874df874ef5aca4aedeada36"));
+            email.setSSLOnConnect(true);
+            email.setFrom("pv19022441@vallarta.tecmm.edu.mx");
+            email.setSubject("mtdEnviarMensajeArchivoAdjunto");
+            email.setMsg("Este es un mensaje de prueba :-)");
+            email.addTo("victorvj098@gmail.com");
+            
+            // add the attachment
+            email.attach(attachment);
+            
+            // send the email
+            email.send();
+        } catch (EmailException ex) {
+            Logger.getLogger(ObjEmail.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (MalformedURLException ex) {
+            Logger.getLogger(ObjEmail.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public void mtdEnviarMensajeArchivoAdjunto_HTML(){
+        try {
+            // Create the email message
+            HtmlEmail email = new HtmlEmail();
+            email.setHostName("in-v3.mailjet.com");
+            email.setSmtpPort(465);
+            email.setAuthenticator(new DefaultAuthenticator("a1238bce0ca670d72a071451af6accde", "11218c5a874df874ef5aca4aedeada36"));
+            email.setSSLOnConnect(true);
+            email.setFrom("pv19022441@vallarta.tecmm.edu.mx");
+            email.setSubject("mtdEnviarMensajeArchivoAdjunto");
+            email.addTo("victorvj098@gmail.com");
+
+            // embed the image and get the content id
+            URL url = new URL("http://www.apache.org/images/asf_logo_wide.gif");
+            String cid = email.embed(url, "Apache logo");
+
+            // set the html message
+            email.setHtmlMsg("<html>The apache logo - <img src=\"cid:"+cid+"\"></html>");
+
+            // set the alternative message
+            email.setTextMsg("Your email client does not support HTML messages");
+
+            // send the email
+            email.send();
+        } catch (EmailException ex) {
+            Logger.getLogger(ObjEmail.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (MalformedURLException ex) {
+            Logger.getLogger(ObjEmail.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
 }

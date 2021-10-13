@@ -6,7 +6,11 @@ import index.Veontec;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import javax.swing.JOptionPane;
+import modelo.dao.CategoriaDao;
+import modelo.dao.CuentaDao;
 import modelo.dao.UsuarioDao;
+import modelo.dto.CategoriaDto;
+import modelo.dto.CuentaDto;
 import modelo.dto.UsuarioDto;
 import src.Info;
 import vista.paneles.PanelSignUp;
@@ -66,47 +70,26 @@ public class CtrlSignUp implements MouseListener{
     private void mtdIniciarSession(){
         if( CtrlHiloConexion.ctrlEstado ){
             // * Verificar los campos de registrarme
-            if( mtdCamposIncorrectos_IniciarSession() ){
+            if( mtdObtenerCamposIncorrectos_IniciarSession() ){
                 return;
             }
 
-            // * Registrando usuario
-            UsuarioDto dto = new UsuarioDto();
-            UsuarioDao dao = new UsuarioDao();
-            dto.setCmpCorreo( pnInicarSession.campoCorreo1.getText().trim() );
-            dto = dao.mtdConsultar(dto);
+            // * Obtener cuenta de usuarioDto si existe
+            if( mtdObtenerUsuario(pnInicarSession.campoCorreo1.getText().trim()) ){
 
-            if( dto.getCmpCorreo() == null || dto.getCmpPassword() == null   ){
-                JOptionPane.showMessageDialog(null, "Usuario no registrado o verifeque los datos.");
-                return;
+            // * Verificar datos capturado son correctos
+            if( mtdValidarDatosDeUsuario(pnInicarSession.campoCorreo1.getText().trim(), 
+            String.valueOf(pnInicarSession.campoPassword1.getPassword())) ){
+                
+                // * Abrir ventana home
+                mtdAbrirVentanaHome();
+                
+            }else{
+                JOptionPane.showMessageDialog(ni, "El campo correo o contraseña son incorrectos.");
             }
-
-            // * Verificar usuario
-            //System.out.println("\n" + pnInicarSession.campoCorreo1.getText().trim() + "\n" + dto.getCmpCorreo().trim());
-            if( pnInicarSession.campoCorreo1.getText().trim().equals(dto.getCmpCorreo().trim())
-                && mtdVerificarPassword(dto.getCmpPassword().trim()) ){
-
-
-                if( Veontec.ventanaHome == null ){
-                    JOptionPane.showMessageDialog(ni, "Bienvenido " + dto.getCmpNombreCompleto() );
-
-                    Veontec.ventanaHome = new VentanaHome();
-                    Veontec.usuarioDao = dao;
-                    Veontec.usuarioDto = dto;
-                    Veontec.ventanaHome.setTitle( Veontec.usuarioDto.getCmpNombreCompleto() 
-                            + " | "  + Veontec.usuarioDto.getCmpCorreo() 
-                            + " - " + Info.NombreSoftware );
-                    CtrlHome ctrl = new CtrlHome(Veontec.ventanaHome);
-                    ctrl.laVista.setLocationRelativeTo(null);
-                    ctrl.laVista.setVisible(true);
-
-                    Veontec.ventanaSession.setVisible(false);
-                    Veontec.ventanaSession.dispose();
-                    Veontec.ventanaSession = null;
-                }
 
             }else{
-                JOptionPane.showMessageDialog(ni, "Vefica que los datos sean correctos.");
+                JOptionPane.showMessageDialog(ni, "Usuario no registrado.");
             }
         }else{
             JOptionPane.showMessageDialog(ni, "No hay conexión");
@@ -117,25 +100,38 @@ public class CtrlSignUp implements MouseListener{
         
         if( CtrlHiloConexion.ctrlEstado ){
             // * Verificar los campos de registrarme
-            if( mtdCamposIncorrectos_Registrarme() ){
+            if( mtdObtenerCamposIncorrectos_Registrarme() ){
                 return ;
             }
 
-            // * Registrando usuario
-            UsuarioDto usuario = new UsuarioDto();
-            UsuarioDao dao = new UsuarioDao();
-            usuario.setCmpNombreCompleto(pnRegistrarme.campoTexto1.getText().trim() );
-            usuario.setCmpCorreo( pnRegistrarme.campoCorreo1.getText().trim() );
-            usuario.setCmpPassword(mtdObtenerPasswordEncry());
+            // * Registrando usuarioDto
+            UsuarioDto usuarioDto = new UsuarioDto();
+            UsuarioDao usuarioDao = new UsuarioDao();
+            usuarioDto.setCmpNombreCompleto(pnRegistrarme.campoTexto1.getText().trim() );
+            usuarioDto.setCmpCorreo( pnRegistrarme.campoCorreo1.getText().trim() );
+            usuarioDto.setCmpPassword(mtdObtenerPasswordEncriptado());
 
             // * Comprobar si el correo está disponible
             // es decir, si no está registrado
-            if( !dao.mtdComprobar(usuario) ){
+            if( !usuarioDao.mtdComprobar(usuarioDto) ){
                 JOptionPane.showMessageDialog(null, "El correo ya está registrado.");
             }else{
-                if( dao.mtdInsetar(usuario) ){
+                if( usuarioDao.mtdInsetar(usuarioDto) ){
+                    
+                    // * Obtener datos de la nueva cuenta
+                    usuarioDto = usuarioDao.mtdConsultar(usuarioDto);
+                    
+                    // * Crear una categoria por defecto llamda 'nueva'
+                    CategoriaDto cateDto = new CategoriaDto();
+                    CategoriaDao cateDao = new CategoriaDao();
+                    cateDto.setCateNombre("Nueva");
+                    cateDto.setCateUsuario(usuarioDto.getCmpID());
+                    cateDto.setCateTotalProductos(0);
+                    cateDao.mtdInsetar(cateDto);
+                    
                     mtdVaciarCampos_Registrarme();
                     JOptionPane.showMessageDialog(ni, "Se registro exitosamente.");
+                
                 }
             }
             
@@ -145,18 +141,73 @@ public class CtrlSignUp implements MouseListener{
         
     }
     
-    private boolean mtdVerificarPassword(String passwd){
+    public void mtdAbrirVentanaHome(){
+        if( Veontec.ventanaHome == null ){
+            // * Instanciar objetos para el cuenta actual
+            Veontec.ventanaHome = new VentanaHome();
+            Veontec.ventanaHome.setTitle( Veontec.usuarioDto.getCmpNombreCompleto() 
+                    + " | "  + Veontec.usuarioDto.getCmpCorreo() 
+                    + " - " + Info.NombreSoftware );
+
+            mtdGuardarCuenta();
+
+            // * Crear controlador y mostrar la ventana principal
+            CtrlHome ctrl = new CtrlHome(Veontec.ventanaHome);
+            ctrl.laVista.setLocationRelativeTo(null);
+            ctrl.laVista.setVisible(true);
+
+            // * Cerrar y destruir la ventana de SingUp
+            Veontec.ventanaSession.setVisible(false);
+            Veontec.ventanaSession.dispose();
+            Veontec.ventanaSession = null;
+        }
+    }
+    
+    public boolean mtdObtenerUsuario(String correoInput){
+        Veontec.usuarioDto = new UsuarioDto();
+        Veontec.usuarioDao = new UsuarioDao();
+        Veontec.usuarioDto.setCmpCorreo( correoInput );
+        Veontec.usuarioDto = Veontec.usuarioDao.mtdConsultar(Veontec.usuarioDto);
+        
+        if( Veontec.usuarioDto.getCmpCorreo() == null || Veontec.usuarioDto.getCmpPassword() == null ){
+                JOptionPane.showMessageDialog(null, "Usuario no registrado o verifeque los datos.");
+                return false;
+        }
+        
+        return true;
+    }
+    
+    public boolean mtdValidarDatosDeUsuario(String correo, String passwd){
+        return correo.equals(Veontec.usuarioDto.getCmpCorreo()) && 
+                mtdComprobarPassword(Veontec.usuarioDto.getCmpPassword(), passwd.toCharArray());
+    }
+    
+    private void mtdGuardarCuenta(){
+        if( Veontec.cuentaDto == null ){
+            // * Registrar los datos del usuarioDto
+            Veontec.cuentaDto = new CuentaDto();
+            Veontec.cuentaDao = new CuentaDao(); 
+            Veontec.cuentaDto.setCorreo(pnInicarSession.campoCorreo1.getText().trim());
+            Veontec.cuentaDto.setPasswd(String.valueOf(pnInicarSession.campoPassword1.getPassword()).trim());
+            Veontec.cuentaDao.regitrar_datos(Veontec.cuentaDto);
+            Veontec.cuentaDto = Veontec.cuentaDao.obtener_datos();
+            System.out.println("Cuenta : " + Veontec.cuentaDto.getCorreo());
+            System.out.println("Cuenta : " + Veontec.cuentaDto.getPasswd());
+        }
+    }
+    
+    private boolean mtdComprobarPassword(String passwdDB,  char[] passwordInput){
         // Create instance
         Argon2 argon2 = Argon2Factory.create();
 
         // Read password from user
-        char[] password = pnInicarSession.campoPassword1.getPassword();
+        char[] password = passwordInput;
         
         try {
             // Hash password
             //String hash = argon2.hash(10, 65536, 1, password);
             // // Estará almacenado en la base de datos
-            String hash = passwd;
+            String hash = passwdDB;
             
             // Verify password
             if (argon2.verify(hash, password)) {
@@ -176,7 +227,7 @@ public class CtrlSignUp implements MouseListener{
         return false;
     }
     
-    private String mtdObtenerPasswordEncry(){
+    private String mtdObtenerPasswordEncriptado(){
         // Encriptar la contraseña
         // Create instance
         Argon2 argon2 = Argon2Factory.create();
@@ -198,7 +249,7 @@ public class CtrlSignUp implements MouseListener{
         return hash;
     }
     
-    private boolean mtdCamposIncorrectos_IniciarSession(){
+    private boolean mtdObtenerCamposIncorrectos_IniciarSession(){
     int campos_incorrectos = 0;
     String msg = "Verifica los siguientes datos: \n";
         
@@ -220,7 +271,7 @@ public class CtrlSignUp implements MouseListener{
         return ( campos_incorrectos > 0 );
     }
     
-    private boolean mtdCamposIncorrectos_Registrarme(){
+    private boolean mtdObtenerCamposIncorrectos_Registrarme(){
     int campos_incorrectos = 0;
     String msg = "Verifica los siguientes datos: \n";
     
