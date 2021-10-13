@@ -3,7 +3,7 @@
 
 ; Variables para el proceso de instalacion
 #define MyAppName "Veontec"
-#define MyAppVersion "v0.9.0"
+#define MyAppVersion "v0.9.5"
 #define MyAppProduccion "Alpha"
 #define MyAppNameFull MyAppName + " " + MyAppVersion + MyAppProduccion
 #define MyAppPublisher "ProgrammerAuditore <victorvj098@gmail.com>"
@@ -115,14 +115,14 @@ procedure InstalandoEjecutable();
 begin
   if (FileExists(ExpandConstant('{app}\{#MyAppExeName}'))) then
     begin
-      MsgBox('Se está instalando {#MyAppNameFull} ...' #13#13 ''+
-      + 'Es recomendable tener el software {#MyAppName} cerrado durante la instalación.',
+      MsgBox('Se estï¿½ instalando {#MyAppNameFull} ...' #13#13 ''+
+      + 'Es recomendable tener el software {#MyAppName} cerrado durante la instalaciï¿½n.',
       mbInformation, MB_OK); 
     end
   else
     begin
-      MsgBox('Se está instalando {#MyAppNameFull} ...' #13#13 ''+
-      + 'Aseguresé de instalar y configurar Java JRE para iniciar a utilizar {#MyAppName}.',
+      MsgBox('Se estï¿½ instalando {#MyAppNameFull} ...' #13#13 ''+
+      + 'Aseguresï¿½ de instalar y configurar Java JRE para iniciar a utilizar {#MyAppName}.',
       mbInformation, MB_OK);     
     end;
 end;

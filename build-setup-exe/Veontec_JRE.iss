@@ -3,7 +3,7 @@
 
 ; Variables para el proceso de instalacion
 #define MyAppName "Veontec"
-#define MyAppVersion "v0.9.0"
+#define MyAppVersion "v0.9.5"
 #define MyAppProduccion "Alpha"
 #define MyAppNameFull MyAppName + " " + MyAppVersion + MyAppProduccion
 #define MyAppPublisher "ProgrammerAuditore <victorvj098@gmail.com>"
@@ -144,17 +144,17 @@ procedure InstalandoEjecutable();
 begin
   if (FileExists(ExpandConstant('{app}\{#MyAppExeName}'))) then
     begin
-      MsgBox('Se está instalando {#MyAppNameFull} ...' #13#13 ''+
-      + 'Es recomendable tener el software {#MyAppName} cerrado durante la instalación.',
+      MsgBox('Se estï¿½ instalando {#MyAppNameFull} ...' #13#13 ''+
+      + 'Es recomendable tener el software {#MyAppName} cerrado durante la instalaciï¿½n.',
       mbInformation, MB_OK); 
     end
 end;
 
 [Run]
-; Nota: Esto se ejecuta al momento de la instalación de nuestro programa
+; Nota: Esto se ejecuta al momento de la instalaciï¿½n de nuestro programa
 
 ; Instalamos MySQL
-; (Aquí­ tenemos que poner el nombre de nuestro motor de base de datos que se encuentra en nuestra carpeta complementos)
+; (Aquï¿½ï¿½ tenemos que poner el nombre de nuestro motor de base de datos que se encuentra en nuestra carpeta complementos)
 ; Filename: {src}\complementos\wampserver.exe; Parameters: "/q:a /C:""install /q"""; WorkingDir: {src}\complementos;
 
 ; Esto se debe de quitar solo en caso de en que quieras  Agregar la ruta de JRE al PATH
