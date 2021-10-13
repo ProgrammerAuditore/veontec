@@ -105,8 +105,10 @@ public class PanelCardVenta extends javax.swing.JPanel {
         cmpDetalleVenta.setColumns(20);
         cmpDetalleVenta.setLineWrap(true);
         cmpDetalleVenta.setRows(5);
-        cmpDetalleVenta.setText("<Comporador>\n<FechaVendido>\n\n<Descripcion>");
+        cmpDetalleVenta.setText("<Comprador>\n<FechaVendido>\n\n<Descripcion>");
         jScrollPane1.setViewportView(cmpDetalleVenta);
+
+        pnImgPortada.setImgBackgroundEnabled(true);
 
         javax.swing.GroupLayout pnImgPortadaLayout = new javax.swing.GroupLayout(pnImgPortada);
         pnImgPortada.setLayout(pnImgPortadaLayout);

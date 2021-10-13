@@ -12,7 +12,7 @@ public class Recursos {
     // * Recursos externos
     public static final File dataRun(){ return new CargarRecurgos().dataRun(); }
     public static final File dataConexion(){ return new CargarRecurgos().dataConexion(); }
-    public static final File dataPreferencias(){ return new CargarRecurgos().dataPreferencias(); }
+    public static final File dataCuenta(){ return new CargarRecurgos().dataCuenta(); }
     public static final Image imgIconoDefault(){ return new CargarRecurgos().iconoDefault(); }
     public static final HashMap<String, String> docCotizacionJasper(){ return new CargarRecurgos().docCotizacionJasper(); }
     //public static final HashMap<String, String> docInformeJasper = new CargarRecurgos().docInformeJasper();
