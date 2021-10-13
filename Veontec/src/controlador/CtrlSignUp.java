@@ -5,7 +5,10 @@ import de.mkammerer.argon2.Argon2Factory;
 import index.Veontec;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import javax.swing.Box;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPasswordField;
 import modelo.ObjEmail;
 import modelo.dao.CategoriaDao;
 import modelo.dao.CuentaDao;
@@ -14,6 +17,7 @@ import modelo.dto.CategoriaDto;
 import modelo.dto.CuentaDto;
 import modelo.dto.UsuarioDto;
 import src.Info;
+import vista.componentes.campos.CampoCorreo;
 import vista.paneles.PanelSignUp;
 import vista.paneles.PanelRegistrarme;
 import vista.ventanas.VentanaHome;
@@ -36,6 +40,7 @@ public class CtrlSignUp implements MouseListener{
         // * Definir oyentes
         this.pnRegistrarme.btnRegistrarme.addMouseListener(this);
         this.pnInicarSession.btnIniciarSession.addMouseListener(this);
+        this.pnInicarSession.btnRecuperarCuenta.addMouseListener(this);
         
     }
     
@@ -64,6 +69,10 @@ public class CtrlSignUp implements MouseListener{
         
         if( e.getSource() == pnInicarSession.btnIniciarSession ){
             mtdIniciarSession();
+        }
+        
+        if( e.getSource() == pnInicarSession.btnRecuperarCuenta ){
+            mtdRecuperarCuenta();
         }
         
     }
@@ -110,7 +119,7 @@ public class CtrlSignUp implements MouseListener{
             UsuarioDao usuarioDao = new UsuarioDao();
             usuarioDto.setCmpNombreCompleto(pnRegistrarme.campoTexto1.getText().trim() );
             usuarioDto.setCmpCorreo( pnRegistrarme.campoCorreo1.getText().trim() );
-            usuarioDto.setCmpPassword(mtdObtenerPasswordEncriptado());
+            usuarioDto.setCmpPassword(mtdObtenerPasswordEncriptado(pnRegistrarme.campoPassword2.getPassword()));
             usuarioDto.setCmpKey("No");
             usuarioDto.setCmpEstado(0);
 
@@ -205,6 +214,58 @@ public class CtrlSignUp implements MouseListener{
         }
     }
     
+    private void mtdRecuperarCuenta(){
+        String correoActual="";
+        Box boxVRecuperarCuenta = Box.createVerticalBox();
+        JLabel info1 = new JLabel("Introduza la contraseña actual");
+        boxVRecuperarCuenta.add(info1);
+        CampoCorreo cmpCampoCorreo = new CampoCorreo();
+        boxVRecuperarCuenta.add(cmpCampoCorreo);
+        
+        boxVRecuperarCuenta.setLocation(Veontec.ventanaSession.getLocation());
+        int opc = JOptionPane.showConfirmDialog(null, boxVRecuperarCuenta, "Verificar correo y cuenta", JOptionPane.OK_CANCEL_OPTION, JOptionPane.WARNING_MESSAGE);
+        
+        if( opc == JOptionPane.OK_OPTION ){
+            correoActual = cmpCampoCorreo.getText().trim();
+            
+            if( !cmpCampoCorreo.isAprobado() ){
+                JOptionPane.showMessageDialog(null, "El correo es incorrecto.");
+                
+            }else
+            if( correoActual.isEmpty() || correoActual.length() > 60 ){
+                JOptionPane.showMessageDialog(null, "El correo es incorrecto.");
+                
+            }else{
+                
+                Veontec.usuarioDto = new UsuarioDto();
+                Veontec.usuarioDao = new UsuarioDao();
+                Veontec.usuarioDto.setCmpCorreo(correoActual);
+                Veontec.usuarioDto = Veontec.usuarioDao.mtdConsultar(Veontec.usuarioDto);
+                if( Veontec.usuarioDto == null){
+                    JOptionPane.showMessageDialog(null, "No existe una cuenta con el correo introducido.");
+                }else if( Veontec.usuarioDto.getCmpCorreo() == null || Veontec.usuarioDto.getCmpPassword() == null ){
+                    JOptionPane.showMessageDialog(null, "No existe una cuenta con el correo introducido.");
+                }else{
+                    
+                    if( Veontec.usuarioDto.getCmpEstado().equals(333) ){
+                        JOptionPane.showMessageDialog(null, "La cuenta no está verificada.");
+                        return;
+                    }
+                    
+                    if(ObjEmail.mtdEnviarRecuperarCuenta(Veontec.usuarioDto)){
+                        Veontec.usuarioDto.setCmpPassword( mtdObtenerPasswordEncriptado(Veontec.usuarioDto.getCmpKey().toCharArray()) );
+                        if(Veontec.usuarioDao.mtdActualizar(Veontec.usuarioDto)){
+                            
+                            JOptionPane.showMessageDialog(ni, "Cuenta recuperada exitosamente.\nRevise su correo par obtener su codigo.");
+                            
+                        }
+                    }
+                }
+                
+            }
+        }
+    }
+    
     private boolean mtdComprobarPassword(String passwdDB,  char[] passwordInput){
         // Create instance
         Argon2 argon2 = Argon2Factory.create();
@@ -236,13 +297,13 @@ public class CtrlSignUp implements MouseListener{
         return false;
     }
     
-    private String mtdObtenerPasswordEncriptado(){
+    private String mtdObtenerPasswordEncriptado(char[] cmpPasswd){
         // Encriptar la contraseña
         // Create instance
         Argon2 argon2 = Argon2Factory.create();
 
         // Read password from user
-        char[] password = pnRegistrarme.campoPassword2.getPassword();
+        char[] password = cmpPasswd;
          String hash = "";
          
         try {

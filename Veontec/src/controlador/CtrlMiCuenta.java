@@ -169,6 +169,10 @@ public class CtrlMiCuenta{
             DesHabilitarBotones(true);
         }
         
+        if( Veontec.usuarioDto.getCmpEstado() == 777 ){
+            JOptionPane.showMessageDialog(laVista, "Cuenta recupera exitosamente.\nCambie su contraseña por seguridad.");
+        }
+        
     }   
     
     private void DesHabilitarBotones(boolean estado){
@@ -272,6 +276,8 @@ public class CtrlMiCuenta{
                         
                         // * Encriptar contraseña y alamacenarlo en el DTO 
                         usuarioDto.setCmpPassword( mtdEncriptarPassword( passwdRepetir.toCharArray() ) );
+                        usuarioDto.setCmpEstado(1333);
+                        usuarioDto.setCmpKey("No");
                         
                         // * Intetamos actualizar los datos del usuario
                         if(usuarioDao.mtdActualizar(usuarioDto)){
@@ -333,8 +339,10 @@ public class CtrlMiCuenta{
                 if( mtdVerificarPassword(usuarioDto.getCmpPassword(), correoActual.toCharArray()) ){
                     if( correoNueva.equals(correoRepetir) ){
                         
-                        // * Encriptar contraseña y alamacenarlo en el DTO 
+                        // * Salvar el nuevo correo
                         usuarioDto.setCmpCorreo( correoRepetir.trim() );
+                        usuarioDto.setCmpEstado(1333);
+                        usuarioDto.setCmpKey("No");
                         
                         logger.info("Correo existente: " + usuarioDao.mtdComprobar(usuarioDto));
                         
@@ -387,6 +395,8 @@ public class CtrlMiCuenta{
             usuarioDto.setCmpDireccion( laVista.cmpDireccion.getText().trim() );
             usuarioDto.setCmpTelefono( laVista.cmpTelefono.getText().trim() );
             usuarioDto.setCmpCorreo( laVista.cmpCorreo.getText().trim() );
+            usuarioDto.setCmpEstado(1333);
+            usuarioDto.setCmpKey("No");
             
                 // * Intentar actualizar los datos con una consulta
                 // a la base de datos

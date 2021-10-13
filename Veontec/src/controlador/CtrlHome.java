@@ -150,23 +150,30 @@ public class CtrlHome implements MouseListener{
         switch(estadoVeontec){
             case 1 : JOptionPane.showMessageDialog(laVista, "Software Veontec, no hay conexión"); break;
             case 2 : Veontec.ventanaHome.setTitle( titulo + " (cuenta no verificada)"); break;
-            case -1 : estadoVeontec = 3; break;
+            case 3 : Veontec.ventanaHome.setTitle( titulo + " (cuenta recuperada)"); break;
+            case -1 : estadoVeontec = 4; break;
             default: break;
         }
-        estadoSuccessVeontec = 3;
+        estadoSuccessVeontec = 4;
     }
     
     private Integer mtdObtenerEstadoVeontec(){
         try {
             // * Verificar no hay conexión   
             if(CtrlHiloConexion.ctrlEstado == false){
-                 return 1;
+                return 1;
             } 
              
             // * Verificar si la cuenta no está verificada
             if(Veontec.usuarioDto.getCmpEstado() == 333){
-                 return 2;
+                return 2;
             }
+            
+            // * Verificar si la cuenta no está en modo recuperada
+            if(Veontec.usuarioDto.getCmpEstado() == 777){
+                return 3;
+            }
+            
         } catch (Exception e) {}
         
         return -1;

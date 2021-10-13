@@ -53,7 +53,7 @@ public class ObjEmail {
         return true;
     }
     
-    public static boolean mtdEnviarRecuperarContrasenha(UsuarioDto usuarioDto){
+    public static boolean mtdEnviarRecuperarCuenta(UsuarioDto usuarioDto){
         Email email = new SimpleEmail();
         SecretKey key_codificado = null;
         String keyCodificado = "";
@@ -74,8 +74,8 @@ public class ObjEmail {
             email.setAuthenticator(new DefaultAuthenticator("a1238bce0ca670d72a071451af6accde", "11218c5a874df874ef5aca4aedeada36"));
             email.setSSLOnConnect(true);
             email.setFrom("pv19022441@vallarta.tecmm.edu.mx");
-            email.setSubject("Verificar email para software Veontec");
-            email.setMsg("Codigo de verifciación: " + keyCodificado);
+            email.setSubject("Recuperar para software Veontec");
+            email.setMsg("Contraseña temporal para recuperación de cuenta: " + keyCodificado);
             email.addTo("" + usuarioDto.getCmpCorreo());
             email.send();
         } catch (EmailException ex) {
@@ -84,7 +84,7 @@ public class ObjEmail {
         }
         
         usuarioDto.setCmpKey(keyCodificado);
-        usuarioDto.setCmpEstado(777); // Recuperar contraseña
+        usuarioDto.setCmpEstado(777); // Recuperar cuenta
         
         return true;
     }
