@@ -6,6 +6,7 @@ import index.Veontec;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import javax.swing.JOptionPane;
+import modelo.ObjEmail;
 import modelo.dao.CategoriaDao;
 import modelo.dao.CuentaDao;
 import modelo.dao.UsuarioDao;
@@ -110,6 +111,8 @@ public class CtrlSignUp implements MouseListener{
             usuarioDto.setCmpNombreCompleto(pnRegistrarme.campoTexto1.getText().trim() );
             usuarioDto.setCmpCorreo( pnRegistrarme.campoCorreo1.getText().trim() );
             usuarioDto.setCmpPassword(mtdObtenerPasswordEncriptado());
+            usuarioDto.setCmpKey("No");
+            usuarioDto.setCmpEstado(0);
 
             // * Comprobar si el correo está disponible
             // es decir, si no está registrado
@@ -121,17 +124,23 @@ public class CtrlSignUp implements MouseListener{
                     // * Obtener datos de la nueva cuenta
                     usuarioDto = usuarioDao.mtdConsultar(usuarioDto);
                     
-                    // * Crear una categoria por defecto llamda 'nueva'
-                    CategoriaDto cateDto = new CategoriaDto();
-                    CategoriaDao cateDao = new CategoriaDao();
-                    cateDto.setCateNombre("Nueva");
-                    cateDto.setCateUsuario(usuarioDto.getCmpID());
-                    cateDto.setCateTotalProductos(0);
-                    cateDao.mtdInsetar(cateDto);
+                    if( ObjEmail.mtdEnviarValidarEmail(usuarioDto) ){
                     
-                    mtdVaciarCampos_Registrarme();
-                    JOptionPane.showMessageDialog(ni, "Se registro exitosamente.");
-                
+                        if(usuarioDao.mtdActualizar(usuarioDto)){
+                        
+                            // * Crear una categoria por defecto llamda 'nueva'
+                            CategoriaDto cateDto = new CategoriaDto();
+                            CategoriaDao cateDao = new CategoriaDao();
+                            cateDto.setCateNombre("Nueva");
+                            cateDto.setCateUsuario(usuarioDto.getCmpID());
+                            cateDto.setCateTotalProductos(0);
+                            cateDao.mtdInsetar(cateDto);
+
+                            mtdVaciarCampos_Registrarme();
+                            JOptionPane.showMessageDialog(ni, "Se registro exitosamente.");
+                            
+                        }
+                    }
                 }
             }
             

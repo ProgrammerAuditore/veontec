@@ -5,6 +5,8 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.crypto.SecretKey;
+import modelo.dto.UsuarioDto;
 import org.apache.commons.mail.DefaultAuthenticator;
 import org.apache.commons.mail.Email;
 import org.apache.commons.mail.EmailAttachment;
@@ -15,21 +17,76 @@ import org.apache.commons.mail.SimpleEmail;
 
 public class ObjEmail {
     
-    public void mtdEnviarMensajeSimple(){
+    public static boolean mtdEnviarValidarEmail(UsuarioDto usuarioDto){
+        Email email = new SimpleEmail();
+        SecretKey key_codificado = null;
+        String keyCodificado = "";
+        
         try {
-            Email email = new SimpleEmail();
+            
+            key_codificado = ObjKey.getKeyFromPassword(usuarioDto.getCmpCorreo(), usuarioDto.getCmpPassword());
+            keyCodificado = ObjKey.convertSecretKeyToString(key_codificado);
+            
+        } catch (Exception e) {
+            return false;
+        }
+        
+        try {
+            
             email.setHostName("in-v3.mailjet.com");
             email.setSmtpPort(465);
             email.setAuthenticator(new DefaultAuthenticator("a1238bce0ca670d72a071451af6accde", "11218c5a874df874ef5aca4aedeada36"));
             email.setSSLOnConnect(true);
             email.setFrom("pv19022441@vallarta.tecmm.edu.mx");
-            email.setSubject("TestMail");
-            email.setMsg("This is a test mail ... :-)");
-            email.addTo("victorvj098@gmail.com");
+            email.setSubject("Verificar email para software Veontec");
+            email.setMsg("Codigo de verifciación: " + keyCodificado);
+            email.addTo("" + usuarioDto.getCmpCorreo());
             email.send();
         } catch (EmailException ex) {
             Logger.getLogger(ObjEmail.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
         }
+        
+        usuarioDto.setCmpKey(keyCodificado);
+        usuarioDto.setCmpEstado(333); // Verificar correo
+        
+        return true;
+    }
+    
+    public static boolean mtdEnviarRecuperarContrasenha(UsuarioDto usuarioDto){
+        Email email = new SimpleEmail();
+        SecretKey key_codificado = null;
+        String keyCodificado = "";
+        
+        try {
+            
+            key_codificado = ObjKey.getKeyFromPassword(usuarioDto.getCmpCorreo(), usuarioDto.getCmpPassword());
+            keyCodificado = ObjKey.convertSecretKeyToString(key_codificado);
+            
+        } catch (Exception e) {
+            return false;
+        }
+        
+        try {
+            
+            email.setHostName("in-v3.mailjet.com");
+            email.setSmtpPort(465);
+            email.setAuthenticator(new DefaultAuthenticator("a1238bce0ca670d72a071451af6accde", "11218c5a874df874ef5aca4aedeada36"));
+            email.setSSLOnConnect(true);
+            email.setFrom("pv19022441@vallarta.tecmm.edu.mx");
+            email.setSubject("Verificar email para software Veontec");
+            email.setMsg("Codigo de verifciación: " + keyCodificado);
+            email.addTo("" + usuarioDto.getCmpCorreo());
+            email.send();
+        } catch (EmailException ex) {
+            Logger.getLogger(ObjEmail.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
+        }
+        
+        usuarioDto.setCmpKey(keyCodificado);
+        usuarioDto.setCmpEstado(777); // Recuperar contraseña
+        
+        return true;
     }
     
     public void mtdEnviarMensajeArchivoAdjunto(){

@@ -63,7 +63,7 @@ public class CtrlMiCuenta{
         btnEliminarCuenta = new MouseAdapter() {
             @Override
             public void mouseReleased(MouseEvent e) {
-                mtdEliminarCuenta();
+                    mtdEliminarCuenta();
             }
         };
         
@@ -91,7 +91,7 @@ public class CtrlMiCuenta{
         btnCambiarPasswd = new MouseAdapter() {
             @Override
             public void mouseReleased(MouseEvent e) {
-                mtdCambiarContrasena();
+                    mtdCambiarContrasena();
             }
         };
         
@@ -105,7 +105,7 @@ public class CtrlMiCuenta{
         btnCambiarCorreo = new MouseAdapter() {
             @Override
             public void mouseReleased(MouseEvent e) {
-                mtdCambiarCorreo();
+                    mtdCambiarCorreo();
             }
         };
         
@@ -119,11 +119,25 @@ public class CtrlMiCuenta{
         btnActualizarDatos = new MouseAdapter() {
             @Override
             public void mouseReleased(MouseEvent e) {
-                mtdActualizarDatos();
+                    mtdActualizarDatos();
             }
         };
         
         laVista.btnEditar.addMouseListener(btnActualizarDatos);
+    }
+    
+    private synchronized void mtdEventoBtnVerificarEmail(){
+        MouseListener btnVerificarEmail = null;
+        laVista.btnVerificarEmail.removeMouseListener(btnVerificarEmail);
+        
+        btnVerificarEmail = new MouseAdapter() {
+            @Override
+            public void mouseReleased(MouseEvent e) {
+                    mtdVerificarEmail();
+            }
+        };
+        
+        laVista.btnVerificarEmail.addMouseListener(btnVerificarEmail);
     }
     
     // Métodos
@@ -135,6 +149,7 @@ public class CtrlMiCuenta{
         mtdEventoBtnCambiarPasswd();
         mtdEventoBtnCambiarCorreo();
         mtdEventoBtnActualizarDatos();
+        mtdEventoBtnVerificarEmail();
     }
     
     private void mtdEstablecerDatos(){
@@ -146,10 +161,32 @@ public class CtrlMiCuenta{
         laVista.cmpNombreCompleto.setText(usuarioDto.getCmpNombreCompleto() );
         laVista.cmpDireccion.setText( usuarioDto.getCmpDireccion() );
         laVista.cmpTelefono.setText( usuarioDto.getCmpTelefono() );
-    }
+        
+        if( Veontec.usuarioDto.getCmpEstado() == 333 ){
+            DesHabilitarBotones(false);
+            JOptionPane.showMessageDialog(laVista, "Verifica la cuenta, por favor.\nRevise su email para obtener el codigo de verificación.");
+        }else{
+            DesHabilitarBotones(true);
+        }
+        
+    }   
     
+    private void DesHabilitarBotones(boolean estado){
+        laVista.btnChgCorreo.setEnabled(estado);
+        laVista.btnChgPasswd.setEnabled(estado);
+        laVista.btnEditar.setEnabled(estado);
+        laVista.btnEliminarCuenta.setEnabled(estado);
+        laVista.btnVerificarEmail.setEnabled(!estado);
+    }
+        
     private void mtdEliminarCuenta(){
         passwd = "";
+        // * Verificar el estado de cuenta
+        if( usuarioDto.getCmpEstado() == 333 ){
+                JOptionPane.showMessageDialog(laVista, "Por favor, verifique la cuenta.");
+                return;
+        }
+        
         Box boxPassword = Box.createVerticalBox();
         JLabel infoInstruccion = new JLabel("Introduzca su constraseña para eliminiar la cuenta");
         boxPassword.add(infoInstruccion);
@@ -196,6 +233,12 @@ public class CtrlMiCuenta{
     }
     
     private void mtdCambiarContrasena() {
+        // * Verificar el estado de cuenta
+        if( usuarioDto.getCmpEstado() == 333 ){
+                JOptionPane.showMessageDialog(laVista, "Por favor, verifique la cuenta.");
+                return;
+        }
+        
         String passwdActual="", passwdNueva="", passwdRepetir="";
         Box boxPassword = Box.createVerticalBox();
         JLabel info1 = new JLabel("Introduza la constraseña actual");
@@ -252,6 +295,13 @@ public class CtrlMiCuenta{
     }
     
     private void mtdCambiarCorreo() {
+        
+        // * Verificar el estado de cuenta
+        if( usuarioDto.getCmpEstado() == 333 ){
+                JOptionPane.showMessageDialog(laVista, "Por favor, verifique la cuenta.");
+                return;
+        }
+        
         String correoActual="", correoNueva="", correoRepetir="";
         Box boxCorreo = Box.createVerticalBox();
         JLabel info1 = new JLabel("Introduza la contraseña actual");
@@ -323,6 +373,13 @@ public class CtrlMiCuenta{
     }
     
     private void  mtdActualizarDatos(){
+        
+        // * Verificar el estado de cuenta
+        if( usuarioDto.getCmpEstado() == 333 ){
+                JOptionPane.showMessageDialog(laVista, "Por favor, verifique la cuenta.");
+                return;
+        }
+        
         if( laVista.mtdVerificarCampos() ){
             
             // * Establecer los nuevos datos
@@ -331,20 +388,69 @@ public class CtrlMiCuenta{
             usuarioDto.setCmpTelefono( laVista.cmpTelefono.getText().trim() );
             usuarioDto.setCmpCorreo( laVista.cmpCorreo.getText().trim() );
             
-            // * Intentar actualizar los datos con una consulta
-            // a la base de datos
-            if(usuarioDao.mtdActualizar(usuarioDto)){
-                Veontec.usuarioDto = usuarioDto;
-                // * Establecer el titulo de la ventana
-                Veontec.ventanaHome.setTitle( Veontec.usuarioDto.getCmpNombreCompleto() 
-                + " | "  + Veontec.usuarioDto.getCmpCorreo() + " - " + Info.NombreSoftware );
-                // * Actualizar los datos
-                mtdEstablecerDatos();
-                JOptionPane.showMessageDialog(laVista, "Datos actualizados exitosamnete.");
-            }
+                // * Intentar actualizar los datos con una consulta
+                // a la base de datos
+                if(usuarioDao.mtdActualizar(usuarioDto)){
+                    Veontec.usuarioDto = usuarioDto;
+                    // * Establecer el titulo de la ventana
+                    Veontec.ventanaHome.setTitle( Veontec.usuarioDto.getCmpNombreCompleto() 
+                    + " | "  + Veontec.usuarioDto.getCmpCorreo() + " - " + Info.NombreSoftware );
+                    // * Actualizar los datos
+                    mtdEstablecerDatos();
+                    JOptionPane.showMessageDialog(laVista, "Datos actualizados exitosamnete.");
+                }
             
         }else{
             JOptionPane.showMessageDialog(laVista, "Verifica que los datos sean correctos.");
+        }
+    }
+    
+    private void mtdVerificarEmail(){
+        
+        // * Verificar el estado de cuenta
+        if( usuarioDto.getCmpEstado() != 333 ){
+                JOptionPane.showMessageDialog(laVista, "La cuenta ya está verificada.");
+                return;
+        }
+        
+        String passwdActual="", codigoVerificacion="";
+        Box boxVerificacion = Box.createVerticalBox();
+        JLabel info1 = new JLabel("Introduza la contraseña actual");
+        boxVerificacion.add(info1);
+        JPasswordField cmpPasswordActual = new JPasswordField(24);
+        boxVerificacion.add(cmpPasswordActual);
+        
+        JLabel info2 = new JLabel("Introduza el código de verifación");
+        boxVerificacion.add(info2);
+        JTextField cmpCodigoVerificacion = new JTextField(24);
+        boxVerificacion.add(cmpCodigoVerificacion);
+        
+        boxVerificacion.setLocation(Veontec.ventanaHome.getLocation());
+        int opc = JOptionPane.showConfirmDialog(laVista, boxVerificacion, "Verificar correo y cuenta", JOptionPane.OK_CANCEL_OPTION, JOptionPane.WARNING_MESSAGE);
+        
+        if( opc == JOptionPane.OK_OPTION ){
+            passwdActual = String.valueOf(cmpPasswordActual.getPassword()).trim();
+            codigoVerificacion = cmpCodigoVerificacion.getText().trim();
+            
+            if( passwdActual.trim().isEmpty() || codigoVerificacion.trim().isEmpty() ){
+                JOptionPane.showMessageDialog(laVista, "Los campos están incompletos");
+            }else if( !mtdVerificarPassword( usuarioDto.getCmpPassword(), passwdActual.toCharArray() )){
+                JOptionPane.showMessageDialog(laVista, "La contraseña actual es incorrecta.");
+            }else if( !usuarioDto.getCmpKey().equals(codigoVerificacion) ){
+                JOptionPane.showMessageDialog(laVista, "Codigo de verificación incorrecta");
+            }else{
+
+                if( !usuarioDao.mtdComprobar(usuarioDto) ){
+                    if( usuarioDto.getCmpKey().equals(codigoVerificacion) ){
+                        usuarioDto.setCmpEstado(1333);
+                        usuarioDto.setCmpKey("No");
+                        usuarioDao.mtdActualizar(usuarioDto);
+                        Veontec.usuarioDto = usuarioDto;
+                        mtdCerrarSession();
+                        JOptionPane.showMessageDialog(laVista, "La cuenta ha sido verificada exitosamente.");
+                    }
+                }
+            }
         }
     }
     
