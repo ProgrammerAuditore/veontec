@@ -87,23 +87,21 @@ public class CtrlSignUp implements MouseListener{
             // * Obtener cuenta de usuarioDto si existe
             if( mtdObtenerUsuario(pnInicarSession.campoCorreo1.getText().trim()) ){
 
-            // * Verificar datos capturado son correctos
-            if( mtdValidarDatosDeUsuario(pnInicarSession.campoCorreo1.getText().trim(), 
-            String.valueOf(pnInicarSession.campoPassword1.getPassword())) ){
-                
-                // * Abrir ventana home
-                mtdAbrirVentanaHome();
-                
-            }else{
-                JOptionPane.showMessageDialog(ni, "El campo correo o contraseña son incorrectos.");
-            }
+                // * Verificar datos capturado son correctos
+                if( mtdValidarDatosDeUsuario(pnInicarSession.campoCorreo1.getText().trim(), 
+                String.valueOf(pnInicarSession.campoPassword1.getPassword())) ){
 
-            }else{
-                JOptionPane.showMessageDialog(ni, "Usuario no registrado.");
+                    // * Abrir ventana home
+                    mtdAbrirVentanaHome();
+
+                }else
+                JOptionPane.showMessageDialog(ni, "Verifique que los datos introducido sean correctos.");
+
             }
-        }else{
-            JOptionPane.showMessageDialog(ni, "No hay conexión");
-        }
+            
+        }else
+        JOptionPane.showMessageDialog(ni, "No hay conexión");
+        
     }
     
     private void mtdRegistrarme(){
@@ -128,26 +126,23 @@ public class CtrlSignUp implements MouseListener{
             if( !usuarioDao.mtdComprobar(usuarioDto) ){
                 JOptionPane.showMessageDialog(null, "El correo ya está registrado.");
             }else{
-                if( usuarioDao.mtdInsetar(usuarioDto) ){
-                    
-                    // * Obtener datos de la nueva cuenta
-                    usuarioDto = usuarioDao.mtdConsultar(usuarioDto);
-                    
-                    if( ObjEmail.mtdEnviarValidarEmail(usuarioDto) ){
-                    
-                        if(usuarioDao.mtdActualizar(usuarioDto)){
-                        
-                            // * Crear una categoria por defecto llamda 'nueva'
-                            CategoriaDto cateDto = new CategoriaDto();
-                            CategoriaDao cateDao = new CategoriaDao();
-                            cateDto.setCateNombre("Nueva");
-                            cateDto.setCateUsuario(usuarioDto.getCmpID());
-                            cateDto.setCateTotalProductos(0);
-                            cateDao.mtdInsetar(cateDto);
+                if( ObjEmail.mtdEnviarValidarEmail(usuarioDto) ){
+                    if( usuarioDao.mtdInsetar(usuarioDto) ){
+                        // * Obtener datos de la nueva cuenta
+                        usuarioDto = usuarioDao.mtdConsultar(usuarioDto);
 
-                            mtdVaciarCampos_Registrarme();
-                            JOptionPane.showMessageDialog(ni, "Se registro exitosamente.");
-                            
+                        if(usuarioDao.mtdActualizar(usuarioDto)){
+                                // * Crear una categoria por defecto llamda 'nueva'
+                                CategoriaDto cateDto = new CategoriaDto();
+                                CategoriaDao cateDao = new CategoriaDao();
+                                cateDto.setCateNombre("Nueva");
+                                cateDto.setCateUsuario(usuarioDto.getCmpID());
+                                cateDto.setCateTotalProductos(0);
+                                cateDao.mtdInsetar(cateDto);
+
+                                mtdVaciarCampos_Registrarme();
+                                JOptionPane.showMessageDialog(ni, "Se registro exitosamente.");
+
                         }
                     }
                 }
@@ -188,7 +183,7 @@ public class CtrlSignUp implements MouseListener{
         Veontec.usuarioDto = Veontec.usuarioDao.mtdConsultar(Veontec.usuarioDto);
         
         if( Veontec.usuarioDto.getCmpCorreo() == null || Veontec.usuarioDto.getCmpPassword() == null ){
-                JOptionPane.showMessageDialog(null, "Usuario no registrado o verifeque los datos.");
+                JOptionPane.showMessageDialog(null, "No hay cuenta asociado con el correo introducido.");
                 return false;
         }
         
