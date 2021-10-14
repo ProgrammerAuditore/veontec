@@ -454,14 +454,13 @@ public class CtrlMiCuenta{
                 if( !usuarioDao.mtdComprobar(usuarioDto) ){
                     if( usuarioDto.getCmpKey().equals(codigoVerificacion) ){
                         
-                        if( ObjEmail.mtdEnviarBienvenida(usuarioDto) ){
-                            usuarioDto.setCmpEstado(1333);
-                            usuarioDto.setCmpKey("No");
-                            usuarioDao.mtdActualizar(usuarioDto);
-                            Veontec.usuarioDto = usuarioDto;
-                            mtdCerrarSession();
-                            JOptionPane.showMessageDialog(laVista, "La cuenta ha sido verificada exitosamente.");
-                        }
+                        ObjEmail.mtdEnviarBienvenida(usuarioDto);
+                        usuarioDto.setCmpEstado(1333);
+                        usuarioDto.setCmpKey("No");
+                        usuarioDao.mtdActualizar(usuarioDto);
+                        Veontec.usuarioDto = usuarioDto;
+                        mtdCerrarSession();
+                        JOptionPane.showMessageDialog(laVista, "La cuenta ha sido verificada exitosamente.");
                         
                     }
                 }
