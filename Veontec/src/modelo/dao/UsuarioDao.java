@@ -14,13 +14,15 @@ public class UsuarioDao implements keyword_query<UsuarioDto>{
     public boolean mtdInsetar(UsuarioDto obj_dto) {
         PreparedStatement ps = null;
         Connection conn = CtrlHiloConexion.getConexion();
-        String sql = "INSERT INTO tblusuarios (usuaNombre, usuaCorreo, usuaPassword) "
-                + "VALUES (?, ?, ?); ";        
+        String sql = "INSERT INTO tblusuarios (usuaNombre, usuaCorreo, usuaPassword, usuaKey , usuaEstado) "
+                + "VALUES (?, ?, ?, ?, ?); ";        
         try {
             ps = conn.prepareStatement(sql.toLowerCase());
             ps.setString(1, obj_dto.getCmpNombreCompleto());
             ps.setString(2, obj_dto.getCmpCorreo());
             ps.setString(3, obj_dto.getCmpPassword());
+            ps.setString(4, obj_dto.getCmpKey());
+            ps.setInt(5, obj_dto.getCmpEstado());
             int rs = ps.executeUpdate();
             
             if( rs > 0 )
@@ -60,7 +62,7 @@ public class UsuarioDao implements keyword_query<UsuarioDto>{
         PreparedStatement ps = null;
         Connection conn = CtrlHiloConexion.getConexion();
         String query = "UPDATE tblusuarios SET "
-                + "usuaNombre = ?, usuaCorreo = ?, usuaPassword = ?, usuaDireccion = ?, usuaTelefono = ? "
+                + "usuaNombre = ?, usuaCorreo = ?, usuaPassword = ?, usuaDireccion = ?, usuaTelefono = ? , usuaKey = ? , usuaEstado = ? "
                 // * Buscamos el producto del usuario respectivo
                 + "WHERE usuaID = ? ;";
         
@@ -72,7 +74,9 @@ public class UsuarioDao implements keyword_query<UsuarioDto>{
             ps.setString(3, obj_dto.getCmpPassword());
             ps.setString(4, obj_dto.getCmpDireccion());
             ps.setString(5, obj_dto.getCmpTelefono());
-            ps.setInt(6, obj_dto.getCmpID());
+            ps.setString(6, obj_dto.getCmpKey());
+            ps.setInt(7, obj_dto.getCmpEstado());
+            ps.setInt(8, obj_dto.getCmpID());
             int respuesta = ps.executeUpdate();
             
             // * Si la respuesta es mayor a 0 significa que la consulta fue exitosa.
@@ -109,6 +113,8 @@ public class UsuarioDao implements keyword_query<UsuarioDto>{
                 usuario.setCmpPassword( rs.getString("usuaPassword") );
                 usuario.setCmpDireccion( rs.getString("usuaDireccion") );
                 usuario.setCmpTelefono( rs.getString("usuaTelefono") );
+                usuario.setCmpKey( rs.getString("usuaKey") );
+                usuario.setCmpEstado( rs.getInt("usuaEstado") );
             }
             
         } catch (SQLException e) {
@@ -140,6 +146,8 @@ public class UsuarioDao implements keyword_query<UsuarioDto>{
                 usuario.setCmpPassword( rs.getString("usuaPassword") );
                 usuario.setCmpDireccion( rs.getString("usuaDireccion") );
                 usuario.setCmpTelefono( rs.getString("usuaTelefono") );
+                usuario.setCmpKey( rs.getString("usuaKey") );
+                usuario.setCmpEstado( rs.getInt("usuaEstado") );
             }
             
         } catch (SQLException e) {

@@ -5,7 +5,7 @@ class Rutas {
     // * Obtener recursos desde la raíz el ejecutable .jar (Recursos Externo)
     public static String pathDataConexion = "veontec/conn";
     public static String pathDataEjecucion = "veontec/.run";
-    public static String pathDataPreferencias = "veontec/.pconfig";
+    public static String pathDataCuenta = "veontec/.dta";
     public static String pathSharedLinux = "/opt/veontec/shared";
     public static String pathSharedWin = "shared";
     

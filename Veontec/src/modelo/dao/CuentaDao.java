@@ -5,22 +5,22 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import modelo.dto.PreferenciaDto;
+import modelo.dto.CuentaDto;
 import src.Recursos;
 import modelo.interfaces.keyword_binario;
 
-public class PreferenciaDao implements keyword_binario<PreferenciaDto>{
+public class CuentaDao implements keyword_binario<CuentaDto>{
 
     @Override
-    public PreferenciaDto obtener_datos() {
-        PreferenciaDto db = null;
+    public CuentaDto obtener_datos() {
+        CuentaDto db = null;
         
-        try(FileInputStream fis = new FileInputStream( Recursos.dataPreferencias() )){
+        try(FileInputStream fis = new FileInputStream( Recursos.dataCuenta() )){
             ObjectInputStream ois = null;
             
             while(fis.available() > 0){
                 ois = new ObjectInputStream(fis);
-                db = (PreferenciaDto) ois.readObject();
+                db = (CuentaDto) ois.readObject();
                 
                 //System.out.println("" + db);
             }
@@ -30,7 +30,7 @@ public class PreferenciaDao implements keyword_binario<PreferenciaDto>{
             
         } catch(Exception e){
             //System.out.println("Error");
-            Recursos.dataPreferencias().delete();
+            //Recursos.dataCuenta().delete();
             //e.printStackTrace();
         }
         
@@ -38,8 +38,8 @@ public class PreferenciaDao implements keyword_binario<PreferenciaDto>{
     }
 
     @Override
-    public void actualizar_datos(PreferenciaDto c) {
-        try (FileOutputStream fos = new FileOutputStream( Recursos.dataPreferencias() )) {
+    public void actualizar_datos(CuentaDto c) {
+        try (FileOutputStream fos = new FileOutputStream( Recursos.dataCuenta() )) {
             
             ObjectOutputStream oss = new ObjectOutputStream(fos);
             oss.writeObject(c);
@@ -53,8 +53,8 @@ public class PreferenciaDao implements keyword_binario<PreferenciaDto>{
     }
 
     @Override
-    public void regitrar_datos(PreferenciaDto c) {
-        try (FileOutputStream fos = new FileOutputStream( Recursos.dataPreferencias() )) {
+    public void regitrar_datos(CuentaDto c) {
+        try (FileOutputStream fos = new FileOutputStream( Recursos.dataCuenta() )) {
             
             ObjectOutputStream oss = new ObjectOutputStream(fos);
             oss.writeObject(c);

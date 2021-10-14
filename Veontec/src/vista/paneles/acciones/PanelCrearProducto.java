@@ -86,7 +86,7 @@ public class PanelCrearProducto extends javax.swing.JPanel {
         etqNombres = new vista.componentes.etiqueta.Etiqueta();
         etqDireccion = new vista.componentes.etiqueta.Etiqueta();
         etqEmail = new vista.componentes.etiqueta.Etiqueta();
-        cmpCategoria = new javax.swing.JComboBox<>();
+        cmpCategorias = new javax.swing.JComboBox<>();
         jScrollPane1 = new javax.swing.JScrollPane();
         cmpDescripcion = new javax.swing.JTextArea();
         etiqueta1 = new vista.componentes.etiqueta.Etiqueta();
@@ -133,7 +133,7 @@ public class PanelCrearProducto extends javax.swing.JPanel {
 
         etqEmail.setText("Seleccionar categoría");
 
-        cmpCategoria.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Mochilas" }));
+        cmpCategorias.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Mochilas" }));
 
         cmpDescripcion.setColumns(20);
         cmpDescripcion.setLineWrap(true);
@@ -184,7 +184,7 @@ public class PanelCrearProducto extends javax.swing.JPanel {
                             .addComponent(etqNombres, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(etqDireccion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 280, Short.MAX_VALUE)
-                            .addComponent(cmpCategoria, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(cmpCategorias, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(etqEmail, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(cmpTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(18, 18, 18)
@@ -243,7 +243,7 @@ public class PanelCrearProducto extends javax.swing.JPanel {
                             .addGap(17, 17, 17)
                             .addComponent(etqEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(cmpCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cmpCategorias, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGap(18, 18, 18)
                             .addComponent(etqDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -316,7 +316,7 @@ public class PanelCrearProducto extends javax.swing.JPanel {
     public javax.swing.JCheckBox cboxBoleto;
     public javax.swing.JCheckBox cboxProductoExterno;
     public javax.swing.JCheckBox cmboxVuelos;
-    public javax.swing.JComboBox<String> cmpCategoria;
+    public javax.swing.JComboBox<String> cmpCategorias;
     public javax.swing.JTextArea cmpDescripcion;
     public vista.componentes.campos.CampoTexto cmpEnlace;
     public vista.componentes.campos.CampoTexto cmpImagenPath;

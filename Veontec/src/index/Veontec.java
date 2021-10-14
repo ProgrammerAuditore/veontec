@@ -10,12 +10,12 @@ import java.io.InputStream;
 import java.util.Properties;
 import java.util.Scanner;
 import javax.swing.JOptionPane;
+import modelo.dao.CuentaDao;
 import modelo.dao.EjecucionDao;
-import modelo.dao.PreferenciaDao;
 import modelo.dao.UsuarioDao;
 import modelo.dto.ConexionDto;
+import modelo.dto.CuentaDto;
 import modelo.dto.EjecucionDto;
-import modelo.dto.PreferenciaDto;
 import modelo.dto.UsuarioDto;
 import src.Info;
 import src.Recursos;
@@ -32,6 +32,8 @@ public class Veontec {
     public static String IdiomaDefinido;
     public static UsuarioDao usuarioDao;
     public static UsuarioDto usuarioDto;
+    public static CuentaDao cuentaDao;
+    public static CuentaDto cuentaDto;
     
     public void mtdTagInit() {
         
@@ -50,7 +52,6 @@ public class Veontec {
             System.exit(0);
         }
         
-        mtdCargarPreferencias();
         HiloConexion hc = new HiloConexion();
         HiloPrincipal hp = new HiloPrincipal();
         //HiloSplash hs = new HiloSplash();
@@ -59,8 +60,41 @@ public class Veontec {
         //hs.setDaemon(true);
         
         Veontec.ventanaSession = new VentanaSingUp();
-        CtrlSignUp ctrl = new CtrlSignUp(Veontec.ventanaSession, Veontec.ventanaSession.pnRegistrarme, Veontec.ventanaSession.pnLoggin); 
-        ctrl.mtdInit();
+        if( Recursos.dataCuenta().exists() ){
+            CtrlSignUp ctrl = new CtrlSignUp(Veontec.ventanaSession, Veontec.ventanaSession.pnRegistrarme, Veontec.ventanaSession.pnLoggin); 
+            
+            Veontec.cuentaDto = new CuentaDto();
+            Veontec.cuentaDao = new CuentaDao(); 
+            Veontec.cuentaDto = Veontec.cuentaDao.obtener_datos();
+            
+            // * Verificar si hay datos registrados y validos
+            if( Veontec.cuentaDto == null ){
+                
+                // * Si no se elimina el archivo
+                // y se abreve la ventana de SingUp
+                Recursos.dataCuenta().delete();
+                ctrl.mtdInit();
+                
+            } else{
+                
+                // * Verificar los datos de la cuenta registrado
+                if( ctrl.mtdObtenerUsuario(Veontec.cuentaDto.getCorreo()) ){
+                    if( ctrl.mtdValidarDatosDeUsuario(Veontec.cuentaDto.getCorreo(), Veontec.cuentaDto.getPasswd()) ){
+                        ctrl.mtdAbrirVentanaHome();
+                    }
+                    
+                }else{
+                    
+                    // * Si no se elimina el archivo
+                    // y se abreve la ventana de SingUp
+                    Recursos.dataCuenta().delete();
+                    ctrl.mtdInit();
+                    
+                }
+                
+            }
+            
+        }
         
         // * Ejecutar hilos
         //hs.start();
@@ -117,29 +151,6 @@ public class Veontec {
         archivoRun.mtdRegistrarDatos(dto);
             
         
-    }
-    
-    private void mtdCargarPreferencias(){
-        PreferenciaDao dao = new PreferenciaDao();
-        PreferenciaDto dto;
-        
-        if( dao.obtener_datos() == null ){ 
-            dto = new PreferenciaDto();
-            Recursos.dataPreferencias().delete();
-        } else{
-            dto = dao.obtener_datos();
-        }
-            
-            if( dto.getIdioma().trim().equals("Español") || dto.getIdioma().trim().equals("Spanish") ){
-                idioma = new Idiomas("es");
-                Veontec.IdiomaDefinido = "ESP";
-            }else{
-                idioma = new Idiomas("en");
-                Veontec.IdiomaDefinido = "ENG";
-            }
-            Recursos.mtdCambiarFuente( dto.getFuente() );
-            Recursos.styleButtonDefault = dto.getEstilo();
-            
     }
     
     public static void mtdVerificarID(){
@@ -300,7 +311,6 @@ public class Veontec {
     
     // * Mostrar mensaje de ayuda en la terminal
     public void mtdTagHelp(){
-        mtdCargarPreferencias();
         System.out.println(Info.NombreSoftware);
         System.out.println("");
         System.out.println(Veontec.idioma.get("MyFreeLab.mtdTagHelp.msg1"));
@@ -330,7 +340,7 @@ public class Veontec {
         System.out.println("#TimeTmp : " + Recursos.timeTmp);
         System.out.println("#bkgAside : " + Recursos.bkgAside);
         System.out.println("#bkgLogo : " + Recursos.bkgLogo);
-        System.out.println("#dataPreferencias : " + Recursos.dataPreferencias().getAbsolutePath());
+        System.out.println("#dataPreferencias : " + Recursos.dataCuenta().getAbsolutePath());
         System.out.println("#dataConexion : " + Recursos.dataConexion().getAbsolutePath());
         System.out.println("#dataRun : " + Recursos.dataRun().getAbsolutePath());
         System.out.println("#docVersionesXml : " + Recursos.docVersionesXml);

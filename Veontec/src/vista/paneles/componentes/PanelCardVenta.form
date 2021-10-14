@@ -186,7 +186,7 @@
                 <Property name="columns" type="int" value="20"/>
                 <Property name="lineWrap" type="boolean" value="true"/>
                 <Property name="rows" type="int" value="5"/>
-                <Property name="text" type="java.lang.String" value="&lt;Comporador&gt;&#xa;&lt;FechaVendido&gt;&#xa;&#xa;&lt;Descripcion&gt;"/>
+                <Property name="text" type="java.lang.String" value="&lt;Comprador&gt;&#xa;&lt;FechaVendido&gt;&#xa;&#xa;&lt;Descripcion&gt;"/>
               </Properties>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
@@ -195,6 +195,9 @@
           </SubComponents>
         </Container>
         <Container class="vista.componentes.jpanelbackground.JPanelBackground" name="pnImgPortada">
+          <Properties>
+            <Property name="imgBackgroundEnabled" type="boolean" value="true"/>
+          </Properties>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
           </AuxValues>

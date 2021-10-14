@@ -68,6 +68,7 @@ public class CtrlVentas{
     // Métodos
     private void mtdInit(){
         logger.info("Ejecutando metodo una vez (Obligatorio)");
+        mtdMostrarProducto();
     }
     
     

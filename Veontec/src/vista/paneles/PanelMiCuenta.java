@@ -80,6 +80,7 @@ public class PanelMiCuenta extends javax.swing.JPanel {
         btnChgPasswd = new vista.componentes.boton.Boton();
         btnChgCorreo = new vista.componentes.boton.Boton();
         btnEliminarCuenta = new vista.componentes.boton.Boton();
+        btnVerificarEmail = new vista.componentes.boton.Boton();
 
         btnCerrarSession.setImgButtonType("danger");
         btnCerrarSession.setTexto("Cerrrar sesion");
@@ -134,7 +135,7 @@ public class PanelMiCuenta extends javax.swing.JPanel {
                             .addComponent(etiqueta4, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(etiqueta3, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(etiqueta5, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 505, Short.MAX_VALUE)))
+                        .addGap(0, 517, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -163,13 +164,17 @@ public class PanelMiCuenta extends javax.swing.JPanel {
 
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Opciones avanzadas"));
 
+        btnChgPasswd.setImgButtonType("warning");
         btnChgPasswd.setTexto("Cambiar contraseña");
 
-        btnChgCorreo.setImgButtonType("warnig");
+        btnChgCorreo.setImgButtonType("warning");
         btnChgCorreo.setTexto("Cambiar correo");
 
         btnEliminarCuenta.setImgButtonType("danger");
         btnEliminarCuenta.setTexto("Eliminar cuenta");
+
+        btnVerificarEmail.setImgButtonType("dark");
+        btnVerificarEmail.setTexto("Verificar cuenta");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -180,19 +185,22 @@ public class PanelMiCuenta extends javax.swing.JPanel {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnChgPasswd, javax.swing.GroupLayout.DEFAULT_SIZE, 263, Short.MAX_VALUE)
                     .addComponent(btnChgCorreo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnEliminarCuenta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btnEliminarCuenta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnVerificarEmail, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addGap(40, 40, 40)
+                .addContainerGap()
+                .addComponent(btnVerificarEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnChgPasswd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(40, 40, 40)
+                .addGap(18, 18, 18)
                 .addComponent(btnChgCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(38, 38, 38)
+                .addGap(18, 18, 18)
                 .addComponent(btnEliminarCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout jPanelBackground1Layout = new javax.swing.GroupLayout(jPanelBackground1);
@@ -204,12 +212,12 @@ public class PanelMiCuenta extends javax.swing.JPanel {
                 .addGroup(jPanelBackground1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanelBackground1Layout.createSequentialGroup()
-                        .addComponent(btnCerrarSession, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(jPanelBackground1Layout.createSequentialGroup()
                         .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGap(18, 18, 18)
-                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanelBackground1Layout.createSequentialGroup()
+                        .addComponent(btnCerrarSession, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanelBackground1Layout.setVerticalGroup(
@@ -221,7 +229,7 @@ public class PanelMiCuenta extends javax.swing.JPanel {
                 .addGroup(jPanelBackground1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 214, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 226, Short.MAX_VALUE)
                 .addComponent(btnCerrarSession, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -245,6 +253,7 @@ public class PanelMiCuenta extends javax.swing.JPanel {
     public vista.componentes.boton.Boton btnChgPasswd;
     public vista.componentes.boton.Boton btnEditar;
     public vista.componentes.boton.Boton btnEliminarCuenta;
+    public vista.componentes.boton.Boton btnVerificarEmail;
     public vista.componentes.campos.CampoCorreo cmpCorreo;
     public vista.componentes.campos.CampoTexto cmpDireccion;
     public vista.componentes.campos.CampoTexto cmpNombreCompleto;

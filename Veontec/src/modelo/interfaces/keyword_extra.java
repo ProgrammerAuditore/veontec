@@ -4,7 +4,7 @@ import java.util.List;
 
 public interface keyword_extra<none> {
     public List<none> mtdListar();
-    public List<none> mtdListar(none dto);
+    public List<none> mtdListar(none obj_dto);
     public List<none> mtdListar(int inicio, int fin);
     public List<none> mtdListar(none obj_dto, int inicio, int fin);
     public long mtdRowCount();

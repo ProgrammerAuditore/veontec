@@ -1,172 +1,289 @@
-/*
- * Copyright (C) 2021 victor
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */
 package modelo;
 
-import java.io.UnsupportedEncodingException;
-import java.util.Properties;
+import java.io.File;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.activation.DataHandler;
-import javax.mail.Message;
-import javax.mail.MessagingException;
-import javax.mail.PasswordAuthentication;
-import javax.mail.Session;
-import javax.mail.Transport;
-import javax.mail.internet.AddressException;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeMessage;
+import javax.crypto.SecretKey;
+import modelo.dto.UsuarioDto;
+import org.apache.commons.mail.DefaultAuthenticator;
+import org.apache.commons.mail.EmailAttachment;
+import org.apache.commons.mail.EmailException;
+import org.apache.commons.mail.HtmlEmail;
+import org.apache.commons.mail.MultiPartEmail;
 
-/**
- *
- * @author victor
- */
 public class ObjEmail {
     
-    public void mtdEnviarEmail(String recipiente){
-        System.out.println("Preparando el email ...");
-        Properties prop = new Properties();
-        prop.put("mail.smtp.auth", true);
-        prop.put("mail.smtp.starttls.enable", "true");
-        //prop.put("mail.smtp.ssl.trust", "smtp.mailtrap.io");
-        prop.put("mail.smtp.host", "in-v3.mailjet.com");
-        prop.put("mail.smtp.port", "587");
-        
-        String myCuentaGmail = "a1238bce0ca670d72a071451af6accde";
-        String password = "11218c5a874df874ef5aca4aedeada36";
-        
-        Session ss = Session.getInstance(prop, new javax.mail.Authenticator() {
-            @Override
-            protected javax.mail.PasswordAuthentication getPasswordAuthentication() {
-                return new PasswordAuthentication(myCuentaGmail, password);
-            }
-        });
-        
-        Message msg = prepararMensaje(ss, myCuentaGmail, recipiente);
+    public static boolean mtdEnviarValidarEmail(UsuarioDto usuarioDto){
+        HtmlEmail emailHtml = new HtmlEmail();
+        SecretKey key_codificado = null;
+        String keyCodificado = "";
+       
         try {
-            Transport.send(msg);
-        } catch (MessagingException ex) {
-            Logger.getLogger(ObjEmail.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        System.out.println("Mensaje enviado exitosamente.");
-    }
-    
-    private Message prepararMensaje(Session ss, String mcg, String recipiente){
-        Message msg = new MimeMessage(ss);
-        try {
-            msg.setFrom(new InternetAddress(mcg));
-            msg.setRecipient(Message.RecipientType.TO, new InternetAddress(recipiente));
-            msg.setSubject("Probando MailJet SMS");
-            msg.setText("Estoy haciendo pruebas.");
-            return msg;
-        } catch (AddressException ex) {
-            Logger.getLogger(ObjEmail.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (MessagingException ex) {
-            Logger.getLogger(ObjEmail.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-        return null;
-    }
-    
-    public void enviarMen(){
-        // Recipient's email ID needs to be mentioned.
-        String to = "fromaddress@gmail.com";
-
-        // Sender's email ID needs to be mentioned
-        String from = "toaddress@gmail.com";
-
-        // Assuming you are sending email from through gmails smtp
-        String host = "smtp.gmail.com";
-
-        // Get system properties
-        Properties properties = System.getProperties();
-
-        // Setup mail server
-        properties.put("mail.smtp.host", host);
-        properties.put("mail.smtp.port", "465");
-        properties.put("mail.smtp.ssl.enable", "true");
-        properties.put("mail.smtp.auth", "true");
-
-        // Get the Session object.// and pass username and password
-        Session session = Session.getInstance(properties, new javax.mail.Authenticator() {
-
-            protected PasswordAuthentication getPasswordAuthentication() {
-
-                return new PasswordAuthentication("fromaddress@gmail.com", "*******");
-
-            }
-
-        });
-
-        // Used to debug SMTP issues
-        session.setDebug(true);
-
-        try {
-            // Create a default MimeMessage object.
-            MimeMessage message = new MimeMessage(session);
-
-            // Set From: header field of the header.
-            message.setFrom(new InternetAddress(from));
-
-            // Set To: header field of the header.
-            message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
-
-            // Set Subject: header field
-            message.setSubject("This is the Subject Line!");
-
-            // Now set the actual message
-            message.setText("This is actual message");
-
-            System.out.println("sending...");
-            // Send message
-            Transport.send(message);
-            System.out.println("Sent message successfully....");
-        } catch (MessagingException mex) {
-            mex.printStackTrace();
-        }
-        
-        
-    }
-    
-    public void mtdMSG(){
-        Properties props = new Properties();
-        props.put("mail.smtp.host","in-v3.mailjet.com");
-        props.put("mail.transport.protocol","smtp");
-        props.put("mail.smtp.auth", "true");
-        props.setProperty("mail.user", "a1238bce0ca670d72a071451af6accde");
-        props.setProperty("mail.password", "11218c5a874df874ef5aca4aedeada36");
-        
-        Session mailSession = Session.getInstance(props,null);
-        Message msg = new MimeMessage(mailSession);
-        
-        try {
-            msg.setSubject("Mensaje de Línea de Código");
-            msg.setFrom(new InternetAddress("victorvj098@gmail.com","Línea de Código"));
-            msg.addRecipients(Message.RecipientType.TO, new InternetAddress[] { new InternetAddress("victorvj098@gmail.com") });
             
-            //DataHandler dh = new DataHandler("sdsdss");
-            //msg.setDataHandler(dh);
-            javax.mail.Transport.send(msg);
-        } catch (MessagingException ex) {
+            key_codificado = ObjKey.getKeyFromPassword(usuarioDto.getCmpCorreo(), usuarioDto.getCmpPassword());
+            keyCodificado = ObjKey.convertSecretKeyToString(key_codificado);
+            
+        } catch (Exception ex) {
+            return false;
+        }
+        
+        try {
+            // Create the emailHtml message
+            emailHtml.setHostName("in-v3.mailjet.com");
+            emailHtml.setSmtpPort(587);
+            emailHtml.setAuthenticator(new DefaultAuthenticator("dabf6d9831bdc3404e03d0bd9aebd337", "09af06a814d962d5b7cc20ec093f41e8"));
+            emailHtml.setSSLOnConnect(true);
+            emailHtml.setFrom("sfw.veontec@gmail.com");
+            emailHtml.setSubject("Account verification hash code");
+            emailHtml.addTo("" + usuarioDto.getCmpCorreo());
+
+            // embed the image and get the content id
+            URL url = new URL("http://www.apache.org/images/asf_logo_wide.gif");
+            String cid = emailHtml.embed(url, "Apache logo");
+
+            // set the html message
+            emailHtml.setHtmlMsg(ObjEmail.mtdMsgHtml(emailHtml, "Account verification code:", keyCodificado ));
+
+            // set the alternative message
+            emailHtml.setTextMsg("Your email client does not support HTML messages");
+
+            // send the emailHtml
+            emailHtml.send();
+        } catch (EmailException ex) {
             Logger.getLogger(ObjEmail.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (UnsupportedEncodingException ex) {
+        } catch (MalformedURLException ex) {
+            Logger.getLogger(ObjEmail.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        usuarioDto.setCmpKey(keyCodificado);
+        usuarioDto.setCmpEstado(333); // Verificar correo
+        
+        return true;
+    }
+    
+    public static boolean mtdEnviarRecuperarCuenta(UsuarioDto usuarioDto){
+        HtmlEmail emailHtml = new HtmlEmail();
+        SecretKey key_codificado = null;
+        String keyCodificado = "";
+       
+        try {
+            
+            key_codificado = ObjKey.getKeyFromPassword(usuarioDto.getCmpCorreo(), usuarioDto.getCmpPassword());
+            keyCodificado = ObjKey.convertSecretKeyToString(key_codificado);
+            
+        } catch (Exception ex) {
+            return false;
+        }
+        
+        try {
+            // Create the emailHtml message
+            emailHtml.setHostName("in-v3.mailjet.com");
+            emailHtml.setSmtpPort(587);
+            emailHtml.setAuthenticator(new DefaultAuthenticator("dabf6d9831bdc3404e03d0bd9aebd337", "09af06a814d962d5b7cc20ec093f41e8"));
+            emailHtml.setSSLOnConnect(true);
+            emailHtml.setFrom("sfw.veontec@gmail.com");
+            emailHtml.setSubject("Temporary password for account recovery");
+            emailHtml.addTo("" + usuarioDto.getCmpCorreo());
+
+            // embed the image and get the content id
+            URL url = new URL("http://www.apache.org/images/asf_logo_wide.gif");
+            String cid = emailHtml.embed(url, "Apache logo");
+
+            // set the html message
+            emailHtml.setHtmlMsg(ObjEmail.mtdMsgHtml(emailHtml, "Temporary password for account recovery:", keyCodificado ));
+
+            // set the alternative message
+            emailHtml.setTextMsg("Your email client does not support HTML messages");
+
+            // send the emailHtml
+            emailHtml.send();
+        } catch (EmailException ex) {
+            Logger.getLogger(ObjEmail.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (MalformedURLException ex) {
+            Logger.getLogger(ObjEmail.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        usuarioDto.setCmpKey(keyCodificado);
+        usuarioDto.setCmpEstado(333); // Verificar correo
+        
+        return true;
+    }
+    
+    public static boolean mtdEnviarBienvenida(UsuarioDto usuarioDto){
+        HtmlEmail email = new HtmlEmail();
+        
+        try {
+            // Create the attachment
+            //EmailAttachment attachment = new EmailAttachment();
+            //File archivo = new File("P:\\Pictures\\ezio.png");
+            
+            // Create the emailHtml message
+            email.setHostName("in-v3.mailjet.com");
+            email.setSmtpPort(587);
+            email.setAuthenticator(new DefaultAuthenticator("dabf6d9831bdc3404e03d0bd9aebd337", "09af06a814d962d5b7cc20ec093f41e8"));
+            email.setSSLOnConnect(true);
+            email.setFrom("sfw.veontec@gmail.com");
+            email.setSubject("Account verification");
+            email.addTo("" + usuarioDto.getCmpCorreo());
+
+            // embed the image and get the content id
+            URL url = new URL("http://www.apache.org/images/asf_logo_wide.gif");
+            String cid = email.embed(url, "Apache logo");
+
+            // set the html message
+            email.setHtmlMsg(ObjEmail.mtdMsgHtml(email, "Account verification", "Successfully verified account"));
+
+            // set the alternative message
+            email.setTextMsg("Your email client does not support HTML messages");
+            
+            // add the attachment
+            //email.attach(attachment);
+
+            // send the emailHtml
+            email.send();
+        } catch (EmailException ex) {
+            Logger.getLogger(ObjEmail.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (MalformedURLException ex) {
+            Logger.getLogger(ObjEmail.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return true;
+    }
+    
+    public static String mtdMsgHtml(HtmlEmail email, String info, String contenido){
+        String msg="";
+        
+        try {
+            
+            // embed the image and get the content id
+            URL url = new URL("http://www.apache.org/images/asf_logo_wide.gif");
+            String cid = email.embed(url, "Apache logo");
+            
+            msg += "<html>";
+            msg += "<img src=\"cid:"+cid+"\">";
+            msg += "<h1>Welcome to software veontec</h1>";
+            msg += "<legend>"+info+"</legend>";
+            msg += "<p style='background-color: green; padding: 10px; border-radius: 20px; text-align: center; color: white; font-size: 14px;'>";
+            msg += contenido;
+            msg += "</p>";
+            msg += "<p>visit to <a href='https://programmerauditore.gitlab.io/veontec/#/'>veontec page</a></p>";
+            msg += "<article style='padding: 10px; color: #900c3f; font-size: 14px;'>";
+            msg += "<p>Note:</p>";
+            msg += "<ul>";
+            msg += "<li>He does not respond to the email, for any reason.</li>";
+            msg += "<li>If you think this email was sent by mistake, ignore it completely.</li>";
+            msg += "<li>If you do not know the reason for this message completely ignored.</li>";
+            msg += "</ul>";
+            msg += "</article>";
+            msg += "<p>&nbsp;</p>";
+            msg += "<span>Veontec (c) 2021</span>";
+            msg += "</html>";
+            
+        } catch (MalformedURLException ex) {
+            Logger.getLogger(ObjEmail.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (EmailException ex) {
             Logger.getLogger(ObjEmail.class.getName()).log(Level.SEVERE, null, ex);
         }
        
-        
+        return msg;
+    } 
+    
+    public void mtdEnviarMensajeArchivoAdjunto(){
+        try {
+            // Create the attachment
+            EmailAttachment attachment = new EmailAttachment();
+            File archivo = new File("P:\\Pictures\\ezio.png");
+            
+            attachment.setPath(archivo.getAbsolutePath());
+            attachment.setDisposition(EmailAttachment.ATTACHMENT);
+            attachment.setDescription("Picture of John");
+            attachment.setName("John");
+            
+            // Create the emailHtml message
+            MultiPartEmail email = new MultiPartEmail();
+            email.setHostName("in-v3.mailjet.com");
+            email.setSmtpPort(465);
+            email.setAuthenticator(new DefaultAuthenticator("a1238bce0ca670d72a071451af6accde", "11218c5a874df874ef5aca4aedeada36"));
+            email.setSSLOnConnect(true);
+            email.setFrom("pv19022441@vallarta.tecmm.edu.mx");
+            email.setSubject("mtdEnviarMensajeArchivoAdjunto");
+            email.setMsg("Este es un mensaje de prueba :-)");
+            email.addTo("victorvj098@gmail.com");
+            
+            // add the attachment
+            email.attach(attachment);
+            
+            // send the emailHtml
+            email.send();
+        } catch (EmailException ex) {
+            Logger.getLogger(ObjEmail.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public void mtdEnviarMensajeArchivoAdjunto_URL(){
+        try {
+            // Create the attachment
+            EmailAttachment attachment = new EmailAttachment();
+            attachment.setURL(new URL("http://www.apache.org/images/asf_logo_wide.gif"));
+            attachment.setDisposition(EmailAttachment.ATTACHMENT);
+            attachment.setDescription("Apache logo");
+            attachment.setName("Apache logo");
+            
+            // Create the emailHtml message
+            MultiPartEmail email = new MultiPartEmail();
+            email.setHostName("in-v3.mailjet.com");
+            email.setSmtpPort(465);
+            email.setAuthenticator(new DefaultAuthenticator("a1238bce0ca670d72a071451af6accde", "11218c5a874df874ef5aca4aedeada36"));
+            email.setSSLOnConnect(true);
+            email.setFrom("pv19022441@vallarta.tecmm.edu.mx");
+            email.setSubject("mtdEnviarMensajeArchivoAdjunto");
+            email.setMsg("Este es un mensaje de prueba :-)");
+            email.addTo("victorvj098@gmail.com");
+            
+            // add the attachment
+            email.attach(attachment);
+            
+            // send the emailHtml
+            email.send();
+        } catch (EmailException ex) {
+            Logger.getLogger(ObjEmail.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (MalformedURLException ex) {
+            Logger.getLogger(ObjEmail.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public void mtdEnviarMensajeArchivoAdjunto_HTML(){
+        try {
+            // Create the emailHtml message
+            HtmlEmail email = new HtmlEmail();
+           
+            email.setHostName("in-v3.mailjet.com");
+            email.setSmtpPort(465);
+            email.setAuthenticator(new DefaultAuthenticator("a1238bce0ca670d72a071451af6accde", "11218c5a874df874ef5aca4aedeada36"));
+            email.setSSLOnConnect(true);
+            email.setFrom("pv19022441@vallarta.tecmm.edu.mx");
+            email.setSubject("mtdEnviarMensajeArchivoAdjunto");
+            email.addTo("victorvj098@gmail.com");
+
+            // embed the image and get the content id
+            URL url = new URL("http://www.apache.org/images/asf_logo_wide.gif");
+            String cid = email.embed(url, "Apache logo");
+
+            // set the html message
+            email.setHtmlMsg("<html>The apache logo - <img src=\"cid:"+cid+"\"></html>");
+
+            // set the alternative message
+            email.setTextMsg("Your email client does not support HTML messages");
+
+            // send the emailHtml
+            email.send();
+        } catch (EmailException ex) {
+            Logger.getLogger(ObjEmail.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (MalformedURLException ex) {
+            Logger.getLogger(ObjEmail.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
 }

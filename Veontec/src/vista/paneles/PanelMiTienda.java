@@ -55,10 +55,10 @@ public class PanelMiTienda extends javax.swing.JPanel {
         jPanelBackground2 = new vista.componentes.jpanelbackground.JPanelBackground();
         etiqueta1 = new vista.componentes.etiqueta.Etiqueta();
         jScrollPane1 = new javax.swing.JScrollPane();
-        lstProductos = new javax.swing.JTree();
-        boton1 = new vista.componentes.boton.Boton();
-        boton2 = new vista.componentes.boton.Boton();
-        boton3 = new vista.componentes.boton.Boton();
+        lstCategorias = new javax.swing.JTree();
+        btnEliminar = new vista.componentes.boton.Boton();
+        btnModificar = new vista.componentes.boton.Boton();
+        btnAgregar = new vista.componentes.boton.Boton();
         jPanel2 = new javax.swing.JPanel();
         btnCrearProducto = new vista.componentes.etiqueta.Enlace();
         campoTexto1 = new vista.componentes.campos.CampoTexto();
@@ -88,26 +88,20 @@ public class PanelMiTienda extends javax.swing.JPanel {
         etiqueta1.setBackground(new java.awt.Color(255, 255, 255));
         etiqueta1.setForeground(new java.awt.Color(255, 255, 255));
         etiqueta1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        etiqueta1.setText("Mis Productos");
+        etiqueta1.setText("Mis categorias");
 
-        javax.swing.tree.DefaultMutableTreeNode treeNode1 = new javax.swing.tree.DefaultMutableTreeNode("Categorias");
-        javax.swing.tree.DefaultMutableTreeNode treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("Nuevo");
-        javax.swing.tree.DefaultMutableTreeNode treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Carra");
-        treeNode2.add(treeNode3);
-        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Balon");
-        treeNode2.add(treeNode3);
-        treeNode1.add(treeNode2);
-        lstProductos.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
-        jScrollPane1.setViewportView(lstProductos);
+        javax.swing.tree.DefaultMutableTreeNode treeNode1 = new javax.swing.tree.DefaultMutableTreeNode("root");
+        lstCategorias.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
+        jScrollPane1.setViewportView(lstCategorias);
 
-        boton1.setImgButtonType("danger");
-        boton1.setTexto("Eliminar");
+        btnEliminar.setImgButtonType("danger");
+        btnEliminar.setTexto("Eliminar");
 
-        boton2.setImgButtonType("warning");
-        boton2.setTexto("Modificar");
+        btnModificar.setImgButtonType("warning");
+        btnModificar.setTexto("Modificar");
 
-        boton3.setImgButtonType("success");
-        boton3.setTexto("Agregar");
+        btnAgregar.setImgButtonType("success");
+        btnAgregar.setTexto("Agregar");
 
         javax.swing.GroupLayout jPanelBackground2Layout = new javax.swing.GroupLayout(jPanelBackground2);
         jPanelBackground2.setLayout(jPanelBackground2Layout);
@@ -118,9 +112,9 @@ public class PanelMiTienda extends javax.swing.JPanel {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelBackground2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanelBackground2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(boton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(boton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(boton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btnEliminar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnModificar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnAgregar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanelBackground2Layout.setVerticalGroup(
@@ -130,11 +124,11 @@ public class PanelMiTienda extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(boton3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(boton2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnModificar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(boton1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -229,10 +223,10 @@ public class PanelMiTienda extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private vista.componentes.boton.Boton boton1;
-    private vista.componentes.boton.Boton boton2;
-    private vista.componentes.boton.Boton boton3;
+    public vista.componentes.boton.Boton btnAgregar;
     public vista.componentes.etiqueta.Enlace btnCrearProducto;
+    public vista.componentes.boton.Boton btnEliminar;
+    public vista.componentes.boton.Boton btnModificar;
     private vista.componentes.campos.CampoTexto campoTexto1;
     private vista.componentes.etiqueta.Etiqueta etiqueta1;
     private javax.swing.JLabel jLabel1;
@@ -241,7 +235,7 @@ public class PanelMiTienda extends javax.swing.JPanel {
     private vista.componentes.jpanelbackground.JPanelBackground jPanelBackground1;
     private vista.componentes.jpanelbackground.JPanelBackground jPanelBackground2;
     private javax.swing.JScrollPane jScrollPane1;
-    public javax.swing.JTree lstProductos;
+    public javax.swing.JTree lstCategorias;
     public javax.swing.JPanel pnContenedor;
     private javax.swing.JScrollPane scpContenedor;
     private vista.componentes.etiqueta.Titulo titulo1;
