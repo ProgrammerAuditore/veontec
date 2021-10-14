@@ -49,6 +49,7 @@
                                   </Group>
                                   <EmptySpace min="0" pref="219" max="32767" attributes="0"/>
                               </Group>
+                              <Component id="btnRecuperarCuenta" alignment="0" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
@@ -67,7 +68,9 @@
                   <Component id="etiqueta2" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="campoPassword1" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="233" max="32767" attributes="0"/>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <Component id="btnRecuperarCuenta" min="-2" pref="30" max="-2" attributes="0"/>
+                  <EmptySpace pref="185" max="32767" attributes="0"/>
                   <Component id="btnIniciarSession" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
@@ -103,6 +106,15 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Contrase&#xf1;a"/>
           </Properties>
+        </Component>
+        <Component class="vista.componentes.etiqueta.Enlace" name="btnRecuperarCuenta">
+          <Properties>
+            <Property name="horizontalAlignment" type="int" value="0"/>
+            <Property name="text" type="java.lang.String" value="Olvide mi contrase&#xf1;a"/>
+          </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+          </AuxValues>
         </Component>
       </SubComponents>
     </Container>

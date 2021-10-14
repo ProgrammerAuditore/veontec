@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 13-10-2021 a las 06:16:14
+-- Tiempo de generación: 14-10-2021 a las 00:27:06
 -- Versión del servidor: 10.4.21-MariaDB
 -- Versión de PHP: 8.0.11
 
@@ -34,14 +34,6 @@ CREATE TABLE `tblcategorias` (
   `cateTotalProductos` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---
--- Volcado de datos para la tabla `tblcategorias`
---
-
-INSERT INTO `tblcategorias` (`cateID`, `cateUsuario`, `cateNombre`, `cateTotalProductos`) VALUES
-(4, 5, 'Nueva', 0),
-(30, 5, 'Mangas', 0);
-
 -- --------------------------------------------------------
 
 --
@@ -59,13 +51,6 @@ CREATE TABLE `tblcompras` (
   `compFecha` varchar(60) COLLATE utf8_bin NOT NULL,
   `compEstado` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
-
---
--- Volcado de datos para la tabla `tblcompras`
---
-
-INSERT INTO `tblcompras` (`compID`, `compProducto`, `compVendedor`, `compComprador`, `compTitulo`, `compCantidad`, `compPrecio`, `compFecha`, `compEstado`) VALUES
-(16, 67, 5, 4, 'Manga Dragon Ball Z', 1, 175.9, '11-11-1111', 0);
 
 -- --------------------------------------------------------
 
@@ -96,13 +81,6 @@ CREATE TABLE `tblpreguntas` (
   `pregEstado` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
---
--- Volcado de datos para la tabla `tblpreguntas`
---
-
-INSERT INTO `tblpreguntas` (`pregID`, `pregProducto`, `pregVendedor`, `pregComprador`, `pregPregunta`, `pregFecha`, `pregEstado`) VALUES
-(33, 67, 5, 4, 'Puede vender a mayoreo ? ', '08/10/2021', 0);
-
 -- --------------------------------------------------------
 
 --
@@ -121,13 +99,6 @@ CREATE TABLE `tblproductos` (
   `prodUsuario` int(11) NOT NULL,
   `prodMedia` longblob DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
-
---
--- Volcado de datos para la tabla `tblproductos`
---
-
-INSERT INTO `tblproductos` (`prodID`, `prodTitulo`, `prodDescripcion`, `prodCategoria`, `prodPrecio`, `prodStock`, `prodTipo`, `prodEnlace`, `prodUsuario`, `prodMedia`) VALUES
-(67, 'Manga Dragon Ball Z', 'Es nueva', 'Nueva', 175.9, 1204, 1, 'Vacio', 5, NULL);
 
 -- --------------------------------------------------------
 
@@ -158,19 +129,10 @@ CREATE TABLE `tblusuarios` (
   `usuaCorreo` varchar(60) COLLATE utf8_bin NOT NULL,
   `usuaPassword` varchar(250) COLLATE utf8_bin NOT NULL,
   `usuaDireccion` varchar(60) COLLATE utf8_bin DEFAULT 'Desconocido',
-  `usuaTelefono` varchar(30) COLLATE utf8_bin DEFAULT '000000000'
+  `usuaTelefono` varchar(30) COLLATE utf8_bin DEFAULT '000000000',
+  `usuaKey` varchar(250) COLLATE utf8_bin DEFAULT 'No',
+  `usuaEstado` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
-
---
--- Volcado de datos para la tabla `tblusuarios`
---
-
-INSERT INTO `tblusuarios` (`usuaID`, `usuaNombre`, `usuaCorreo`, `usuaPassword`, `usuaDireccion`, `usuaTelefono`) VALUES
-(4, 'Boris P.', 'boris@example.com', '$argon2i$v=19$m=65536,t=10,p=1$5x55s5ZnNLAtQhRuwjF9Vw$NN6/HCv3Tp2nIKwOsFOtavu/jxVsHHiB1IA4c/1LDqo', 'Desconocido', '1234567890'),
-(5, 'Victor J.', 'victor@example.com', '$argon2i$v=19$m=65536,t=10,p=1$enBHesfKtJpIFzG6zMCRkg$m5QToybCecIQhiKAV4Xof69UdVi68zDLapvfsean0Nw', 'Merida #12, Pto. Vallarta. Jal. México', '1111111111'),
-(15, 'Usuario de pruebas', 'example@example.com', '$argon2i$v=19$m=65536,t=10,p=1$9zxIwG1LY3aQzrbK5tNqRw$BVY//94+T5loqP3HP4eJg3xUfeAaQsdymNGjYxbW3KM', '', ''),
-(16, 'angel@example.com', 'angel@example.com', '$argon2i$v=19$m=65536,t=10,p=1$1wRm5io9STIlldtTALliWw$dYU88SlQcwKjktHf6WBHbBhabGRBKXgqeBx9rK+O/A4', 'Desconocido', '000000000'),
-(18, 'example100@example.com', 'example100@example.com', '$argon2i$v=19$m=65536,t=10,p=1$TMahBK8ZyCqSOK2lMVRFyA$N38M1G/G3BkxULpuFFIcnbMwHLvDqO/1bG0+JXT8n1w', 'Desconocido', '000000000');
 
 -- --------------------------------------------------------
 
@@ -189,13 +151,6 @@ CREATE TABLE `tblventas` (
   `ventFecha` varchar(60) COLLATE utf8_bin NOT NULL,
   `ventEstado` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
-
---
--- Volcado de datos para la tabla `tblventas`
---
-
-INSERT INTO `tblventas` (`ventID`, `ventProducto`, `ventVendedor`, `ventComprador`, `ventTitulo`, `ventCantidad`, `ventPrecio`, `ventFecha`, `ventEstado`) VALUES
-(3, 67, 5, 4, 'Balon EUFA', 3, 399.9, '29/08/2021', 0);
 
 --
 -- Índices para tablas volcadas
@@ -268,7 +223,7 @@ ALTER TABLE `tblventas`
 -- AUTO_INCREMENT de la tabla `tblcategorias`
 --
 ALTER TABLE `tblcategorias`
-  MODIFY `cateID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+  MODIFY `cateID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 
 --
 -- AUTO_INCREMENT de la tabla `tblcompras`
@@ -304,7 +259,7 @@ ALTER TABLE `tblrespuestas`
 -- AUTO_INCREMENT de la tabla `tblusuarios`
 --
 ALTER TABLE `tblusuarios`
-  MODIFY `usuaID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `usuaID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT de la tabla `tblventas`
