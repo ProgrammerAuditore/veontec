@@ -57,7 +57,7 @@ public class CampoPassword extends JPasswordField implements FocusListener{
     }
     
     // Métodos custom
-    private void getEstiloTextEmpty(){
+    public void getEstiloTextEmpty(){
         setEchoChar((char)0);
         setBackground( backgroundColor );
         setBorderMargin( Color.RED );
@@ -65,7 +65,7 @@ public class CampoPassword extends JPasswordField implements FocusListener{
         setCaretColor( cursorColor );
     }
     
-    private void getEstiloTextEscritura(){
+    public void getEstiloTextEscritura(){
         setEchoChar('*');
         setBackground( backgroundColor );
         setBorderMargin( borderColor );
@@ -73,7 +73,7 @@ public class CampoPassword extends JPasswordField implements FocusListener{
         setCaretColor( cursorColor );
     }
     
-    private void getEstiloTextEstablecido(){
+    public void getEstiloTextEstablecido(){
         setBackground( backgroundColor );
         setBorderMargin( borderColor );
         setForeground( textoColor );
@@ -144,6 +144,12 @@ public class CampoPassword extends JPasswordField implements FocusListener{
                 getEstiloAprobado();
             }
         }
+    }
+    
+    @Override
+    public void setEnabled(boolean enabled) {
+        super.setEnabled(enabled);
+        getEstiloTextEscritura();
     }
 
     public JLabel getComponenteDidireccional() {

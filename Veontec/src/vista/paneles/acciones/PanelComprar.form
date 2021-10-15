@@ -20,19 +20,19 @@
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="0" attributes="0">
-                              <Component id="btnAceptar" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="btnCancelar" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <Component id="jPanel1" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                          <Component id="jTabbedPane1" pref="0" max="32767" attributes="0"/>
+                          <Component id="jPanel1" alignment="1" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                   </Group>
-                  <Component id="jTabbedPane1" alignment="0" pref="0" max="32767" attributes="0"/>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Component id="btnAceptar" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
+                      <Component id="btnCancelar" min="-2" max="-2" attributes="0"/>
+                  </Group>
               </Group>
-              <EmptySpace max="-2" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -41,14 +41,14 @@
           <Group type="102" attributes="0">
               <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
               <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="13" max="-2" attributes="0"/>
-              <Component id="jTabbedPane1" max="32767" attributes="0"/>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Component id="jTabbedPane1" min="-2" pref="457" max="-2" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="btnAceptar" min="-2" max="-2" attributes="0"/>
                   <Component id="btnCancelar" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace max="-2" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -153,7 +153,7 @@
                           <Group type="102" attributes="0">
                               <Component id="etqCantidad" min="-2" pref="280" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="etqTotal" pref="273" max="32767" attributes="0"/>
+                              <Component id="etqTotal" pref="271" max="32767" attributes="0"/>
                           </Group>
                           <Group type="102" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
@@ -338,8 +338,8 @@
         <Container class="javax.swing.JPanel" name="jPanel3">
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
-              <JTabbedPaneConstraints tabName="Debito o Credito">
-                <Property name="tabTitle" type="java.lang.String" value="Debito o Credito"/>
+              <JTabbedPaneConstraints tabName="Tarjeta de debido o credito">
+                <Property name="tabTitle" type="java.lang.String" value="Tarjeta de debido o credito"/>
               </JTabbedPaneConstraints>
             </Constraint>
           </Constraints>
@@ -347,200 +347,17 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="1" attributes="0">
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="1" attributes="0">
-                          <Component id="jPanel6" max="32767" attributes="0"/>
-                          <Component id="etiqueta3" alignment="0" max="32767" attributes="0"/>
-                          <Component id="btnMtdDebito" alignment="0" max="32767" attributes="0"/>
-                      </Group>
-                      <EmptySpace max="-2" attributes="0"/>
-                  </Group>
+                  <Component id="jPanel4" alignment="0" max="32767" attributes="0"/>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="etiqueta3" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="btnMtdDebito" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="jPanel6" max="32767" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                  </Group>
+                  <Component id="jPanel4" alignment="0" max="32767" attributes="0"/>
               </Group>
             </DimensionLayout>
           </Layout>
           <SubComponents>
-            <Component class="javax.swing.JRadioButton" name="btnMtdDebito">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Debito o credito"/>
-              </Properties>
-              <Events>
-                <EventHandler event="mouseReleased" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnMtdDebitoMouseReleased"/>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mtdActiones"/>
-              </Events>
-            </Component>
-            <Component class="vista.componentes.etiqueta.Etiqueta" name="etiqueta3">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="M&#xe9;todo de pago"/>
-              </Properties>
-            </Component>
-            <Container class="javax.swing.JPanel" name="jPanel6">
-              <Properties>
-                <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-                  <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
-                    <TitledBorder title="Datos de la tarjeta"/>
-                  </Border>
-                </Property>
-              </Properties>
-
-              <Layout>
-                <DimensionLayout dim="0">
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" attributes="0">
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="etiqueta5" max="32767" attributes="0"/>
-                              <Component id="cmpDebitoTitular" alignment="0" pref="521" max="32767" attributes="0"/>
-                              <Component id="etiqueta6" alignment="0" max="32767" attributes="0"/>
-                              <Component id="cmpDebitoNumTarjeta" alignment="0" max="32767" attributes="0"/>
-                              <Group type="102" alignment="1" attributes="0">
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Group type="102" alignment="0" attributes="0">
-                                          <Component id="cmpDebitoFechaMM" min="-2" pref="45" max="-2" attributes="0"/>
-                                          <EmptySpace max="-2" attributes="0"/>
-                                          <Component id="etiqueta8" min="-2" max="-2" attributes="0"/>
-                                          <EmptySpace max="-2" attributes="0"/>
-                                          <Component id="cmpDebitoFechaYY" min="-2" pref="45" max="-2" attributes="0"/>
-                                      </Group>
-                                      <Component id="etiqueta7" alignment="0" min="-2" pref="215" max="-2" attributes="0"/>
-                                  </Group>
-                                  <EmptySpace max="32767" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                      <Component id="cmpDebitoCVV" max="32767" attributes="0"/>
-                                      <Component id="etiqueta9" max="32767" attributes="0"/>
-                                  </Group>
-                              </Group>
-                          </Group>
-                          <EmptySpace max="-2" attributes="0"/>
-                      </Group>
-                  </Group>
-                </DimensionLayout>
-                <DimensionLayout dim="1">
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="etiqueta5" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Component id="cmpDebitoTitular" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Component id="etiqueta6" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Component id="cmpDebitoNumTarjeta" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="etiqueta7" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="etiqueta9" alignment="3" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="cmpDebitoFechaMM" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="etiqueta8" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="cmpDebitoFechaYY" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="cmpDebitoCVV" alignment="3" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <EmptySpace pref="86" max="32767" attributes="0"/>
-                      </Group>
-                  </Group>
-                </DimensionLayout>
-              </Layout>
-              <SubComponents>
-                <Component class="vista.componentes.etiqueta.Etiqueta" name="etiqueta5">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="Nombre del titular"/>
-                  </Properties>
-                </Component>
-                <Component class="vista.componentes.campos.CampoDatos" name="cmpDebitoTitular">
-                  <Properties>
-                    <Property name="placeholder" type="java.lang.String" value="Maria Guadalupe, ej."/>
-                  </Properties>
-                </Component>
-                <Component class="vista.componentes.etiqueta.Etiqueta" name="etiqueta6">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="N&#xfa;mero de tarjeta "/>
-                  </Properties>
-                </Component>
-                <Component class="vista.componentes.campos.CampoNumericoLim" name="cmpDebitoNumTarjeta">
-                  <Properties>
-                    <Property name="limiteNumerico" type="java.lang.Integer" value="16"/>
-                    <Property name="placeholder" type="java.lang.String" value="1111111111111111"/>
-                  </Properties>
-                </Component>
-                <Component class="vista.componentes.campos.CampoNumericoLim" name="cmpDebitoFechaMM">
-                  <Properties>
-                    <Property name="limiteNumerico" type="java.lang.Integer" value="2"/>
-                    <Property name="placeholder" type="java.lang.String" value="MM"/>
-                  </Properties>
-                </Component>
-                <Component class="vista.componentes.etiqueta.Etiqueta" name="etiqueta7">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="Fecha de expiraci&#xf3;n"/>
-                  </Properties>
-                </Component>
-                <Component class="vista.componentes.etiqueta.Etiqueta" name="etiqueta8">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="/"/>
-                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                      <Font name="K2D SemiBold" size="18" style="3"/>
-                    </Property>
-                  </Properties>
-                </Component>
-                <Component class="vista.componentes.campos.CampoNumericoLim" name="cmpDebitoFechaYY">
-                  <Properties>
-                    <Property name="limiteNumerico" type="java.lang.Integer" value="2"/>
-                    <Property name="placeholder" type="java.lang.String" value="YY"/>
-                  </Properties>
-                </Component>
-                <Component class="vista.componentes.campos.CampoNumericoLim" name="cmpDebitoCVV">
-                  <Properties>
-                    <Property name="limiteNumerico" type="java.lang.Integer" value="4"/>
-                    <Property name="placeholder" type="java.lang.String" value="1111"/>
-                  </Properties>
-                </Component>
-                <Component class="vista.componentes.etiqueta.Etiqueta" name="etiqueta9">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="CVV"/>
-                  </Properties>
-                </Component>
-              </SubComponents>
-            </Container>
-          </SubComponents>
-        </Container>
-        <Container class="javax.swing.JPanel" name="jPanel4">
-          <Constraints>
-            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
-              <JTabbedPaneConstraints tabName="Paypal">
-                <Property name="tabTitle" type="java.lang.String" value="Paypal"/>
-              </JTabbedPaneConstraints>
-            </Constraint>
-          </Constraints>
-
-          <Layout>
-            <DimensionLayout dim="0">
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jPanel5" alignment="0" max="32767" attributes="0"/>
-              </Group>
-            </DimensionLayout>
-            <DimensionLayout dim="1">
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jPanel5" alignment="0" max="32767" attributes="0"/>
-              </Group>
-            </DimensionLayout>
-          </Layout>
-          <SubComponents>
-            <Container class="javax.swing.JPanel" name="jPanel5">
+            <Container class="javax.swing.JPanel" name="jPanel4">
               <Properties>
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                   <Border info="org.netbeans.modules.form.compat2.border.EtchedBorderInfo">
@@ -552,131 +369,61 @@
               <Layout>
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" alignment="1" attributes="0">
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="1" attributes="0">
-                              <Component id="jPanel7" max="32767" attributes="0"/>
-                              <Component id="etiqueta4" alignment="0" pref="553" max="32767" attributes="0"/>
-                              <Component id="btnMtdPaypal" alignment="0" max="32767" attributes="0"/>
-                          </Group>
-                          <EmptySpace max="-2" attributes="0"/>
-                      </Group>
+                      <EmptySpace min="0" pref="577" max="32767" attributes="0"/>
                   </Group>
                 </DimensionLayout>
                 <DimensionLayout dim="1">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="etiqueta4" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Component id="btnMtdPaypal" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Component id="jPanel7" max="32767" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
-                      </Group>
+                      <EmptySpace min="0" pref="423" max="32767" attributes="0"/>
                   </Group>
                 </DimensionLayout>
               </Layout>
-              <SubComponents>
-                <Component class="javax.swing.JRadioButton" name="btnMtdPaypal">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="PayPal"/>
-                  </Properties>
-                  <Events>
-                    <EventHandler event="mouseReleased" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnMtdPaypalMouseReleased"/>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnMtdPaypalActionPerformed"/>
-                  </Events>
-                </Component>
-                <Component class="vista.componentes.etiqueta.Etiqueta" name="etiqueta4">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="M&#xe9;todo de pago"/>
-                  </Properties>
-                </Component>
-                <Container class="javax.swing.JPanel" name="jPanel7">
-                  <Properties>
-                    <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-                      <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
-                        <TitledBorder title="Datos de paypal"/>
-                      </Border>
-                    </Property>
-                  </Properties>
-
-                  <Layout>
-                    <DimensionLayout dim="0">
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" attributes="0">
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="etiqueta10" max="32767" attributes="0"/>
-                                  <Component id="cmpPayPalTitular" max="32767" attributes="0"/>
-                                  <Component id="etiqueta11" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="cmpPayPalCorreo" max="32767" attributes="0"/>
-                                  <Component id="etiqueta12" max="32767" attributes="0"/>
-                                  <Component id="cmpPayPalPasswd" alignment="0" max="32767" attributes="0"/>
-                              </Group>
-                              <EmptySpace max="-2" attributes="0"/>
-                          </Group>
-                      </Group>
-                    </DimensionLayout>
-                    <DimensionLayout dim="1">
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="etiqueta10" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Component id="cmpPayPalTitular" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Component id="etiqueta11" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="11" max="-2" attributes="0"/>
-                              <Component id="cmpPayPalCorreo" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Component id="etiqueta12" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Component id="cmpPayPalPasswd" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace pref="85" max="32767" attributes="0"/>
-                          </Group>
-                      </Group>
-                    </DimensionLayout>
-                  </Layout>
-                  <SubComponents>
-                    <Component class="vista.componentes.campos.CampoDatos" name="cmpPayPalTitular">
-                      <Properties>
-                        <Property name="placeholder" type="java.lang.String" value="Maria Guadalupe, ej."/>
-                      </Properties>
-                      <Events>
-                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cmpPayPalTitularActionPerformed"/>
-                      </Events>
-                    </Component>
-                    <Component class="vista.componentes.etiqueta.Etiqueta" name="etiqueta10">
-                      <Properties>
-                        <Property name="text" type="java.lang.String" value="Nombre del titular"/>
-                      </Properties>
-                    </Component>
-                    <Component class="vista.componentes.campos.CampoCorreo" name="cmpPayPalCorreo">
-                      <Properties>
-                        <Property name="placeholder" type="java.lang.String" value="maria.guadalupe@example.com"/>
-                      </Properties>
-                    </Component>
-                    <Component class="vista.componentes.campos.CampoPassword" name="cmpPayPalPasswd">
-                      <Properties>
-                        <Property name="placeholder" type="java.lang.String" value=""/>
-                      </Properties>
-                    </Component>
-                    <Component class="vista.componentes.etiqueta.Etiqueta" name="etiqueta11">
-                      <Properties>
-                        <Property name="text" type="java.lang.String" value="Correo el&#xe9;ctronico  "/>
-                      </Properties>
-                    </Component>
-                    <Component class="vista.componentes.etiqueta.Etiqueta" name="etiqueta12">
-                      <Properties>
-                        <Property name="text" type="java.lang.String" value="Contrase&#xf1;a "/>
-                      </Properties>
-                    </Component>
-                  </SubComponents>
-                </Container>
-              </SubComponents>
             </Container>
           </SubComponents>
+        </Container>
+        <Container class="javax.swing.JPanel" name="jPanel5">
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
+              <JTabbedPaneConstraints tabName="Mercado pago">
+                <Property name="tabTitle" type="java.lang.String" value="Mercado pago"/>
+              </JTabbedPaneConstraints>
+            </Constraint>
+          </Constraints>
+
+          <Layout>
+            <DimensionLayout dim="0">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <EmptySpace min="0" pref="581" max="32767" attributes="0"/>
+              </Group>
+            </DimensionLayout>
+            <DimensionLayout dim="1">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <EmptySpace min="0" pref="427" max="32767" attributes="0"/>
+              </Group>
+            </DimensionLayout>
+          </Layout>
+        </Container>
+        <Container class="javax.swing.JPanel" name="jPanel6">
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
+              <JTabbedPaneConstraints tabName="Paypal">
+                <Property name="tabTitle" type="java.lang.String" value="Paypal"/>
+              </JTabbedPaneConstraints>
+            </Constraint>
+          </Constraints>
+
+          <Layout>
+            <DimensionLayout dim="0">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <EmptySpace min="0" pref="581" max="32767" attributes="0"/>
+              </Group>
+            </DimensionLayout>
+            <DimensionLayout dim="1">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <EmptySpace min="0" pref="427" max="32767" attributes="0"/>
+              </Group>
+            </DimensionLayout>
+          </Layout>
         </Container>
       </SubComponents>
     </Container>

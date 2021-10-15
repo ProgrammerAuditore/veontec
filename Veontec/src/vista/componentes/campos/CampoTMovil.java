@@ -68,21 +68,21 @@ public class CampoTMovil extends JTextField implements FocusListener, KeyListene
     }
     
     // Métodos custom
-    private void getEstiloTextEmpty(){
+    public void getEstiloTextEmpty(){
         setBackground( backgroundColor );
         setBorderMargin( Color.RED );
         setForeground( placeholderColor );
         setCaretColor( cursorColor );
     }
     
-    private void getEstiloTextEscritura(){
+    public void getEstiloTextEscritura(){
         setBackground( backgroundColor );
         setBorderMargin( borderColor );
         setForeground( textoColor );
         setCaretColor( cursorColor );
     }
     
-    private void getEstiloTextEstablecido(){
+    public void getEstiloTextEstablecido(){
         setBackground( backgroundColor );
         setBorderMargin( borderColor );
         setForeground( textoColor );
@@ -201,6 +201,12 @@ public class CampoTMovil extends JTextField implements FocusListener, KeyListene
 
     public boolean isVerificarCampo() {
         return verificarCampo;
+    }
+    
+    @Override
+    public void setEnabled(boolean enabled) {
+        super.setEnabled(enabled);
+        getEstiloTextEscritura();
     }
 
     public void setVerificarCampo(boolean verificarCampo) {
