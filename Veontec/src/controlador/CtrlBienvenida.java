@@ -66,6 +66,10 @@ public class CtrlBienvenida{
         mtdMostrarProducto();
     }
     
+    public static boolean mtdRecargar(){
+        instancia.mtdMostrarProducto();
+        return true;
+    }
     
     private void mtdMostrarProducto(){
         logger.warn("Inicializando ... ");

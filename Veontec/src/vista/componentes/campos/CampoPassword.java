@@ -160,6 +160,11 @@ public class CampoPassword extends JPasswordField implements FocusListener{
         this.componenteDidireccional = componenteDidireccional;
         setPlaceholder(componenteDidireccional.getText());
     }
+    
+    public boolean isAprobado(){
+        return !String.valueOf(getPassword()).equals( getPlaceholder() ) &&
+                String.valueOf(getPassword()).length() >= 4;         
+    }
 
     public boolean isVerificarCampo() {
         return verificarCampo;

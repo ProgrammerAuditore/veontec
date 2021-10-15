@@ -134,7 +134,8 @@ public class CampoNumerico extends JTextField implements FocusListener, KeyListe
     }
     
     public boolean isAprobado(){
-        return !getText().equals( getPlaceholder() );          
+        return !getText().equals( getPlaceholder() ) && 
+                Integer.valueOf(getText()) > 0;          
     }
     
     @Override

@@ -1,5 +1,6 @@
 package controlador.acciones;
 
+import controlador.CtrlBienvenida;
 import index.Veontec;
 import java.awt.Dialog;
 import java.awt.event.KeyAdapter;
@@ -12,6 +13,8 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import modelo.dao.CompraDao;
@@ -180,24 +183,55 @@ public class CtrlModalComprarProducto {
     }
     
     private void mtdComprar() {
-        Integer cmpCantidad = Integer.parseInt( pnHacerCompra.cmpCantidad.getText() );
-        Double cmpPrecio = Double.parseDouble( pnHacerCompra.cmpPrecio.getText() );
-        BigDecimal precio  = new BigDecimal( (cmpCantidad * cmpPrecio) );
-        String cmpTitulo = pnHacerCompra.cmpTitulo.getText();
-        usuaDto = Veontec.usuarioDto; 
-                
-        compDto.setCompProducto( prodDto.getProdID() );
-        compDto.setCompVendedor( prodDto.getProdUsuario() );
-        compDto.setCompComprador( usuaDto.getCmpID() );
-        compDto.setCompTitulo( cmpTitulo );
-        compDto.setCompCantidad( cmpCantidad );        
-        compDto.setCompPrecio( precio.doubleValue() );
-        compDto.setCompFecha("11-11-1111");
-        compDto.setCompEstado(0);        
         
-        if( compDao.mtdInsetar(compDto)  ){
-            JOptionPane.showMessageDialog(null, "Se realizo la compra exitosamente.");
+        if( !pnHacerCompra.btnMtdDebito.isSelected() && !pnHacerCompra.btnMtdPaypal.isSelected() ){
+            JOptionPane.showMessageDialog(Veontec.ventanaHome, "Selecciona un método de pago.");
+        
+        }else
+        if( !pnHacerCompra.cmpCantidad.isAprobado() || Integer.valueOf(pnHacerCompra.cmpCantidad.getText()) == 0  ){
+            JOptionPane.showMessageDialog(Veontec.ventanaHome, "Introduce la cantida de compra.");
+        
+        }else
+        if(  !pnHacerCompra.mtdComprobarMtdDebito() && !pnHacerCompra.mtdComprobarMtdPayPal()  ){
+            JOptionPane.showMessageDialog(Veontec.ventanaHome, "Verifique que los campos en el método de pago sean correctos.");
+        
+        }else{
+            
+            Integer cmpCantidad = Integer.parseInt( pnHacerCompra.cmpCantidad.getText() );
+            Double cmpPrecio = Double.parseDouble( pnHacerCompra.cmpPrecio.getText() );
+            BigDecimal precio  = new BigDecimal( (cmpCantidad * cmpPrecio) );
+            String cmpTitulo = pnHacerCompra.cmpTitulo.getText();
+            usuaDto = Veontec.usuarioDto; 
+            
+            // * Establecer la compra
+            compDto.setCompProducto( prodDto.getProdID() );
+            compDto.setCompVendedor( prodDto.getProdUsuario() );
+            compDto.setCompComprador( usuaDto.getCmpID() );
+            compDto.setCompTitulo( cmpTitulo );
+            compDto.setCompCantidad( cmpCantidad );        
+            compDto.setCompPrecio( precio.doubleValue() );
+            compDto.setCompFecha(fncObtenerFechaYHoraActual());
+            compDto.setCompEstado(0);      
+            
+            // * Establecer el producto
+            prodDto.setProdStock( prodDto.getProdStock() - cmpCantidad );
+            
+
+            // * Realizar la compra
+            if( compDao.mtdInsetar(compDto) && prodDao.mtdActualizar(prodDto)  ){
+                CtrlBienvenida.mtdRecargar();
+                mtdCerrarModal();
+                JOptionPane.showMessageDialog(Veontec.ventanaHome, "La compra se realizo exitosamente.");
+            }
+                
         }
+    }
+    
+    private String fncObtenerFechaYHoraActual(){
+        LocalDateTime myDateObj = LocalDateTime.now();
+        DateTimeFormatter myFormatObj = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        String formattedDate = myDateObj.format(myFormatObj);
+        return formattedDate;
     }
     
 }

@@ -199,7 +199,8 @@ public class CtrlCardCompra {
                     JOptionPane.YES_NO_OPTION );
             
         if( opc == JOptionPane.YES_NO_OPTION ){
-            if( compDao.mtdRemover(compDto) ){
+            prodDto.setProdStock( prodDto.getProdStock() + compDto.getCompCantidad() );
+            if( compDao.mtdRemover(compDto) && prodDao.mtdActualizar(prodDto) ){
                 CtrlCompras.mtdRecargarCompras();
                 JOptionPane.showMessageDialog(tarjeta, "Producto cancelado exitosamente.");
             }

@@ -42,7 +42,7 @@ public class PanelHacerCompra extends javax.swing.JPanel {
             return false;
         }
         
-        if( cmpPrecio.getText().trim().isEmpty()  || cmpDescripcion.getText().trim().length() > 160 ){
+        if( cmpDescripcion.getText().trim().isEmpty()  || cmpDescripcion.getText().trim().length() > 160 ){
             return false;
         }
         
@@ -69,6 +69,34 @@ public class PanelHacerCompra extends javax.swing.JPanel {
         this.cmpDebitoTitular.getEstiloTextEscritura();
         this.cmpDebitoCVV.setEnabled(estado);
         this.cmpDebitoCVV.getEstiloTextEscritura();
+    }
+    
+    public boolean mtdComprobarMtdDebito(){
+        
+        if( btnMtdDebito.isSelected() ){
+            if( cmpDebitoFechaMM.isAprobado() && cmpDebitoFechaYY.isAprobado() ){
+                if( cmpDebitoNumTarjeta.isAprobado() && cmpDebitoTitular.isAprobado() ){
+                    if( cmpDebitoCVV.isAprobado() ){
+                        return true;
+                    }
+                }
+            }
+        }
+        
+        return false;
+    }
+    
+    public boolean mtdComprobarMtdPayPal(){
+        
+        if( btnMtdPaypal.isSelected() ){
+            if( cmpPayPalTitular.isAprobado() && cmpPayPalCorreo.isAprobado() ){
+                if( cmpPayPalPasswd.isAprobado() ){
+                    return true;
+                }
+            }
+        }
+        
+        return false;
     }
 
     /**
@@ -552,8 +580,8 @@ public class PanelHacerCompra extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public vista.componentes.boton.Boton btnAceptar;
     public vista.componentes.boton.Boton btnCancelar;
-    private javax.swing.JRadioButton btnMtdDebito;
-    private javax.swing.JRadioButton btnMtdPaypal;
+    public javax.swing.JRadioButton btnMtdDebito;
+    public javax.swing.JRadioButton btnMtdPaypal;
     public vista.componentes.campos.CampoNumerico cmpCantidad;
     private vista.componentes.campos.CampoNumericoLim cmpDebitoCVV;
     private vista.componentes.campos.CampoNumericoLim cmpDebitoFechaMM;
