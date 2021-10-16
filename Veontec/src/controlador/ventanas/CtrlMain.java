@@ -107,8 +107,10 @@ public class CtrlMain {
     private void mtdIniciarSessionAutoLoggin(){
         ctrlIniciarSession = CtrlIniciarSesion.getInstancia(laVista.pnLoggin);
             
+            // * Verificar si existe el usuario de los credenciales en .dta 
             if(ctrlIniciarSession.mtdObtenerUsuario(cuentaDto.getCorreo())){
                 
+                // * Verificar si el usuario de los credenciales en .dta son validos
                 if( ctrlIniciarSession.mtdValidarDatosDeUsuario(cuentaDto.getCorreo(), cuentaDto.getPasswd()) ){
                     Veontec.cuentaDao = cuentaDao;
                     Veontec.cuentaDto = cuentaDto;
@@ -116,6 +118,9 @@ public class CtrlMain {
                 }
                 
             }else{
+                
+                // * Si no se elimina el archivo
+                // y se abreve la ventana de SingUp
                 Recursos.dataCuenta().delete();
                 mtdInit();
             
