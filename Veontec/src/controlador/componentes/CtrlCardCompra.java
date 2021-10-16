@@ -206,22 +206,6 @@ public class CtrlCardCompra {
             }
         }
         
-        /*
-        if( prodDto != null ){
-            int opc = JOptionPane.showConfirmDialog(tarjeta, 
-                    "¿Seguro que deseas cancelar el producto?",
-                    "Cancelar | " + prodDto.getProdTitulo(),
-                    JOptionPane.YES_NO_OPTION );
-            
-            if( opc == JOptionPane.YES_NO_OPTION ){
-                
-            }
-            
-        }else{
-            JOptionPane.showMessageDialog(tarjeta, "No hay registro sobre el producto.");
-        }
-        */
-        
     }
     
     public PanelCardCompra getLaVista() {

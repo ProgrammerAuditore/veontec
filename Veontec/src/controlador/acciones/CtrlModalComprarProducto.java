@@ -20,9 +20,11 @@ import javax.swing.JOptionPane;
 import modelo.dao.CompraDao;
 import modelo.dao.ProductoDao;
 import modelo.dao.UsuarioDao;
+import modelo.dao.VentaDao;
 import modelo.dto.CompraDto;
 import modelo.dto.ProductoDto;
 import modelo.dto.UsuarioDto;
+import modelo.dto.VentaDto;
 import vista.paneles.acciones.PanelHacerCompra;
 
 public class CtrlModalComprarProducto {
@@ -36,6 +38,8 @@ public class CtrlModalComprarProducto {
     private ProductoDao prodDao;
     private CompraDto compDto;
     private CompraDao compDao;
+    private VentaDao ventaDao;
+    private VentaDto ventaDto;
     private UsuarioDao usuaDao;
     private UsuarioDto usuaDto;
 
@@ -49,6 +53,8 @@ public class CtrlModalComprarProducto {
         this.usuaDao = new UsuarioDao();
         this.compDto = new CompraDto();
         this.compDao = new CompraDao();
+        this.ventaDto = new VentaDto();
+        this.ventaDao = new VentaDao();
     }
 
     // * Eventos
@@ -213,12 +219,22 @@ public class CtrlModalComprarProducto {
             compDto.setCompFecha(fncObtenerFechaYHoraActual());
             compDto.setCompEstado(0);      
             
+            // * Establecer la venta
+            ventaDto.setVentCantidad( cmpCantidad );
+            ventaDto.setVentComprador( usuaDto.getCmpID() );
+            ventaDto.setVentVendedor( prodDto.getProdUsuario() );
+            ventaDto.setVentTitulo( prodDto.getProdTitulo() );
+            ventaDto.setVentProducto( prodDto.getProdID() );
+            ventaDto.setVentPrecio( prodDto.getProdPrecio() );
+            ventaDto.setVentFecha( fncObtenerFechaYHoraActual() );
+            ventaDto.setVentEstado(0);
+            
             // * Establecer el producto
             prodDto.setProdStock( prodDto.getProdStock() - cmpCantidad );
             
 
             // * Realizar la compra
-            if( compDao.mtdInsetar(compDto) && prodDao.mtdActualizar(prodDto)  ){
+            if( compDao.mtdInsetar(compDto) && prodDao.mtdActualizar(prodDto) && ventaDao.mtdInsetar(ventaDto) ){
                 CtrlBienvenida.mtdRecargar();
                 mtdCerrarModal();
                 JOptionPane.showMessageDialog(Veontec.ventanaHome, "La compra se realizo exitosamente.");
