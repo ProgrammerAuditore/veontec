@@ -20,12 +20,12 @@ package vista.ventanas;
  *
  * @author victor
  */
-public class VentanaSingUp extends javax.swing.JFrame {
+public class VentanaMain extends javax.swing.JFrame {
 
     /**
      * Creates new form Loggin
      */
-    public VentanaSingUp() {
+    public VentanaMain() {
         initComponents();
     }
 
@@ -38,16 +38,16 @@ public class VentanaSingUp extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        tabContenedor = new javax.swing.JTabbedPane();
+        pnTabMenus = new javax.swing.JTabbedPane();
         jPanelBackground2 = new vista.componentes.jpanelbackground.JPanelBackground();
-        pnLoggin = new vista.paneles.PanelSignUp();
+        pnLoggin = new vista.paneles.PanelIniciarSesion();
         jPanelBackground3 = new vista.componentes.jpanelbackground.JPanelBackground();
         pnRegistrarme = new vista.paneles.PanelRegistrarme();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
 
-        tabContenedor.setTabPlacement(javax.swing.JTabbedPane.LEFT);
+        pnTabMenus.setTabPlacement(javax.swing.JTabbedPane.LEFT);
 
         javax.swing.GroupLayout jPanelBackground2Layout = new javax.swing.GroupLayout(jPanelBackground2);
         jPanelBackground2.setLayout(jPanelBackground2Layout);
@@ -60,7 +60,7 @@ public class VentanaSingUp extends javax.swing.JFrame {
             .addComponent(pnLoggin, javax.swing.GroupLayout.DEFAULT_SIZE, 430, Short.MAX_VALUE)
         );
 
-        tabContenedor.addTab("Iniciar session", jPanelBackground2);
+        pnTabMenus.addTab("Iniciar session", jPanelBackground2);
 
         javax.swing.GroupLayout jPanelBackground3Layout = new javax.swing.GroupLayout(jPanelBackground3);
         jPanelBackground3.setLayout(jPanelBackground3Layout);
@@ -73,17 +73,17 @@ public class VentanaSingUp extends javax.swing.JFrame {
             .addComponent(pnRegistrarme, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 430, Short.MAX_VALUE)
         );
 
-        tabContenedor.addTab("Registrarme", jPanelBackground3);
+        pnTabMenus.addTab("Registrarme", jPanelBackground3);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(tabContenedor, javax.swing.GroupLayout.PREFERRED_SIZE, 515, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(pnTabMenus, javax.swing.GroupLayout.PREFERRED_SIZE, 515, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(tabContenedor, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 435, Short.MAX_VALUE)
+            .addComponent(pnTabMenus, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 435, Short.MAX_VALUE)
         );
 
         pack();
@@ -106,14 +106,22 @@ public class VentanaSingUp extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(VentanaSingUp.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VentanaMain.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(VentanaSingUp.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VentanaMain.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(VentanaSingUp.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VentanaMain.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(VentanaSingUp.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VentanaMain.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -126,7 +134,7 @@ public class VentanaSingUp extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new VentanaSingUp().setVisible(true);
+                new VentanaMain().setVisible(true);
             }
         });
     }
@@ -134,8 +142,8 @@ public class VentanaSingUp extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private vista.componentes.jpanelbackground.JPanelBackground jPanelBackground2;
     private vista.componentes.jpanelbackground.JPanelBackground jPanelBackground3;
-    public vista.paneles.PanelSignUp pnLoggin;
+    public vista.paneles.PanelIniciarSesion pnLoggin;
     public vista.paneles.PanelRegistrarme pnRegistrarme;
-    public javax.swing.JTabbedPane tabContenedor;
+    public javax.swing.JTabbedPane pnTabMenus;
     // End of variables declaration//GEN-END:variables
 }

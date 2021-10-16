@@ -1,5 +1,12 @@
-package controlador;
+package controlador.ventanas;
 
+import controlador.CtrlBienvenida;
+import controlador.CtrlCompras;
+import controlador.CtrlHiloConexion;
+import controlador.CtrlMiCuenta;
+import controlador.CtrlMiTienda;
+import controlador.CtrlPreguntas;
+import controlador.CtrlVentas;
 import index.Veontec;
 import java.util.Objects;
 import javax.swing.JOptionPane;
@@ -104,14 +111,14 @@ public class CtrlHome{
     
     private void mtdValidarAcceso(){
         estadoVeontec = mtdObtenerEstadoVeontec();
+        estadoSuccessVeontec = 4;
         switch(estadoVeontec){
             case 1 : JOptionPane.showMessageDialog(laVista, "Software Veontec, no hay conexión"); break;
             case 2 : Veontec.ventanaHome.setTitle( titulo + " (cuenta no verificada)"); break;
             case 3 : Veontec.ventanaHome.setTitle( titulo + " (cuenta recuperada)"); break;
-            case -1 : estadoVeontec = 4; break;
+            case -1 : estadoVeontec = estadoSuccessVeontec; break;
             default: break;
         }
-        estadoSuccessVeontec = 4;
     }
     
     private Integer mtdObtenerEstadoVeontec(){

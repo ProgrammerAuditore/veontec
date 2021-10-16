@@ -1,5 +1,6 @@
 package controlador;
 
+import controlador.ventanas.CtrlMain;
 import de.mkammerer.argon2.Argon2;
 import de.mkammerer.argon2.Argon2Factory;
 import index.Veontec;
@@ -20,7 +21,7 @@ import org.apache.commons.logging.LogFactory;
 import src.Info;
 import src.Recursos;
 import vista.paneles.PanelMiCuenta;
-import vista.ventanas.VentanaSingUp;
+import vista.ventanas.VentanaMain;
 
 public class CtrlMiCuenta{
     
@@ -531,8 +532,8 @@ public class CtrlMiCuenta{
 
         if( Veontec.ventanaSession == null ){
             mtdEliminarInstancias();
-            Veontec.ventanaSession = new VentanaSingUp();
-            CtrlSignUp ctrl = new CtrlSignUp(Veontec.ventanaSession, Veontec.ventanaSession.pnRegistrarme, Veontec.ventanaSession.pnLoggin); 
+            Veontec.ventanaSession = new VentanaMain();
+            CtrlMain ctrl = new CtrlMain(Veontec.ventanaSession);
             ctrl.mtdInit();
         }
         
@@ -548,6 +549,8 @@ public class CtrlMiCuenta{
         CtrlMiCuenta.mtdEliminarInstancia();
         CtrlPreguntas.mtdEliminarInstancia();
         CtrlVentas.mtdEliminarInstancia();
+        CtrlIniciarSesion.mtdEliminarInstancia();
+        CtrlRegistrarme.mtdEliminarInstancia();
     }
     
     public static void mtdEliminarInstancia(){

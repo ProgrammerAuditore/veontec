@@ -1,7 +1,7 @@
 package index;
 
 import controlador.CtrlHiloConexion;
-import controlador.CtrlSignUp;
+import controlador.ventanas.CtrlMain;
 import hilos.HiloConexion;
 import hilos.HiloPrincipal;
 import java.io.File;
@@ -21,12 +21,12 @@ import src.Info;
 import src.Recursos;
 import src.idiomas.Idiomas;
 import vista.ventanas.VentanaHome;
-import vista.ventanas.VentanaSingUp;
+import vista.ventanas.VentanaMain;
 
 public class Veontec {
     
     public static VentanaHome ventanaHome;
-    public static VentanaSingUp ventanaSession;
+    public static VentanaMain ventanaSession;
     public static Properties idioma = new Idiomas("en");
     public static long ctrlID;
     public static String IdiomaDefinido;
@@ -59,42 +59,9 @@ public class Veontec {
         hp.setDaemon(true);
         //hs.setDaemon(true);
         
-        Veontec.ventanaSession = new VentanaSingUp();
-        if( Recursos.dataCuenta().exists() ){
-            CtrlSignUp ctrl = new CtrlSignUp(Veontec.ventanaSession, Veontec.ventanaSession.pnRegistrarme, Veontec.ventanaSession.pnLoggin); 
-            
-            Veontec.cuentaDto = new CuentaDto();
-            Veontec.cuentaDao = new CuentaDao(); 
-            Veontec.cuentaDto = Veontec.cuentaDao.obtener_datos();
-            
-            // * Verificar si hay datos registrados y validos
-            if( Veontec.cuentaDto == null ){
-                
-                // * Si no se elimina el archivo
-                // y se abreve la ventana de SingUp
-                Recursos.dataCuenta().delete();
-                ctrl.mtdInit();
-                
-            } else{
-                
-                // * Verificar los datos de la cuenta registrado
-                if( ctrl.mtdObtenerUsuario(Veontec.cuentaDto.getCorreo()) ){
-                    if( ctrl.mtdValidarDatosDeUsuario(Veontec.cuentaDto.getCorreo(), Veontec.cuentaDto.getPasswd()) ){
-                        ctrl.mtdAbrirVentanaHome();
-                    }
-                    
-                }else{
-                    
-                    // * Si no se elimina el archivo
-                    // y se abreve la ventana de SingUp
-                    Recursos.dataCuenta().delete();
-                    ctrl.mtdInit();
-                    
-                }
-                
-            }
-            
-        }
+        Veontec.ventanaSession = new VentanaMain();
+        CtrlMain main = new CtrlMain(Veontec.ventanaSession);
+        main.mtdInit();
         
         // * Ejecutar hilos
         //hs.start();
@@ -254,23 +221,6 @@ public class Veontec {
     }
     
     
-    
-    // * Inicializar el programa de pruebas
-    public void mtdTagTest(){
-        mtdVerInformacionDelSoftware();
-        
-        // * Establecer conexion..
-        ConexionDto conec = new ConexionDto("3306", "sql3.freesqldatabase.com", "sql3432572", "sql3432572", "R9p2mht4YB");
-        CtrlHiloConexion.ctrlDatos = conec;
-        CtrlHiloConexion.mtdEstablecer();
-        
-        if( CtrlHiloConexion.checkConexion() ){
-          
-        }else{
-            JOptionPane.showMessageDialog(null, "No existe conexion.");
-        }
-    }
-    
     // * Obtener el PID del programa
     public void mtdTagPID(){
         EjecucionDao archivoRun = new EjecucionDao();
@@ -307,45 +257,6 @@ public class Veontec {
             // *WARNING* PID propia
             System.out.println("[x] " + Recursos.PID);
         }
-    }
-    
-    // * Mostrar mensaje de ayuda en la terminal
-    public void mtdTagHelp(){
-        System.out.println(Info.NombreSoftware);
-        System.out.println("");
-        System.out.println(Veontec.idioma.get("MyFreeLab.mtdTagHelp.msg1"));
-        
-        System.out.print("  --init              ");
-        System.out.println(Veontec.idioma.get("MyFreeLab.mtdTagHelp.msg2") +" "+Info.NombreSoftware);
-        
-        System.out.print("  --mkconn, -mc       ");
-        System.out.println(Veontec.idioma.get("MyFreeLab.mtdTagHelp.msg3") + " conn");
-        
-        System.out.print("  --mkpref, -mp       ");
-        System.out.println(Veontec.idioma.get("MyFreeLab.mtdTagHelp.msg3") + " .pconfig");
-        
-        System.out.print("  --pid               ");
-        System.out.println(Veontec.idioma.get("MyFreeLab.mtdTagHelp.msg4"));
-        
-        System.out.print("  --help, -h          ");
-        System.out.println(Veontec.idioma.get("MyFreeLab.mtdTagHelp.msg5"));
-   
-    }
-
-    private void mtdVerInformacionDelSoftware() {
-        System.out.println("#DirHome : " + Recursos.dirHome );
-        System.out.println("#Path Actual : " + new File(".").getAbsolutePath());
-        System.out.println("#PID : " + mtdObtenerPID() );
-        System.out.println("#SO : " + Recursos.SistemaOs);
-        System.out.println("#TimeTmp : " + Recursos.timeTmp);
-        System.out.println("#bkgAside : " + Recursos.bkgAside);
-        System.out.println("#bkgLogo : " + Recursos.bkgLogo);
-        System.out.println("#dataPreferencias : " + Recursos.dataCuenta().getAbsolutePath());
-        System.out.println("#dataConexion : " + Recursos.dataConexion().getAbsolutePath());
-        System.out.println("#dataRun : " + Recursos.dataRun().getAbsolutePath());
-        System.out.println("#docVersionesXml : " + Recursos.docVersionesXml);
-        System.out.println("#docReporte : " + Recursos.docCotizacionJasper());
-        System.out.println("#\n");
     }
     
     private int mtdObtenerPID(){
