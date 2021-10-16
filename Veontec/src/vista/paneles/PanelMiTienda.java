@@ -61,7 +61,7 @@ public class PanelMiTienda extends javax.swing.JPanel {
         btnAgregar = new vista.componentes.boton.Boton();
         jPanel2 = new javax.swing.JPanel();
         btnCrearProducto = new vista.componentes.etiqueta.Enlace();
-        campoTexto1 = new vista.componentes.campos.CampoTexto();
+        cmpBusqueda = new vista.componentes.campos.CampoTexto();
         scpContenedor = new javax.swing.JScrollPane();
         pnContenedor = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -137,7 +137,7 @@ public class PanelMiTienda extends javax.swing.JPanel {
         btnCrearProducto.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         btnCrearProducto.setText("Crear producto");
 
-        campoTexto1.setPlaceholder("Buscar un producto");
+        cmpBusqueda.setPlaceholder("Buscar un producto");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -147,12 +147,12 @@ public class PanelMiTienda extends javax.swing.JPanel {
                 .addGap(28, 28, 28)
                 .addComponent(btnCrearProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(campoTexto1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(cmpBusqueda, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                .addComponent(campoTexto1, javax.swing.GroupLayout.DEFAULT_SIZE, 43, Short.MAX_VALUE)
+                .addComponent(cmpBusqueda, javax.swing.GroupLayout.DEFAULT_SIZE, 43, Short.MAX_VALUE)
                 .addComponent(btnCrearProducto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -227,7 +227,7 @@ public class PanelMiTienda extends javax.swing.JPanel {
     public vista.componentes.etiqueta.Enlace btnCrearProducto;
     public vista.componentes.boton.Boton btnEliminar;
     public vista.componentes.boton.Boton btnModificar;
-    private vista.componentes.campos.CampoTexto campoTexto1;
+    public vista.componentes.campos.CampoTexto cmpBusqueda;
     private vista.componentes.etiqueta.Etiqueta etiqueta1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;

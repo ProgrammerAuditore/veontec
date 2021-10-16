@@ -42,8 +42,8 @@ public class PanelVentas extends javax.swing.JPanel {
         jPanel1 = new javax.swing.JPanel();
         titulo1 = new vista.componentes.etiqueta.Titulo();
         jPanel2 = new javax.swing.JPanel();
-        campoTexto1 = new vista.componentes.campos.CampoTexto();
-        boton1 = new vista.componentes.boton.Boton();
+        cmpBusqueda = new vista.componentes.campos.CampoTexto();
+        btnBuscar = new vista.componentes.boton.Boton();
         boton2 = new vista.componentes.boton.Boton();
         boton3 = new vista.componentes.boton.Boton();
         jPanel3 = new javax.swing.JPanel();
@@ -70,15 +70,15 @@ public class PanelVentas extends javax.swing.JPanel {
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Opciones"));
 
-        campoTexto1.setPlaceholder("Buscar una venta por producto");
-        campoTexto1.addActionListener(new java.awt.event.ActionListener() {
+        cmpBusqueda.setPlaceholder("Buscar una venta por producto");
+        cmpBusqueda.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                campoTexto1ActionPerformed(evt);
+                cmpBusquedaActionPerformed(evt);
             }
         });
 
-        boton1.setImgButtonType("dark");
-        boton1.setTexto("Buscar");
+        btnBuscar.setImgButtonType("dark");
+        btnBuscar.setTexto("Buscar");
 
         boton2.setImgButtonType("danger");
         boton2.setTexto("Sig.");
@@ -91,9 +91,9 @@ public class PanelVentas extends javax.swing.JPanel {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(campoTexto1, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(cmpBusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(boton1, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(boton3, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -112,8 +112,8 @@ public class PanelVentas extends javax.swing.JPanel {
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(boton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(boton1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(campoTexto1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(cmpBusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
 
@@ -193,16 +193,16 @@ public class PanelVentas extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void campoTexto1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoTexto1ActionPerformed
+    private void cmpBusquedaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmpBusquedaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_campoTexto1ActionPerformed
+    }//GEN-LAST:event_cmpBusquedaActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private vista.componentes.boton.Boton boton1;
     private vista.componentes.boton.Boton boton2;
     private vista.componentes.boton.Boton boton3;
-    private vista.componentes.campos.CampoTexto campoTexto1;
+    public vista.componentes.boton.Boton btnBuscar;
+    public vista.componentes.campos.CampoTexto cmpBusqueda;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
