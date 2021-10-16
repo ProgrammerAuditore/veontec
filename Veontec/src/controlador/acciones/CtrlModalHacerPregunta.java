@@ -9,14 +9,13 @@ import java.awt.event.MouseListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import modelo.dao.PreguntaDao;
 import modelo.dao.ProductoDao;
 import modelo.dto.PreguntaDto;
 import modelo.dto.ProductoDto;
+import src.Funciones;
 import vista.paneles.acciones.PanelHacerPreguntar;
 
 public class CtrlModalHacerPregunta {
@@ -135,7 +134,7 @@ public class CtrlModalHacerPregunta {
             
             preguntaDto.setPregComprador( Veontec.usuarioDto.getCmpID() );
             preguntaDto.setPregEstado(0);
-            preguntaDto.setPregFecha(fncObtenerFechaYHoraActual());
+            preguntaDto.setPregFecha( new Funciones().fncObtenerFechaActual());
             preguntaDto.setPregPregunta( laVista.cmpPregunta.getText() );
             preguntaDto.setPregProducto( productoDto.getProdID() );
             preguntaDto.setPregTitulo( productoDto.getProdTitulo() );
@@ -152,13 +151,6 @@ public class CtrlModalHacerPregunta {
             JOptionPane.showMessageDialog(laVista, "Verifica que los datos sean correctos");
         }
         
-    }
-    
-    private String fncObtenerFechaYHoraActual(){
-        LocalDateTime myDateObj = LocalDateTime.now();
-        DateTimeFormatter myFormatObj = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        String formattedDate = myDateObj.format(myFormatObj);
-        return formattedDate;
     }
     
     private void mtdCerrarModal(){

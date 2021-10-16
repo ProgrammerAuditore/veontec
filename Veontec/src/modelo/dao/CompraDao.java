@@ -37,9 +37,9 @@ public class CompraDao implements keyword_query<CompraDto>, keyword_extra<Compra
         PreparedStatement ps = null;
         Connection conn = CtrlHiloConexion.getConexion();
         String query = "INSERT INTO " + nombreTabla + " "
-                + "( compProducto, compVendedor, compComprador, compTitulo, compCantidad, compPrecio, compFecha, compEstado )"
+                + "( compProducto, compVendedor, compComprador, compTitulo, compCantidad, compPrecio, compFecha, compEstado, compHashCode )"
                 + "VALUES "
-                + "( ?, ?, ?, ?, ?, ?, ?, ?); ";
+                + "( ?, ?, ?, ?, ?, ?, ?, ?, ?); ";
         
         try {
             
@@ -53,6 +53,7 @@ public class CompraDao implements keyword_query<CompraDto>, keyword_extra<Compra
             ps.setDouble(6, obj_dto.getCompPrecio());
             ps.setString(7, obj_dto.getCompFecha());
             ps.setInt(8, obj_dto.getCompEstado());
+            ps.setInt(9, obj_dto.getCompHashCode());
             
             // * Ejecutar la consulta
             int respuesta = ps.executeUpdate();
@@ -163,6 +164,7 @@ public class CompraDao implements keyword_query<CompraDto>, keyword_extra<Compra
                 compra.setCompPrecio( rs.getDouble("compPrecio") );
                 compra.setCompCantidad( rs.getInt("compCantidad") );
                 compra.setCompEstado( rs.getInt("compEstado") );
+                compra.setCompHashCode( rs.getInt("compHashCode") );
             }
             
         } catch (SQLException e) {
@@ -204,6 +206,7 @@ public class CompraDao implements keyword_query<CompraDto>, keyword_extra<Compra
                 compra.setCompPrecio( rs.getDouble("compPrecio") );
                 compra.setCompCantidad( rs.getInt("compCantidad") );
                 compra.setCompEstado( rs.getInt("compEstado") );
+                compra.setCompHashCode( rs.getInt("compHashCode") );
                 ventas.add(compra);
             }
             
@@ -265,6 +268,7 @@ public class CompraDao implements keyword_query<CompraDto>, keyword_extra<Compra
                 compra.setCompPrecio( rs.getDouble("compPrecio") );
                 compra.setCompCantidad( rs.getInt("compCantidad") );
                 compra.setCompEstado( rs.getInt("compEstado") );
+                compra.setCompHashCode( rs.getInt("compHashCode") );
                 ventas.add(compra);
             }
             
@@ -310,6 +314,7 @@ public class CompraDao implements keyword_query<CompraDto>, keyword_extra<Compra
                 compra.setCompPrecio( rs.getDouble("compPrecio") );
                 compra.setCompCantidad( rs.getInt("compCantidad") );
                 compra.setCompEstado( rs.getInt("compEstado") );
+                compra.setCompHashCode( rs.getInt("compHashCode") );
                 ventas.add(compra);
             }
             

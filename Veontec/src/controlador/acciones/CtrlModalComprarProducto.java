@@ -25,6 +25,8 @@ import modelo.dto.CompraDto;
 import modelo.dto.ProductoDto;
 import modelo.dto.UsuarioDto;
 import modelo.dto.VentaDto;
+import org.apache.commons.lang.builder.HashCodeBuilder;
+import src.Funciones;
 import vista.paneles.acciones.PanelHacerCompra;
 
 public class CtrlModalComprarProducto {
@@ -203,6 +205,7 @@ public class CtrlModalComprarProducto {
         
         }else{
             
+            String FechaActual = new Funciones().fncObtenerFechaActual();
             Integer cmpCantidad = Integer.parseInt( pnHacerCompra.cmpCantidad.getText() );
             Double cmpPrecio = Double.parseDouble( pnHacerCompra.cmpPrecio.getText() );
             BigDecimal precio  = new BigDecimal( (cmpCantidad * cmpPrecio) );
@@ -216,7 +219,7 @@ public class CtrlModalComprarProducto {
             compDto.setCompTitulo( cmpTitulo );
             compDto.setCompCantidad( cmpCantidad );        
             compDto.setCompPrecio( precio.doubleValue() );
-            compDto.setCompFecha(fncObtenerFechaYHoraActual());
+            compDto.setCompFecha( FechaActual );
             compDto.setCompEstado(0);      
             
             // * Establecer la venta
@@ -226,11 +229,16 @@ public class CtrlModalComprarProducto {
             ventaDto.setVentTitulo( prodDto.getProdTitulo() );
             ventaDto.setVentProducto( prodDto.getProdID() );
             ventaDto.setVentPrecio( prodDto.getProdPrecio() );
-            ventaDto.setVentFecha( fncObtenerFechaYHoraActual() );
+            ventaDto.setVentFecha( FechaActual );
             ventaDto.setVentEstado(0);
             
             // * Establecer el producto
             prodDto.setProdStock( prodDto.getProdStock() - cmpCantidad );
+            
+            // * Establecer hash code
+            int hashCode = new Funciones().hashCodeCompraVenta(ventaDto, compDto);
+            ventaDto.setVentHashCode(hashCode);
+            compDto.setCompHashCode(hashCode);
             
 
             // * Realizar la compra
@@ -243,11 +251,6 @@ public class CtrlModalComprarProducto {
         }
     }
     
-    private String fncObtenerFechaYHoraActual(){
-        LocalDateTime myDateObj = LocalDateTime.now();
-        DateTimeFormatter myFormatObj = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        String formattedDate = myDateObj.format(myFormatObj);
-        return formattedDate;
-    }
+    
     
 }

@@ -19,9 +19,11 @@ import javax.swing.JOptionPane;
 import modelo.dao.CompraDao;
 import modelo.dao.ProductoDao;
 import modelo.dao.UsuarioDao;
+import modelo.dao.VentaDao;
 import modelo.dto.CompraDto;
 import modelo.dto.ProductoDto;
 import modelo.dto.UsuarioDto;
+import modelo.dto.VentaDto;
 import vista.paneles.componentes.PanelCardCompra;
 
 public class CtrlCardCompra {
@@ -33,6 +35,8 @@ public class CtrlCardCompra {
     // * Modelo
     private ProductoDto prodDto;
     private ProductoDao prodDao;
+    private VentaDto ventaDto;
+    private VentaDao ventaDao;
     private UsuarioDao usuaDao;
     private UsuarioDto usuaDto;
     
@@ -53,6 +57,8 @@ public class CtrlCardCompra {
         this.usuaDto = new UsuarioDto();
         this.prodDao = new ProductoDao();
         this.prodDto = new ProductoDto();
+        this.ventaDao = new VentaDao();
+        this.ventaDto = new VentaDto();
         this.tarjeta_dimensiones = new GridBagConstraints();
     }
     
@@ -200,7 +206,10 @@ public class CtrlCardCompra {
             
         if( opc == JOptionPane.YES_NO_OPTION ){
             prodDto.setProdStock( prodDto.getProdStock() + compDto.getCompCantidad() );
-            if( compDao.mtdRemover(compDto) && prodDao.mtdActualizar(prodDto) ){
+            ventaDto.setVentComprador( compDto.getCompComprador() );
+            ventaDto.setVentVendedor( compDto.getCompVendedor() );
+            ventaDto.setVentHashCode( compDto.getCompHashCode() );
+            if( compDao.mtdRemover(compDto) && prodDao.mtdActualizar(prodDto) && ventaDao.mtdRemoverPorHashCode(ventaDto) ){
                 CtrlCompras.mtdRecargarCompras();
                 JOptionPane.showMessageDialog(tarjeta, "Producto cancelado exitosamente.");
             }

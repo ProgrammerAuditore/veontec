@@ -2,6 +2,11 @@ package src;
 
 import de.mkammerer.argon2.Argon2;
 import de.mkammerer.argon2.Argon2Factory;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import modelo.dto.CompraDto;
+import modelo.dto.VentaDto;
+import org.apache.commons.lang.builder.HashCodeBuilder;
 
 public class Funciones {
     
@@ -56,6 +61,30 @@ public class Funciones {
         
         //System.out.println("" + hash);
         return hash;
+    }
+    
+    public String fncObtenerFechaYHoraActual(){
+        LocalDateTime myDateObj = LocalDateTime.now();
+        DateTimeFormatter myFormatObj = DateTimeFormatter.ofPattern("MM-dd-yyyy HH:mm:ss");
+        String formattedDate = myDateObj.format(myFormatObj);
+        return formattedDate;
+    }
+    
+    public String fncObtenerFechaActual(){
+        LocalDateTime myDateObj = LocalDateTime.now();
+        DateTimeFormatter myFormatObj = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        String formattedDate = myDateObj.format(myFormatObj);
+        return formattedDate;
+    }
+    
+    public int hashCodeCompraVenta(VentaDto ventaDto, CompraDto compDto) {
+        return new HashCodeBuilder(17, 37).
+        append(ventaDto.getVentComprador()).
+        append(ventaDto.getVentVendedor()).
+        append(ventaDto.getVentID()).
+        append(compDto.getCompID()).
+        append(new Funciones().fncObtenerFechaYHoraActual()).
+        toHashCode();
     }
     
 }
