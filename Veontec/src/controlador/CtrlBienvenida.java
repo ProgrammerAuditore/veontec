@@ -2,6 +2,10 @@ package controlador;
 
 import controlador.componentes.CtrlCardProducto;
 import java.awt.GridBagLayout;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.List;
 import javax.swing.JDialog;
 import javax.swing.tree.DefaultMutableTreeNode;
@@ -50,7 +54,7 @@ public class CtrlBienvenida{
             instancia.mtdInit();
             
         }else{
-            instancia.mtdMostrarProducto();
+            instancia.mtdMostrarProducto(false);
             
         }
         
@@ -58,28 +62,56 @@ public class CtrlBienvenida{
     }
     
     // Eventos
-    // Vacio
+    private void mtdEventoBtnBuscar(){
+        laVista.btnBuscar.addMouseListener(new MouseAdapter(){
+            @Override
+            public void mouseReleased(MouseEvent e) {
+                mtdMostrarProducto(true);
+            }
+        });
+    }
+    
+    private void mtdEventoCmpBuscarProducto(){
+        laVista.cmpBuscarProducto.addKeyListener(new KeyAdapter(){
+            @Override
+            public void keyPressed(KeyEvent e) {
+                if(e.getKeyCode() == KeyEvent.VK_ENTER ){
+                    mtdMostrarProducto(true);
+                } 
+            }
+        });
+        
+    }
     
     // Métodos
     private void mtdInit(){
         logger.info("Ejecutando || CtrlBienvenida::mtdInit ");
-        mtdMostrarProducto();
+        mtdEventoBtnBuscar();
+        mtdEventoCmpBuscarProducto();
+        mtdMostrarProducto(false);
     }
     
     public static boolean mtdRecargar(){
-        instancia.mtdMostrarProducto();
+        instancia.mtdMostrarProducto(false);
         return true;
     }
     
-    private void mtdMostrarProducto(){
+    private synchronized void mtdMostrarProducto(boolean busqueda){
         logger.warn("Inicializando ... ");
+        
         //lstMisProductos.clear();
+        int totalProductos=0;
         laVista.pnContenedor.setLayout(new GridBagLayout());
         laVista.pnContenedor.removeAll();
         
-        lstMisProductos = producto_dao.mtdListar();
-        int totalProductos = lstMisProductos.size();
+        if( busqueda == false ){
+            lstMisProductos = producto_dao.mtdListar();
+        }else{
+            producto_dto.setProdTitulo('%'+laVista.cmpBuscarProducto.getText().trim()+'%');
+            lstMisProductos = producto_dao.mtdListarBuscarProducto(producto_dto, 10, 0);
+        }
         
+        totalProductos = lstMisProductos.size();
         if( totalProductos > 0 ){
         
             int columna = 0, fila = 0; // Establecer contadores para columnas y filas

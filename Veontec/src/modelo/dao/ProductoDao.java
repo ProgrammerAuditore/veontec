@@ -358,6 +358,49 @@ public class ProductoDao implements keyword_query<ProductoDto>, keyword_producto
         
         return productos;
     }
+    
+    public List<ProductoDto> mtdListarBuscarProducto(ProductoDto obj_dto, int inicio, int fin) {
+        // * Funciona perfectamente
+        
+        List<ProductoDto> productos = null;
+        PreparedStatement ps = null;
+        Connection conn = CtrlHiloConexion.getConexion();
+        String query = "SELECT * FROM tblproductos "
+                + "WHERE prodTitulo LIKE BINARY ?  "
+                + "LIMIT ? OFFSET ? ;";
+        
+        try {
+            
+            ps = conn.prepareStatement(query.toLowerCase());
+            ps.setString(1, obj_dto.getProdTitulo());
+            ps.setInt(2, inicio);
+            ps.setInt(3, fin);
+            ResultSet rs = ps.executeQuery();
+            
+            productos = new ArrayList<>();
+            while( rs.next() ){
+                ProductoDto prod = new ProductoDto();
+                
+                prod.setProdID( rs.getInt("prodID") );
+                prod.setProdTitulo(rs.getString("prodTitulo") );
+                prod.setProdDescripcion(rs.getString("prodDescripcion") );
+                prod.setProdCategoria(rs.getString("prodCategoria") );
+                prod.setProdPrecio( rs.getDouble("prodPrecio") );
+                prod.setProdStock(rs.getInt("prodStock"));
+                prod.setProdTipo(rs.getInt("prodTipo") );
+                prod.setProdEnlace(rs.getString("prodEnlace") );
+                prod.setProdUsuario(rs.getInt("prodUsuario") );
+                prod.setProdImg( rs.getBytes("prodMedia") );
+                
+                productos.add(prod);
+            }
+            
+        } catch (SQLException e) {
+            System.out.println("" + e.getMessage());
+        }
+        
+        return productos;
+    }
 
     @Override
     public long mtdRowCount() {
