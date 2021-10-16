@@ -469,6 +469,29 @@ public class ProductoDao implements keyword_query<ProductoDto>, keyword_producto
         
         return filas;
     }
+    
+    public int mtdRowCountInteger() {
+        // * Funciona perfectamente
+        
+        int filas = 0;
+        PreparedStatement ps = null;
+        Connection conn = CtrlHiloConexion.getConexion();
+        String query = "SELECT COUNT(*) FROM tblproductos ;";
+        
+        try {
+            
+            ps = conn.prepareStatement(query.toLowerCase());
+            ResultSet rs = ps.executeQuery();
+            rs.next();
+            filas = rs.getInt(1);
+            
+            
+        } catch (SQLException e) {
+            System.out.println("" + e.getMessage());
+        }
+        
+        return filas;
+    }
 
     @Override
     public long mtdRowCount(ProductoDto obj_dto) {

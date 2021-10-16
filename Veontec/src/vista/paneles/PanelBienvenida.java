@@ -49,8 +49,8 @@ public class PanelBienvenida extends javax.swing.JPanel {
         jPanel2 = new javax.swing.JPanel();
         cmpBuscarProducto = new vista.componentes.campos.CampoTexto();
         btnBuscar = new vista.componentes.boton.Boton();
-        boton2 = new vista.componentes.boton.Boton();
-        boton3 = new vista.componentes.boton.Boton();
+        btnSiguiente = new vista.componentes.boton.Boton();
+        btnPrevia = new vista.componentes.boton.Boton();
         scpContenedor = new javax.swing.JScrollPane();
         pnContenedor = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -79,10 +79,10 @@ public class PanelBienvenida extends javax.swing.JPanel {
         btnBuscar.setImgButtonType("dark");
         btnBuscar.setTexto("Buscar");
 
-        boton2.setImgButtonType("danger");
-        boton2.setTexto("Sig.");
+        btnSiguiente.setImgButtonType("danger");
+        btnSiguiente.setTexto("Sig.");
 
-        boton3.setTexto("Prev.");
+        btnPrevia.setTexto("Prev.");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -93,10 +93,10 @@ public class PanelBienvenida extends javax.swing.JPanel {
                 .addComponent(cmpBuscarProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 512, Short.MAX_VALUE)
-                .addComponent(boton3, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnPrevia, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(boton2, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnSiguiente, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -105,11 +105,11 @@ public class PanelBienvenida extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(boton3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnPrevia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(boton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnSiguiente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                 .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(cmpBuscarProducto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -178,9 +178,9 @@ public class PanelBienvenida extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private vista.componentes.boton.Boton boton2;
-    private vista.componentes.boton.Boton boton3;
     public vista.componentes.boton.Boton btnBuscar;
+    public vista.componentes.boton.Boton btnPrevia;
+    public vista.componentes.boton.Boton btnSiguiente;
     public vista.componentes.campos.CampoTexto cmpBuscarProducto;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
