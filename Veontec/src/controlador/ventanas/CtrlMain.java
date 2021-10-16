@@ -10,10 +10,13 @@ import javax.swing.JOptionPane;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import modelo.dao.CategoriaDao;
+import modelo.dao.CuentaDao;
 import modelo.dao.UsuarioDao;
 import modelo.dto.CategoriaDto;
+import modelo.dto.CuentaDto;
 import modelo.dto.UsuarioDto;
 import src.Info;
+import src.Recursos;
 import vista.ventanas.VentanaMain;
 
 enum TabsMain {
@@ -30,12 +33,15 @@ public class CtrlMain {
     private UsuarioDto usuarioDto;
     private CategoriaDao categoriaDao;
     private CategoriaDto categoriaDto;
+    private CuentaDao cuentaDao;
+    private CuentaDto cuentaDto;
     
     // * Atributos
     private int tabPreviaSeleccionada;
     private Integer estadoVeontec;
     private Integer estadoSuccessVeontec;
     private String titulo;
+    private CtrlIniciarSesion ctrlIniciarSession = null;
     private static final Logger LOG = Logger.getLogger(CtrlMain.class.getName());
     
     
@@ -46,6 +52,8 @@ public class CtrlMain {
         this.usuarioDto = new UsuarioDto();
         this.categoriaDao = new CategoriaDao();
         this.categoriaDto = new CategoriaDto();
+        this.cuentaDao = new CuentaDao();
+        this.cuentaDto = new CuentaDto();
     }
     
     // * Eventos
@@ -65,17 +73,68 @@ public class CtrlMain {
         LOG.info("Ejecutando metodo una vez (Obligatorio)");
         laVista.setTitle(Info.NombreSoftware);
         mtdEventoPnTabMenu();
-        mtdCargarSingOn();
+        mtdCargarSingOn(false);
         mtdCargarSingUp();
         
         laVista.setLocationRelativeTo(null);
         laVista.setVisible(true);
     }
     
-    private void mtdCargarSingOn(){
+    public void mtdInitLoggin(){
+        LOG.info("Ejecutando metodo una vez (Obligatorio)");
+        
+        // * Verificar si existe los credenciales en .dta
+        if( Recursos.dataCuenta().exists() ){
+            cuentaDto = cuentaDao.obtener_datos();
+            
+            // * Verificar si los credenciales en .dta son incorrectos
+            if( cuentaDto == null ){
+                // * Si no se elimina el archivo
+                // y se abreve la ventana de SingUp
+                Recursos.dataCuenta().delete();
+                mtdInit();
+                
+            }else{
+                // * Ejecutar auto loggin
+                mtdCargarSingOn(true);
+            
+            }
+            
+        }
+        
+    }
+    
+    private void mtdIniciarSessionAutoLoggin(){
+        ctrlIniciarSession = CtrlIniciarSesion.getInstancia(laVista.pnLoggin);
+            
+            if(ctrlIniciarSession.mtdObtenerUsuario(cuentaDto.getCorreo())){
+                
+                if( ctrlIniciarSession.mtdValidarDatosDeUsuario(cuentaDto.getCorreo(), cuentaDto.getPasswd()) ){
+                    Veontec.cuentaDao = cuentaDao;
+                    Veontec.cuentaDto = cuentaDto;
+                    ctrlIniciarSession.mtdAbrirVentanaHome();
+                }
+                
+            }else{
+                Recursos.dataCuenta().delete();
+                mtdInit();
+            
+            }
+    }
+    
+    private void mtdCargarSingOn(boolean autologgin){
         mtdValidarAcceso();
-        if(  estadoVeontec >= estadoSuccessVeontec ){
-            CtrlIniciarSesion ctrl = CtrlIniciarSesion.getInstancia(laVista.pnLoggin);
+        
+        if( autologgin == false ){
+            // * Cargar la pestaña de iniciar sesion
+            if(  estadoVeontec >= estadoSuccessVeontec ){
+                ctrlIniciarSession = CtrlIniciarSesion.getInstancia(laVista.pnLoggin);
+            }
+            
+        }else{
+            // * Ejecutar auto loggin
+            mtdIniciarSessionAutoLoggin();
+            
         }
     }
     
@@ -124,7 +183,7 @@ public class CtrlMain {
         if( laVista.pnTabMenus.getSelectedIndex() == TabsMain.SignOn.ordinal() 
             && tabPreviaSeleccionada != TabsMain.SignOn.ordinal() ){
             
-            mtdCargarSingOn();
+            mtdCargarSingOn(false);
             tabPreviaSeleccionada = TabsMain.SignOn.ordinal();
             
         }

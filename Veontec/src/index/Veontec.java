@@ -61,7 +61,7 @@ public class Veontec {
         
         Veontec.ventanaSession = new VentanaMain();
         CtrlMain main = new CtrlMain(Veontec.ventanaSession);
-        main.mtdInit();
+        main.mtdInitLoggin();
         
         // * Ejecutar hilos
         //hs.start();
