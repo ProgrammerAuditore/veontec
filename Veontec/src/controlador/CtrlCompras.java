@@ -2,6 +2,10 @@ package controlador;
 
 import controlador.componentes.CtrlCardCompra;
 import java.awt.GridBagLayout;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.List;
 import javax.swing.JDialog;
 import javax.swing.tree.DefaultMutableTreeNode;
@@ -57,7 +61,7 @@ public class CtrlCompras{
             instancia.mtdInit();
         
         }else{
-            instancia.mtdMostrarProducto();
+            instancia.mtdMostrarProducto(false);
         
         }
         
@@ -65,11 +69,32 @@ public class CtrlCompras{
     }
     
     // Eventos
-    // Vacio
+    private void mtdEventoBtnBuscar(){
+        laVista.btnBuscar.addMouseListener(new MouseAdapter(){
+            @Override
+            public void mouseReleased(MouseEvent e) {
+                mtdMostrarProducto(true);
+            }
+        });
+    }
+    
+    private void mtdEventoCmpBuscarProducto(){
+        laVista.cmpBuscar.addKeyListener(new KeyAdapter(){
+            @Override
+            public void keyPressed(KeyEvent e) {
+                if(e.getKeyCode() == KeyEvent.VK_ENTER ){
+                    mtdMostrarProducto(true);
+                } 
+            }
+        });
+        
+    }
     
     // Métodos
     private void mtdInit(){
         logger.info("Ejecutando metodo una vez (obligatorio)");
+        mtdEventoBtnBuscar();
+        mtdEventoCmpBuscarProducto();
     }
     
     public static boolean mtdRecargarCompras(){
@@ -78,12 +103,13 @@ public class CtrlCompras{
             //instancia.mtdInit();
         //}
         
-        instancia.mtdMostrarProducto();
+        instancia.mtdMostrarProducto(false);
         return true;
     }
     
-    private void mtdMostrarProducto(){
+    private void mtdMostrarProducto(boolean busqueda){
         logger.info("Iniciando...");
+        int totalProductos = 0;
         //lstMisProductos.clear();
         laVista.pnContenedor.setLayout(new GridBagLayout());
         laVista.pnContenedor.removeAll();
@@ -93,8 +119,13 @@ public class CtrlCompras{
         compra_dto.setCompComprador( usuario_dto.getCmpID() );
 
         logger.info("listando...");
-        lstMisCompras = compra_dao.mtdListar(compra_dto);
-        int totalProductos = lstMisCompras.size();
+        if( busqueda == false){
+            lstMisCompras = compra_dao.mtdListar(compra_dto);
+        } else{
+            compra_dto.setCompTitulo('%'+laVista.cmpBuscar.getText()+'%');
+            lstMisCompras = compra_dao.mtdListarBuscarCompras(compra_dto, 10, 0);
+        }
+        totalProductos = lstMisCompras.size();
         
         if( totalProductos > 0 ){
             

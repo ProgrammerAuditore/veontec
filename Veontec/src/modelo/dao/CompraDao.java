@@ -274,6 +274,51 @@ public class CompraDao implements keyword_query<CompraDto>, keyword_extra<Compra
         
         return ventas;
     }
+    
+    public List<CompraDto> mtdListarBuscarCompras(CompraDto obj_dto, int inicio, int fin) {
+        // Funciona perfectamente
+        
+        List<CompraDto> ventas = null;
+        PreparedStatement ps = null;
+        Connection conn = CtrlHiloConexion.getConexion();
+        String query = "SELECT * FROM " + nombreTabla + " "
+                // * Buscamos el producto del usuario respectivo
+                + "WHERE compComprador = ? AND compTitulo LIKE ? "
+                + "LIMIT ? OFFSET ? ; ";
+        
+        try {
+            
+            // * Preparar la consulta
+            ps = conn.prepareStatement(query.toLowerCase());
+            ps.setInt(1, obj_dto.getCompComprador());
+            ps.setString(2, obj_dto.getCompTitulo());
+            ps.setInt(3, inicio);
+            ps.setInt(4, fin);
+            
+            // * Ejecutar la consulta
+            ResultSet rs = ps.executeQuery();
+            
+            ventas = new ArrayList<>();
+            while( rs.next() ){
+                CompraDto compra = new CompraDto(); 
+                compra.setCompID( rs.getInt("compID") );
+                compra.setCompProducto( rs.getInt("compProducto") );
+                compra.setCompComprador( rs.getInt("compComprador") );
+                compra.setCompVendedor(rs.getInt("compVendedor") );
+                compra.setCompTitulo( rs.getString("compTitulo") );
+                compra.setCompFecha( rs.getString("compFecha") );
+                compra.setCompPrecio( rs.getDouble("compPrecio") );
+                compra.setCompCantidad( rs.getInt("compCantidad") );
+                compra.setCompEstado( rs.getInt("compEstado") );
+                ventas.add(compra);
+            }
+            
+        } catch (SQLException e) {
+            System.out.println("" + e.getMessage());
+        }
+        
+        return ventas;
+    }
 
     @Override
     public long mtdRowCount(CompraDto obj_dto) {
