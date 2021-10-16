@@ -136,6 +136,7 @@ public class CtrlModalHacerPregunta {
             preguntaDto.setPregFecha("08/10/2021");
             preguntaDto.setPregPregunta( laVista.cmpPregunta.getText() );
             preguntaDto.setPregProducto( productoDto.getProdID() );
+            preguntaDto.setPregTitulo( productoDto.getProdTitulo() );
             preguntaDto.setPregVendedor( productoDto.getProdUsuario() );
             
             if( preguntaDao.mtdInsetar(preguntaDto) ){

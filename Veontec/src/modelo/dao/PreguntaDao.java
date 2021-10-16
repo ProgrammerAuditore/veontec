@@ -22,20 +22,21 @@ public class PreguntaDao implements keyword_query<PreguntaDto> , keyword_extra<P
         PreparedStatement ps = null;
         Connection conn = CtrlHiloConexion.getConexion();
         String query = "INSERT INTO " + nombreTabla + " "
-                + "( pregProducto, pregVendedor, pregComprador, pregPregunta, pregFecha, pregEstado )"
+                + "( pregTitulo, pregProducto, pregVendedor, pregComprador, pregPregunta, pregFecha, pregEstado )"
                 + "VALUES "
-                + "( ?, ?, ?, ?, ?, ? ) ;";
+                + "( ? ,?, ?, ?, ?, ?, ? ) ;";
         
         try {
             
             // * Preparar la consulta
             ps = conn.prepareStatement(query.toLowerCase());
-            ps.setInt(1, obj_dto.getPregProducto());
-            ps.setInt(2, obj_dto.getPregVendedor());
-            ps.setInt(3, obj_dto.getPregComprador());
-            ps.setString(4, obj_dto.getPregPregunta());
-            ps.setString(5, obj_dto.getPregFecha());
-            ps.setInt(6, obj_dto.getPregEstado());
+            ps.setString(1, obj_dto.getPregTitulo());
+            ps.setInt(2, obj_dto.getPregProducto());
+            ps.setInt(3, obj_dto.getPregVendedor());
+            ps.setInt(4, obj_dto.getPregComprador());
+            ps.setString(5, obj_dto.getPregPregunta());
+            ps.setString(6, obj_dto.getPregFecha());
+            ps.setInt(7, obj_dto.getPregEstado());
             
             // * Ejecutar la consulta
             int respuesta = ps.executeUpdate();
@@ -151,6 +152,7 @@ public class PreguntaDao implements keyword_query<PreguntaDto> , keyword_extra<P
             while( rs.next() ){
                 PreguntaDto pregunta = new PreguntaDto();
                 pregunta.setPregID( rs.getInt("pregID") );
+                pregunta.setPregTitulo( rs.getString("pregTitulo") );
                 pregunta.setPregProducto( rs.getInt("pregProducto") );
                 pregunta.setPregComprador( rs.getInt("pregComprador") );
                 pregunta.setPregVendedor( rs.getInt("pregVendedor") );
@@ -197,6 +199,54 @@ public class PreguntaDao implements keyword_query<PreguntaDto> , keyword_extra<P
             while( rs.next() ){
                 PreguntaDto pregunta = new PreguntaDto();
                 pregunta.setPregID( rs.getInt("pregID") );
+                pregunta.setPregTitulo( rs.getString("pregTitulo") );
+                pregunta.setPregProducto( rs.getInt("pregProducto") );
+                pregunta.setPregComprador( rs.getInt("pregComprador") );
+                pregunta.setPregVendedor( rs.getInt("pregVendedor") );
+                pregunta.setPregPregunta( rs.getString("pregPregunta") );
+                pregunta.setPregFecha( rs.getString("pregFecha") );
+                pregunta.setPregEstado( rs.getInt("pregEstado") );
+                preguntas.add(pregunta);
+            }
+
+            
+        } catch (SQLException e) {
+            System.out.println("" + e.getMessage());
+        }
+        
+        return preguntas;
+    }
+    
+    public List<PreguntaDto> mtdListarBuscarPreguntas(PreguntaDto obj_dto, int cantidad, int inicio) {
+        // Funciona correctamente
+        
+        List<PreguntaDto> preguntas = null;
+        PreparedStatement ps = null;
+        Connection conn = CtrlHiloConexion.getConexion();
+        String query = "SELECT * FROM " + nombreTabla + " "
+                // * Buscamos el producto del usuario respectivo
+                + "WHERE (pregVendedor = ? OR pregComprador = ?) AND (pregTitulo LIKE ?) "
+                + "LIMIT ? OFFSET ? ;";
+        
+        try {
+            
+            // * Preparar la consulta
+            ps = conn.prepareStatement(query.toLowerCase());
+            ps.setInt(1, obj_dto.getPregVendedor());
+            ps.setInt(2, obj_dto.getPregComprador());
+            ps.setString(3, obj_dto.getPregTitulo());
+            ps.setInt(4, cantidad);
+            ps.setInt(5, inicio);
+            
+            // * Ejecutar la consulta
+            ResultSet rs = ps.executeQuery();
+            
+            // * Si la respuesta es mayor a 0 significa que la consulta fue exitosa.
+            preguntas = new ArrayList<>();
+            while( rs.next() ){
+                PreguntaDto pregunta = new PreguntaDto();
+                pregunta.setPregID( rs.getInt("pregID") );
+                pregunta.setPregTitulo( rs.getString("pregTitulo") );
                 pregunta.setPregProducto( rs.getInt("pregProducto") );
                 pregunta.setPregComprador( rs.getInt("pregComprador") );
                 pregunta.setPregVendedor( rs.getInt("pregVendedor") );

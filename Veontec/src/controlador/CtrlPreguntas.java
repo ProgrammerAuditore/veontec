@@ -4,6 +4,9 @@ import static controlador.CtrlVentas.logger;
 import controlador.componentes.CtrlCardPregunta;
 import index.Veontec;
 import java.awt.GridBagLayout;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.List;
@@ -56,6 +59,27 @@ public class CtrlPreguntas implements MouseListener{
         
     }
     
+    private void mtdEventoBtnBuscar(){
+        laVista.btnBuscar.addMouseListener(new MouseAdapter(){
+            @Override
+            public void mouseReleased(MouseEvent e) {
+                mtdMostrarPreguntas(true);
+            }
+        });
+    }
+    
+    private void mtdEventoCmpBuscarProducto(){
+        laVista.cmpBusqueda.addKeyListener(new KeyAdapter(){
+            @Override
+            public void keyPressed(KeyEvent e) {
+                if(e.getKeyCode() == KeyEvent.VK_ENTER ){
+                    mtdMostrarPreguntas(true);
+                } 
+            }
+        });
+    }
+        
+    
     // * Métodos
     public static CtrlPreguntas getInstancia(PanelPreguntas laVista, UsuarioDto dto, UsuarioDao dao){
         logger.warn("Inicializando controlador.... ");
@@ -65,7 +89,7 @@ public class CtrlPreguntas implements MouseListener{
             instancia.mtdInit();
         
         }else{
-            instancia.mtdMostrarPreguntas();
+            instancia.mtdMostrarPreguntas(false);
         
         }
         
@@ -73,26 +97,35 @@ public class CtrlPreguntas implements MouseListener{
     }
     
     public static boolean mtdRecargarPreguntas(){
-        instancia.mtdMostrarPreguntas();
+        instancia.mtdMostrarPreguntas(false);
         return true;
     }
     
     private void mtdInit(){
         logger.info("Ejecutando metodo una vez (Obligatorio)");
-        mtdMostrarPreguntas();
+        mtdEventoBtnBuscar();
+        mtdEventoCmpBuscarProducto();
+        mtdMostrarPreguntas(false);
     }
     
-    private void mtdMostrarPreguntas(){
+    private void mtdMostrarPreguntas(boolean busqueda){
         logger.info("Iniciando ...");
-        laVista.pnContenedor.removeAll();
+        int totalPreguntas = 0;
         laVista.pnContenedor.setLayout(new GridBagLayout());
+        laVista.pnContenedor.removeAll();
         
         logger.info("Listando preguntas...");
         preguntaDto.setPregComprador( Veontec.usuarioDto.getCmpID() );
         preguntaDto.setPregVendedor( Veontec.usuarioDto.getCmpID() );
-        lstPreguntas = preguntaDao.mtdListar(preguntaDto);
-        int totalPreguntas = lstPreguntas.size();
         
+        if( busqueda == false ){
+            lstPreguntas = preguntaDao.mtdListar(preguntaDto);
+        }else{
+            preguntaDto.setPregTitulo('%'+laVista.cmpBusqueda.getText()+'%');
+            lstPreguntas = preguntaDao.mtdListarBuscarPreguntas(preguntaDto, 10, 0);
+        }
+        
+        totalPreguntas = lstPreguntas.size();
         if( totalPreguntas > 0 ){
             
             logger.warn("Recorriendo productos ....");
