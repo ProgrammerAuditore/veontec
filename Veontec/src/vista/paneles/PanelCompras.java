@@ -16,6 +16,8 @@
  */
 package vista.paneles;
 
+import src.Recursos;
+
 /**
  *
  * @author victor
@@ -27,6 +29,10 @@ public class PanelCompras extends javax.swing.JPanel {
      */
     public PanelCompras() {
         initComponents();
+        
+        this.scpContenedor.getVerticalScrollBar().setUnitIncrement(Recursos.scpDesplazamiento);
+        this.scpContenedor.getHorizontalScrollBar().setUnitIncrement(Recursos.scpDesplazamiento);
+        
     }
 
     /**
@@ -47,7 +53,7 @@ public class PanelCompras extends javax.swing.JPanel {
         boton2 = new vista.componentes.boton.Boton();
         boton3 = new vista.componentes.boton.Boton();
         jPanel3 = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
+        scpContenedor = new javax.swing.JScrollPane();
         pnContenedor = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
 
@@ -145,7 +151,7 @@ public class PanelCompras extends javax.swing.JPanel {
                 .addContainerGap(291, Short.MAX_VALUE))
         );
 
-        jScrollPane1.setViewportView(pnContenedor);
+        scpContenedor.setViewportView(pnContenedor);
 
         javax.swing.GroupLayout jPanelBackground1Layout = new javax.swing.GroupLayout(jPanelBackground1);
         jPanelBackground1.setLayout(jPanelBackground1Layout);
@@ -159,7 +165,7 @@ public class PanelCompras extends javax.swing.JPanel {
                     .addGroup(jPanelBackground1Layout.createSequentialGroup()
                         .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
+                        .addComponent(scpContenedor, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanelBackground1Layout.setVerticalGroup(
@@ -172,7 +178,7 @@ public class PanelCompras extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanelBackground1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1))
+                    .addComponent(scpContenedor))
                 .addContainerGap())
         );
 
@@ -199,8 +205,8 @@ public class PanelCompras extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private vista.componentes.jpanelbackground.JPanelBackground jPanelBackground1;
-    private javax.swing.JScrollPane jScrollPane1;
     public javax.swing.JPanel pnContenedor;
+    private javax.swing.JScrollPane scpContenedor;
     private vista.componentes.etiqueta.Titulo titulo1;
     // End of variables declaration//GEN-END:variables
 }

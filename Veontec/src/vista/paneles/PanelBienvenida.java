@@ -16,6 +16,8 @@
  */
 package vista.paneles;
 
+import src.Recursos;
+
 /**
  *
  * @author victor
@@ -28,8 +30,8 @@ public class PanelBienvenida extends javax.swing.JPanel {
     public PanelBienvenida() {
         initComponents();
         
-        this.scpContenedor.getVerticalScrollBar().setUnitIncrement(64);
-        this.scpContenedor.getHorizontalScrollBar().setUnitIncrement(64);
+        this.scpContenedor.getVerticalScrollBar().setUnitIncrement(Recursos.scpDesplazamiento);
+        this.scpContenedor.getHorizontalScrollBar().setUnitIncrement(Recursos.scpDesplazamiento);
     }
 
     /**

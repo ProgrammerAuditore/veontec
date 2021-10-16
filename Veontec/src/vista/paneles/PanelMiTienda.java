@@ -16,6 +16,8 @@
  */
 package vista.paneles;
 
+import src.Recursos;
+
 /**
  *
  * @author victor
@@ -35,8 +37,8 @@ public class PanelMiTienda extends javax.swing.JPanel {
         this.scpContenedor.setBorder(null);
         this.scpContenedor.getViewport().setBorder(null);
         */
-        this.scpContenedor.getVerticalScrollBar().setUnitIncrement(16);
-        this.scpContenedor.getHorizontalScrollBar().setUnitIncrement(16);
+        this.scpContenedor.getVerticalScrollBar().setUnitIncrement(Recursos.scpDesplazamiento);
+        this.scpContenedor.getHorizontalScrollBar().setUnitIncrement(Recursos.scpDesplazamiento);
     
     }
 
