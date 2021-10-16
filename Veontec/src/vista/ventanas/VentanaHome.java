@@ -82,7 +82,7 @@ public class VentanaHome extends javax.swing.JFrame {
         pnTabMiTienda.setLayout(pnTabMiTiendaLayout);
         pnTabMiTiendaLayout.setHorizontalGroup(
             pnTabMiTiendaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pnMiTienda, javax.swing.GroupLayout.DEFAULT_SIZE, 1080, Short.MAX_VALUE)
+            .addComponent(pnMiTienda, javax.swing.GroupLayout.DEFAULT_SIZE, 1082, Short.MAX_VALUE)
         );
         pnTabMiTiendaLayout.setVerticalGroup(
             pnTabMiTiendaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -95,11 +95,11 @@ public class VentanaHome extends javax.swing.JFrame {
         pnTabCompras.setLayout(pnTabComprasLayout);
         pnTabComprasLayout.setHorizontalGroup(
             pnTabComprasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pnCompras, javax.swing.GroupLayout.DEFAULT_SIZE, 1080, Short.MAX_VALUE)
+            .addComponent(pnCompras, javax.swing.GroupLayout.DEFAULT_SIZE, 1082, Short.MAX_VALUE)
         );
         pnTabComprasLayout.setVerticalGroup(
             pnTabComprasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pnCompras, javax.swing.GroupLayout.DEFAULT_SIZE, 727, Short.MAX_VALUE)
+            .addComponent(pnCompras, javax.swing.GroupLayout.DEFAULT_SIZE, 729, Short.MAX_VALUE)
         );
 
         pnTabMenu.addTab("Compras", pnTabCompras);
@@ -108,7 +108,7 @@ public class VentanaHome extends javax.swing.JFrame {
         pnTabVentas.setLayout(pnTabVentasLayout);
         pnTabVentasLayout.setHorizontalGroup(
             pnTabVentasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pnVentas, javax.swing.GroupLayout.DEFAULT_SIZE, 1080, Short.MAX_VALUE)
+            .addComponent(pnVentas, javax.swing.GroupLayout.DEFAULT_SIZE, 1082, Short.MAX_VALUE)
         );
         pnTabVentasLayout.setVerticalGroup(
             pnTabVentasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -121,7 +121,7 @@ public class VentanaHome extends javax.swing.JFrame {
         pnTabPreguntas.setLayout(pnTabPreguntasLayout);
         pnTabPreguntasLayout.setHorizontalGroup(
             pnTabPreguntasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panelPreguntas, javax.swing.GroupLayout.DEFAULT_SIZE, 1080, Short.MAX_VALUE)
+            .addComponent(panelPreguntas, javax.swing.GroupLayout.DEFAULT_SIZE, 1082, Short.MAX_VALUE)
         );
         pnTabPreguntasLayout.setVerticalGroup(
             pnTabPreguntasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -134,11 +134,11 @@ public class VentanaHome extends javax.swing.JFrame {
         pnTabCuenta.setLayout(pnTabCuentaLayout);
         pnTabCuentaLayout.setHorizontalGroup(
             pnTabCuentaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pnMiCuenta, javax.swing.GroupLayout.DEFAULT_SIZE, 1080, Short.MAX_VALUE)
+            .addComponent(pnMiCuenta, javax.swing.GroupLayout.DEFAULT_SIZE, 1082, Short.MAX_VALUE)
         );
         pnTabCuentaLayout.setVerticalGroup(
             pnTabCuentaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pnMiCuenta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(pnMiCuenta, javax.swing.GroupLayout.DEFAULT_SIZE, 729, Short.MAX_VALUE)
         );
 
         pnTabMenu.addTab("Mi cuenta", pnTabCuenta);

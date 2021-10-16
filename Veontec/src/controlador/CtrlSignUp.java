@@ -166,6 +166,7 @@ public class CtrlSignUp implements MouseListener{
 
             // * Crear controlador y mostrar la ventana principal
             CtrlHome ctrl = new CtrlHome(Veontec.ventanaHome);
+            ctrl.mtdInit();
             ctrl.laVista.setLocationRelativeTo(null);
             ctrl.laVista.setVisible(true);
 

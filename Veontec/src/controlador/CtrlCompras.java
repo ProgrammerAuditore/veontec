@@ -95,6 +95,7 @@ public class CtrlCompras{
         logger.info("Ejecutando metodo una vez (obligatorio)");
         mtdEventoBtnBuscar();
         mtdEventoCmpBuscarProducto();
+        mtdMostrarProducto(false);
     }
     
     public static boolean mtdRecargarCompras(){
