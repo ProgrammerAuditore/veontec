@@ -6,6 +6,8 @@ import index.Veontec;
 import java.awt.GridBagLayout;
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.List;
@@ -88,7 +90,7 @@ public class CtrlMiTienda implements MouseListener{
             
         }else{
             instancia.mtdMostrarCategorias();
-            instancia.mtdMostrarProducto();
+            instancia.mtdMostrarProducto(false);
         
         }
         
@@ -97,7 +99,7 @@ public class CtrlMiTienda implements MouseListener{
     
     public static boolean mtdRecargarMisProductos(){
         instancia.mtdMostrarCategorias();
-        instancia.mtdMostrarProducto();
+        instancia.mtdMostrarProducto(false);
         return true;
     }
     
@@ -123,6 +125,18 @@ public class CtrlMiTienda implements MouseListener{
         }
         
     }
+    
+    private void mtdEventoCmpBuscarProducto(){
+        laVista.cmpBusqueda.addKeyListener(new KeyAdapter(){
+            @Override
+            public void keyPressed(KeyEvent e) {
+                if(e.getKeyCode() == KeyEvent.VK_ENTER ){
+                    mtdMostrarProducto(true);
+                } 
+            }
+        });
+        
+    }
    
     // Métodos
     private void mtdInit(){
@@ -133,21 +147,29 @@ public class CtrlMiTienda implements MouseListener{
         laVista.btnAgregar.addMouseListener(this);
         laVista.btnModificar.addMouseListener(this);
         laVista.btnEliminar.addMouseListener(this);
+        mtdEventoCmpBuscarProducto();
         mtdDefinirIconos();
         mtdMostrarCategorias();
-        mtdMostrarProducto();
+        mtdMostrarProducto(false);
     }
     
-    private void mtdMostrarProducto(){
+    private void mtdMostrarProducto(boolean busqueda){
         logger.info("Iniciando ...");
+        int totalProductos = 0;
         //lstMisProductos.clear();
         laVista.pnContenedor.removeAll();
         laVista.pnContenedor.setLayout(new GridBagLayout());
         
         logger.info("Listando mis productos...");
         producto_dto.setProdUsuario( usuario_dto.getCmpID() );
-        lstMisProductos = producto_dao.mtdListar(producto_dto);
-        int totalProductos = lstMisProductos.size();
+        
+        if( busqueda == false ){
+            lstMisProductos = producto_dao.mtdListar(producto_dto);
+        }else{
+            producto_dto.setProdTitulo('%'+laVista.cmpBusqueda.getText()+'%');
+            lstMisProductos = producto_dao.mtdListarBuscarProductoDeUsuario(producto_dto, 10, 0);
+        }
+        totalProductos = lstMisProductos.size();
         
         if( totalProductos > 0){
             
