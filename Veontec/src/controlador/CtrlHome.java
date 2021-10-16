@@ -3,9 +3,11 @@ package controlador;
 import index.Veontec;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.Objects;
 import javax.swing.JOptionPane;
 import modelo.dao.UsuarioDao;
 import modelo.dto.UsuarioDto;
+import src.Info;
 import vista.ventanas.VentanaHome;
 
 enum TabsHome {
@@ -165,12 +167,12 @@ public class CtrlHome implements MouseListener{
             } 
              
             // * Verificar si la cuenta no está verificada
-            if(Veontec.usuarioDto.getCmpEstado() == 333){
+            if(Objects.equals(Veontec.usuarioDto.getCmpEstado(), Info.veontecCuentaNoVerificada)){
                 return 2;
             }
             
             // * Verificar si la cuenta no está en modo recuperada
-            if(Veontec.usuarioDto.getCmpEstado() == 777){
+            if(Objects.equals(Veontec.usuarioDto.getCmpEstado(), Info.veontecRecuperarCuenta)){
                 return 3;
             }
             

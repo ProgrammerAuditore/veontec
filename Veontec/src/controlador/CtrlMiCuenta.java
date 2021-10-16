@@ -6,6 +6,7 @@ import index.Veontec;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.Objects;
 import javax.swing.Box;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -187,7 +188,7 @@ public class CtrlMiCuenta{
     private void mtdEliminarCuenta(){
         passwd = "";
         // * Verificar el estado de cuenta
-        if( usuarioDto.getCmpEstado() == 333 ){
+        if( Objects.equals(usuarioDto.getCmpEstado(), Info.veontecCuentaNoVerificada) ){
                 JOptionPane.showMessageDialog(laVista, "Por favor, verifique la cuenta.");
                 return;
         }
@@ -239,7 +240,7 @@ public class CtrlMiCuenta{
     
     private void mtdCambiarContrasena() {
         // * Verificar el estado de cuenta
-        if( usuarioDto.getCmpEstado() == 333 ){
+        if( Objects.equals(usuarioDto.getCmpEstado(), Info.veontecCuentaNoVerificada) ){
                 JOptionPane.showMessageDialog(laVista, "Por favor, verifique la cuenta.");
                 return;
         }
@@ -277,7 +278,7 @@ public class CtrlMiCuenta{
                         
                         // * Encriptar contraseña y alamacenarlo en el DTO 
                         usuarioDto.setCmpPassword( mtdEncriptarPassword( passwdRepetir.toCharArray() ) );
-                        usuarioDto.setCmpEstado(1333);
+                        usuarioDto.setCmpEstado(Info.veontecCuentaVerificada);
                         usuarioDto.setCmpKey("No");
                         
                         // * Intetamos actualizar los datos del usuario
@@ -304,7 +305,7 @@ public class CtrlMiCuenta{
     private void mtdCambiarCorreo() {
         
         // * Verificar el estado de cuenta
-        if( usuarioDto.getCmpEstado() == 333 ){
+        if( Objects.equals(usuarioDto.getCmpEstado(), Info.veontecCuentaNoVerificada) ){
                 JOptionPane.showMessageDialog(laVista, "Por favor, verifique la cuenta.");
                 return;
         }
@@ -342,7 +343,7 @@ public class CtrlMiCuenta{
                         
                         // * Salvar el nuevo correo
                         usuarioDto.setCmpCorreo( correoRepetir.trim() );
-                        usuarioDto.setCmpEstado(1333);
+                        usuarioDto.setCmpEstado(Info.veontecCuentaVerificada);
                         usuarioDto.setCmpKey("No");
                         
                         logger.info("Correo existente: " + usuarioDao.mtdComprobar(usuarioDto));
@@ -384,7 +385,7 @@ public class CtrlMiCuenta{
     private void  mtdActualizarDatos(){
         
         // * Verificar el estado de cuenta
-        if( usuarioDto.getCmpEstado() == 333 ){
+        if( Objects.equals(usuarioDto.getCmpEstado(), Info.veontecCuentaNoVerificada) ){
                 JOptionPane.showMessageDialog(laVista, "Por favor, verifique la cuenta.");
                 return;
         }
@@ -396,7 +397,7 @@ public class CtrlMiCuenta{
             usuarioDto.setCmpDireccion( laVista.cmpDireccion.getText().trim() );
             usuarioDto.setCmpTelefono( laVista.cmpTelefono.getText().trim() );
             usuarioDto.setCmpCorreo( laVista.cmpCorreo.getText().trim() );
-            usuarioDto.setCmpEstado(1333);
+            usuarioDto.setCmpEstado(Info.veontecCuentaVerificada);
             usuarioDto.setCmpKey("No");
             
                 // * Intentar actualizar los datos con una consulta
@@ -419,7 +420,7 @@ public class CtrlMiCuenta{
     private void mtdVerificarEmail(){
         
         // * Verificar el estado de cuenta
-        if( usuarioDto.getCmpEstado() != 333 ){
+        if( !Objects.equals(usuarioDto.getCmpEstado(), Info.veontecCuentaNoVerificada) ){
                 JOptionPane.showMessageDialog(laVista, "La cuenta ya está verificada.");
                 return;
         }
@@ -455,7 +456,7 @@ public class CtrlMiCuenta{
                     if( usuarioDto.getCmpKey().equals(codigoVerificacion) ){
                         
                         ObjEmail.mtdEnviarBienvenida(usuarioDto);
-                        usuarioDto.setCmpEstado(1333);
+                        usuarioDto.setCmpEstado(Info.veontecCuentaVerificada);
                         usuarioDto.setCmpKey("No");
                         usuarioDao.mtdActualizar(usuarioDto);
                         Veontec.usuarioDto = usuarioDto;
