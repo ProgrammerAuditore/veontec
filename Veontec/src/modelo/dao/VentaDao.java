@@ -243,6 +243,51 @@ public class VentaDao implements keyword_query<VentaDto>, keyword_extra<VentaDto
         
         return ventas;
     }
+    
+    public List<VentaDto> mtdListarBuscarVentasPorUsuario(VentaDto obj_dto, int inicio, int fin) {
+        // Funciona perfectamente
+        
+        List<VentaDto> ventas = null;
+        PreparedStatement ps = null;
+        Connection conn = CtrlHiloConexion.getConexion();
+        String query = "SELECT * FROM " + nombreTabla + " "
+                // * Buscamos el producto del usuario respectivo
+                + "WHERE ventVendedor = ? AND ventTitulo LIKE ? "
+                + "LIMIT ? OFFSET ? ;";
+        
+        try {
+            
+            // * Preparar la consulta
+            ps = conn.prepareStatement(query.toLowerCase());
+            ps.setInt(1, obj_dto.getVentVendedor());
+            ps.setString(2, obj_dto.getVentTitulo());
+            ps.setInt(3, inicio);
+            ps.setInt(4, fin);
+            
+            // * Ejecutar la consulta
+            ResultSet rs = ps.executeQuery();
+            
+            ventas = new ArrayList<>();
+            while( rs.next() ){
+                VentaDto venta = new VentaDto(); 
+                venta.setVentID( rs.getInt("ventID") );
+                venta.setVentProducto( rs.getInt("ventProducto") );
+                venta.setVentComprador( rs.getInt("ventComprador") );
+                venta.setVentVendedor(rs.getInt("ventVendedor") );
+                venta.setVentTitulo( rs.getString("ventTitulo") );
+                venta.setVentFecha( rs.getString("ventFecha") );
+                venta.setVentPrecio( rs.getDouble("ventPrecio") );
+                venta.setVentCantidad( rs.getInt("ventCantidad") );
+                venta.setVentEstado( rs.getInt("ventEstado") );
+                ventas.add(venta);
+            }
+            
+        } catch (SQLException e) {
+            System.out.println("" + e.getMessage());
+        }
+        
+        return ventas;
+    }
 
     @Override
     public long mtdRowCount(VentaDto obj_dto) {
