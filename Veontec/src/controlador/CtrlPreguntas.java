@@ -4,9 +4,14 @@ import static controlador.CtrlVentas.logger;
 import controlador.componentes.CtrlCardPregunta;
 import index.Veontec;
 import java.awt.GridBagLayout;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.List;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import modelo.dao.PreguntaDao;
 import modelo.dao.ProductoDao;
 import modelo.dao.UsuarioDao;
@@ -17,7 +22,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import vista.paneles.PanelPreguntas;
 
-public class CtrlPreguntas implements MouseListener{
+public class CtrlPreguntas{
     
     // * Vista
     PanelPreguntas laVista;
@@ -35,6 +40,10 @@ public class CtrlPreguntas implements MouseListener{
     private static CtrlPreguntas instancia;
     private List<PreguntaDto> lstPreguntas;
     Integer usuarioID;
+    private Integer pagProductos;
+    private Integer totalProductosExistentes;
+    private Integer productoPorPagina;
+    private static final Logger LOG = Logger.getLogger(CtrlBienvenida.class.getName());
     
     // * Constructor
     private CtrlPreguntas(PanelPreguntas laVista, UsuarioDto dto, UsuarioDao dao){
@@ -48,13 +57,55 @@ public class CtrlPreguntas implements MouseListener{
         this.preguntaDao = new PreguntaDao();
         this.producto_dto = new ProductoDto();
         this.producto_dao = new ProductoDao();
+        pagProductos = 0;
+        productoPorPagina = 3;
     }
     
-    // * Eventos
-    @Override
-    public void mouseReleased(MouseEvent e) {
-        
+    // * Eventos    
+    private void mtdEventoBtnBuscar(){
+        laVista.btnBuscar.addMouseListener(new MouseAdapter(){
+            @Override
+            public void mouseReleased(MouseEvent e) {
+                pagProductos = 0;
+                laVista.btnPrevia.setEnabled(true);
+                laVista.btnSiguiente.setEnabled(true);
+                mtdMostrarPreguntas(true);
+            }
+        });
     }
+    
+    private void mtdEventoCmpBuscarProducto(){
+        laVista.cmpBusqueda.addKeyListener(new KeyAdapter(){
+            @Override
+            public void keyPressed(KeyEvent e) {
+                if(e.getKeyCode() == KeyEvent.VK_ENTER ){
+                    pagProductos = 0;
+                    laVista.btnPrevia.setEnabled(true);
+                    laVista.btnSiguiente.setEnabled(true);
+                    mtdMostrarPreguntas(true);
+                } 
+            }
+        });
+    }
+    
+    private void mtdEventoBtnPrevia(){
+        laVista.btnPrevia.addMouseListener(new MouseAdapter(){
+            @Override
+            public void mouseReleased(MouseEvent e) {
+                mtdMostrarProductosPrevias();
+            }
+        });
+    }
+    
+    private void mtdEventoBtnSiguiente(){
+        laVista.btnSiguiente.addMouseListener(new MouseAdapter(){
+            @Override
+            public void mouseReleased(MouseEvent e) {
+                mtdMostrarProductosSiguiente();
+            }
+        });
+    }
+        
     
     // * Métodos
     public static CtrlPreguntas getInstancia(PanelPreguntas laVista, UsuarioDto dto, UsuarioDao dao){
@@ -65,7 +116,7 @@ public class CtrlPreguntas implements MouseListener{
             instancia.mtdInit();
         
         }else{
-            instancia.mtdMostrarPreguntas();
+            instancia.mtdMostrarPreguntas(false);
         
         }
         
@@ -73,26 +124,38 @@ public class CtrlPreguntas implements MouseListener{
     }
     
     public static boolean mtdRecargarPreguntas(){
-        instancia.mtdMostrarPreguntas();
+        instancia.mtdMostrarPreguntas(false);
         return true;
     }
     
     private void mtdInit(){
         logger.info("Ejecutando metodo una vez (Obligatorio)");
-        mtdMostrarPreguntas();
+        mtdEventoBtnBuscar();
+        mtdEventoBtnPrevia();
+        mtdEventoBtnSiguiente();
+        mtdEventoCmpBuscarProducto();
+        mtdMostrarPreguntas(false);
     }
     
-    private void mtdMostrarPreguntas(){
+    private void mtdMostrarPreguntas(boolean busqueda){
         logger.info("Iniciando ...");
-        laVista.pnContenedor.removeAll();
+        int totalPreguntas = 0;
         laVista.pnContenedor.setLayout(new GridBagLayout());
+        laVista.pnContenedor.removeAll();
         
         logger.info("Listando preguntas...");
         preguntaDto.setPregComprador( Veontec.usuarioDto.getCmpID() );
         preguntaDto.setPregVendedor( Veontec.usuarioDto.getCmpID() );
-        lstPreguntas = preguntaDao.mtdListar(preguntaDto);
-        int totalPreguntas = lstPreguntas.size();
+        totalProductosExistentes = Integer.parseInt(""+preguntaDao.mtdRowCount(preguntaDto));
         
+        if( busqueda == false ){
+            lstPreguntas = preguntaDao.mtdListar(preguntaDto ,productoPorPagina, pagProductos);
+        }else{
+            preguntaDto.setPregTitulo('%'+laVista.cmpBusqueda.getText()+'%');
+            lstPreguntas = preguntaDao.mtdListarBuscarPreguntas(preguntaDto, 10, 0);
+        }
+        
+        totalPreguntas = lstPreguntas.size();
         if( totalPreguntas > 0 ){
             
             logger.warn("Recorriendo productos ....");
@@ -123,25 +186,39 @@ public class CtrlPreguntas implements MouseListener{
         laVista.pnContenedor.revalidate();
         laVista.pnContenedor.repaint();
     }
-
-    @Override
-    public void mouseClicked(MouseEvent e) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    
+    private void mtdMostrarProductosPrevias(){
+        pagProductos -= productoPorPagina;
+        //pagProductos = pagProductos <= 0 ? 0 : pagProductos;
+        //LOG.info("Productos previas : " + pagProductos );
+        
+        if( pagProductos < 0  ){
+            pagProductos = 0;
+            JOptionPane.showMessageDialog(laVista, "No hay más productos para mostrar");
+            laVista.btnPrevia.setEnabled(false);
+            return;
+        }
+        
+        laVista.btnSiguiente.setEnabled(true);
+        mtdMostrarPreguntas(false);
+        
     }
-
-    @Override
-    public void mousePressed(MouseEvent e) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void mouseEntered(MouseEvent e) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void mouseExited(MouseEvent e) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    
+    private void mtdMostrarProductosSiguiente(){
+        pagProductos += productoPorPagina;
+        //pagProductos = pagProductos >= totalProductosExistentes ? totalProductosExistentes: pagProductos;
+        //LOG.info("Productos siguientes : " + pagProductos );
+        
+        if( pagProductos >= totalProductosExistentes ){
+            pagProductos = totalProductosExistentes;
+            JOptionPane.showMessageDialog(laVista, "No hay más productos para mostrar");
+            laVista.btnSiguiente.setEnabled(false);
+            return;
+        }
+        
+        laVista.btnPrevia.setEnabled(true);
+        mtdMostrarPreguntas(false);
+        
     }
     
     public static void mtdEliminarInstancia(){

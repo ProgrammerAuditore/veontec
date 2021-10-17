@@ -157,6 +157,12 @@ public class CampoTexto extends JTextField implements FocusListener{
             }
         }
     }
+    
+    @Override
+    public void setEnabled(boolean enabled) {
+        super.setEnabled(enabled);
+        getEstiloTextEscritura();
+    }
 
     public JLabel getComponenteDidireccional() {
         return componenteDidireccional;

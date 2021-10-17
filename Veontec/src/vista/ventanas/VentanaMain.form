@@ -24,17 +24,17 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="tabContenedor" min="-2" pref="515" max="-2" attributes="0"/>
+          <Component id="pnTabMenus" min="-2" pref="515" max="-2" attributes="0"/>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="tabContenedor" alignment="1" pref="435" max="32767" attributes="0"/>
+          <Component id="pnTabMenus" alignment="1" pref="435" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Container class="javax.swing.JTabbedPane" name="tabContenedor">
+    <Container class="javax.swing.JTabbedPane" name="pnTabMenus">
       <Properties>
         <Property name="tabPlacement" type="int" value="2"/>
       </Properties>
@@ -66,7 +66,7 @@
             </DimensionLayout>
           </Layout>
           <SubComponents>
-            <Component class="vista.paneles.PanelSignUp" name="pnLoggin">
+            <Component class="vista.paneles.PanelIniciarSesion" name="pnLoggin">
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
               </AuxValues>

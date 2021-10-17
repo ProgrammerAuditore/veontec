@@ -3,7 +3,12 @@ package controlador;
 import controlador.componentes.CtrlCardVenta;
 import index.Veontec;
 import java.awt.GridBagLayout;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.tree.DefaultMutableTreeNode;
 import modelo.dao.ProductoDao;
 import modelo.dao.UsuarioDao;
@@ -33,6 +38,9 @@ public class CtrlVentas{
     static Log logger = LogFactory.getLog(CtrlVentas.class);
     private static CtrlVentas instancia;
     private List<VentaDto> lstMisVentas;
+    private Integer pagProductos;
+    private Integer totalProductosExistentes;
+    private Integer productoPorPagina;
 
     // Constructor
     public CtrlVentas(PanelVentas laVista, UsuarioDto dto, UsuarioDao dao) {
@@ -43,7 +51,8 @@ public class CtrlVentas{
         producto_dto = new ProductoDto();
         ventDao = new VentaDao();
         ventDto = new VentaDto();
-        
+        pagProductos = 0;
+        productoPorPagina = 3;
     }
     
     // Obtener instancia | Singleton
@@ -55,7 +64,7 @@ public class CtrlVentas{
             instancia.mtdInit();
         
         }else{
-            instancia.mtdMostrarProducto();
+            instancia.mtdMostrarProducto(false);
         
         }
         
@@ -63,26 +72,81 @@ public class CtrlVentas{
     }
     
     // Eventos
-    // Vacio
+    private void mtdEventoBtnBuscar(){
+        laVista.btnBuscar.addMouseListener(new MouseAdapter(){
+            @Override
+            public void mouseReleased(MouseEvent e) {
+                pagProductos = 0;
+                mtdMostrarProducto(true);
+            }
+        });
+    }
+    
+    private void mtdEventoCmpBuscarProducto(){
+        laVista.cmpBusqueda.addKeyListener(new KeyAdapter(){
+            @Override
+            public void keyPressed(KeyEvent e) {
+                if(e.getKeyCode() == KeyEvent.VK_ENTER ){
+                    pagProductos = 0;
+                    mtdMostrarProducto(true);
+                } 
+            }
+        });
+        
+    }
+    
+    private void mtdEventoBtnPrevia(){
+        laVista.btnPrevia.addMouseListener(new MouseAdapter(){
+            @Override
+            public void mouseReleased(MouseEvent e) {
+                laVista.btnPrevia.setEnabled(true);
+                laVista.btnSiguiente.setEnabled(true);
+                mtdMostrarProductosPrevias();
+            }
+        });
+    }
+    
+    private void mtdEventoBtnSiguiente(){
+        laVista.btnSiguiente.addMouseListener(new MouseAdapter(){
+            @Override
+            public void mouseReleased(MouseEvent e) {
+                laVista.btnPrevia.setEnabled(true);
+                laVista.btnSiguiente.setEnabled(true);
+                mtdMostrarProductosSiguiente();
+            }
+        });
+    }
     
     // Métodos
     private void mtdInit(){
         logger.info("Ejecutando metodo una vez (Obligatorio)");
-        mtdMostrarProducto();
+        mtdEventoBtnBuscar();
+        mtdEventoBtnSiguiente();
+        mtdEventoBtnPrevia();
+        mtdEventoCmpBuscarProducto();
+        mtdMostrarProducto(false);
     }
     
     
-    private void mtdMostrarProducto(){
+    private void mtdMostrarProducto(boolean busqueda){
         logger.info("Iniciando ...");
+        int totalProductos = 0;
         //lstMisProductos.clear();
         laVista.pnContenedor.setLayout(new GridBagLayout());
         laVista.pnContenedor.removeAll();
         
         logger.info("Listando ventas...");
         ventDto.setVentVendedor( Veontec.usuarioDto.getCmpID() );
-        lstMisVentas = ventDao.mtdListar(ventDto);
-        int totalProductos = lstMisVentas.size();
+        totalProductosExistentes = Integer.valueOf( ""+ventDao.mtdRowCount(ventDto) );
         
+        if( busqueda == false ){
+            lstMisVentas = ventDao.mtdListar(ventDto, productoPorPagina, pagProductos);
+        }else{
+            ventDto.setVentTitulo('%'+laVista.cmpBusqueda.getText()+'%');
+            lstMisVentas = ventDao.mtdListarBuscarVentasPorUsuario(ventDto, productoPorPagina, pagProductos);
+        }
+        
+        totalProductos = lstMisVentas.size();
         if(  totalProductos > 0 ){
             
             logger.warn("Recorriendo productos ....");
@@ -106,6 +170,40 @@ public class CtrlVentas{
         laVista.pnContenedor.validate();
         laVista.pnContenedor.revalidate();
         laVista.pnContenedor.repaint();
+        
+    }
+    
+    private void mtdMostrarProductosPrevias(){
+        pagProductos -= productoPorPagina;
+        //pagProductos = pagProductos <= 0 ? 0 : pagProductos;
+        //LOG.info("Productos previas : " + pagProductos );
+        
+        if( pagProductos < 0  ){
+            pagProductos = 0;
+            JOptionPane.showMessageDialog(laVista, "No hay más productos para mostrar");
+            laVista.btnPrevia.setEnabled(false);
+            return;
+        }
+        
+        laVista.btnSiguiente.setEnabled(true);
+        mtdMostrarProducto(false);
+        
+    }
+    
+    private void mtdMostrarProductosSiguiente(){
+        pagProductos += productoPorPagina;
+        //pagProductos = pagProductos >= totalProductosExistentes ? totalProductosExistentes: pagProductos;
+        //LOG.info("Productos siguientes : " + pagProductos );
+        
+        if( pagProductos >= totalProductosExistentes ){
+            pagProductos = totalProductosExistentes;
+            JOptionPane.showMessageDialog(laVista, "No hay más productos para mostrar");
+            laVista.btnSiguiente.setEnabled(false);
+            return;
+        }
+        
+        laVista.btnPrevia.setEnabled(true);
+        mtdMostrarProducto(false);
         
     }
     
