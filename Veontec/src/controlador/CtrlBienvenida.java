@@ -71,7 +71,9 @@ public class CtrlBienvenida{
         laVista.btnBuscar.addMouseListener(new MouseAdapter(){
             @Override
             public void mouseReleased(MouseEvent e) {
-                pagProductos = 0;
+                pagProductos=0;
+                laVista.btnPrevia.setEnabled(true);
+                laVista.btnSiguiente.setEnabled(true);
                 mtdMostrarProducto(true);
             }
         });
@@ -83,6 +85,8 @@ public class CtrlBienvenida{
             public void keyPressed(KeyEvent e) {
                 if(e.getKeyCode() == KeyEvent.VK_ENTER ){
                     pagProductos=0;
+                    laVista.btnPrevia.setEnabled(true);
+                    laVista.btnSiguiente.setEnabled(true);
                     mtdMostrarProducto(true);
                 } 
             }
