@@ -39,7 +39,7 @@ import org.apache.commons.logging.LogFactory;
 import vista.paneles.acciones.PanelCrearProducto;
 import vista.paneles.PanelMiTienda;
 
-public class CtrlMiTienda implements MouseListener{
+public class CtrlMiTienda{
     
     // Vista
     public PanelMiTienda laVista;
@@ -112,26 +112,41 @@ public class CtrlMiTienda implements MouseListener{
     }
     
     // Eventos
-    @Override
-    public void mouseReleased(MouseEvent e) {
-        
-        if( e.getSource() == laVista.btnCrearProducto ){
-            CtrlModalCrearProducto crear = new CtrlModalCrearProducto();
-            crear.mtdInit();
-        }
-        
-        if( e.getSource() == laVista.btnAgregar ){
-            mtdCrearCategoria();
-        }
-        
-        if( e.getSource() == laVista.btnModificar ){
-            mtdModificarCategoria();
-        }
-        
-        if( e.getSource() == laVista.btnEliminar ){
-            mtdEliminarCategoria();
-        }
-        
+    private void mtdEventoBtnCrearProducto(){
+        laVista.btnCrearProducto.addMouseListener(new MouseAdapter(){
+            @Override
+            public void mouseReleased(MouseEvent e) {
+                CtrlModalCrearProducto crear = new CtrlModalCrearProducto();
+                crear.mtdInit();
+            }
+        });
+    }
+    
+    private void mtdEventoBtnAgregarCategoria(){
+        laVista.btnAgregar.addMouseListener(new MouseAdapter(){
+            @Override
+            public void mouseReleased(MouseEvent e) {
+                 mtdCrearCategoria();
+            }
+        });
+    }
+    
+    private void mtdEventoBtnModificarCategoria(){
+        laVista.btnModificar.addMouseListener(new MouseAdapter(){
+            @Override
+            public void mouseReleased(MouseEvent e) {
+                mtdModificarCategoria();
+            }
+        });
+    }
+    
+    private void mtdEventoBtnEliminarCategoria(){
+        laVista.btnEliminar.addMouseListener(new MouseAdapter(){
+            @Override
+            public void mouseReleased(MouseEvent e) {
+                mtdEliminarCategoria();
+            }
+        });
     }
     
     private void mtdEventoBtnBuscar(){
@@ -184,10 +199,10 @@ public class CtrlMiTienda implements MouseListener{
         logger.info("Ejecutando metodo una vez (Obligatorio)");
         laVista.pnContenedor.setLayout(new GridBagLayout());
         images_dto.setImagUsuario( usuario_dto.getCmpID() );
-        laVista.btnCrearProducto.addMouseListener(this);
-        laVista.btnAgregar.addMouseListener(this);
-        laVista.btnModificar.addMouseListener(this);
-        laVista.btnEliminar.addMouseListener(this);
+        mtdEventoBtnAgregarCategoria();
+        mtdEventoBtnModificarCategoria();
+        mtdEventoBtnCrearProducto();
+        mtdEventoBtnEliminarCategoria();
         mtdEventoBtnBuscar();
         mtdEventoCmpBuscarProducto();
         mtdEventoBtnPrevia();
@@ -471,18 +486,6 @@ public class CtrlMiTienda implements MouseListener{
         mtdMostrarProducto(false);
         
     }
-    
-    @Override
-    public void mouseClicked(MouseEvent e) {}
-
-    @Override
-    public void mousePressed(MouseEvent e) {}
-
-    @Override
-    public void mouseEntered(MouseEvent e) {}
-
-    @Override
-    public void mouseExited(MouseEvent e) {}
     
     public static void mtdEliminarInstancia(){
         instancia = null;
