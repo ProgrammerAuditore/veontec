@@ -286,7 +286,29 @@ public class PreguntaDao implements keyword_query<PreguntaDto> , keyword_extra<P
 
     @Override
     public long mtdRowCount(PreguntaDto obj_dto) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        // * Funciona perfectamente
+        
+        long filas = 0;
+        PreparedStatement ps = null;
+        Connection conn = CtrlHiloConexion.getConexion();
+        String query = "SELECT COUNT(*) FROM  " + nombreTabla + " "
+                + "WHERE pregVendedor = ? OR pregComprador = ? ;";
+        
+        try {
+            
+            ps = conn.prepareStatement(query.toLowerCase());
+            ps.setInt(1, obj_dto.getPregVendedor());
+            ps.setInt(2, obj_dto.getPregComprador());
+            ResultSet rs = ps.executeQuery();
+            rs.next();
+            filas = rs.getInt(1);
+            
+            
+        } catch (SQLException e) {
+            System.out.println("" + e.getMessage());
+        }
+        
+        return filas;
     }
 
     @Override

@@ -47,7 +47,7 @@ public class CtrlBienvenida{
         producto_dao = new ProductoDao();
         producto_dto = new ProductoDto();
         pagProductos = 0;
-        productoPorPagina = 9;
+        productoPorPagina = 3;
     }
     
     // Obtener instancia | Singleton
@@ -77,6 +77,19 @@ public class CtrlBienvenida{
         });
     }
     
+    private void mtdEventoCmpBuscarProducto(){
+        laVista.cmpBuscarProducto.addKeyListener(new KeyAdapter(){
+            @Override
+            public void keyPressed(KeyEvent e) {
+                if(e.getKeyCode() == KeyEvent.VK_ENTER ){
+                    pagProductos=0;
+                    mtdMostrarProducto(true);
+                } 
+            }
+        });
+        
+    }
+    
     private void mtdEventoBtnPrevia(){
         laVista.btnPrevia.addMouseListener(new MouseAdapter(){
             @Override
@@ -95,19 +108,6 @@ public class CtrlBienvenida{
         });
     }
     
-    private void mtdEventoCmpBuscarProducto(){
-        laVista.cmpBuscarProducto.addKeyListener(new KeyAdapter(){
-            @Override
-            public void keyPressed(KeyEvent e) {
-                if(e.getKeyCode() == KeyEvent.VK_ENTER ){
-                    pagProductos=0;
-                    mtdMostrarProducto(true);
-                } 
-            }
-        });
-        
-    }
-    
     // Métodos
     private void mtdInit(){
         LOG.info("Ejecutando || CtrlBienvenida::mtdInit ");
@@ -124,13 +124,13 @@ public class CtrlBienvenida{
     }
     
     private synchronized void mtdMostrarProducto(boolean busqueda){
-        totalProductosExistentes = producto_dao.mtdRowCountInteger();
         LOG.warning("Inicializando ... ");
         
         //lstMisProductos.clear();
         int totalProductos=0;
         laVista.pnContenedor.setLayout(new GridBagLayout());
         laVista.pnContenedor.removeAll();
+        totalProductosExistentes = producto_dao.mtdRowCountInteger();
         
         if( busqueda == false ){
             lstMisProductos = producto_dao.mtdListar(productoPorPagina, pagProductos);
