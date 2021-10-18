@@ -1,6 +1,6 @@
 package controlador.componentes;
 
-import controlador.CtrlMiTienda;
+import controlador.tabs.CtrlMiTienda;
 import controlador.acciones.CtrlModalEditarProducto;
 import index.Veontec;
 import java.awt.Dialog;

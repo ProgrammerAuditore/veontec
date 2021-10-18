@@ -1,5 +1,7 @@
-package controlador;
+package controlador.tabs;
 
+import controlador.ventanas.CtrlRegistrarme;
+import controlador.ventanas.CtrlIniciarSesion;
 import controlador.ventanas.CtrlMain;
 import de.mkammerer.argon2.Argon2;
 import de.mkammerer.argon2.Argon2Factory;

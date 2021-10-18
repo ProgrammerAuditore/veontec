@@ -1,6 +1,6 @@
 package controlador.componentes;
 
-import controlador.CtrlCompras;
+import controlador.tabs.CtrlCompras;
 import controlador.acciones.CtrlModalHacerPregunta;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;

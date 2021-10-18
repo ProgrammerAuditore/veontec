@@ -1,6 +1,6 @@
 package controlador.acciones;
 
-import controlador.CtrlPreguntas;
+import controlador.tabs.CtrlPreguntas;
 import index.Veontec;
 import java.awt.Dialog;
 import java.awt.event.MouseAdapter;

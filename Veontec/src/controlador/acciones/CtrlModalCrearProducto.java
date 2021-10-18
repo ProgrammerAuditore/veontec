@@ -1,6 +1,6 @@
 package controlador.acciones;
 
-import controlador.CtrlMiTienda;
+import controlador.tabs.CtrlMiTienda;
 import index.Veontec;
 import java.awt.Dialog;
 import java.awt.event.ActionEvent;

@@ -1,72 +1,69 @@
-package controlador;
+package controlador.tabs;
 
-import controlador.componentes.CtrlCardCompra;
+import controlador.componentes.CtrlCardVenta;
+import index.Veontec;
 import java.awt.GridBagLayout;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.List;
-import java.util.logging.Logger;
-import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import javax.swing.tree.DefaultMutableTreeNode;
-import modelo.dao.CompraDao;
 import modelo.dao.ProductoDao;
 import modelo.dao.UsuarioDao;
-import modelo.dto.CompraDto;
+import modelo.dao.VentaDao;
 import modelo.dto.ProductoDto;
 import modelo.dto.UsuarioDto;
+import modelo.dto.VentaDto;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import vista.paneles.PanelCompras;
+import src.Info;
+import vista.paneles.PanelVentas;
 
-public class CtrlCompras{
+public class CtrlVentas{
     
     // Vista
-    public PanelCompras laVista;
-    public JDialog modalCrearProducto;
+    public PanelVentas laVista;
     
     // Modelos
     private UsuarioDto usuario_dto;
     private UsuarioDao usuario_dao;
     private ProductoDao producto_dao;
     private ProductoDto producto_dto;
-    private CompraDao compra_dao;
-    private CompraDto compra_dto;
+    private VentaDto ventDto;
+    private VentaDao ventDao;
     private DefaultMutableTreeNode treeNode1;
     
     // Atributos
-    static Log logger = LogFactory.getLog(CtrlCompras.class);
-    private static CtrlCompras instancia;
-    private List<CompraDto> lstMisCompras;
+    static Log logger = LogFactory.getLog(CtrlVentas.class);
+    private static CtrlVentas instancia;
+    private List<VentaDto> lstMisVentas;
     private Integer cantidadResultados;
     private Integer totalProductosExistentes;
     private Integer cantidadPorPagina;
     private boolean activarBusqueda;
-    private static final Logger LOG = Logger.getLogger(CtrlCompras.class.getName());
 
     // Constructor
-    public CtrlCompras(PanelCompras laVista, UsuarioDto dto, UsuarioDao dao) {
+    public CtrlVentas(PanelVentas laVista, UsuarioDto dto, UsuarioDao dao) {
         this.laVista = laVista;
         this.usuario_dto = dto;
         this.usuario_dao = dao;
         this.producto_dao = new ProductoDao();
         this.producto_dto = new ProductoDto();
-        this.compra_dao = new CompraDao();
-        this.compra_dto = new CompraDto();
+        this.ventDao = new VentaDao();
+        this.ventDto = new VentaDto();
         this.cantidadResultados = 0;
-        this.cantidadPorPagina = 3;
+        this.cantidadPorPagina = Info.veontecResultadoPorPagina;
         this.activarBusqueda = false;
     }
     
     // Obtener instancia | Singleton
-    public static CtrlCompras getInstancia(PanelCompras laVista, UsuarioDto dto, UsuarioDao dao){
-        logger.info("Inicializando controlador");
-        
+    public static CtrlVentas getInstancia(PanelVentas laVista, UsuarioDto dto, UsuarioDao dao){
+        logger.warn("Inicializando controlador.... ");
         if( instancia == null ){
-            logger.warn("Creando instancia");
-            instancia = new CtrlCompras(laVista, dto, dao);
+            logger.warn("Creando instancia.... ");
+            instancia = new CtrlVentas(laVista, dto, dao);
             instancia.mtdInit();
         
         }else{
@@ -105,6 +102,8 @@ public class CtrlCompras{
         laVista.btnPrevia.addMouseListener(new MouseAdapter(){
             @Override
             public void mouseReleased(MouseEvent e) {
+                laVista.btnPrevia.setEnabled(true);
+                laVista.btnSiguiente.setEnabled(true);
                 mtdMostrarProductosPrevias();
             }
         });
@@ -114,6 +113,8 @@ public class CtrlCompras{
         laVista.btnSiguiente.addMouseListener(new MouseAdapter(){
             @Override
             public void mouseReleased(MouseEvent e) {
+                laVista.btnPrevia.setEnabled(true);
+                laVista.btnSiguiente.setEnabled(true);
                 mtdMostrarProductosSiguiente();
             }
         });
@@ -121,58 +122,54 @@ public class CtrlCompras{
     
     // Métodos
     private void mtdInit(){
-        logger.info("Ejecutando metodo una vez (obligatorio)");
+        logger.info("Ejecutando metodo una vez (Obligatorio)");
         mtdEventoBtnBuscar();
-        mtdEventoBtnPrevia();
         mtdEventoBtnSiguiente();
+        mtdEventoBtnPrevia();
         mtdEventoCmpBuscarProducto();
         mtdMostrarProducto(false);
     }
     
-    public static boolean mtdRecargarCompras(){
-        logger.warn("Ejecutando metodo ");
-        //if( instancia == null ){
-            //instancia.mtdInit();
-        //}
-        
-        instancia.mtdMostrarProducto(false);
-        return true;
-    }
     
     private void mtdMostrarProducto(boolean busqueda){
-        logger.info("Iniciando...");
+        logger.info("Iniciando ...");
         
         int totalProductos = 0;
         laVista.pnContenedor.setLayout(new GridBagLayout());
         laVista.pnContenedor.removeAll();
         
+        logger.info("Listando ventas...");
+        ventDto.setVentVendedor( Veontec.usuarioDto.getCmpID() );
         
-        // El usuario actual es el comprador
-        compra_dto.setCompComprador( usuario_dto.getCmpID() );
-        
-        logger.info("listando...");
-        if( busqueda == false){
-            lstMisCompras = compra_dao.mtdListar(compra_dto, cantidadPorPagina, cantidadResultados);
-            totalProductosExistentes = Integer.parseInt(""+ compra_dao.mtdRowCount(compra_dto));
-        } else{
-            compra_dto.setCompTitulo('%'+laVista.cmpBusqueda.getText()+'%');
-            lstMisCompras = compra_dao.mtdBuscarAllComprasPorUsuario(compra_dto, cantidadPorPagina, cantidadResultados);
-            totalProductosExistentes = Integer.parseInt(""+ compra_dao.mtdRowCountAllComprasPorUsuario(compra_dto));
+        if( busqueda == false ){
+            lstMisVentas = ventDao.mtdListar(ventDto, cantidadPorPagina, cantidadResultados);
+            totalProductosExistentes = Integer.valueOf( ""+ventDao.mtdRowCount(ventDto) );
+        }else{
+            ventDto.setVentTitulo('%'+laVista.cmpBusqueda.getText()+'%');
+            lstMisVentas = ventDao.mtdBuscarAllVentasPorUsuario(ventDto, cantidadPorPagina, cantidadResultados);
+            totalProductosExistentes = Integer.valueOf( ""+ventDao.mtdRowCountAllVentasPorUsuario(ventDto) );
         }
         
-        totalProductos = lstMisCompras.size();
-        if( totalProductos > 0 ){
+        totalProductos = lstMisVentas.size();
+        if(  totalProductos > 0 ){
             
-            logger.warn("Recorriendo productos");
+            logger.warn("Recorriendo productos ....");
             for (int i = 0; i < totalProductos; i++) {
-                CtrlCardCompra tarjeta = new CtrlCardCompra(lstMisCompras.get(i));
-                tarjeta.setItem(i);
-                tarjeta.mtdInit();
-                laVista.pnContenedor.add(tarjeta.getLaVista(), tarjeta.getTarjeta_dimensiones());
+                producto_dto = new ProductoDto();
+                producto_dto.setProdID( lstMisVentas.get(i).getVentProducto() );
+                producto_dto.setProdUsuario( lstMisVentas.get(i).getVentVendedor() );
+                producto_dto = producto_dao.mtdConsultar(producto_dto);
+
+                if( producto_dto != null){ 
+                    CtrlCardVenta tarjeta = new CtrlCardVenta(lstMisVentas.get(i), producto_dto);
+                    tarjeta.setItem(i);
+                    tarjeta.mtdInit();
+                    laVista.pnContenedor.add(tarjeta.getLaVista(), tarjeta.getTarjeta_dimensiones());
+                }
+
             }
             
         }
-            
         
         laVista.pnContenedor.validate();
         laVista.pnContenedor.revalidate();
@@ -200,7 +197,7 @@ public class CtrlCompras{
     private void mtdMostrarProductosSiguiente(){
         cantidadResultados += cantidadPorPagina;
         //pagProductos = cantidadResultados >= totalProductosExistentes ? totalProductosExistentes: cantidadResultados;
-        //LOG.info("Productos siguientes : " + cantidadResultados +" : Productos existentes : " + totalProductosExistentes );
+        //LOG.info("Productos siguientes : " + cantidadResultados );
         
         if( cantidadResultados >= totalProductosExistentes ){
             cantidadResultados = totalProductosExistentes;

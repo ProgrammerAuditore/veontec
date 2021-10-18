@@ -1,8 +1,6 @@
 package controlador.ventanas;
 
 import controlador.CtrlHiloConexion;
-import controlador.CtrlIniciarSesion;
-import controlador.CtrlRegistrarme;
 import index.Veontec;
 import java.util.Objects;
 import java.util.logging.Logger;

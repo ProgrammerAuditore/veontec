@@ -1,4 +1,4 @@
-package controlador;
+package controlador.tabs;
 
 import controlador.acciones.CtrlModalCrearProducto;
 import controlador.componentes.CtrlCardMiProducto;
@@ -36,6 +36,7 @@ import modelo.dto.ProductoDto;
 import modelo.dto.UsuarioDto;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import src.Info;
 import vista.paneles.acciones.PanelCrearProducto;
 import vista.paneles.PanelMiTienda;
 
@@ -85,7 +86,7 @@ public class CtrlMiTienda{
         this.lstCategoriaRaiz = new DefaultMutableTreeNode("Categorias");
         this.lstCategoriaModelo = new DefaultTreeModel(lstCategoriaRaiz);
         this.cantidadResultados = 0;
-        this.cantidadPorPagina = 3;
+        this.cantidadPorPagina = Info.veontecResultadoPorPagina;
         this.activarBusqueda = false;
     }
     

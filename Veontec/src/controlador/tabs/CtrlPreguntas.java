@@ -1,4 +1,4 @@
-package controlador;
+package controlador.tabs;
 
 import controlador.componentes.CtrlCardPregunta;
 import index.Veontec;
@@ -18,6 +18,7 @@ import modelo.dto.ProductoDto;
 import modelo.dto.UsuarioDto;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import src.Info;
 import vista.paneles.PanelPreguntas;
 
 public class CtrlPreguntas{
@@ -57,7 +58,7 @@ public class CtrlPreguntas{
         this.producto_dto = new ProductoDto();
         this.producto_dao = new ProductoDao();
         this.cantidadResultado = 0;
-        this.cantidadPorPagina = 3;
+        this.cantidadPorPagina = Info.veontecResultadoPorPagina;
         this.activarBusqueda = false;
     }
     

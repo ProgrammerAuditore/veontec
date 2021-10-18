@@ -1,5 +1,6 @@
-package controlador;
+package controlador.ventanas;
 
+import controlador.CtrlHiloConexion;
 import controlador.ventanas.CtrlHome;
 import de.mkammerer.argon2.Argon2;
 import de.mkammerer.argon2.Argon2Factory;

@@ -1,6 +1,6 @@
 package controlador.acciones;
 
-import controlador.CtrlBienvenida;
+import controlador.tabs.CtrlBienvenida;
 import index.Veontec;
 import java.awt.Dialog;
 import java.awt.event.KeyAdapter;

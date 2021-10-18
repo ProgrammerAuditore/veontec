@@ -1,12 +1,12 @@
 package controlador.ventanas;
 
-import controlador.CtrlBienvenida;
-import controlador.CtrlCompras;
+import controlador.tabs.CtrlBienvenida;
+import controlador.tabs.CtrlCompras;
 import controlador.CtrlHiloConexion;
-import controlador.CtrlMiCuenta;
-import controlador.CtrlMiTienda;
-import controlador.CtrlPreguntas;
-import controlador.CtrlVentas;
+import controlador.tabs.CtrlMiCuenta;
+import controlador.tabs.CtrlMiTienda;
+import controlador.tabs.CtrlPreguntas;
+import controlador.tabs.CtrlVentas;
 import index.Veontec;
 import java.util.Objects;
 import javax.swing.JOptionPane;

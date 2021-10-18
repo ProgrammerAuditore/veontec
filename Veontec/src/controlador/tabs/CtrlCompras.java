@@ -1,6 +1,6 @@
-package controlador;
+package controlador.tabs;
 
-import controlador.componentes.CtrlCardProducto;
+import controlador.componentes.CtrlCardCompra;
 import java.awt.GridBagLayout;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
@@ -11,16 +11,21 @@ import java.util.logging.Logger;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import javax.swing.tree.DefaultMutableTreeNode;
+import modelo.dao.CompraDao;
 import modelo.dao.ProductoDao;
 import modelo.dao.UsuarioDao;
+import modelo.dto.CompraDto;
 import modelo.dto.ProductoDto;
 import modelo.dto.UsuarioDto;
-import vista.paneles.PanelBienvenida;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import src.Info;
+import vista.paneles.PanelCompras;
 
-public class CtrlBienvenida{
+public class CtrlCompras{
     
     // Vista
-    public PanelBienvenida laVista;
+    public PanelCompras laVista;
     public JDialog modalCrearProducto;
     
     // Modelos
@@ -28,41 +33,46 @@ public class CtrlBienvenida{
     private UsuarioDao usuario_dao;
     private ProductoDao producto_dao;
     private ProductoDto producto_dto;
+    private CompraDao compra_dao;
+    private CompraDto compra_dto;
     private DefaultMutableTreeNode treeNode1;
     
     // Atributos
-    private static CtrlBienvenida instancia;
-    private List<ProductoDto> lstMisProductos;
-    private Integer cantidadResultado;
+    static Log logger = LogFactory.getLog(CtrlCompras.class);
+    private static CtrlCompras instancia;
+    private List<CompraDto> lstMisCompras;
+    private Integer cantidadResultados;
     private Integer totalProductosExistentes;
-    private Integer cantidaPorPagina;
+    private Integer cantidadPorPagina;
     private boolean activarBusqueda;
-    private static final Logger LOG = Logger.getLogger(CtrlBienvenida.class.getName());
-    
+    private static final Logger LOG = Logger.getLogger(CtrlCompras.class.getName());
 
     // Constructor
-    public CtrlBienvenida(PanelBienvenida laVista, UsuarioDto dto, UsuarioDao dao) {
+    public CtrlCompras(PanelCompras laVista, UsuarioDto dto, UsuarioDao dao) {
         this.laVista = laVista;
         this.usuario_dto = dto;
         this.usuario_dao = dao;
         this.producto_dao = new ProductoDao();
         this.producto_dto = new ProductoDto();
-        this.cantidadResultado = 0;
-        this.cantidaPorPagina = 3;
+        this.compra_dao = new CompraDao();
+        this.compra_dto = new CompraDto();
+        this.cantidadResultados = 0;
+        this.cantidadPorPagina = Info.veontecResultadoPorPagina;
         this.activarBusqueda = false;
     }
     
     // Obtener instancia | Singleton
-    public static CtrlBienvenida getInstancia(PanelBienvenida laVista, UsuarioDto dto, UsuarioDao dao){
-        LOG.info("Inicializando || CtrlBienvenida::getInstancia ");
+    public static CtrlCompras getInstancia(PanelCompras laVista, UsuarioDto dto, UsuarioDao dao){
+        logger.info("Inicializando controlador");
+        
         if( instancia == null ){
-            LOG.info("Creado || CtrlBienvenida::getInstancia ");
-            instancia = new CtrlBienvenida(laVista, dto, dao);
+            logger.warn("Creando instancia");
+            instancia = new CtrlCompras(laVista, dto, dao);
             instancia.mtdInit();
-            
+        
         }else{
             instancia.mtdMostrarProducto(false);
-            
+        
         }
         
         return instancia;
@@ -112,59 +122,58 @@ public class CtrlBienvenida{
     
     // Métodos
     private void mtdInit(){
-        LOG.info("Ejecutando || CtrlBienvenida::mtdInit ");
-        mtdEventoBtnSiguiente();
-        mtdEventoBtnPrevia();
+        logger.info("Ejecutando metodo una vez (obligatorio)");
         mtdEventoBtnBuscar();
+        mtdEventoBtnPrevia();
+        mtdEventoBtnSiguiente();
         mtdEventoCmpBuscarProducto();
         mtdMostrarProducto(false);
     }
     
-    public static boolean mtdRecargar(){
+    public static boolean mtdRecargarCompras(){
+        logger.warn("Ejecutando metodo ");
+        //if( instancia == null ){
+            //instancia.mtdInit();
+        //}
+        
         instancia.mtdMostrarProducto(false);
         return true;
     }
     
-    private synchronized void mtdMostrarProducto(boolean busqueda){
-        LOG.warning("Inicializando ... ");
+    private void mtdMostrarProducto(boolean busqueda){
+        logger.info("Iniciando...");
         
-        int totalProductos=0;
+        int totalProductos = 0;
         laVista.pnContenedor.setLayout(new GridBagLayout());
         laVista.pnContenedor.removeAll();
         
-        if( busqueda == false ){
-            lstMisProductos = producto_dao.mtdListar(cantidaPorPagina, cantidadResultado);
-            totalProductosExistentes = producto_dao.mtdRowCountAllProductos();
-        }else{
-            producto_dto.setProdTitulo('%'+laVista.cmpBusqueda.getText().trim()+'%');
-            producto_dto.setProdCategoria('%'+laVista.cmpBusqueda.getText().trim()+'%');
-            lstMisProductos = producto_dao.mtdBuscarAllProductosSimilares(producto_dto, cantidaPorPagina, cantidadResultado);
-            totalProductosExistentes = producto_dao.mtdRowCountAllProductosSimilares(producto_dto);
+        
+        // El usuario actual es el comprador
+        compra_dto.setCompComprador( usuario_dto.getCmpID() );
+        
+        logger.info("listando...");
+        if( busqueda == false){
+            lstMisCompras = compra_dao.mtdListar(compra_dto, cantidadPorPagina, cantidadResultados);
+            totalProductosExistentes = Integer.parseInt(""+ compra_dao.mtdRowCount(compra_dto));
+        } else{
+            compra_dto.setCompTitulo('%'+laVista.cmpBusqueda.getText()+'%');
+            lstMisCompras = compra_dao.mtdBuscarAllComprasPorUsuario(compra_dto, cantidadPorPagina, cantidadResultados);
+            totalProductosExistentes = Integer.parseInt(""+ compra_dao.mtdRowCountAllComprasPorUsuario(compra_dto));
         }
         
-        totalProductos = lstMisProductos.size();
+        totalProductos = lstMisCompras.size();
         if( totalProductos > 0 ){
-        
-            int columna = 0, fila = 0; // Establecer contadores para columnas y filas
-            int productos = 3; // Establecer cantida de producto a mostrar por fila
-            LOG.warning(" Recorriendo productos. ");
+            
+            logger.warn("Recorriendo productos");
             for (int i = 0; i < totalProductos; i++) {
-                CtrlCardProducto tarjeta = new CtrlCardProducto(lstMisProductos.get(i), producto_dao);
-                tarjeta.setItem(fila);
-                tarjeta.setColumna(columna);
-
+                CtrlCardCompra tarjeta = new CtrlCardCompra(lstMisCompras.get(i));
+                tarjeta.setItem(i);
                 tarjeta.mtdInit();
-                LOG.warning(" Agregando producto: #" + i);
                 laVista.pnContenedor.add(tarjeta.getLaVista(), tarjeta.getTarjeta_dimensiones());
-                columna++;
-
-                if( columna >= productos ){
-                    columna = 0;
-                    fila++;
-                }
             }
             
         }
+            
         
         laVista.pnContenedor.validate();
         laVista.pnContenedor.revalidate();
@@ -173,12 +182,12 @@ public class CtrlBienvenida{
     }
     
     private void mtdMostrarProductosPrevias(){
-        cantidadResultado -= cantidaPorPagina;
-        //pagProductos = cantidadResultado <= 0 ? 0 : cantidadResultado;
-        //LOG.info("Productos previas : " + cantidadResultado );
+        cantidadResultados -= cantidadPorPagina;
+        //pagProductos = cantidadResultados <= 0 ? 0 : cantidadResultados;
+        //LOG.info("Productos previas : " + cantidadResultados );
         
-        if( cantidadResultado < 0  ){
-            cantidadResultado = 0;
+        if( cantidadResultados < 0  ){
+            cantidadResultados = 0;
             JOptionPane.showMessageDialog(laVista, "No hay más resultados por mostrar.");
             laVista.btnPrevia.setEnabled(false);
             return;
@@ -190,12 +199,12 @@ public class CtrlBienvenida{
     }
     
     private void mtdMostrarProductosSiguiente(){
-        cantidadResultado += cantidaPorPagina;
-        //pagProductos = cantidadResultado >= totalProductosExistentes ? totalProductosExistentes: cantidadResultado;
-        //LOG.info("Productos siguientes : " + cantidadResultado );
+        cantidadResultados += cantidadPorPagina;
+        //pagProductos = cantidadResultados >= totalProductosExistentes ? totalProductosExistentes: cantidadResultados;
+        //LOG.info("Productos siguientes : " + cantidadResultados +" : Productos existentes : " + totalProductosExistentes );
         
-        if( cantidadResultado >= totalProductosExistentes ){
-            cantidadResultado = totalProductosExistentes;
+        if( cantidadResultados >= totalProductosExistentes ){
+            cantidadResultados = totalProductosExistentes;
             JOptionPane.showMessageDialog(laVista, "No hay más resultados por mostrar.");
             laVista.btnSiguiente.setEnabled(false);
             return;
@@ -210,7 +219,7 @@ public class CtrlBienvenida{
         laVista.btnPrevia.setEnabled(true);
         laVista.btnSiguiente.setEnabled(true);
         
-        cantidadResultado=0;
+        cantidadResultados=0;
         if( laVista.cmpBusqueda.getText().trim().isEmpty() || laVista.cmpBusqueda.isVacio() ){
             activarBusqueda = false;
         }else{
