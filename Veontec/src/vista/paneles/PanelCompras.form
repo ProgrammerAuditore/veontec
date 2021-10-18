@@ -39,7 +39,7 @@
                       <Group type="102" alignment="0" attributes="0">
                           <Component id="jPanel3" min="-2" max="-2" attributes="0"/>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Component id="jScrollPane1" pref="0" max="32767" attributes="0"/>
+                          <Component id="scpContenedor" pref="0" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
@@ -56,7 +56,7 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="jPanel3" max="32767" attributes="0"/>
-                      <Component id="jScrollPane1" max="32767" attributes="0"/>
+                      <Component id="scpContenedor" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
@@ -109,13 +109,13 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="campoTexto1" min="-2" pref="260" max="-2" attributes="0"/>
+                      <Component id="cmpBusqueda" min="-2" pref="260" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="boton1" min="-2" pref="90" max="-2" attributes="0"/>
+                      <Component id="btnBuscar" min="-2" pref="90" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
-                      <Component id="boton3" min="-2" pref="55" max="-2" attributes="0"/>
+                      <Component id="btnPrevia" min="-2" pref="55" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="boton2" min="-2" pref="55" max="-2" attributes="0"/>
+                      <Component id="btnSiguiente" min="-2" pref="55" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -126,15 +126,15 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
-                              <Component id="boton3" min="-2" max="-2" attributes="0"/>
+                              <Component id="btnPrevia" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="32767" attributes="0"/>
                           </Group>
                           <Group type="102" attributes="0">
                               <Group type="103" groupAlignment="1" attributes="0">
-                                  <Component id="boton2" alignment="1" max="32767" attributes="0"/>
+                                  <Component id="btnSiguiente" alignment="1" max="32767" attributes="0"/>
                                   <Group type="103" alignment="0" groupAlignment="1" attributes="0">
-                                      <Component id="boton1" min="-2" max="-2" attributes="0"/>
-                                      <Component id="campoTexto1" min="-2" max="-2" attributes="0"/>
+                                      <Component id="btnBuscar" min="-2" max="-2" attributes="0"/>
+                                      <Component id="cmpBusqueda" min="-2" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                               <EmptySpace max="32767" attributes="0"/>
@@ -145,27 +145,39 @@
             </DimensionLayout>
           </Layout>
           <SubComponents>
-            <Component class="vista.componentes.campos.CampoTexto" name="campoTexto1">
+            <Component class="vista.componentes.campos.CampoTexto" name="cmpBusqueda">
               <Properties>
                 <Property name="placeholder" type="java.lang.String" value="Buscar una compra por producto"/>
               </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+              </AuxValues>
             </Component>
-            <Component class="vista.componentes.boton.Boton" name="boton1">
+            <Component class="vista.componentes.boton.Boton" name="btnBuscar">
               <Properties>
                 <Property name="imgButtonType" type="java.lang.String" value="dark"/>
                 <Property name="texto" type="java.lang.String" value="Buscar"/>
               </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+              </AuxValues>
             </Component>
-            <Component class="vista.componentes.boton.Boton" name="boton2">
+            <Component class="vista.componentes.boton.Boton" name="btnSiguiente">
               <Properties>
                 <Property name="imgButtonType" type="java.lang.String" value="danger"/>
                 <Property name="texto" type="java.lang.String" value="Sig."/>
               </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+              </AuxValues>
             </Component>
-            <Component class="vista.componentes.boton.Boton" name="boton3">
+            <Component class="vista.componentes.boton.Boton" name="btnPrevia">
               <Properties>
                 <Property name="texto" type="java.lang.String" value="Prev."/>
               </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+              </AuxValues>
             </Component>
           </SubComponents>
         </Container>
@@ -189,7 +201,7 @@
             </DimensionLayout>
           </Layout>
         </Container>
-        <Container class="javax.swing.JScrollPane" name="jScrollPane1">
+        <Container class="javax.swing.JScrollPane" name="scpContenedor">
 
           <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
           <SubComponents>

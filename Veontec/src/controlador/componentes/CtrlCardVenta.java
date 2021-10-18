@@ -24,10 +24,10 @@ import vista.paneles.componentes.PanelCardVenta;
 public class CtrlCardVenta {
 
     
-    // * Vista
+    // ***** Vista
     private PanelCardVenta tarjeta;
     
-    // * Modelo
+    // ***** Modelo
     private VentaDto ventDto;
     private VentaDao ventDao;
     private ProductoDto prodDto;
@@ -35,12 +35,12 @@ public class CtrlCardVenta {
     private UsuarioDto usuaDto;
     private UsuarioDao usuaDao;
     
-    // * Atributos
+    // ***** Atributos
     private GridBagConstraints tarjeta_dimensiones;
     private Integer item;
     private ImageIcon portada;
     
-    // Constructor
+    // ***** Constructor
     public CtrlCardVenta(VentaDto ventDto, ProductoDto prodDto) {
         this.tarjeta = new PanelCardVenta();
         this.ventDto = ventDto;
@@ -52,7 +52,7 @@ public class CtrlCardVenta {
         this.tarjeta_dimensiones = new GridBagConstraints();
     }
     
-    // Eventos
+    // ***** Eventos
     private void mtdCrearEventoBtnGuardar(){
         MouseListener eventoBtnComprar = null;
         tarjeta.etqTitulo.removeMouseListener(eventoBtnComprar);
@@ -67,7 +67,7 @@ public class CtrlCardVenta {
         tarjeta.etqTitulo.addMouseListener(eventoBtnComprar);
     }
     
-    // Métodos
+    // ***** Métodos
     public void mtdInit(){
         mtdEstablecerDimensiones();
         mtdEstablecerOpciones();

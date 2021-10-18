@@ -1,9 +1,7 @@
 package controlador.componentes;
 
-import controlador.CtrlMiTienda;
+import controlador.tabs.CtrlMiTienda;
 import controlador.acciones.CtrlModalEditarProducto;
-import index.Veontec;
-import java.awt.Dialog;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.Image;
@@ -11,8 +9,6 @@ import java.awt.Insets;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
@@ -24,25 +20,24 @@ import javax.swing.JOptionPane;
 import modelo.dao.ProductoDao;
 import modelo.dto.ProductoDto;
 import vista.paneles.componentes.PanelCardMiProducto;
-import vista.paneles.acciones.PanelCrearProducto;
 
 public class CtrlCardMiProducto {
 
     
-    // * Vista
+    // ***** Vista
     private PanelCardMiProducto tarjeta;
     public JDialog modalCrearProducto;
     
-    // * Modelo
+    // ***** Modelo
     private ProductoDto prodDto;
     private ProductoDao prodDao;
     
-    // * Atributos
+    // ***** Atributos
     private GridBagConstraints tarjeta_dimensiones;
     private Integer item;
     private ImageIcon portada;
     
-    // Constructor
+    // ***** Constructor
     public CtrlCardMiProducto(ProductoDto prodDto, ProductoDao prodDao) {
         this.tarjeta = new PanelCardMiProducto();
         this.prodDto = prodDto;
@@ -50,7 +45,7 @@ public class CtrlCardMiProducto {
         this.tarjeta_dimensiones = new GridBagConstraints();
     }
     
-    // Eventos
+    // ***** Eventos
     private void mtdCrearEventoBtnRemover(){
         MouseListener eventoBtnComprar = null;
         tarjeta.btnEliminar.removeMouseListener(eventoBtnComprar);
@@ -81,7 +76,7 @@ public class CtrlCardMiProducto {
         tarjeta.btnEditar.addMouseListener(eventoBtnEditar);
     }
     
-    // Métodos
+    // ***** Métodos
     public void mtdInit(){
         mtdEstablecerDimensiones();
         mtdCrearEventoBtnRemover();

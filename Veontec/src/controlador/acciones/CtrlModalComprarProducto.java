@@ -1,5 +1,6 @@
 package controlador.acciones;
 
+import controlador.tabs.CtrlBienvenida;
 import index.Veontec;
 import java.awt.Dialog;
 import java.awt.event.KeyAdapter;
@@ -17,28 +18,33 @@ import javax.swing.JOptionPane;
 import modelo.dao.CompraDao;
 import modelo.dao.ProductoDao;
 import modelo.dao.UsuarioDao;
+import modelo.dao.VentaDao;
 import modelo.dto.CompraDto;
 import modelo.dto.ProductoDto;
 import modelo.dto.UsuarioDto;
+import modelo.dto.VentaDto;
+import src.Funciones;
 import vista.paneles.acciones.PanelHacerCompra;
 
 public class CtrlModalComprarProducto {
 
-    // * Vista
+    // ***** Vista
     private PanelHacerCompra pnHacerCompra;
     private JDialog modal;
 
-    // * Modelo
+    // ***** Modelo
     private ProductoDto prodDto;
     private ProductoDao prodDao;
     private CompraDto compDto;
     private CompraDao compDao;
+    private VentaDao ventaDao;
+    private VentaDto ventaDto;
     private UsuarioDao usuaDao;
     private UsuarioDto usuaDto;
 
-    // * Atributos
+    // ***** Atributos
 
-    // * Controlador
+    // ***** Controlador
     public CtrlModalComprarProducto(ProductoDto producto_dto) {
         this.prodDto = producto_dto;
         this.prodDao = new ProductoDao();
@@ -46,9 +52,11 @@ public class CtrlModalComprarProducto {
         this.usuaDao = new UsuarioDao();
         this.compDto = new CompraDto();
         this.compDao = new CompraDao();
+        this.ventaDto = new VentaDto();
+        this.ventaDao = new VentaDao();
     }
 
-    // * Eventos
+    // ***** Eventos
     private void mtdBuildEventoBtnCancelar() {
         MouseListener eventoBtnCancelar = null;
         pnHacerCompra.btnCancelar.removeMouseListener(eventoBtnCancelar);
@@ -131,7 +139,7 @@ public class CtrlModalComprarProducto {
         pnHacerCompra.cmpCantidad.addKeyListener(eventoCampoCantidad);
     }
     
-    // * Métodos
+    // ***** Métodos
     public void mtdInit() {
         modal = new JDialog(Veontec.ventanaHome);
         pnHacerCompra = new PanelHacerCompra();
@@ -180,24 +188,66 @@ public class CtrlModalComprarProducto {
     }
     
     private void mtdComprar() {
-        Integer cmpCantidad = Integer.parseInt( pnHacerCompra.cmpCantidad.getText() );
-        Double cmpPrecio = Double.parseDouble( pnHacerCompra.cmpPrecio.getText() );
-        BigDecimal precio  = new BigDecimal( (cmpCantidad * cmpPrecio) );
-        String cmpTitulo = pnHacerCompra.cmpTitulo.getText();
-        usuaDto = Veontec.usuarioDto; 
-                
-        compDto.setCompProducto( prodDto.getProdID() );
-        compDto.setCompVendedor( prodDto.getProdUsuario() );
-        compDto.setCompComprador( usuaDto.getCmpID() );
-        compDto.setCompTitulo( cmpTitulo );
-        compDto.setCompCantidad( cmpCantidad );        
-        compDto.setCompPrecio( precio.doubleValue() );
-        compDto.setCompFecha("11-11-1111");
-        compDto.setCompEstado(0);        
         
-        if( compDao.mtdInsetar(compDto)  ){
-            JOptionPane.showMessageDialog(null, "Se realizo la compra exitosamente.");
+        if( !pnHacerCompra.btnMtdDebito.isSelected() && !pnHacerCompra.btnMtdPaypal.isSelected() ){
+            JOptionPane.showMessageDialog(Veontec.ventanaHome, "Selecciona un método de pago.");
+        
+        }else
+        if( !pnHacerCompra.cmpCantidad.isAprobado() || Integer.valueOf(pnHacerCompra.cmpCantidad.getText()) == 0  ){
+            JOptionPane.showMessageDialog(Veontec.ventanaHome, "Introduce la cantida de compra.");
+        
+        }else
+        if(  !pnHacerCompra.mtdComprobarMtdDebito() && !pnHacerCompra.mtdComprobarMtdPayPal()  ){
+            JOptionPane.showMessageDialog(Veontec.ventanaHome, "Verifique que los campos en el método de pago sean correctos.");
+        
+        }else{
+            
+            String FechaActual = new Funciones().fncObtenerFechaActual();
+            Integer cmpCantidad = Integer.parseInt( pnHacerCompra.cmpCantidad.getText() );
+            Double cmpPrecio = Double.parseDouble( pnHacerCompra.cmpPrecio.getText() );
+            BigDecimal precio  = new BigDecimal( (cmpCantidad * cmpPrecio) );
+            String cmpTitulo = pnHacerCompra.cmpTitulo.getText();
+            usuaDto = Veontec.usuarioDto; 
+            
+            // * Establecer la compra
+            compDto.setCompProducto( prodDto.getProdID() );
+            compDto.setCompVendedor( prodDto.getProdUsuario() );
+            compDto.setCompComprador( usuaDto.getCmpID() );
+            compDto.setCompTitulo( cmpTitulo );
+            compDto.setCompCantidad( cmpCantidad );        
+            compDto.setCompPrecio( precio.doubleValue() );
+            compDto.setCompFecha( FechaActual );
+            compDto.setCompEstado(0);      
+            
+            // * Establecer la venta
+            ventaDto.setVentCantidad( cmpCantidad );
+            ventaDto.setVentComprador( usuaDto.getCmpID() );
+            ventaDto.setVentVendedor( prodDto.getProdUsuario() );
+            ventaDto.setVentTitulo( prodDto.getProdTitulo() );
+            ventaDto.setVentProducto( prodDto.getProdID() );
+            ventaDto.setVentPrecio( prodDto.getProdPrecio() );
+            ventaDto.setVentFecha( FechaActual );
+            ventaDto.setVentEstado(0);
+            
+            // * Establecer el producto
+            prodDto.setProdStock( prodDto.getProdStock() - cmpCantidad );
+            
+            // * Establecer hash code
+            int hashCode = new Funciones().hashCodeCompraVenta(ventaDto, compDto);
+            ventaDto.setVentHashCode(hashCode);
+            compDto.setCompHashCode(hashCode);
+            
+
+            // * Realizar la compra
+            if( compDao.mtdInsetar(compDto) && prodDao.mtdActualizar(prodDto) && ventaDao.mtdInsetar(ventaDto) ){
+                CtrlBienvenida.mtdRecargar();
+                mtdCerrarModal();
+                JOptionPane.showMessageDialog(Veontec.ventanaHome, "La compra se realizo exitosamente.");
+            }
+                
         }
     }
+    
+    
     
 }

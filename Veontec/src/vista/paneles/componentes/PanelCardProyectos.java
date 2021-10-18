@@ -9,10 +9,6 @@ import index.Veontec;
 import java.awt.Color;
 import java.awt.Dimension;
 
-/**
- *
- * @author victo
- */
 public class PanelCardProyectos extends javax.swing.JPanel {
 
     /**

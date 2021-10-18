@@ -8,11 +8,10 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import modelo.dto.CompraDto;
-import modelo.interfaces.keyword_extra;
 import modelo.interfaces.keyword_query;
 
 
-public class CompraDao implements keyword_query<CompraDto>, keyword_extra<CompraDto> {
+public class CompraDao implements keyword_query<CompraDto>{
 
     private final String nombreTabla= "tblcompras";
     
@@ -37,9 +36,9 @@ public class CompraDao implements keyword_query<CompraDto>, keyword_extra<Compra
         PreparedStatement ps = null;
         Connection conn = CtrlHiloConexion.getConexion();
         String query = "INSERT INTO " + nombreTabla + " "
-                + "( compProducto, compVendedor, compComprador, compTitulo, compCantidad, compPrecio, compFecha, compEstado )"
+                + "( compProducto, compVendedor, compComprador, compTitulo, compCantidad, compPrecio, compFecha, compEstado, compHashCode )"
                 + "VALUES "
-                + "( ?, ?, ?, ?, ?, ?, ?, ?); ";
+                + "( ?, ?, ?, ?, ?, ?, ?, ?, ?); ";
         
         try {
             
@@ -53,6 +52,7 @@ public class CompraDao implements keyword_query<CompraDto>, keyword_extra<Compra
             ps.setDouble(6, obj_dto.getCompPrecio());
             ps.setString(7, obj_dto.getCompFecha());
             ps.setInt(8, obj_dto.getCompEstado());
+            ps.setInt(9, obj_dto.getCompHashCode());
             
             // * Ejecutar la consulta
             int respuesta = ps.executeUpdate();
@@ -163,6 +163,7 @@ public class CompraDao implements keyword_query<CompraDto>, keyword_extra<Compra
                 compra.setCompPrecio( rs.getDouble("compPrecio") );
                 compra.setCompCantidad( rs.getInt("compCantidad") );
                 compra.setCompEstado( rs.getInt("compEstado") );
+                compra.setCompHashCode( rs.getInt("compHashCode") );
             }
             
         } catch (SQLException e) {
@@ -172,7 +173,6 @@ public class CompraDao implements keyword_query<CompraDto>, keyword_extra<Compra
         return compra;
     }
 
-    @Override
     public List<CompraDto> mtdListar(CompraDto obj_dto) {
         // * Funciona perfectamente
         
@@ -204,6 +204,7 @@ public class CompraDao implements keyword_query<CompraDto>, keyword_extra<Compra
                 compra.setCompPrecio( rs.getDouble("compPrecio") );
                 compra.setCompCantidad( rs.getInt("compCantidad") );
                 compra.setCompEstado( rs.getInt("compEstado") );
+                compra.setCompHashCode( rs.getInt("compHashCode") );
                 ventas.add(compra);
             }
             
@@ -230,7 +231,6 @@ public class CompraDao implements keyword_query<CompraDto>, keyword_extra<Compra
     * @return      Una lista de objetos de tipo <tt>CompraDto<tt>
     * @see         CompraDto
     */
-    @Override
     public List<CompraDto> mtdListar(CompraDto obj_dto, int inicio, int fin) {
         // Funciona perfectamente
         
@@ -265,6 +265,7 @@ public class CompraDao implements keyword_query<CompraDto>, keyword_extra<Compra
                 compra.setCompPrecio( rs.getDouble("compPrecio") );
                 compra.setCompCantidad( rs.getInt("compCantidad") );
                 compra.setCompEstado( rs.getInt("compEstado") );
+                compra.setCompHashCode( rs.getInt("compHashCode") );
                 ventas.add(compra);
             }
             
@@ -274,9 +275,8 @@ public class CompraDao implements keyword_query<CompraDto>, keyword_extra<Compra
         
         return ventas;
     }
-
-    @Override
-    public long mtdRowCount(CompraDto obj_dto) {
+    
+    public long mtdRowCountAllComprasPorUsuario(CompraDto obj_dto) {
         // * Funciona perfectamente
         
         PreparedStatement ps = null;
@@ -306,34 +306,81 @@ public class CompraDao implements keyword_query<CompraDto>, keyword_extra<Compra
         return registros;
     }
     
-    @Override
-    public long mtdRowCount() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public long mtdRowCountAllComprasPorUsuarioSimilares(CompraDto obj_dto) {
+        // * Funciona perfectamente
+        
+        PreparedStatement ps = null;
+        Connection conn = CtrlHiloConexion.getConexion();
+        String query = "SELECT COUNT(*) FROM " + nombreTabla + " "
+                // * Buscamos el producto del usuario respectivo
+                + "WHERE compComprador = ? AND compTitulo LIKE ? ;";
+        long registros = 0;
+        
+        try {
+            
+            // * Preparar la consulta
+            ps = conn.prepareStatement(query.toLowerCase());
+            ps.setInt(1, obj_dto.getCompComprador());
+            ps.setString(2, obj_dto.getCompTitulo());
+            
+            // * Ejecutar la consulta
+            ResultSet rs = ps.executeQuery();
+            
+            // * Si la respuesta es mayor a 0 significa que la consulta fue exitosa.
+            if( rs.next() )
+                registros = rs.getInt(1);
+            
+        } catch (SQLException e) {
+            System.out.println("" + e.getMessage());
+        }
+        
+        return registros;
     }
     
-    @Override
-    public List<CompraDto> mtdListar(int inicio, int fin) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-    
-    @Override
-    public List<CompraDto> mtdListar() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-    
-    @Override
-    public long mtdRowCount(int estado) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public boolean mtdComprobar(CompraDto obj_dto) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public boolean mtdEliminar(CompraDto obj_dto) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public List<CompraDto> mtdBuscarAllComprasPorUsuarioSimilares(CompraDto obj_dto, int inicio, int fin) {
+        // Funciona perfectamente
+        
+        List<CompraDto> ventas = null;
+        PreparedStatement ps = null;
+        Connection conn = CtrlHiloConexion.getConexion();
+        String query = "SELECT * FROM " + nombreTabla + " "
+                // * Buscamos el producto del usuario respectivo
+                + "WHERE compComprador = ? AND compTitulo LIKE ? "
+                + "LIMIT ? OFFSET ? ; ";
+        
+        try {
+            
+            // * Preparar la consulta
+            ps = conn.prepareStatement(query.toLowerCase());
+            ps.setInt(1, obj_dto.getCompComprador());
+            ps.setString(2, obj_dto.getCompTitulo());
+            ps.setInt(3, inicio);
+            ps.setInt(4, fin);
+            
+            // * Ejecutar la consulta
+            ResultSet rs = ps.executeQuery();
+            
+            ventas = new ArrayList<>();
+            while( rs.next() ){
+                CompraDto compra = new CompraDto(); 
+                compra.setCompID( rs.getInt("compID") );
+                compra.setCompProducto( rs.getInt("compProducto") );
+                compra.setCompComprador( rs.getInt("compComprador") );
+                compra.setCompVendedor(rs.getInt("compVendedor") );
+                compra.setCompTitulo( rs.getString("compTitulo") );
+                compra.setCompFecha( rs.getString("compFecha") );
+                compra.setCompPrecio( rs.getDouble("compPrecio") );
+                compra.setCompCantidad( rs.getInt("compCantidad") );
+                compra.setCompEstado( rs.getInt("compEstado") );
+                compra.setCompHashCode( rs.getInt("compHashCode") );
+                ventas.add(compra);
+            }
+            
+        } catch (SQLException e) {
+            System.out.println("" + e.getMessage());
+        }
+        
+        return ventas;
     }
     
 }

@@ -1,6 +1,6 @@
 package controlador.acciones;
 
-import controlador.CtrlPreguntas;
+import controlador.tabs.CtrlPreguntas;
 import index.Veontec;
 import java.awt.Dialog;
 import java.awt.event.MouseAdapter;
@@ -15,23 +15,24 @@ import modelo.dao.PreguntaDao;
 import modelo.dao.ProductoDao;
 import modelo.dto.PreguntaDto;
 import modelo.dto.ProductoDto;
+import src.Funciones;
 import vista.paneles.acciones.PanelHacerPreguntar;
 
 public class CtrlModalHacerPregunta {
 
-    // * Vista
+    // ***** Vista
     private PanelHacerPreguntar laVista;
     private JDialog modal;
     
-    // * Modelo
+    // ***** Modelo
     private PreguntaDto preguntaDto;
     private PreguntaDao preguntaDao;
     private ProductoDto productoDto;
     private ProductoDao productoDao;
     
-    // * Atributo
+    // ***** Atributo
     
-    // * Constructor
+    // ***** Constructor
     public CtrlModalHacerPregunta(ProductoDto productoDto) {
         this.productoDto = productoDto;
         this.laVista = new PanelHacerPreguntar();
@@ -42,7 +43,7 @@ public class CtrlModalHacerPregunta {
         
     }
     
-    // * Eventos
+    // ***** Eventos
     private void mtdEventoBtnCancelar() {
         MouseListener btnCancelar = null;
         laVista.btnCancelar.removeMouseListener(btnCancelar);
@@ -93,7 +94,7 @@ public class CtrlModalHacerPregunta {
         modal.addWindowListener(evtWindow);
     }
     
-    // * Métodos
+    // ***** Métodos
     public void mtdInit(){
         mtdEstablecerDatos();
         mtdAgregerEventoWindow();
@@ -133,9 +134,10 @@ public class CtrlModalHacerPregunta {
             
             preguntaDto.setPregComprador( Veontec.usuarioDto.getCmpID() );
             preguntaDto.setPregEstado(0);
-            preguntaDto.setPregFecha("08/10/2021");
+            preguntaDto.setPregFecha( new Funciones().fncObtenerFechaActual());
             preguntaDto.setPregPregunta( laVista.cmpPregunta.getText() );
             preguntaDto.setPregProducto( productoDto.getProdID() );
+            preguntaDto.setPregTitulo( productoDto.getProdTitulo() );
             preguntaDto.setPregVendedor( productoDto.getProdUsuario() );
             
             if( preguntaDao.mtdInsetar(preguntaDto) ){

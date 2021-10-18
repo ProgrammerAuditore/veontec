@@ -68,21 +68,21 @@ public class CampoNumerico extends JTextField implements FocusListener, KeyListe
     }
     
     // Métodos custom
-    private void getEstiloTextEmpty(){
+    public void getEstiloTextEmpty(){
         setBackground( backgroundColor );
         setBorderMargin( Color.RED );
         setForeground( placeholderColor );
         setCaretColor( cursorColor );
     }
     
-    private void getEstiloTextEscritura(){
+    public void getEstiloTextEscritura(){
         setBackground( backgroundColor );
         setBorderMargin( borderColor );
         setForeground( textoColor );
         setCaretColor( cursorColor );
     }
     
-    private void getEstiloTextEstablecido(){
+    public void getEstiloTextEstablecido(){
         setBackground( backgroundColor );
         setBorderMargin( borderColor );
         setForeground( textoColor );
@@ -134,7 +134,8 @@ public class CampoNumerico extends JTextField implements FocusListener, KeyListe
     }
     
     public boolean isAprobado(){
-        return !getText().equals( getPlaceholder() );          
+        return !getText().equals( getPlaceholder() ) && 
+                Integer.valueOf(getText()) > 0;          
     }
     
     @Override
@@ -192,6 +193,12 @@ public class CampoNumerico extends JTextField implements FocusListener, KeyListe
 
     @Override
     public void keyReleased(KeyEvent e) {
+    }
+    
+    @Override
+    public void setEnabled(boolean enabled) {
+        super.setEnabled(enabled);
+        getEstiloTextEscritura();
     }
 
     public boolean isVerificarCampo() {

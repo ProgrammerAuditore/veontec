@@ -1,17 +1,17 @@
 package modelo;
 
-import java.io.File;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.crypto.SecretKey;
 import modelo.dto.UsuarioDto;
 import org.apache.commons.mail.DefaultAuthenticator;
-import org.apache.commons.mail.EmailAttachment;
 import org.apache.commons.mail.EmailException;
 import org.apache.commons.mail.HtmlEmail;
-import org.apache.commons.mail.MultiPartEmail;
+import src.Info;
 
 public class ObjEmail {
     
@@ -31,11 +31,12 @@ public class ObjEmail {
         
         try {
             // Create the emailHtml message
-            emailHtml.setHostName("in-v3.mailjet.com");
-            emailHtml.setSmtpPort(587);
-            emailHtml.setAuthenticator(new DefaultAuthenticator("dabf6d9831bdc3404e03d0bd9aebd337", "09af06a814d962d5b7cc20ec093f41e8"));
-            emailHtml.setSSLOnConnect(true);
-            emailHtml.setFrom("sfw.veontec@gmail.com");
+            emailHtml.setHostName(Info.smtpHostName);
+            emailHtml.setSmtpPort(Info.smtpPort);
+            emailHtml.setAuthenticator(new DefaultAuthenticator(Info.smtpUser, Info.smtpPasswd));
+            emailHtml.setSSLOnConnect(Info.smtpOnSSL);
+            emailHtml.setStartTLSEnabled(Info.smtpOnTLS);
+            emailHtml.setFrom(Info.smtpSetFrom);
             emailHtml.setSubject("Account verification hash code");
             emailHtml.addTo("" + usuarioDto.getCmpCorreo());
 
@@ -44,7 +45,7 @@ public class ObjEmail {
             String cid = emailHtml.embed(url, "Apache logo");
 
             // set the html message
-            emailHtml.setHtmlMsg(ObjEmail.mtdMsgHtml(emailHtml, "Account verification code:", keyCodificado ));
+            emailHtml.setHtmlMsg(ObjEmail.mtdMsgHtml(emailHtml, "Account verification hash code:", keyCodificado ));
 
             // set the alternative message
             emailHtml.setTextMsg("Your email client does not support HTML messages");
@@ -53,12 +54,14 @@ public class ObjEmail {
             emailHtml.send();
         } catch (EmailException ex) {
             Logger.getLogger(ObjEmail.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
         } catch (MalformedURLException ex) {
             Logger.getLogger(ObjEmail.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
         }
         
         usuarioDto.setCmpKey(keyCodificado);
-        usuarioDto.setCmpEstado(333); // Verificar correo
+        usuarioDto.setCmpEstado(Info.veontecCuentaNoVerificada);
         
         return true;
     }
@@ -70,8 +73,10 @@ public class ObjEmail {
        
         try {
             
-            key_codificado = ObjKey.getKeyFromPassword(usuarioDto.getCmpCorreo(), usuarioDto.getCmpPassword());
+            key_codificado = ObjKey.getKeyFromPassword(usuarioDto.getCmpCorreo()+"."+usuarioDto.getCmpPassword(), 
+                    usuarioDto.getCmpCorreo()+"."+new ObjEmail().fncObtenerFechaYHoraActual());
             keyCodificado = ObjKey.convertSecretKeyToString(key_codificado);
+            keyCodificado = keyCodificado.substring(0, 16);
             
         } catch (Exception ex) {
             return false;
@@ -79,11 +84,12 @@ public class ObjEmail {
         
         try {
             // Create the emailHtml message
-            emailHtml.setHostName("in-v3.mailjet.com");
-            emailHtml.setSmtpPort(587);
-            emailHtml.setAuthenticator(new DefaultAuthenticator("dabf6d9831bdc3404e03d0bd9aebd337", "09af06a814d962d5b7cc20ec093f41e8"));
-            emailHtml.setSSLOnConnect(true);
-            emailHtml.setFrom("sfw.veontec@gmail.com");
+            emailHtml.setHostName(Info.smtpHostName);
+            emailHtml.setSmtpPort(Info.smtpPort);
+            emailHtml.setAuthenticator(new DefaultAuthenticator(Info.smtpUser, Info.smtpPasswd));
+            emailHtml.setSSLOnConnect(Info.smtpOnSSL);
+            emailHtml.setStartTLSEnabled(Info.smtpOnTLS);
+            emailHtml.setFrom(Info.smtpSetFrom);
             emailHtml.setSubject("Temporary password for account recovery");
             emailHtml.addTo("" + usuarioDto.getCmpCorreo());
 
@@ -101,18 +107,20 @@ public class ObjEmail {
             emailHtml.send();
         } catch (EmailException ex) {
             Logger.getLogger(ObjEmail.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
         } catch (MalformedURLException ex) {
             Logger.getLogger(ObjEmail.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
         }
         
         usuarioDto.setCmpKey(keyCodificado);
-        usuarioDto.setCmpEstado(333); // Verificar correo
+        usuarioDto.setCmpEstado(Info.veontecRecuperarCuenta);
         
         return true;
     }
     
     public static boolean mtdEnviarBienvenida(UsuarioDto usuarioDto){
-        HtmlEmail email = new HtmlEmail();
+        HtmlEmail emailHtml = new HtmlEmail();
         
         try {
             // Create the attachment
@@ -120,35 +128,40 @@ public class ObjEmail {
             //File archivo = new File("P:\\Pictures\\ezio.png");
             
             // Create the emailHtml message
-            email.setHostName("in-v3.mailjet.com");
-            email.setSmtpPort(587);
-            email.setAuthenticator(new DefaultAuthenticator("dabf6d9831bdc3404e03d0bd9aebd337", "09af06a814d962d5b7cc20ec093f41e8"));
-            email.setSSLOnConnect(true);
-            email.setFrom("sfw.veontec@gmail.com");
-            email.setSubject("Account verification");
-            email.addTo("" + usuarioDto.getCmpCorreo());
+            emailHtml.setHostName(Info.smtpHostName);
+            emailHtml.setSmtpPort(Info.smtpPort);
+            emailHtml.setAuthenticator(new DefaultAuthenticator(Info.smtpUser, Info.smtpPasswd));
+            emailHtml.setSSLOnConnect(Info.smtpOnSSL);
+            emailHtml.setStartTLSEnabled(Info.smtpOnTLS);
+            emailHtml.setFrom(Info.smtpSetFrom);
+            emailHtml.setSubject("Account verification");
+            emailHtml.addTo("" + usuarioDto.getCmpCorreo());
 
             // embed the image and get the content id
             URL url = new URL("http://www.apache.org/images/asf_logo_wide.gif");
-            String cid = email.embed(url, "Apache logo");
+            String cid = emailHtml.embed(url, "Apache logo");
 
             // set the html message
-            email.setHtmlMsg(ObjEmail.mtdMsgHtml(email, "Account verification", "Successfully verified account"));
+            emailHtml.setHtmlMsg(ObjEmail.mtdMsgHtml(emailHtml, "Account verification", "Successfully verified account"));
 
             // set the alternative message
-            email.setTextMsg("Your email client does not support HTML messages");
+            emailHtml.setTextMsg("Your email client does not support HTML messages");
             
             // add the attachment
             //email.attach(attachment);
 
             // send the emailHtml
-            email.send();
+            emailHtml.send();
         } catch (EmailException ex) {
             Logger.getLogger(ObjEmail.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
         } catch (MalformedURLException ex) {
             Logger.getLogger(ObjEmail.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
         }
         
+        // usuarioDto.setCmpKey(keyCodificado);
+        usuarioDto.setCmpEstado(Info.veontecCuentaVerificada);
         return true;
     }
     
@@ -190,100 +203,11 @@ public class ObjEmail {
         return msg;
     } 
     
-    public void mtdEnviarMensajeArchivoAdjunto(){
-        try {
-            // Create the attachment
-            EmailAttachment attachment = new EmailAttachment();
-            File archivo = new File("P:\\Pictures\\ezio.png");
-            
-            attachment.setPath(archivo.getAbsolutePath());
-            attachment.setDisposition(EmailAttachment.ATTACHMENT);
-            attachment.setDescription("Picture of John");
-            attachment.setName("John");
-            
-            // Create the emailHtml message
-            MultiPartEmail email = new MultiPartEmail();
-            email.setHostName("in-v3.mailjet.com");
-            email.setSmtpPort(465);
-            email.setAuthenticator(new DefaultAuthenticator("a1238bce0ca670d72a071451af6accde", "11218c5a874df874ef5aca4aedeada36"));
-            email.setSSLOnConnect(true);
-            email.setFrom("pv19022441@vallarta.tecmm.edu.mx");
-            email.setSubject("mtdEnviarMensajeArchivoAdjunto");
-            email.setMsg("Este es un mensaje de prueba :-)");
-            email.addTo("victorvj098@gmail.com");
-            
-            // add the attachment
-            email.attach(attachment);
-            
-            // send the emailHtml
-            email.send();
-        } catch (EmailException ex) {
-            Logger.getLogger(ObjEmail.class.getName()).log(Level.SEVERE, null, ex);
-        }
+    public String fncObtenerFechaYHoraActual(){
+        LocalDateTime myDateObj = LocalDateTime.now();
+        DateTimeFormatter myFormatObj = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
+        String formattedDate = myDateObj.format(myFormatObj);
+        return formattedDate;
     }
-    
-    public void mtdEnviarMensajeArchivoAdjunto_URL(){
-        try {
-            // Create the attachment
-            EmailAttachment attachment = new EmailAttachment();
-            attachment.setURL(new URL("http://www.apache.org/images/asf_logo_wide.gif"));
-            attachment.setDisposition(EmailAttachment.ATTACHMENT);
-            attachment.setDescription("Apache logo");
-            attachment.setName("Apache logo");
-            
-            // Create the emailHtml message
-            MultiPartEmail email = new MultiPartEmail();
-            email.setHostName("in-v3.mailjet.com");
-            email.setSmtpPort(465);
-            email.setAuthenticator(new DefaultAuthenticator("a1238bce0ca670d72a071451af6accde", "11218c5a874df874ef5aca4aedeada36"));
-            email.setSSLOnConnect(true);
-            email.setFrom("pv19022441@vallarta.tecmm.edu.mx");
-            email.setSubject("mtdEnviarMensajeArchivoAdjunto");
-            email.setMsg("Este es un mensaje de prueba :-)");
-            email.addTo("victorvj098@gmail.com");
-            
-            // add the attachment
-            email.attach(attachment);
-            
-            // send the emailHtml
-            email.send();
-        } catch (EmailException ex) {
-            Logger.getLogger(ObjEmail.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (MalformedURLException ex) {
-            Logger.getLogger(ObjEmail.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-    
-    public void mtdEnviarMensajeArchivoAdjunto_HTML(){
-        try {
-            // Create the emailHtml message
-            HtmlEmail email = new HtmlEmail();
-           
-            email.setHostName("in-v3.mailjet.com");
-            email.setSmtpPort(465);
-            email.setAuthenticator(new DefaultAuthenticator("a1238bce0ca670d72a071451af6accde", "11218c5a874df874ef5aca4aedeada36"));
-            email.setSSLOnConnect(true);
-            email.setFrom("pv19022441@vallarta.tecmm.edu.mx");
-            email.setSubject("mtdEnviarMensajeArchivoAdjunto");
-            email.addTo("victorvj098@gmail.com");
-
-            // embed the image and get the content id
-            URL url = new URL("http://www.apache.org/images/asf_logo_wide.gif");
-            String cid = email.embed(url, "Apache logo");
-
-            // set the html message
-            email.setHtmlMsg("<html>The apache logo - <img src=\"cid:"+cid+"\"></html>");
-
-            // set the alternative message
-            email.setTextMsg("Your email client does not support HTML messages");
-
-            // send the emailHtml
-            email.send();
-        } catch (EmailException ex) {
-            Logger.getLogger(ObjEmail.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (MalformedURLException ex) {
-            Logger.getLogger(ObjEmail.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-    
+        
 }

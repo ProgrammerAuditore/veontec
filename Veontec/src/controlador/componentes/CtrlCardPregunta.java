@@ -1,6 +1,6 @@
 package controlador.componentes;
 
-import controlador.CtrlPreguntas;
+import controlador.tabs.CtrlPreguntas;
 import controlador.acciones.CtrlModalHacerPregunta;
 import index.Veontec;
 import java.awt.Dimension;

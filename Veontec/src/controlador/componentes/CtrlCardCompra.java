@@ -1,6 +1,6 @@
 package controlador.componentes;
 
-import controlador.CtrlCompras;
+import controlador.tabs.CtrlCompras;
 import controlador.acciones.CtrlModalHacerPregunta;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
@@ -19,32 +19,36 @@ import javax.swing.JOptionPane;
 import modelo.dao.CompraDao;
 import modelo.dao.ProductoDao;
 import modelo.dao.UsuarioDao;
+import modelo.dao.VentaDao;
 import modelo.dto.CompraDto;
 import modelo.dto.ProductoDto;
 import modelo.dto.UsuarioDto;
+import modelo.dto.VentaDto;
 import vista.paneles.componentes.PanelCardCompra;
 
 public class CtrlCardCompra {
 
     
-    // * Vista
+    // ***** Vista
     private PanelCardCompra tarjeta;
     
-    // * Modelo
+    // ***** Modelo
     private ProductoDto prodDto;
     private ProductoDao prodDao;
+    private VentaDto ventaDto;
+    private VentaDao ventaDao;
     private UsuarioDao usuaDao;
     private UsuarioDto usuaDto;
     
     private CompraDto compDto;
     private CompraDao compDao;
     
-    // * Atributos
+    // ***** Atributos
     private GridBagConstraints tarjeta_dimensiones;
     private Integer item;
     private ImageIcon portada;
     
-    // Constructor
+    // ***** Constructor
     public CtrlCardCompra(CompraDto compDto) {
         this.tarjeta = new PanelCardCompra();
         this.compDto = compDto;
@@ -53,10 +57,12 @@ public class CtrlCardCompra {
         this.usuaDto = new UsuarioDto();
         this.prodDao = new ProductoDao();
         this.prodDto = new ProductoDto();
+        this.ventaDao = new VentaDao();
+        this.ventaDto = new VentaDto();
         this.tarjeta_dimensiones = new GridBagConstraints();
     }
     
-    // Eventos
+    // ***** Eventos
     private void mtdCrearEventoBtnCancelarCompra(){
         MouseListener eventoBtnComprar = null;
         tarjeta.btnCancelarCompra.removeMouseListener(eventoBtnComprar);
@@ -96,7 +102,7 @@ public class CtrlCardCompra {
         tarjeta.btnHacerPregunta.addMouseListener(eventoBtnHacePregunta);
     }
     
-    // Métodos
+    // ***** Métodos
     public void mtdInit(){
         
         if( compDto.getCompEstado() == 100 ){
@@ -199,27 +205,15 @@ public class CtrlCardCompra {
                     JOptionPane.YES_NO_OPTION );
             
         if( opc == JOptionPane.YES_NO_OPTION ){
-            if( compDao.mtdRemover(compDto) ){
+            prodDto.setProdStock( prodDto.getProdStock() + compDto.getCompCantidad() );
+            ventaDto.setVentComprador( compDto.getCompComprador() );
+            ventaDto.setVentVendedor( compDto.getCompVendedor() );
+            ventaDto.setVentHashCode( compDto.getCompHashCode() );
+            if( compDao.mtdRemover(compDto) && prodDao.mtdActualizar(prodDto) && ventaDao.mtdRemoverPorHashCode(ventaDto) ){
                 CtrlCompras.mtdRecargarCompras();
                 JOptionPane.showMessageDialog(tarjeta, "Producto cancelado exitosamente.");
             }
         }
-        
-        /*
-        if( prodDto != null ){
-            int opc = JOptionPane.showConfirmDialog(tarjeta, 
-                    "¿Seguro que deseas cancelar el producto?",
-                    "Cancelar | " + prodDto.getProdTitulo(),
-                    JOptionPane.YES_NO_OPTION );
-            
-            if( opc == JOptionPane.YES_NO_OPTION ){
-                
-            }
-            
-        }else{
-            JOptionPane.showMessageDialog(tarjeta, "No hay registro sobre el producto.");
-        }
-        */
         
     }
     
