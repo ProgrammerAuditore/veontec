@@ -15,6 +15,7 @@ import modelo.dao.PreguntaDao;
 import modelo.dao.ProductoDao;
 import modelo.dto.PreguntaDto;
 import modelo.dto.ProductoDto;
+import src.Funciones;
 import vista.paneles.acciones.PanelHacerPreguntar;
 
 public class CtrlModalHacerPregunta {
@@ -133,9 +134,10 @@ public class CtrlModalHacerPregunta {
             
             preguntaDto.setPregComprador( Veontec.usuarioDto.getCmpID() );
             preguntaDto.setPregEstado(0);
-            preguntaDto.setPregFecha("08/10/2021");
+            preguntaDto.setPregFecha( new Funciones().fncObtenerFechaActual());
             preguntaDto.setPregPregunta( laVista.cmpPregunta.getText() );
             preguntaDto.setPregProducto( productoDto.getProdID() );
+            preguntaDto.setPregTitulo( productoDto.getProdTitulo() );
             preguntaDto.setPregVendedor( productoDto.getProdUsuario() );
             
             if( preguntaDao.mtdInsetar(preguntaDto) ){

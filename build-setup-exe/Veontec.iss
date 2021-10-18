@@ -3,7 +3,7 @@
 
 ; Variables para el proceso de instalacion
 #define MyAppName "Veontec"
-#define MyAppVersion "v0.9.7"
+#define MyAppVersion "v0.9.87"
 #define MyAppProduccion "Alpha"
 #define MyAppNameFull MyAppName + " " + MyAppVersion + MyAppProduccion
 #define MyAppPublisher "ProgrammerAuditore <victorvj098@gmail.com>"

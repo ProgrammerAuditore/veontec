@@ -16,6 +16,8 @@
  */
 package vista.paneles;
 
+import src.Recursos;
+
 /**
  *
  * @author victor
@@ -27,6 +29,9 @@ public class PanelPreguntas extends javax.swing.JPanel {
      */
     public PanelPreguntas() {
         initComponents();
+        
+        this.scpContenedor.getVerticalScrollBar().setUnitIncrement(Recursos.scpDesplazamiento);
+        this.scpContenedor.getHorizontalScrollBar().setUnitIncrement(Recursos.scpDesplazamiento);
     }
 
     /**
@@ -42,12 +47,12 @@ public class PanelPreguntas extends javax.swing.JPanel {
         jPanel1 = new javax.swing.JPanel();
         titulo1 = new vista.componentes.etiqueta.Titulo();
         jPanel2 = new javax.swing.JPanel();
-        campoTexto1 = new vista.componentes.campos.CampoTexto();
-        boton1 = new vista.componentes.boton.Boton();
-        boton2 = new vista.componentes.boton.Boton();
-        boton3 = new vista.componentes.boton.Boton();
+        cmpBusqueda = new vista.componentes.campos.CampoTexto();
+        btnBuscar = new vista.componentes.boton.Boton();
+        btnSiguiente = new vista.componentes.boton.Boton();
+        btnPrevia = new vista.componentes.boton.Boton();
         jPanel3 = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
+        scpContenedor = new javax.swing.JScrollPane();
         pnContenedor = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
 
@@ -70,15 +75,15 @@ public class PanelPreguntas extends javax.swing.JPanel {
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Opciones"));
 
-        campoTexto1.setPlaceholder("Buscar una pregunta por producto");
+        cmpBusqueda.setPlaceholder("Buscar una pregunta por producto");
 
-        boton1.setImgButtonType("dark");
-        boton1.setTexto("Buscar");
+        btnBuscar.setImgButtonType("dark");
+        btnBuscar.setTexto("Buscar");
 
-        boton2.setImgButtonType("danger");
-        boton2.setTexto("Sig.");
+        btnSiguiente.setImgButtonType("danger");
+        btnSiguiente.setTexto("Sig.");
 
-        boton3.setTexto("Prev.");
+        btnPrevia.setTexto("Prev.");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -86,13 +91,13 @@ public class PanelPreguntas extends javax.swing.JPanel {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(campoTexto1, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(cmpBusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(boton1, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(boton3, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnPrevia, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(boton2, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnSiguiente, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -101,14 +106,14 @@ public class PanelPreguntas extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(boton3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnPrevia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(boton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnSiguiente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(boton1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(campoTexto1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(cmpBusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
 
@@ -145,7 +150,7 @@ public class PanelPreguntas extends javax.swing.JPanel {
                 .addContainerGap(305, Short.MAX_VALUE))
         );
 
-        jScrollPane1.setViewportView(pnContenedor);
+        scpContenedor.setViewportView(pnContenedor);
 
         javax.swing.GroupLayout jPanelBackground1Layout = new javax.swing.GroupLayout(jPanelBackground1);
         jPanelBackground1.setLayout(jPanelBackground1Layout);
@@ -159,7 +164,7 @@ public class PanelPreguntas extends javax.swing.JPanel {
                     .addGroup(jPanelBackground1Layout.createSequentialGroup()
                         .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jScrollPane1)))
+                        .addComponent(scpContenedor)))
                 .addContainerGap())
         );
         jPanelBackground1Layout.setVerticalGroup(
@@ -172,7 +177,7 @@ public class PanelPreguntas extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanelBackground1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1))
+                    .addComponent(scpContenedor))
                 .addContainerGap())
         );
 
@@ -190,17 +195,17 @@ public class PanelPreguntas extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private vista.componentes.boton.Boton boton1;
-    private vista.componentes.boton.Boton boton2;
-    private vista.componentes.boton.Boton boton3;
-    private vista.componentes.campos.CampoTexto campoTexto1;
+    public vista.componentes.boton.Boton btnBuscar;
+    public vista.componentes.boton.Boton btnPrevia;
+    public vista.componentes.boton.Boton btnSiguiente;
+    public vista.componentes.campos.CampoTexto cmpBusqueda;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private vista.componentes.jpanelbackground.JPanelBackground jPanelBackground1;
-    private javax.swing.JScrollPane jScrollPane1;
     public javax.swing.JPanel pnContenedor;
+    private javax.swing.JScrollPane scpContenedor;
     private vista.componentes.etiqueta.Titulo titulo1;
     // End of variables declaration//GEN-END:variables
 }

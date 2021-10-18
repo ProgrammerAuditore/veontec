@@ -48,6 +48,7 @@ public class Recursos {
     public static final Dimension tamDialogModal = new Dimension(850, 534); // 621, 562 
     public static final Dimension tamDialogModalCrearProducto = new Dimension(630, 612);  
     public static final Dimension tamDialogInfo = new Dimension(460, 444);
+    public static final Integer scpDesplazamiento = 64;
     
     // Informacion del sistema
     public static final String SistemaOs = ManagementFactory.getOperatingSystemMXBean().getName();

@@ -23,11 +23,11 @@ import src.Recursos;
  *
  * @author victo
  */
-public class CampoDatos extends JTextField implements FocusListener, KeyListener{
-    
+public class CampoNumericoLim extends JTextField implements FocusListener, KeyListener{
     
     // * Propiedadades
     public String Placeholder = "Establezca un placeholder";
+    public Integer limiteNumerico = 0;
     public boolean verificarCampo = true;
     private final Border BorderMargin = BorderFactory.createEmptyBorder(0, 10, 0, 10);
     private final Color borderColor = new Color(192, 192, 192);
@@ -38,7 +38,7 @@ public class CampoDatos extends JTextField implements FocusListener, KeyListener
     private final Dimension tamahno = new Dimension(280, 27);
     public JLabel componenteDidireccional;
     
-    public CampoDatos() {
+    public CampoNumericoLim() {
         super(14);
         this.iniciar_propiedades();
     }
@@ -110,7 +110,7 @@ public class CampoDatos extends JTextField implements FocusListener, KeyListener
     
     private void setToolTip(){
         String aqui= Veontec.idioma.getProperty("componente.setToolTip.aqui");
-        String EstiloToolTip = "<html><b><font color=white>" + getPlaceholder() + " "+ aqui + "</font></b></html>" ;
+        String EstiloToolTip = "<html><b><font color=white>" + getPlaceholder() + " "+aqui + "</font></b></html>" ;
         setToolTipText( EstiloToolTip );
     }
     
@@ -170,27 +170,38 @@ public class CampoDatos extends JTextField implements FocusListener, KeyListener
     }
 
     @Override
-    public void keyTyped(KeyEvent e) {
-        char caracter = e.getKeyChar();
+    public void keyTyped(KeyEvent evt) {
+        char charCap = evt.getKeyChar();
         
-        if (Character.isSpaceChar(caracter) || Character.isLetter(caracter)){
-            
-        }else
-        if(  Character.isDigit(caracter) ){
-            e.consume();
-            JOptionPane.showMessageDialog(null, Veontec.idioma.getProperty("campoDatos.keyTyped.msg1"));
-        } else {
-            e.consume();
+        // * Establecer maximo 10 digitos
+        if ( this.getText().length() >= limiteNumerico ){
+            evt.consume(); 
+            JOptionPane.showMessageDialog(null, "Ingrese solo "+limiteNumerico+" dígitos.");
+            return;
         }
         
+        // * Aceptar solo numeros de 0 a 9
+        if ( !(charCap >= '0' && charCap <= '9')) {
+            
+            if( Character.isLetter( charCap ) ){
+                evt.consume();
+                JOptionPane.showMessageDialog(null, "Ingrese solo números.");
+
+            }else
+            evt.consume();
+            
+        }
+
     }
+    
+    @Override
+    public void keyPressed(KeyEvent e) {}
 
     @Override
-    public void keyPressed(KeyEvent e) {
-    }
+    public void keyReleased(KeyEvent e) {}
 
-    @Override
-    public void keyReleased(KeyEvent e) {
+    public boolean isVerificarCampo() {
+        return verificarCampo;
     }
     
     @Override
@@ -198,13 +209,17 @@ public class CampoDatos extends JTextField implements FocusListener, KeyListener
         super.setEnabled(enabled);
         getEstiloTextEscritura();
     }
-    
-    public boolean isVerificarCampo() {
-        return verificarCampo;
-    }
 
     public void setVerificarCampo(boolean verificarCampo) {
         this.verificarCampo = verificarCampo;
+    }
+
+    public Integer getLimiteNumerico() {
+        return limiteNumerico;
+    }
+
+    public void setLimiteNumerico(Integer limiteNumerico) {
+        this.limiteNumerico = limiteNumerico;
     }
     
 }

@@ -20,12 +20,12 @@ package vista.paneles;
  *
  * @author victor
  */
-public class PanelSignUp extends javax.swing.JPanel {
+public class PanelIniciarSesion extends javax.swing.JPanel {
 
     /**
      * Creates new form PanelLoggin
      */
-    public PanelSignUp() {
+    public PanelIniciarSesion() {
         initComponents();
     }
 

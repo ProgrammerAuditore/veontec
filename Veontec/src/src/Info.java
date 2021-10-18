@@ -3,8 +3,8 @@ package src;
 // Aquí se incluye la información del softwares
 public class Info {
     public static final String sNombre = "Veontec";
-    public static final String sVersionName = "v0.9.7";
-    public static final String sVersionNum = "0970";
+    public static final String sVersionName = "v0.9.87";
+    public static final String sVersionNum = "0987";
     public static final String sProduccion = "Alpha";
     public static final String NombreSoftware = sNombre + " " + sVersionName + sProduccion;
     
