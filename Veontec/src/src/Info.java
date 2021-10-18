@@ -3,8 +3,8 @@ package src;
 // Aquí se incluye la información del softwares
 public class Info {
     public static final String sNombre = "Veontec";
-    public static final String sVersionName = "v0.9.87";
-    public static final String sVersionNum = "0987";
+    public static final String sVersionName = "v0.9.97";
+    public static final String sVersionNum = "0997";
     public static final String sProduccion = "Alpha";
     public static final String NombreSoftware = sNombre + " " + sVersionName + sProduccion;
     
@@ -26,10 +26,10 @@ public class Info {
     */
     
     /* Desarrollo mailtrap */
-    public static final String smtpHostName = "smtp.mailtrap.io";
+    public static final String smtpHostName = "HOST";
     public static final Integer smtpPort = 2525;
-    public static final String smtpUser = "1367cd978cc57a";
-    public static final String smtpPasswd = "04df52819fb63e";
+    public static final String smtpUser = "USER";
+    public static final String smtpPasswd = "PASSWORD";
     public static final String smtpSetFrom = "sfw.veontec@support.com";
     public static final boolean smtpOnSSL = false;
     public static final boolean smtpOnTLS = false;
