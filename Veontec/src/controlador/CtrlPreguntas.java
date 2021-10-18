@@ -1,6 +1,5 @@
 package controlador;
 
-import static controlador.CtrlVentas.logger;
 import controlador.componentes.CtrlCardPregunta;
 import index.Veontec;
 import java.awt.GridBagLayout;
@@ -8,7 +7,6 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.util.List;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -43,6 +41,7 @@ public class CtrlPreguntas{
     private Integer pagProductos;
     private Integer totalProductosExistentes;
     private Integer productoPorPagina;
+    private boolean tipoBusqueda;
     private static final Logger LOG = Logger.getLogger(CtrlBienvenida.class.getName());
     
     // * Constructor
@@ -57,8 +56,9 @@ public class CtrlPreguntas{
         this.preguntaDao = new PreguntaDao();
         this.producto_dto = new ProductoDto();
         this.producto_dao = new ProductoDao();
-        pagProductos = 0;
-        productoPorPagina = 3;
+        this.pagProductos = 0;
+        this.productoPorPagina = 3;
+        this.tipoBusqueda = false;
     }
     
     // * Eventos    
@@ -66,10 +66,8 @@ public class CtrlPreguntas{
         laVista.btnBuscar.addMouseListener(new MouseAdapter(){
             @Override
             public void mouseReleased(MouseEvent e) {
-                pagProductos = 0;
-                laVista.btnPrevia.setEnabled(true);
-                laVista.btnSiguiente.setEnabled(true);
-                mtdMostrarPreguntas(true);
+                mtdEstabecerBusqueda();
+                mtdMostrarPreguntas(tipoBusqueda);
             }
         });
     }
@@ -79,10 +77,8 @@ public class CtrlPreguntas{
             @Override
             public void keyPressed(KeyEvent e) {
                 if(e.getKeyCode() == KeyEvent.VK_ENTER ){
-                    pagProductos = 0;
-                    laVista.btnPrevia.setEnabled(true);
-                    laVista.btnSiguiente.setEnabled(true);
-                    mtdMostrarPreguntas(true);
+                    mtdEstabecerBusqueda();
+                    mtdMostrarPreguntas(tipoBusqueda);
                 } 
             }
         });
@@ -146,13 +142,15 @@ public class CtrlPreguntas{
         logger.info("Listando preguntas...");
         preguntaDto.setPregComprador( Veontec.usuarioDto.getCmpID() );
         preguntaDto.setPregVendedor( Veontec.usuarioDto.getCmpID() );
-        totalProductosExistentes = Integer.parseInt(""+preguntaDao.mtdRowCount(preguntaDto));
+        
         
         if( busqueda == false ){
             lstPreguntas = preguntaDao.mtdListar(preguntaDto ,productoPorPagina, pagProductos);
+            totalProductosExistentes = Integer.parseInt(""+preguntaDao.mtdRowCount(preguntaDto));
         }else{
             preguntaDto.setPregTitulo('%'+laVista.cmpBusqueda.getText()+'%');
-            lstPreguntas = preguntaDao.mtdListarBuscarPreguntas(preguntaDto, 10, 0);
+            lstPreguntas = preguntaDao.mtdBuscarAllPreguntasSimilares(preguntaDto, productoPorPagina, pagProductos);
+            totalProductosExistentes = Integer.parseInt(""+preguntaDao.mtdRowCountAllPreguntasSimilares(preguntaDto));
         }
         
         totalPreguntas = lstPreguntas.size();
@@ -200,7 +198,7 @@ public class CtrlPreguntas{
         }
         
         laVista.btnSiguiente.setEnabled(true);
-        mtdMostrarPreguntas(false);
+        mtdMostrarPreguntas(tipoBusqueda);
         
     }
     
@@ -217,8 +215,21 @@ public class CtrlPreguntas{
         }
         
         laVista.btnPrevia.setEnabled(true);
-        mtdMostrarPreguntas(false);
+        mtdMostrarPreguntas(tipoBusqueda);
         
+    }
+    
+    private void mtdEstabecerBusqueda(){
+        laVista.btnPrevia.setEnabled(true);
+        laVista.btnSiguiente.setEnabled(true);
+        
+        pagProductos=0;
+        if( laVista.cmpBusqueda.getText().trim().isEmpty() || laVista.cmpBusqueda.isVacio() ){
+            tipoBusqueda = false;
+        }else{
+            tipoBusqueda = true;
+        }
+        System.out.println("busquedaProductos " + tipoBusqueda);
     }
     
     public static void mtdEliminarInstancia(){
