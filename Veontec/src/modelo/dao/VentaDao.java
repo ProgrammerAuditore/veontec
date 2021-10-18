@@ -279,7 +279,7 @@ public class VentaDao implements keyword_query<VentaDto>, keyword_extra<VentaDto
         return ventas;
     }
     
-    public List<VentaDto> mtdListarBuscarVentasPorUsuario(VentaDto obj_dto, int inicio, int fin) {
+    public List<VentaDto> mtdBuscarAllVentasPorUsuario(VentaDto obj_dto, int inicio, int fin) {
         // Funciona perfectamente
         
         List<VentaDto> ventas = null;
@@ -384,6 +384,37 @@ public class VentaDao implements keyword_query<VentaDto>, keyword_extra<VentaDto
     @Override
     public boolean mtdEliminar(VentaDto obj_dto) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+    public long mtdRowCountAllVentasPorUsuario(VentaDto obj_dto) {
+        // * Funciona perfectamente
+        
+        PreparedStatement ps = null;
+        Connection conn = CtrlHiloConexion.getConexion();
+        String query = "SELECT COUNT(*) FROM " + nombreTabla + " "
+                // * Buscamos el producto del usuario respectivo
+                + "WHERE ventVendedor = ? AND ventTitulo LIKE ? ;";
+        long registros = 0;
+        
+        try {
+            
+            // * Preparar la consulta
+            ps = conn.prepareStatement(query.toLowerCase());
+            ps.setInt(1, obj_dto.getVentVendedor());
+            ps.setString(2, obj_dto.getVentTitulo());
+            
+            // * Ejecutar la consulta
+            ResultSet rs = ps.executeQuery();
+            
+            // * Si la respuesta es mayor a 0 significa que la consulta fue exitosa.
+            if( rs.next() )
+                registros = rs.getInt(1);
+            
+        } catch (SQLException e) {
+            System.out.println("" + e.getMessage());
+        }
+        
+        return registros;
     }
     
 }
