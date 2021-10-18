@@ -8,6 +8,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.List;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.tree.DefaultMutableTreeNode;
 import modelo.dao.ProductoDao;
@@ -16,17 +17,15 @@ import modelo.dao.VentaDao;
 import modelo.dto.ProductoDto;
 import modelo.dto.UsuarioDto;
 import modelo.dto.VentaDto;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import src.Info;
 import vista.paneles.PanelVentas;
 
 public class CtrlVentas{
     
-    // Vista
+    // ***** Vista
     public PanelVentas laVista;
     
-    // Modelos
+    // ***** Modelos
     private UsuarioDto usuario_dto;
     private UsuarioDao usuario_dao;
     private ProductoDao producto_dao;
@@ -35,16 +34,17 @@ public class CtrlVentas{
     private VentaDao ventDao;
     private DefaultMutableTreeNode treeNode1;
     
-    // Atributos
-    static Log logger = LogFactory.getLog(CtrlVentas.class);
+    // ***** Atributos
     private static CtrlVentas instancia;
     private List<VentaDto> lstMisVentas;
     private Integer cantidadResultados;
     private Integer totalProductosExistentes;
     private Integer cantidadPorPagina;
     private boolean activarBusqueda;
+    private static final Logger LOG = Logger.getLogger(CtrlVentas.class.getName());
+    
 
-    // Constructor
+    // ***** Constructor
     public CtrlVentas(PanelVentas laVista, UsuarioDto dto, UsuarioDao dao) {
         this.laVista = laVista;
         this.usuario_dto = dto;
@@ -60,9 +60,9 @@ public class CtrlVentas{
     
     // Obtener instancia | Singleton
     public static CtrlVentas getInstancia(PanelVentas laVista, UsuarioDto dto, UsuarioDao dao){
-        logger.warn("Inicializando controlador.... ");
+        LOG.warning("Inicializando controlador.... ");
         if( instancia == null ){
-            logger.warn("Creando instancia.... ");
+            LOG.warning("Creando instancia.... ");
             instancia = new CtrlVentas(laVista, dto, dao);
             instancia.mtdInit();
         
@@ -74,7 +74,7 @@ public class CtrlVentas{
         return instancia;
     }
     
-    // Eventos
+    // ***** Eventos
     private void mtdEventoBtnBuscar(){
         laVista.btnBuscar.addMouseListener(new MouseAdapter(){
             @Override
@@ -120,9 +120,9 @@ public class CtrlVentas{
         });
     }
     
-    // Métodos
+    // ***** Métodos
     private void mtdInit(){
-        logger.info("Ejecutando metodo una vez (Obligatorio)");
+        LOG.info("Ejecutando metodo una vez (Obligatorio)");
         mtdEventoBtnBuscar();
         mtdEventoBtnSiguiente();
         mtdEventoBtnPrevia();
@@ -132,28 +132,28 @@ public class CtrlVentas{
     
     
     private void mtdMostrarProducto(boolean busqueda){
-        logger.info("Iniciando ...");
+        LOG.info("Iniciando ...");
         
         int totalProductos = 0;
         laVista.pnContenedor.setLayout(new GridBagLayout());
         laVista.pnContenedor.removeAll();
         
-        logger.info("Listando ventas...");
+        LOG.info("Listando ventas...");
         ventDto.setVentVendedor( Veontec.usuarioDto.getCmpID() );
         
         if( busqueda == false ){
             lstMisVentas = ventDao.mtdListar(ventDto, cantidadPorPagina, cantidadResultados);
-            totalProductosExistentes = Integer.valueOf( ""+ventDao.mtdRowCount(ventDto) );
+            totalProductosExistentes = Integer.valueOf( ""+ventDao.mtdRowCountAllVentasPorUsuario(ventDto) );
         }else{
             ventDto.setVentTitulo('%'+laVista.cmpBusqueda.getText()+'%');
-            lstMisVentas = ventDao.mtdBuscarAllVentasPorUsuario(ventDto, cantidadPorPagina, cantidadResultados);
-            totalProductosExistentes = Integer.valueOf( ""+ventDao.mtdRowCountAllVentasPorUsuario(ventDto) );
+            lstMisVentas = ventDao.mtdBuscarAllVentasPorUsuarioSimilares(ventDto, cantidadPorPagina, cantidadResultados);
+            totalProductosExistentes = Integer.valueOf( ""+ventDao.mtdRowCountAllVentasPorUsuarioSimilares(ventDto) );
         }
         
         totalProductos = lstMisVentas.size();
         if(  totalProductos > 0 ){
             
-            logger.warn("Recorriendo productos ....");
+            LOG.warning("Recorriendo productos ....");
             for (int i = 0; i < totalProductos; i++) {
                 producto_dto = new ProductoDto();
                 producto_dto.setProdID( lstMisVentas.get(i).getVentProducto() );

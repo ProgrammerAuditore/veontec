@@ -9,10 +9,6 @@ import java.awt.Dimension;
 import java.net.URL;
 import org.apache.commons.validator.routines.UrlValidator;
 
-/**
- *
- * @author victo
- */
 public class PanelCrearProducto extends javax.swing.JPanel {
 
     /**

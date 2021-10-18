@@ -29,20 +29,20 @@ import vista.paneles.acciones.PanelCrearProducto;
 
 public class CtrlModalEditarProducto implements ActionListener{
     
-    // * Vista
+    // ***** Vista
     private PanelCrearProducto laVista;
     private JDialog modal;
     
-    // * Modelo
+    // ***** Modelo
     private ProductoDao productoDao;
     private ProductoDto productoDto;
     private CategoriaDto categoriaDto;
     private CategoriaDao categoriaDao;
     
-    // * Atributos (Opcional)
+    // ***** Atributos (Opcional)
     List<CategoriaDto> lstCategorias;
     
-    // * Constructor
+    // ***** Constructor
     public CtrlModalEditarProducto(ProductoDto productoDto) {
         this.laVista = new PanelCrearProducto();
         this.productoDao = new ProductoDao();
@@ -52,7 +52,7 @@ public class CtrlModalEditarProducto implements ActionListener{
         this.modal = new JDialog(Veontec.ventanaHome);
     }    
     
-    // * Eventos
+    // ***** Eventos
     private void mtdEventoBtnAceptar() {
         MouseListener btnAceptar = null;
         laVista.btnAceptar.removeMouseListener(btnAceptar);
@@ -117,7 +117,7 @@ public class CtrlModalEditarProducto implements ActionListener{
         laVista.btnSeleccionarImg.addMouseListener(btnSeleccionarImg);
     }
     
-    // * Métodos
+    // ***** Métodos
     public void mtdInit(){
         laVista.cboxBoleto.addActionListener(this);
         laVista.cboxProductoExterno.addActionListener(this);

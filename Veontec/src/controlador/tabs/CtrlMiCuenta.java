@@ -10,6 +10,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.Objects;
+import java.util.logging.Logger;
 import javax.swing.Box;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -18,8 +19,6 @@ import javax.swing.JTextField;
 import modelo.ObjEmail;
 import modelo.dao.UsuarioDao;
 import modelo.dto.UsuarioDto;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import src.Info;
 import src.Recursos;
 import vista.paneles.PanelMiCuenta;
@@ -27,19 +26,20 @@ import vista.ventanas.VentanaMain;
 
 public class CtrlMiCuenta{
     
-    // Vista
+    // ***** Vista
     public PanelMiCuenta laVista;
     
-    // Modelos
+    // ***** Modelos
     private UsuarioDto usuarioDto;
     private UsuarioDao usuarioDao;
     
-    // Atributos
+    // ***** Atributos
     private static CtrlMiCuenta instancia;
     String passwd;
-    static Log logger = LogFactory.getLog(CtrlMiCuenta.class);
+    private static final Logger LOG = Logger.getLogger(CtrlMiCuenta.class.getName());
     
-    // Constructor
+    
+    // ***** Constructor
     private CtrlMiCuenta(PanelMiCuenta laVista, UsuarioDto dto, UsuarioDao dao) {
         this.laVista = laVista;
         this.usuarioDto = dto;
@@ -48,9 +48,9 @@ public class CtrlMiCuenta{
     
     // Obtener instancia | Singleton 
     public static CtrlMiCuenta getInstancia(PanelMiCuenta laVista, UsuarioDto dto, UsuarioDao dao){
-        logger.info("Inicializando ");
+        LOG.info("Inicializando ");
         if( instancia == null ){
-            logger.info("Creando instancia ");
+            LOG.info("Creando instancia ");
             instancia = new CtrlMiCuenta(laVista, dto, dao);
             instancia.mtdInit();
             
@@ -60,7 +60,7 @@ public class CtrlMiCuenta{
         return instancia;
     }
     
-    // Eventos
+    // ***** Eventos
     private synchronized void mtdEventoBtnEliminarCuenta(){
         MouseListener btnEliminarCuenta = null;
         laVista.btnEliminarCuenta.removeMouseListener(btnEliminarCuenta);
@@ -145,10 +145,10 @@ public class CtrlMiCuenta{
         laVista.btnVerificarEmail.addMouseListener(btnVerificarEmail);
     }
     
-    // Métodos
+    // ***** Métodos
     private void  mtdInit(){
         // * Se inicializa o ejecuta una sola vez (Obligatorio)
-        logger.warn("Ejecutando controlador");
+        LOG.warning("Ejecutando controlador");
         mtdEventoBtnEliminarCuenta();
         mtdEventoBtnCerrarSession();
         mtdEventoBtnCambiarPasswd();
@@ -158,10 +158,10 @@ public class CtrlMiCuenta{
     }
     
     private void mtdEstablecerDatos(){
-        logger.info("Iniciando ...");
+        LOG.info("Iniciando ...");
         instancia.usuarioDto = Veontec.usuarioDto;
         
-        logger.warn("Estableciendo datos ....");
+        LOG.warning("Estableciendo datos ....");
         laVista.cmpCorreo.setText(usuarioDto.getCmpCorreo() );
         laVista.cmpNombreCompleto.setText(usuarioDto.getCmpNombreCompleto() );
         laVista.cmpDireccion.setText( usuarioDto.getCmpDireccion() );
@@ -349,7 +349,7 @@ public class CtrlMiCuenta{
                         usuarioDto.setCmpEstado(Info.veontecCuentaVerificada);
                         usuarioDto.setCmpKey("No");
                         
-                        logger.info("Correo existente: " + usuarioDao.mtdComprobar(usuarioDto));
+                        LOG.info("Correo existente: " + usuarioDao.mtdComprobar(usuarioDto));
                         
                         // * Comprobar si el correo está disponible
                         // es decir, si no está registrado

@@ -20,19 +20,19 @@ import vista.paneles.acciones.PanelHacerPreguntar;
 
 public class CtrlModalHacerPregunta {
 
-    // * Vista
+    // ***** Vista
     private PanelHacerPreguntar laVista;
     private JDialog modal;
     
-    // * Modelo
+    // ***** Modelo
     private PreguntaDto preguntaDto;
     private PreguntaDao preguntaDao;
     private ProductoDto productoDto;
     private ProductoDao productoDao;
     
-    // * Atributo
+    // ***** Atributo
     
-    // * Constructor
+    // ***** Constructor
     public CtrlModalHacerPregunta(ProductoDto productoDto) {
         this.productoDto = productoDto;
         this.laVista = new PanelHacerPreguntar();
@@ -43,7 +43,7 @@ public class CtrlModalHacerPregunta {
         
     }
     
-    // * Eventos
+    // ***** Eventos
     private void mtdEventoBtnCancelar() {
         MouseListener btnCancelar = null;
         laVista.btnCancelar.removeMouseListener(btnCancelar);
@@ -94,7 +94,7 @@ public class CtrlModalHacerPregunta {
         modal.addWindowListener(evtWindow);
     }
     
-    // * Métodos
+    // ***** Métodos
     public void mtdInit(){
         mtdEstablecerDatos();
         mtdAgregerEventoWindow();

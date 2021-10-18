@@ -8,10 +8,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import modelo.dto.VentaDto;
-import modelo.interfaces.keyword_extra;
 import modelo.interfaces.keyword_query;
 
-public class VentaDao implements keyword_query<VentaDto>, keyword_extra<VentaDto> {
+public class VentaDao implements keyword_query<VentaDto> {
 
     private final String nombreTabla= "tblventas";
     
@@ -190,7 +189,6 @@ public class VentaDao implements keyword_query<VentaDto>, keyword_extra<VentaDto
         return venta;
     }
 
-    @Override
     public List<VentaDto> mtdListar(VentaDto obj_dto) {
         // * Funciona perfectamente
         
@@ -233,7 +231,6 @@ public class VentaDao implements keyword_query<VentaDto>, keyword_extra<VentaDto
         return ventas;
     }
 
-    @Override
     public List<VentaDto> mtdListar(VentaDto obj_dto, int inicio, int fin) {
         // Funciona perfectamente
         
@@ -279,7 +276,7 @@ public class VentaDao implements keyword_query<VentaDto>, keyword_extra<VentaDto
         return ventas;
     }
     
-    public List<VentaDto> mtdBuscarAllVentasPorUsuario(VentaDto obj_dto, int inicio, int fin) {
+    public List<VentaDto> mtdBuscarAllVentasPorUsuarioSimilares(VentaDto obj_dto, int inicio, int fin) {
         // Funciona perfectamente
         
         List<VentaDto> ventas = null;
@@ -325,8 +322,7 @@ public class VentaDao implements keyword_query<VentaDto>, keyword_extra<VentaDto
         return ventas;
     }
 
-    @Override
-    public long mtdRowCount(VentaDto obj_dto) {
+    public long mtdRowCountAllVentasPorUsuario(VentaDto obj_dto) {
         // * Funciona perfectamente
         
         PreparedStatement ps = null;
@@ -355,38 +351,8 @@ public class VentaDao implements keyword_query<VentaDto>, keyword_extra<VentaDto
         
         return registros;
     }
-    
-    @Override
-    public long mtdRowCount() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-    
-    @Override
-    public List<VentaDto> mtdListar(int inicio, int fin) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-    
-    @Override
-    public List<VentaDto> mtdListar() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-    
-    @Override
-    public long mtdRowCount(int estado) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public boolean mtdComprobar(VentaDto obj_dto) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public boolean mtdEliminar(VentaDto obj_dto) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-    
-    public long mtdRowCountAllVentasPorUsuario(VentaDto obj_dto) {
+        
+    public long mtdRowCountAllVentasPorUsuarioSimilares(VentaDto obj_dto) {
         // * Funciona perfectamente
         
         PreparedStatement ps = null;

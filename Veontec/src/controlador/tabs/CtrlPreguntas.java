@@ -16,17 +16,15 @@ import modelo.dao.UsuarioDao;
 import modelo.dto.PreguntaDto;
 import modelo.dto.ProductoDto;
 import modelo.dto.UsuarioDto;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import src.Info;
 import vista.paneles.PanelPreguntas;
 
 public class CtrlPreguntas{
     
-    // * Vista
+    // ***** Vista
     PanelPreguntas laVista;
     
-    // * Modelo
+    // ***** Modelo
     private ProductoDao producto_dao;
     private ProductoDto producto_dto;
     private PreguntaDao preguntaDao;
@@ -34,8 +32,7 @@ public class CtrlPreguntas{
     private UsuarioDao usuarioDao;
     private UsuarioDto usuarioDto;
     
-    // * Atributos
-    static Log logger = LogFactory.getLog(CtrlPreguntas.class);
+    // ***** Atributos
     private static CtrlPreguntas instancia;
     private List<PreguntaDto> lstPreguntas;
     Integer usuarioID;
@@ -45,7 +42,7 @@ public class CtrlPreguntas{
     private boolean activarBusqueda;
     private static final Logger LOG = Logger.getLogger(CtrlBienvenida.class.getName());
     
-    // * Constructor
+    // ***** Constructor
     private CtrlPreguntas(PanelPreguntas laVista, UsuarioDto dto, UsuarioDao dao){
         // * Se recibe por parametros
         this.laVista = laVista;
@@ -62,7 +59,7 @@ public class CtrlPreguntas{
         this.activarBusqueda = false;
     }
     
-    // * Eventos    
+    // ***** Eventos    
     private void mtdEventoBtnBuscar(){
         laVista.btnBuscar.addMouseListener(new MouseAdapter(){
             @Override
@@ -104,11 +101,11 @@ public class CtrlPreguntas{
     }
         
     
-    // * Métodos
+    // ***** Métodos
     public static CtrlPreguntas getInstancia(PanelPreguntas laVista, UsuarioDto dto, UsuarioDao dao){
-        logger.warn("Inicializando controlador.... ");
+        LOG.warning("Inicializando controlador.... ");
         if( instancia == null ){
-            logger.warn("Creando instancia.... ");
+            LOG.warning("Creando instancia.... ");
             instancia = new CtrlPreguntas(laVista, dto, dao);
             instancia.mtdInit();
         
@@ -126,7 +123,7 @@ public class CtrlPreguntas{
     }
     
     private void mtdInit(){
-        logger.info("Ejecutando metodo una vez (Obligatorio)");
+        LOG.info("Ejecutando metodo una vez (Obligatorio)");
         mtdEventoBtnBuscar();
         mtdEventoBtnPrevia();
         mtdEventoBtnSiguiente();
@@ -135,30 +132,30 @@ public class CtrlPreguntas{
     }
     
     private void mtdMostrarPreguntas(boolean busqueda){
-        logger.info("Iniciando ...");
+        LOG.info("Iniciando ...");
         
         int totalPreguntas = 0;
         laVista.pnContenedor.setLayout(new GridBagLayout());
         laVista.pnContenedor.removeAll();
         
-        logger.info("Listando preguntas...");
+        LOG.info("Listando preguntas...");
         preguntaDto.setPregComprador( Veontec.usuarioDto.getCmpID() );
         preguntaDto.setPregVendedor( Veontec.usuarioDto.getCmpID() );
         
         
         if( busqueda == false ){
             lstPreguntas = preguntaDao.mtdListar(preguntaDto ,cantidadPorPagina, cantidadResultado);
-            totalProductosExistentes = Integer.parseInt(""+preguntaDao.mtdRowCount(preguntaDto));
+            totalProductosExistentes = Integer.parseInt(""+preguntaDao.mtdRowCountAllPreguntasPorUsuario(preguntaDto));
         }else{
             preguntaDto.setPregTitulo('%'+laVista.cmpBusqueda.getText()+'%');
-            lstPreguntas = preguntaDao.mtdBuscarAllPreguntasSimilares(preguntaDto, cantidadPorPagina, cantidadResultado);
-            totalProductosExistentes = Integer.parseInt(""+preguntaDao.mtdRowCountAllPreguntasSimilares(preguntaDto));
+            lstPreguntas = preguntaDao.mtdBuscarAllPreguntasPorUsuarioSimilares(preguntaDto, cantidadPorPagina, cantidadResultado);
+            totalProductosExistentes = Integer.parseInt(""+preguntaDao.mtdRowCountAllPreguntasPorUsuarioSimilares(preguntaDto));
         }
         
         totalPreguntas = lstPreguntas.size();
         if( totalPreguntas > 0 ){
             
-            logger.warn("Recorriendo productos ....");
+            LOG.warning("Recorriendo productos ....");
             for (int i = 0; i < totalPreguntas; i++) {
                 producto_dto = producto_dao.mtdConsultar( lstPreguntas.get(i).getPregProducto() );
                 

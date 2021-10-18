@@ -8,11 +8,10 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import modelo.dto.CompraDto;
-import modelo.interfaces.keyword_extra;
 import modelo.interfaces.keyword_query;
 
 
-public class CompraDao implements keyword_query<CompraDto>, keyword_extra<CompraDto> {
+public class CompraDao implements keyword_query<CompraDto>{
 
     private final String nombreTabla= "tblcompras";
     
@@ -174,7 +173,6 @@ public class CompraDao implements keyword_query<CompraDto>, keyword_extra<Compra
         return compra;
     }
 
-    @Override
     public List<CompraDto> mtdListar(CompraDto obj_dto) {
         // * Funciona perfectamente
         
@@ -233,7 +231,6 @@ public class CompraDao implements keyword_query<CompraDto>, keyword_extra<Compra
     * @return      Una lista de objetos de tipo <tt>CompraDto<tt>
     * @see         CompraDto
     */
-    @Override
     public List<CompraDto> mtdListar(CompraDto obj_dto, int inicio, int fin) {
         // Funciona perfectamente
         
@@ -279,8 +276,7 @@ public class CompraDao implements keyword_query<CompraDto>, keyword_extra<Compra
         return ventas;
     }
     
-    @Override
-    public long mtdRowCount(CompraDto obj_dto) {
+    public long mtdRowCountAllComprasPorUsuario(CompraDto obj_dto) {
         // * Funciona perfectamente
         
         PreparedStatement ps = null;
@@ -310,37 +306,7 @@ public class CompraDao implements keyword_query<CompraDto>, keyword_extra<Compra
         return registros;
     }
     
-    @Override
-    public long mtdRowCount() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-    
-    @Override
-    public List<CompraDto> mtdListar(int inicio, int fin) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-    
-    @Override
-    public List<CompraDto> mtdListar() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-    
-    @Override
-    public long mtdRowCount(int estado) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public boolean mtdComprobar(CompraDto obj_dto) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public boolean mtdEliminar(CompraDto obj_dto) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-    
-    public long mtdRowCountAllComprasPorUsuario(CompraDto obj_dto) {
+    public long mtdRowCountAllComprasPorUsuarioSimilares(CompraDto obj_dto) {
         // * Funciona perfectamente
         
         PreparedStatement ps = null;
@@ -371,7 +337,7 @@ public class CompraDao implements keyword_query<CompraDto>, keyword_extra<Compra
         return registros;
     }
     
-    public List<CompraDto> mtdBuscarAllComprasPorUsuario(CompraDto obj_dto, int inicio, int fin) {
+    public List<CompraDto> mtdBuscarAllComprasPorUsuarioSimilares(CompraDto obj_dto, int inicio, int fin) {
         // Funciona perfectamente
         
         List<CompraDto> ventas = null;

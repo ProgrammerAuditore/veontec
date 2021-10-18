@@ -1,9 +1,6 @@
 package controlador.ventanas;
 
 import controlador.CtrlHiloConexion;
-import controlador.ventanas.CtrlHome;
-import de.mkammerer.argon2.Argon2;
-import de.mkammerer.argon2.Argon2Factory;
 import index.Veontec;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -26,21 +23,21 @@ import vista.ventanas.VentanaHome;
 
 public class CtrlIniciarSesion {
     
-    // * Vista
+    // ***** Vista
     private PanelIniciarSesion pnSignOn;
     
-    // * Modelo
+    // ***** Modelo
     private UsuarioDao usuarioDao;
     private UsuarioDto usuarioDto;
     private CategoriaDao categoriaDao;
     private CategoriaDto categoriaDto;
     
-    // * Atributos
+    // ***** Atributos
     private static CtrlIniciarSesion instancia;
     private static final Logger LOG = Logger.getLogger(CtrlIniciarSesion.class.getName());
     
     
-    // * Constructor
+    // ***** Constructor
     private CtrlIniciarSesion(PanelIniciarSesion pnSignOn) {
         this.pnSignOn = pnSignOn;
         this.usuarioDao = new UsuarioDao();
@@ -49,7 +46,7 @@ public class CtrlIniciarSesion {
         this.categoriaDto = new CategoriaDto();
     }
     
-    // * Eventos
+    // ***** Eventos
     private void mtdEventoBtnIniciarSesion(){
         pnSignOn.btnIniciarSession.addMouseListener(new MouseAdapter(){
             @Override
@@ -68,7 +65,7 @@ public class CtrlIniciarSesion {
         });
     }
     
-    // * Métodos
+    // ***** Métodos
     public static CtrlIniciarSesion getInstancia(PanelIniciarSesion pnSignOn){
         if( instancia ==  null){
             instancia = new CtrlIniciarSesion(pnSignOn);
@@ -80,7 +77,7 @@ public class CtrlIniciarSesion {
         return instancia;
     }
     
-    // * Métodos
+    // ***** Métodos
     public void mtdInit(){
         LOG.info("Ejecutando metodo una vez (Obligatorio)");
         mtdEventoBtnIniciarSesion();

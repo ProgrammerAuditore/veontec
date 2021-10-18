@@ -1,6 +1,5 @@
 package controlador.componentes;
 
-import static com.lowagie.text.pdf.PdfFileSpecification.url;
 import controlador.acciones.CtrlModalComprarProducto;
 import controlador.acciones.CtrlModalHacerPregunta;
 import index.Veontec;
@@ -29,22 +28,22 @@ import modelo.dto.UsuarioDto;
 import vista.paneles.componentes.PanelCardProducto;
 
 public class CtrlCardProducto {
-    // * Vista
+    // ***** Vista
     private PanelCardProducto tarjeta;
     
-    // * Modelo
+    // ***** Modelo
     private ProductoDto prodDto;
     private ProductoDao prodDao;
     private UsuarioDto usuaDto;
     private UsuarioDao usuaDao;
     
-    // * Atributos
+    // ***** Atributos
     private GridBagConstraints tarjeta_dimensiones;
     private Integer item;
     private Integer columna;
     private ImageIcon portada;
     
-    // Constructor
+    // ***** Constructor
     public CtrlCardProducto(ProductoDto prodDto, ProductoDao prodDao) {
         this.prodDto = prodDto;
         this.prodDao = prodDao;
@@ -54,7 +53,7 @@ public class CtrlCardProducto {
         this.usuaDto = new UsuarioDto();
     }
     
-    // Eventos
+    // ***** Eventos
     private void mtdCrearEventoBtnComprar(){
         tarjeta.btnComprar.setTexto("Comparar");
         
@@ -122,7 +121,7 @@ public class CtrlCardProducto {
         tarjeta.btnComprar.addMouseListener(eventoBtnPregunta);
     }
     
-    // Métodos
+    // ***** Métodos
     public void mtdInit(){
         mtdEstablecerImagen();
         mtdEstablecerOpciones();

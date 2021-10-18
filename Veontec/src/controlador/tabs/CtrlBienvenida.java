@@ -20,18 +20,18 @@ import vista.paneles.PanelBienvenida;
 
 public class CtrlBienvenida{
     
-    // Vista
+    // ***** Vista
     public PanelBienvenida laVista;
     public JDialog modalCrearProducto;
     
-    // Modelos
+    // ***** Modelos
     private UsuarioDto usuario_dto;
     private UsuarioDao usuario_dao;
     private ProductoDao producto_dao;
     private ProductoDto producto_dto;
     private DefaultMutableTreeNode treeNode1;
     
-    // Atributos
+    // ***** Atributos
     private static CtrlBienvenida instancia;
     private List<ProductoDto> lstMisProductos;
     private Integer cantidadResultado;
@@ -41,7 +41,7 @@ public class CtrlBienvenida{
     private static final Logger LOG = Logger.getLogger(CtrlBienvenida.class.getName());
     
 
-    // Constructor
+    // ***** Constructor
     public CtrlBienvenida(PanelBienvenida laVista, UsuarioDto dto, UsuarioDao dao) {
         this.laVista = laVista;
         this.usuario_dto = dto;
@@ -69,7 +69,7 @@ public class CtrlBienvenida{
         return instancia;
     }
     
-    // Eventos
+    // ***** Eventos
     private void mtdEventoBtnBuscar(){
         laVista.btnBuscar.addMouseListener(new MouseAdapter(){
             @Override
@@ -111,7 +111,7 @@ public class CtrlBienvenida{
         });
     }
     
-    // Métodos
+    // ***** Métodos
     private void mtdInit(){
         LOG.info("Ejecutando || CtrlBienvenida::mtdInit ");
         mtdEventoBtnSiguiente();
@@ -135,7 +135,7 @@ public class CtrlBienvenida{
         
         if( busqueda == false ){
             lstMisProductos = producto_dao.mtdListar(cantidaPorPagina, cantidadResultado);
-            totalProductosExistentes = producto_dao.mtdRowCountAllProductos();
+            totalProductosExistentes = Integer.parseInt(""+producto_dao.mtdRowCountAllProductos());
         }else{
             producto_dto.setProdTitulo('%'+laVista.cmpBusqueda.getText().trim()+'%');
             producto_dto.setProdCategoria('%'+laVista.cmpBusqueda.getText().trim()+'%');
@@ -155,7 +155,7 @@ public class CtrlBienvenida{
                 tarjeta.setColumna(columna);
 
                 tarjeta.mtdInit();
-                LOG.warning(" Agregando producto: #" + i);
+                //LOG.warning(" Agregando producto: #" + i);
                 laVista.pnContenedor.add(tarjeta.getLaVista(), tarjeta.getTarjeta_dimensiones());
                 columna++;
 

@@ -13,8 +13,6 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import modelo.dao.CompraDao;
@@ -25,17 +23,16 @@ import modelo.dto.CompraDto;
 import modelo.dto.ProductoDto;
 import modelo.dto.UsuarioDto;
 import modelo.dto.VentaDto;
-import org.apache.commons.lang.builder.HashCodeBuilder;
 import src.Funciones;
 import vista.paneles.acciones.PanelHacerCompra;
 
 public class CtrlModalComprarProducto {
 
-    // * Vista
+    // ***** Vista
     private PanelHacerCompra pnHacerCompra;
     private JDialog modal;
 
-    // * Modelo
+    // ***** Modelo
     private ProductoDto prodDto;
     private ProductoDao prodDao;
     private CompraDto compDto;
@@ -45,9 +42,9 @@ public class CtrlModalComprarProducto {
     private UsuarioDao usuaDao;
     private UsuarioDto usuaDto;
 
-    // * Atributos
+    // ***** Atributos
 
-    // * Controlador
+    // ***** Controlador
     public CtrlModalComprarProducto(ProductoDto producto_dto) {
         this.prodDto = producto_dto;
         this.prodDao = new ProductoDao();
@@ -59,7 +56,7 @@ public class CtrlModalComprarProducto {
         this.ventaDao = new VentaDao();
     }
 
-    // * Eventos
+    // ***** Eventos
     private void mtdBuildEventoBtnCancelar() {
         MouseListener eventoBtnCancelar = null;
         pnHacerCompra.btnCancelar.removeMouseListener(eventoBtnCancelar);
@@ -142,7 +139,7 @@ public class CtrlModalComprarProducto {
         pnHacerCompra.cmpCantidad.addKeyListener(eventoCampoCantidad);
     }
     
-    // * Métodos
+    // ***** Métodos
     public void mtdInit() {
         modal = new JDialog(Veontec.ventanaHome);
         pnHacerCompra = new PanelHacerCompra();

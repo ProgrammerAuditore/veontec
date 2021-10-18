@@ -21,26 +21,26 @@ enum TabsHome {
 
 public class CtrlHome{
     
-    // * Vista
+    // ***** Vista
     public VentanaHome laVista;
     
-    // * Modelos
+    // ***** Modelos
     // Vacío
     
-    // * Atributos
+    // ***** Atributos
     private int tabPreviaSeleccionada;
     private Integer estadoVeontec;
     private Integer estadoSuccessVeontec;
     private String titulo;
 
-    // * Constructor
+    // ***** Constructor
     public CtrlHome(VentanaHome laVista) {
         this.laVista = laVista;
         this.tabPreviaSeleccionada = 0;
         
     }
     
-    // * Eventos
+    // ***** Eventos
     private void mtdEventoPnTabMenu(){
         laVista.pnTabMenu.addChangeListener(new ChangeListener() {
             @Override
@@ -50,7 +50,7 @@ public class CtrlHome{
         });
     }
     
-    // * Métodos
+    // ***** Métodos
     public void mtdInit(){
         
         // * Establecer oyentes

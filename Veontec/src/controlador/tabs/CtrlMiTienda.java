@@ -10,7 +10,6 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.util.List;
 import java.util.logging.Logger;
 import javax.swing.Box;
@@ -34,19 +33,17 @@ import modelo.dto.CategoriaDto;
 import modelo.dto.ImagesDto;
 import modelo.dto.ProductoDto;
 import modelo.dto.UsuarioDto;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import src.Info;
 import vista.paneles.acciones.PanelCrearProducto;
 import vista.paneles.PanelMiTienda;
 
 public class CtrlMiTienda{
     
-    // Vista
+    // ***** Vista
     public PanelMiTienda laVista;
     public JDialog modalCrearProducto;
     
-    // Modelos
+    // ***** Modelos
     private UsuarioDto usuario_dto;
     private UsuarioDao usuario_dao;
     private ProductoDao producto_dao;
@@ -59,8 +56,7 @@ public class CtrlMiTienda{
     private DefaultTreeModel lstCategoriaModelo;
     private JTree lstCategoriasArbol;
     
-    // Atributos
-    static Log logger = LogFactory.getLog(CtrlMiTienda.class);
+    // ***** Atributos
     private static CtrlMiTienda instancia;
     private List<ProductoDto> lstMisProductos;
     private List<CategoriaDto> lstMisCategorias;
@@ -72,7 +68,7 @@ public class CtrlMiTienda{
     private boolean activarBusqueda;
     private static final Logger LOG = Logger.getLogger(CtrlBienvenida.class.getName());
 
-    // Constructor
+    // ***** Constructor
     public CtrlMiTienda(PanelMiTienda laVista, UsuarioDto dto, UsuarioDao dao) {
         this.laVista = laVista;
         this.usuario_dto = dto;
@@ -92,10 +88,10 @@ public class CtrlMiTienda{
     
     // Obtener instancia | Singleton
     public static CtrlMiTienda getInstancia(PanelMiTienda laVista, UsuarioDto dto, UsuarioDao dao){
-        logger.warn("Inicializando controlador.... ");
+        LOG.warning("Inicializando controlador.... ");
         
         if( instancia == null ){
-            logger.warn("Creando instancia.... ");
+            LOG.warning("Creando instancia.... ");
             instancia = new CtrlMiTienda(laVista, dto, dao);
             instancia.mtdInit();
             
@@ -114,7 +110,7 @@ public class CtrlMiTienda{
         return true;
     }
     
-    // Eventos
+    // ***** Eventos
     private void mtdEventoBtnCrearProducto(){
         laVista.btnCrearProducto.addMouseListener(new MouseAdapter(){
             @Override
@@ -193,9 +189,9 @@ public class CtrlMiTienda{
         });
     }
    
-    // Métodos
+    // ***** Métodos
     private void mtdInit(){
-        logger.info("Ejecutando metodo una vez (Obligatorio)");
+        LOG.info("Ejecutando metodo una vez (Obligatorio)");
         laVista.pnContenedor.setLayout(new GridBagLayout());
         images_dto.setImagUsuario( usuario_dto.getCmpID() );
         mtdEventoBtnAgregarCategoria();
@@ -212,19 +208,19 @@ public class CtrlMiTienda{
     }
     
     private void mtdMostrarProducto(boolean busqueda){
-        logger.info("Iniciando ...");
+        LOG.info("Iniciando ...");
         
         int totalProductos = 0;
         laVista.pnContenedor.removeAll();
         laVista.pnContenedor.setLayout(new GridBagLayout());
         
-        logger.info("Listando mis productos...");
+        LOG.info("Listando mis productos...");
         producto_dto.setProdUsuario( usuario_dto.getCmpID() );
         
         
         if( busqueda == false ){
             lstMisProductos = producto_dao.mtdListar(producto_dto, cantidadPorPagina, cantidadResultados);
-            totalProductosExistentes = Integer.parseInt(""+producto_dao.mtdRowCount(producto_dto));
+            totalProductosExistentes = Integer.parseInt(""+producto_dao.mtdRowCountAllProductosPorUsuario(producto_dto));
         }else{
             producto_dto.setProdTitulo('%'+laVista.cmpBusqueda.getText().trim()+'%');
             producto_dto.setProdCategoria('%'+laVista.cmpBusqueda.getText().trim()+'%');
@@ -235,7 +231,7 @@ public class CtrlMiTienda{
         totalProductos = lstMisProductos.size();
         if( totalProductos > 0){
             
-            logger.warn("Recorriendo productos ....");
+            LOG.warning("Recorriendo productos ....");
             for (int i = 0; i < totalProductos; i++) {
                 CtrlCardMiProducto tarjeta = new CtrlCardMiProducto(lstMisProductos.get(i), producto_dao);
                 tarjeta.setItem(i);
@@ -252,20 +248,20 @@ public class CtrlMiTienda{
     }
            
     public void mtdMostrarCategorias(){
-        logger.info("Iniciando ...");
+        LOG.info("Iniciando ...");
         laVista.lstCategorias.setModel(null);
         lstCategoriaRaiz.removeAllChildren();
         
-        logger.info("Listando mis categorias...");
+        LOG.info("Listando mis categorias...");
         categoria_dto.setCateUsuario(usuario_dto.getCmpID());
         lstMisCategorias = categoria_dao.mtdListar(categoria_dto);
         int totalCategorias = lstMisCategorias.size();
-        logger.info("Total categorias: " + totalCategorias);
+        LOG.info("Total categorias: " + totalCategorias);
         
         
         if( totalCategorias > 0 ){
             
-            logger.warn("Recorriendo categorias ....");
+            LOG.warning("Recorriendo categorias ....");
             for (int i = 0; i < totalCategorias; i++) {
                 DefaultMutableTreeNode categoria = new DefaultMutableTreeNode(lstMisCategorias.get(i).getCateNombre());
                 lstCategoriaModelo.insertNodeInto(categoria, lstCategoriaRaiz, i);

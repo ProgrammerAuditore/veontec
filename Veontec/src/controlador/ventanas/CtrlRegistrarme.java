@@ -1,8 +1,6 @@
 package controlador.ventanas;
 
 import controlador.CtrlHiloConexion;
-import de.mkammerer.argon2.Argon2;
-import de.mkammerer.argon2.Argon2Factory;
 import index.Veontec;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -18,21 +16,21 @@ import vista.paneles.PanelRegistrarme;
 
 public class CtrlRegistrarme {
     
-    // * Vista
+    // ***** Vista
     private PanelRegistrarme pnSignUp;
     
-    // * Modelo
+    // ***** Modelo
     private UsuarioDao usuarioDao;
     private UsuarioDto usuarioDto;
     private CategoriaDao categoriaDao;
     private CategoriaDto categoriaDto;
     
-    // * Atributos
+    // ***** Atributos
     private static CtrlRegistrarme instancia;
     private static final Logger LOG = Logger.getLogger(CtrlRegistrarme.class.getName());
     
     
-    // * Constructor
+    // ***** Constructor
     private CtrlRegistrarme(PanelRegistrarme pnRegistrarme) {
         this.pnSignUp = pnRegistrarme;
         this.usuarioDao = new UsuarioDao();
@@ -41,7 +39,7 @@ public class CtrlRegistrarme {
         this.categoriaDto = new CategoriaDto();
     }
     
-    // * Eventos
+    // ***** Eventos
     private void mtdEventoBtnRegistrarme(){
         pnSignUp.btnRegistrarme.addMouseListener(new MouseAdapter(){
             @Override
@@ -51,7 +49,7 @@ public class CtrlRegistrarme {
         });
     }
     
-    // * Métodos
+    // ***** Métodos
     public static CtrlRegistrarme getInstancia(PanelRegistrarme pnRegistrarme){
         if( instancia ==  null){
             instancia = new CtrlRegistrarme(pnRegistrarme);

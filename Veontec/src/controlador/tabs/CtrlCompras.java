@@ -17,18 +17,16 @@ import modelo.dao.UsuarioDao;
 import modelo.dto.CompraDto;
 import modelo.dto.ProductoDto;
 import modelo.dto.UsuarioDto;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import src.Info;
 import vista.paneles.PanelCompras;
 
 public class CtrlCompras{
     
-    // Vista
+    // ***** Vista
     public PanelCompras laVista;
     public JDialog modalCrearProducto;
     
-    // Modelos
+    // ***** Modelos
     private UsuarioDto usuario_dto;
     private UsuarioDao usuario_dao;
     private ProductoDao producto_dao;
@@ -37,8 +35,7 @@ public class CtrlCompras{
     private CompraDto compra_dto;
     private DefaultMutableTreeNode treeNode1;
     
-    // Atributos
-    static Log logger = LogFactory.getLog(CtrlCompras.class);
+    // ***** Atributos
     private static CtrlCompras instancia;
     private List<CompraDto> lstMisCompras;
     private Integer cantidadResultados;
@@ -47,7 +44,7 @@ public class CtrlCompras{
     private boolean activarBusqueda;
     private static final Logger LOG = Logger.getLogger(CtrlCompras.class.getName());
 
-    // Constructor
+    // ***** Constructor
     public CtrlCompras(PanelCompras laVista, UsuarioDto dto, UsuarioDao dao) {
         this.laVista = laVista;
         this.usuario_dto = dto;
@@ -63,10 +60,10 @@ public class CtrlCompras{
     
     // Obtener instancia | Singleton
     public static CtrlCompras getInstancia(PanelCompras laVista, UsuarioDto dto, UsuarioDao dao){
-        logger.info("Inicializando controlador");
+        LOG.info("Inicializando controlador");
         
         if( instancia == null ){
-            logger.warn("Creando instancia");
+            LOG.warning("Creando instancia");
             instancia = new CtrlCompras(laVista, dto, dao);
             instancia.mtdInit();
         
@@ -78,7 +75,7 @@ public class CtrlCompras{
         return instancia;
     }
     
-    // Eventos
+    // ***** Eventos
     private void mtdEventoBtnBuscar(){
         laVista.btnBuscar.addMouseListener(new MouseAdapter(){
             @Override
@@ -120,9 +117,9 @@ public class CtrlCompras{
         });
     }
     
-    // Métodos
+    // ***** Métodos
     private void mtdInit(){
-        logger.info("Ejecutando metodo una vez (obligatorio)");
+        LOG.info("Ejecutando metodo una vez (obligatorio)");
         mtdEventoBtnBuscar();
         mtdEventoBtnPrevia();
         mtdEventoBtnSiguiente();
@@ -131,7 +128,7 @@ public class CtrlCompras{
     }
     
     public static boolean mtdRecargarCompras(){
-        logger.warn("Ejecutando metodo ");
+        LOG.warning("Ejecutando metodo ");
         //if( instancia == null ){
             //instancia.mtdInit();
         //}
@@ -141,7 +138,7 @@ public class CtrlCompras{
     }
     
     private void mtdMostrarProducto(boolean busqueda){
-        logger.info("Iniciando...");
+        LOG.info("Iniciando...");
         
         int totalProductos = 0;
         laVista.pnContenedor.setLayout(new GridBagLayout());
@@ -151,20 +148,20 @@ public class CtrlCompras{
         // El usuario actual es el comprador
         compra_dto.setCompComprador( usuario_dto.getCmpID() );
         
-        logger.info("listando...");
+        LOG.info("listando...");
         if( busqueda == false){
             lstMisCompras = compra_dao.mtdListar(compra_dto, cantidadPorPagina, cantidadResultados);
-            totalProductosExistentes = Integer.parseInt(""+ compra_dao.mtdRowCount(compra_dto));
+            totalProductosExistentes = Integer.parseInt(""+ compra_dao.mtdRowCountAllComprasPorUsuario(compra_dto));
         } else{
             compra_dto.setCompTitulo('%'+laVista.cmpBusqueda.getText()+'%');
-            lstMisCompras = compra_dao.mtdBuscarAllComprasPorUsuario(compra_dto, cantidadPorPagina, cantidadResultados);
-            totalProductosExistentes = Integer.parseInt(""+ compra_dao.mtdRowCountAllComprasPorUsuario(compra_dto));
+            lstMisCompras = compra_dao.mtdBuscarAllComprasPorUsuarioSimilares(compra_dto, cantidadPorPagina, cantidadResultados);
+            totalProductosExistentes = Integer.parseInt(""+ compra_dao.mtdRowCountAllComprasPorUsuarioSimilares(compra_dto));
         }
         
         totalProductos = lstMisCompras.size();
         if( totalProductos > 0 ){
             
-            logger.warn("Recorriendo productos");
+            LOG.warning("Recorriendo productos");
             for (int i = 0; i < totalProductos; i++) {
                 CtrlCardCompra tarjeta = new CtrlCardCompra(lstMisCompras.get(i));
                 tarjeta.setItem(i);

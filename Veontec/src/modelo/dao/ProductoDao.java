@@ -9,9 +9,8 @@ import java.util.ArrayList;
 import java.util.List;
 import modelo.dto.ProductoDto;
 import modelo.interfaces.keyword_query;
-import modelo.interfaces.keyword_producto;
 
-public class ProductoDao implements keyword_query<ProductoDto>, keyword_producto<ProductoDto>{
+public class ProductoDao implements keyword_query<ProductoDto>{
 
     @Override
     public boolean mtdInsetar(ProductoDto obj_dto) {
@@ -194,7 +193,6 @@ public class ProductoDao implements keyword_query<ProductoDto>, keyword_producto
         return prod;
     }
 
-    @Override
     public List<ProductoDto> mtdListar() {
         // * Funciona perfectamente
         
@@ -233,7 +231,6 @@ public class ProductoDao implements keyword_query<ProductoDto>, keyword_producto
         return productos;
     }
     
-    @Override
     public List<ProductoDto> mtdListar(ProductoDto dto) {
         // * Funciona perfectamente
         
@@ -274,7 +271,6 @@ public class ProductoDao implements keyword_query<ProductoDto>, keyword_producto
         return productos;
     }
 
-    @Override
     public List<ProductoDto> mtdListar(int inicio, int fin) {
         // * Funciona perfectamente
         
@@ -315,7 +311,6 @@ public class ProductoDao implements keyword_query<ProductoDto>, keyword_producto
         return productos;
     }
     
-    @Override
     public List<ProductoDto> mtdListar(ProductoDto obj_dto, int inicio, int fin) {
         // * Funciona perfectamente
         
@@ -359,7 +354,6 @@ public class ProductoDao implements keyword_query<ProductoDto>, keyword_producto
         return productos;
     }
     
-    @Override
     public long mtdRowCount() {
         // * Funciona perfectamente
         
@@ -383,10 +377,10 @@ public class ProductoDao implements keyword_query<ProductoDto>, keyword_producto
         return filas;
     }
     
-    public int mtdRowCountAllProductos() {
+    public long mtdRowCountAllProductos() {
         // * Funciona perfectamente
         
-        int filas = 0;
+        long filas = 0;
         PreparedStatement ps = null;
         Connection conn = CtrlHiloConexion.getConexion();
         String query = "SELECT COUNT(*) FROM tblproductos ;";
@@ -475,8 +469,7 @@ public class ProductoDao implements keyword_query<ProductoDto>, keyword_producto
         return filas;
     }
 
-    @Override
-    public long mtdRowCount(ProductoDto obj_dto) {
+    public long mtdRowCountAllProductosPorUsuario(ProductoDto obj_dto) {
         // * Funciona perfectamente
         
         long filas = 0;
@@ -499,21 +492,6 @@ public class ProductoDao implements keyword_query<ProductoDto>, keyword_producto
         }
         
         return filas;
-    }
-    
-    @Override
-    public long mtdRowCount(int estado) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-    
-    @Override
-    public boolean mtdComprobar(ProductoDto obj_dto) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-    
-    @Override
-    public boolean mtdEliminar(ProductoDto obj_dto) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
     public long mtdRowCountAllProductosPorUsuarioSimilares(ProductoDto obj_dto) {

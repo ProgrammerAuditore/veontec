@@ -7,10 +7,6 @@ package vista.paneles.acciones;
 
 import src.Recursos;
 
-/**
- *
- * @author victo
- */
 public class PanelHacerPreguntar extends javax.swing.JPanel {
 
     /**
