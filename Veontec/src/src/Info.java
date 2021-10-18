@@ -16,9 +16,9 @@ public class Info {
     public static final Integer veontecCardsPorFila = 3;
     
     /* Produccción  mailjet <-> GMAIL
-    public static final String smtpUser = "dabf6d9831bdc3404e03d0bd9aebd337";
-    public static final String smtpPasswd = "09af06a814d962d5b7cc20ec093f41e8";
-    public static final String smtpHostName = "in-v3.mailjet.com";
+    public static final String smtpUser = "USER";
+    public static final String smtpPasswd = "PASSWORD";
+    public static final String smtpHostName = "HOST";
     public static final String smtpSetFrom = "sfw.veontec@support.com";
     public static final Integer smtpPort = 587;
     public static final boolean smtpOnSSL = true;
