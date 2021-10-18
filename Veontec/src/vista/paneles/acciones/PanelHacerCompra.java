@@ -5,6 +5,12 @@
  */
 package vista.paneles.acciones;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 import src.Recursos;
 
 /**
@@ -20,9 +26,8 @@ public class PanelHacerCompra extends javax.swing.JPanel {
         initComponents();
         this.setSize(Recursos.tamDialogModalCrearProducto );
         this.setPreferredSize(Recursos.tamDialogModalCrearProducto );
-        mtdEstablecerIdioma();
     }
-    
+  
     public boolean mtdComprobar() {
         
         if( !cmpTitulo.isAprobado() || cmpTitulo.getText().trim().isEmpty() || cmpTitulo.getText().trim().length() > 60 ){
@@ -37,16 +42,61 @@ public class PanelHacerCompra extends javax.swing.JPanel {
             return false;
         }
         
-        if( cmpPrecio.getText().trim().isEmpty()  || cmpDescripcion.getText().trim().length() > 160 ){
+        if( cmpDescripcion.getText().trim().isEmpty()  || cmpDescripcion.getText().trim().length() > 160 ){
             return false;
         }
         
         return true;
     }
     
-    private void mtdEstablecerIdioma(){
-        // * Etiquetas
-  
+    private void mtdCamposMtdPaypal(boolean estado){
+        this.cmpPayPalCorreo.setEnabled(estado);
+        this.cmpPayPalCorreo.getEstiloTextEscritura();
+        this.cmpPayPalPasswd.setEnabled(estado);
+        this.cmpPayPalPasswd.getEstiloTextEscritura();
+        this.cmpPayPalTitular.setEnabled(estado);
+        this.cmpPayPalTitular.getEstiloTextEscritura();
+    }
+    
+    private void mtdCamposMtdDebito(boolean estado){
+        this.cmpDebitoFechaMM.setEnabled(estado);
+        this.cmpDebitoFechaMM.getEstiloTextEscritura();
+        this.cmpDebitoFechaYY.setEnabled(estado);
+        this.cmpDebitoFechaYY.getEstiloTextEscritura();
+        this.cmpDebitoNumTarjeta.setEnabled(estado);
+        this.cmpDebitoNumTarjeta.getEstiloTextEscritura();
+        this.cmpDebitoTitular.setEnabled(estado);
+        this.cmpDebitoTitular.getEstiloTextEscritura();
+        this.cmpDebitoCVV.setEnabled(estado);
+        this.cmpDebitoCVV.getEstiloTextEscritura();
+    }
+    
+    public boolean mtdComprobarMtdDebito(){
+        
+        if( btnMtdDebito.isSelected() ){
+            if( cmpDebitoFechaMM.isAprobado() && cmpDebitoFechaYY.isAprobado() ){
+                if( cmpDebitoNumTarjeta.isAprobado() && cmpDebitoTitular.isAprobado() ){
+                    if( cmpDebitoCVV.isAprobado() ){
+                        return true;
+                    }
+                }
+            }
+        }
+        
+        return false;
+    }
+    
+    public boolean mtdComprobarMtdPayPal(){
+        
+        if( btnMtdPaypal.isSelected() ){
+            if( cmpPayPalTitular.isAprobado() && cmpPayPalCorreo.isAprobado() ){
+                if( cmpPayPalPasswd.isAprobado() ){
+                    return true;
+                }
+            }
+        }
+        
+        return false;
     }
 
     /**
@@ -60,6 +110,9 @@ public class PanelHacerCompra extends javax.swing.JPanel {
 
         jPanel1 = new javax.swing.JPanel();
         etqTitulo = new vista.componentes.etiqueta.Titulo();
+        btnAceptar = new vista.componentes.boton.Boton();
+        btnCancelar = new vista.componentes.boton.Boton();
+        jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel2 = new javax.swing.JPanel();
         etqNombres = new vista.componentes.etiqueta.Etiqueta();
         etqDireccion = new vista.componentes.etiqueta.Etiqueta();
@@ -76,8 +129,31 @@ public class PanelHacerCompra extends javax.swing.JPanel {
         jSeparator1 = new javax.swing.JSeparator();
         etqTotal = new vista.componentes.etiqueta.Etiqueta();
         cmpTotal = new vista.componentes.campos.CampoMoneda();
-        btnAceptar = new vista.componentes.boton.Boton();
-        btnCancelar = new vista.componentes.boton.Boton();
+        jPanel3 = new javax.swing.JPanel();
+        btnMtdDebito = new javax.swing.JRadioButton();
+        etiqueta3 = new vista.componentes.etiqueta.Etiqueta();
+        jPanel6 = new javax.swing.JPanel();
+        etiqueta5 = new vista.componentes.etiqueta.Etiqueta();
+        cmpDebitoTitular = new vista.componentes.campos.CampoDatos();
+        etiqueta6 = new vista.componentes.etiqueta.Etiqueta();
+        cmpDebitoNumTarjeta = new vista.componentes.campos.CampoNumericoLim();
+        cmpDebitoFechaMM = new vista.componentes.campos.CampoNumericoLim();
+        etiqueta7 = new vista.componentes.etiqueta.Etiqueta();
+        etiqueta8 = new vista.componentes.etiqueta.Etiqueta();
+        cmpDebitoFechaYY = new vista.componentes.campos.CampoNumericoLim();
+        cmpDebitoCVV = new vista.componentes.campos.CampoNumericoLim();
+        etiqueta9 = new vista.componentes.etiqueta.Etiqueta();
+        jPanel4 = new javax.swing.JPanel();
+        jPanel5 = new javax.swing.JPanel();
+        btnMtdPaypal = new javax.swing.JRadioButton();
+        etiqueta4 = new vista.componentes.etiqueta.Etiqueta();
+        jPanel7 = new javax.swing.JPanel();
+        cmpPayPalTitular = new vista.componentes.campos.CampoDatos();
+        etiqueta10 = new vista.componentes.etiqueta.Etiqueta();
+        cmpPayPalCorreo = new vista.componentes.campos.CampoCorreo();
+        cmpPayPalPasswd = new vista.componentes.campos.CampoPassword();
+        etiqueta11 = new vista.componentes.etiqueta.Etiqueta();
+        etiqueta12 = new vista.componentes.etiqueta.Etiqueta();
 
         jPanel1.setBackground(new java.awt.Color(51, 51, 51));
 
@@ -96,7 +172,13 @@ public class PanelHacerCompra extends javax.swing.JPanel {
             .addComponent(etqTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, 61, Short.MAX_VALUE)
         );
 
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Producto"));
+        btnAceptar.setImgButtonType("success");
+        btnAceptar.setTexto("Aceptar");
+
+        btnCancelar.setImgButtonType("secondary");
+        btnCancelar.setTexto("Cancelar");
+
+        jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         etqNombres.setText("Titulo del producto");
 
@@ -162,13 +244,13 @@ public class PanelHacerCompra extends javax.swing.JPanel {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(etqCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(etqTotal, javax.swing.GroupLayout.DEFAULT_SIZE, 271, Short.MAX_VALUE))
+                        .addComponent(etqTotal, javax.swing.GroupLayout.DEFAULT_SIZE, 273, Short.MAX_VALUE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addComponent(cmpCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(cmpTotal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addComponent(cmpTotal, javax.swing.GroupLayout.DEFAULT_SIZE, 261, Short.MAX_VALUE))
                             .addComponent(jSeparator1)
                             .addComponent(cmpEnlace, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jScrollPane1)
@@ -206,14 +288,232 @@ public class PanelHacerCompra extends javax.swing.JPanel {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cmpCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cmpTotal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(31, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        btnAceptar.setImgButtonType("success");
-        btnAceptar.setTexto("Aceptar");
+        jTabbedPane1.addTab("Producto", jPanel2);
 
-        btnCancelar.setImgButtonType("secondary");
-        btnCancelar.setTexto("Cancelar");
+        btnMtdDebito.setText("Debito o credito");
+        btnMtdDebito.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                btnMtdDebitoMouseReleased(evt);
+            }
+        });
+        btnMtdDebito.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mtdActiones(evt);
+            }
+        });
+
+        etiqueta3.setText("Método de pago");
+
+        jPanel6.setBorder(javax.swing.BorderFactory.createTitledBorder("Datos de la tarjeta"));
+
+        etiqueta5.setText("Nombre del titular");
+
+        cmpDebitoTitular.setPlaceholder("Maria Guadalupe, ej.");
+
+        etiqueta6.setText("Número de tarjeta ");
+
+        cmpDebitoNumTarjeta.setLimiteNumerico(new java.lang.Integer(16));
+        cmpDebitoNumTarjeta.setPlaceholder("1111111111111111");
+
+        cmpDebitoFechaMM.setLimiteNumerico(new java.lang.Integer(2));
+        cmpDebitoFechaMM.setPlaceholder("MM");
+
+        etiqueta7.setText("Fecha de expiración");
+
+        etiqueta8.setText("/");
+        etiqueta8.setFont(new java.awt.Font("K2D SemiBold", 3, 18)); // NOI18N
+
+        cmpDebitoFechaYY.setLimiteNumerico(new java.lang.Integer(2));
+        cmpDebitoFechaYY.setPlaceholder("YY");
+
+        cmpDebitoCVV.setLimiteNumerico(new java.lang.Integer(4));
+        cmpDebitoCVV.setPlaceholder("1111");
+
+        etiqueta9.setText("CVV");
+
+        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
+        jPanel6.setLayout(jPanel6Layout);
+        jPanel6Layout.setHorizontalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(etiqueta5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(cmpDebitoTitular, javax.swing.GroupLayout.DEFAULT_SIZE, 521, Short.MAX_VALUE)
+                    .addComponent(etiqueta6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(cmpDebitoNumTarjeta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
+                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel6Layout.createSequentialGroup()
+                                .addComponent(cmpDebitoFechaMM, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(etiqueta8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(cmpDebitoFechaYY, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(etiqueta7, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(cmpDebitoCVV, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(etiqueta9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addContainerGap())
+        );
+        jPanel6Layout.setVerticalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(etiqueta5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(cmpDebitoTitular, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(etiqueta6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(cmpDebitoNumTarjeta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(etiqueta7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(etiqueta9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cmpDebitoFechaMM, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(etiqueta8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cmpDebitoFechaYY, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cmpDebitoCVV, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(86, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(etiqueta3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnMtdDebito, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(etiqueta3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnMtdDebito)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        jTabbedPane1.addTab("Debito o Credito", jPanel3);
+
+        jPanel5.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
+        btnMtdPaypal.setText("PayPal");
+        btnMtdPaypal.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                btnMtdPaypalMouseReleased(evt);
+            }
+        });
+        btnMtdPaypal.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMtdPaypalActionPerformed(evt);
+            }
+        });
+
+        etiqueta4.setText("Método de pago");
+
+        jPanel7.setBorder(javax.swing.BorderFactory.createTitledBorder("Datos de paypal"));
+
+        cmpPayPalTitular.setPlaceholder("Maria Guadalupe, ej.");
+        cmpPayPalTitular.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmpPayPalTitularActionPerformed(evt);
+            }
+        });
+
+        etiqueta10.setText("Nombre del titular");
+
+        cmpPayPalCorreo.setPlaceholder("maria.guadalupe@example.com");
+
+        cmpPayPalPasswd.setPlaceholder("");
+
+        etiqueta11.setText("Correo eléctronico  ");
+
+        etiqueta12.setText("Contraseña ");
+
+        javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
+        jPanel7.setLayout(jPanel7Layout);
+        jPanel7Layout.setHorizontalGroup(
+            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel7Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(etiqueta10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(cmpPayPalTitular, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(etiqueta11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(cmpPayPalCorreo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(etiqueta12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(cmpPayPalPasswd, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        jPanel7Layout.setVerticalGroup(
+            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel7Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(etiqueta10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(cmpPayPalTitular, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(etiqueta11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(11, 11, 11)
+                .addComponent(cmpPayPalCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(etiqueta12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(cmpPayPalPasswd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(85, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
+        jPanel5.setLayout(jPanel5Layout);
+        jPanel5Layout.setHorizontalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(etiqueta4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 553, Short.MAX_VALUE)
+                    .addComponent(btnMtdPaypal, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        jPanel5Layout.setVerticalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(etiqueta4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnMtdPaypal)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+
+        jTabbedPane1.addTab("Paypal", jPanel4);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -223,20 +523,23 @@ public class PanelHacerCompra extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnAceptar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(20, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(btnAceptar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(18, 18, 18)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(13, 13, 13)
+                .addComponent(jTabbedPane1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnAceptar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -245,19 +548,67 @@ public class PanelHacerCompra extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnMtdPaypalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMtdPaypalActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnMtdPaypalActionPerformed
+
+    private void cmpPayPalTitularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmpPayPalTitularActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cmpPayPalTitularActionPerformed
+
+    private void mtdActiones(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mtdActiones
+
+    }//GEN-LAST:event_mtdActiones
+
+    private void btnMtdDebitoMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMtdDebitoMouseReleased
+        // TODO add your handling code here:
+        mtdCamposMtdDebito( btnMtdDebito.isSelected() );
+        
+        btnMtdPaypal.setEnabled( !btnMtdDebito.isSelected() );
+        mtdCamposMtdPaypal( !btnMtdDebito.isSelected() );
+    }//GEN-LAST:event_btnMtdDebitoMouseReleased
+
+    private void btnMtdPaypalMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMtdPaypalMouseReleased
+        // TODO add your handling code here:
+        mtdCamposMtdPaypal( btnMtdPaypal.isSelected() );
+         
+        btnMtdDebito.setEnabled( !btnMtdPaypal.isSelected() );
+        mtdCamposMtdDebito( !btnMtdPaypal.isSelected() );
+    }//GEN-LAST:event_btnMtdPaypalMouseReleased
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public vista.componentes.boton.Boton btnAceptar;
     public vista.componentes.boton.Boton btnCancelar;
+    public javax.swing.JRadioButton btnMtdDebito;
+    public javax.swing.JRadioButton btnMtdPaypal;
     public vista.componentes.campos.CampoNumerico cmpCantidad;
+    private vista.componentes.campos.CampoNumericoLim cmpDebitoCVV;
+    private vista.componentes.campos.CampoNumericoLim cmpDebitoFechaMM;
+    private vista.componentes.campos.CampoNumericoLim cmpDebitoFechaYY;
+    private vista.componentes.campos.CampoNumericoLim cmpDebitoNumTarjeta;
+    private vista.componentes.campos.CampoDatos cmpDebitoTitular;
     public javax.swing.JTextArea cmpDescripcion;
     public vista.componentes.campos.CampoTexto cmpEnlace;
+    private vista.componentes.campos.CampoCorreo cmpPayPalCorreo;
+    private vista.componentes.campos.CampoPassword cmpPayPalPasswd;
+    private vista.componentes.campos.CampoDatos cmpPayPalTitular;
     public vista.componentes.campos.CampoMoneda cmpPrecio;
     public vista.componentes.campos.CampoNumerico cmpStock;
     public vista.componentes.campos.CampoTexto cmpTitulo;
     public vista.componentes.campos.CampoMoneda cmpTotal;
     private vista.componentes.etiqueta.Etiqueta etiqueta1;
+    private vista.componentes.etiqueta.Etiqueta etiqueta10;
+    private vista.componentes.etiqueta.Etiqueta etiqueta11;
+    private vista.componentes.etiqueta.Etiqueta etiqueta12;
     private vista.componentes.etiqueta.Etiqueta etiqueta2;
+    private vista.componentes.etiqueta.Etiqueta etiqueta3;
+    private vista.componentes.etiqueta.Etiqueta etiqueta4;
+    private vista.componentes.etiqueta.Etiqueta etiqueta5;
+    private vista.componentes.etiqueta.Etiqueta etiqueta6;
+    private vista.componentes.etiqueta.Etiqueta etiqueta7;
+    private vista.componentes.etiqueta.Etiqueta etiqueta8;
+    private vista.componentes.etiqueta.Etiqueta etiqueta9;
     private vista.componentes.etiqueta.Etiqueta etqCantidad;
     private vista.componentes.etiqueta.Etiqueta etqDireccion;
     private vista.componentes.etiqueta.Etiqueta etqNombres;
@@ -265,7 +616,13 @@ public class PanelHacerCompra extends javax.swing.JPanel {
     private vista.componentes.etiqueta.Etiqueta etqTotal;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel6;
+    private javax.swing.JPanel jPanel7;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JTabbedPane jTabbedPane1;
     // End of variables declaration//GEN-END:variables
 }

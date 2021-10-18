@@ -11,6 +11,7 @@ public class VentaDto {
     private Double ventPrecio;
     private String ventFecha;
     private Integer ventEstado;
+    private Integer ventHashCode;
 
     public Integer getVentID() {
         return ventID;
@@ -84,14 +85,26 @@ public class VentaDto {
         this.ventEstado = ventEstado;
     }
 
+    public Integer getVentHashCode() {
+        return ventHashCode;
+    }
+
+    public void setVentHashCode(Integer ventHashCode) {
+        this.ventHashCode = ventHashCode;
+    }
+
     @Override
     public String toString() {
-        String msg = "";
-        msg += "ventID = " + ventID + "\n";
-        msg += "ventComprador = " + ventComprador + "\n";
-        msg += "ventVendedor = " + ventVendedor + "\n";
-        msg += "ventProducto = " + ventProducto + "\n";
-        return msg; 
+        return "VentaDto{" + "ventID=" + ventID + 
+                ", ventProducto=" + ventProducto + 
+                ", ventComprador=" + ventComprador + 
+                ", ventVendedor=" + ventVendedor + 
+                ", ventTitulo=" + ventTitulo + 
+                ", ventCantidad=" + ventCantidad + 
+                ", ventPrecio=" + ventPrecio + 
+                ", ventFecha=" + ventFecha + 
+                ", ventEstado=" + ventEstado + 
+                ", ventHashCode=" + ventHashCode + '}';
     }
     
 }

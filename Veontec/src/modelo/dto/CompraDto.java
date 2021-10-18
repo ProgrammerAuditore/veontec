@@ -11,6 +11,7 @@ public class CompraDto {
     private Double compPrecio;
     private String compFecha;
     private Integer compEstado;
+    private Integer compHashCode;
 
     public Integer getCompID() {
         return compID;
@@ -84,14 +85,26 @@ public class CompraDto {
         this.compEstado = compEstado;
     }
 
+    public Integer getCompHashCode() {
+        return compHashCode;
+    }
+
+    public void setCompHashCode(Integer compHashCode) {
+        this.compHashCode = compHashCode;
+    }
+
     @Override
     public String toString() {
-        String msg = "";
-        msg += "compID = " + compID + "\n";
-        msg += "compComprador = " + compComprador + "\n";
-        msg += "compVendedor = " + compVendedor + "\n";
-        msg += "compProducto = " + compProducto + "\n";
-        return msg; 
+        return "CompraDto{" + "compID=" + compID + 
+                ", compProducto=" + compProducto + 
+                ", compComprador=" + compComprador + 
+                ", compVendedor=" + compVendedor + 
+                ", compTitulo=" + compTitulo + 
+                ", compCantidad=" + compCantidad 
+                + ", compPrecio=" + compPrecio + 
+                ", compFecha=" + compFecha + 
+                ", compEstado=" + compEstado + 
+                ", compHashCode=" + compHashCode + '}';
     }
     
 }

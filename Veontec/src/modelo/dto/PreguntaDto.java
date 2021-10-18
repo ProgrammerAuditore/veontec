@@ -3,6 +3,7 @@ package modelo.dto;
 public class PreguntaDto {
     
     private Integer pregID;
+    private String pregTitulo;
     private Integer pregProducto;
     private Integer pregVendedor;
     private Integer pregComprador;
@@ -12,6 +13,14 @@ public class PreguntaDto {
 
     public Integer getPregID() {
         return pregID;
+    }
+
+    public String getPregTitulo() {
+        return pregTitulo;
+    }
+
+    public void setPregTitulo(String pregTitulo) {
+        this.pregTitulo = pregTitulo;
     }
 
     public void setPregID(Integer pregID) {
