@@ -1,6 +1,6 @@
 package controlador.componentes;
 
-import controlador.CtrlCompras;
+import controlador.tabs.CtrlCompras;
 import controlador.acciones.CtrlModalHacerPregunta;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
@@ -29,10 +29,10 @@ import vista.paneles.componentes.PanelCardCompra;
 public class CtrlCardCompra {
 
     
-    // * Vista
+    // ***** Vista
     private PanelCardCompra tarjeta;
     
-    // * Modelo
+    // ***** Modelo
     private ProductoDto prodDto;
     private ProductoDao prodDao;
     private VentaDto ventaDto;
@@ -43,12 +43,12 @@ public class CtrlCardCompra {
     private CompraDto compDto;
     private CompraDao compDao;
     
-    // * Atributos
+    // ***** Atributos
     private GridBagConstraints tarjeta_dimensiones;
     private Integer item;
     private ImageIcon portada;
     
-    // Constructor
+    // ***** Constructor
     public CtrlCardCompra(CompraDto compDto) {
         this.tarjeta = new PanelCardCompra();
         this.compDto = compDto;
@@ -62,7 +62,7 @@ public class CtrlCardCompra {
         this.tarjeta_dimensiones = new GridBagConstraints();
     }
     
-    // Eventos
+    // ***** Eventos
     private void mtdCrearEventoBtnCancelarCompra(){
         MouseListener eventoBtnComprar = null;
         tarjeta.btnCancelarCompra.removeMouseListener(eventoBtnComprar);
@@ -102,7 +102,7 @@ public class CtrlCardCompra {
         tarjeta.btnHacerPregunta.addMouseListener(eventoBtnHacePregunta);
     }
     
-    // Métodos
+    // ***** Métodos
     public void mtdInit(){
         
         if( compDto.getCompEstado() == 100 ){

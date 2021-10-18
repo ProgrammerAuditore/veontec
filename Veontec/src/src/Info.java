@@ -12,6 +12,9 @@ public class Info {
     public static final Integer veontecCuentaNoVerificada = 333;
     public static final Integer veontecRecuperarCuenta = 777;
     
+    public static final Integer veontecResultadoPorPagina = 3;
+    public static final Integer veontecCardsPorFila = 3;
+    
     /* Produccción  mailjet <-> GMAIL
     public static final String smtpUser = "dabf6d9831bdc3404e03d0bd9aebd337";
     public static final String smtpPasswd = "09af06a814d962d5b7cc20ec093f41e8";
@@ -23,10 +26,10 @@ public class Info {
     */
     
     /* Desarrollo mailtrap */
-    public static final String smtpHostName = "HOST";
+    public static final String smtpHostName = "smtp.mailtrap.io";
     public static final Integer smtpPort = 2525;
-    public static final String smtpUser = "USER";
-    public static final String smtpPasswd = "PASSWORD";
+    public static final String smtpUser = "1367cd978cc57a";
+    public static final String smtpPasswd = "04df52819fb63e";
     public static final String smtpSetFrom = "sfw.veontec@support.com";
     public static final boolean smtpOnSSL = false;
     public static final boolean smtpOnTLS = false;

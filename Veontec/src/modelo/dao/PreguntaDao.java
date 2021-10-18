@@ -8,10 +8,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import modelo.dto.PreguntaDto;
-import modelo.interfaces.keyword_extra;
 import modelo.interfaces.keyword_query;
 
-public class PreguntaDao implements keyword_query<PreguntaDto> , keyword_extra<PreguntaDto>{
+public class PreguntaDao implements keyword_query<PreguntaDto>{
 
     private final String nombreTabla = "tblpreguntas";
     
@@ -50,6 +49,11 @@ public class PreguntaDao implements keyword_query<PreguntaDto> , keyword_extra<P
         }
         
         return false;
+    }
+    
+    @Override
+    public boolean mtdActualizar(PreguntaDto obj_dto) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
@@ -126,7 +130,6 @@ public class PreguntaDao implements keyword_query<PreguntaDto> , keyword_extra<P
         return pregunta;
     }
 
-    @Override
     public List<PreguntaDto> mtdListar(PreguntaDto obj_dto) {
         // Funciona correctamente
         
@@ -170,7 +173,6 @@ public class PreguntaDao implements keyword_query<PreguntaDto> , keyword_extra<P
         return preguntas;
     }
 
-    @Override
     public List<PreguntaDto> mtdListar(PreguntaDto obj_dto, int cantidad, int inicio) {
         // Funciona correctamente
         
@@ -217,7 +219,7 @@ public class PreguntaDao implements keyword_query<PreguntaDto> , keyword_extra<P
         return preguntas;
     }
     
-    public List<PreguntaDto> mtdListarBuscarPreguntas(PreguntaDto obj_dto, int cantidad, int inicio) {
+    public List<PreguntaDto> mtdBuscarAllPreguntasPorUsuarioSimilares(PreguntaDto obj_dto, int cantidad, int inicio) {
         // Funciona correctamente
         
         List<PreguntaDto> preguntas = null;
@@ -264,28 +266,7 @@ public class PreguntaDao implements keyword_query<PreguntaDto> , keyword_extra<P
         return preguntas;
     }
     
-    @Override
-    public boolean mtdActualizar(PreguntaDto obj_dto) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-    
-    @Override
-    public List<PreguntaDto> mtdListar() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-    
-    @Override
-    public List<PreguntaDto> mtdListar(int inicio, int fin) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public long mtdRowCount() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public long mtdRowCount(PreguntaDto obj_dto) {
+    public long mtdRowCountAllPreguntasPorUsuario(PreguntaDto obj_dto) {
         // * Funciona perfectamente
         
         long filas = 0;
@@ -310,20 +291,32 @@ public class PreguntaDao implements keyword_query<PreguntaDto> , keyword_extra<P
         
         return filas;
     }
-
-    @Override
-    public long mtdRowCount(int estado) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public boolean mtdComprobar(PreguntaDto obj_dto) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public boolean mtdEliminar(PreguntaDto obj_dto) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+   
+    public long mtdRowCountAllPreguntasPorUsuarioSimilares(PreguntaDto obj_dto) {
+        // * Funciona perfectamente
+        
+        long filas = 0;
+        PreparedStatement ps = null;
+        Connection conn = CtrlHiloConexion.getConexion();
+        String query = "SELECT COUNT(*) FROM  " + nombreTabla + " "
+                + "WHERE (pregVendedor = ? OR pregComprador = ?) AND (pregTitulo LIKE ?) ;";
+        
+        try {
+            
+            ps = conn.prepareStatement(query.toLowerCase());
+            ps.setInt(1, obj_dto.getPregVendedor());
+            ps.setInt(2, obj_dto.getPregComprador());
+            ps.setString(3, obj_dto.getPregTitulo());
+            ResultSet rs = ps.executeQuery();
+            rs.next();
+            filas = rs.getInt(1);
+            
+            
+        } catch (SQLException e) {
+            System.out.println("" + e.getMessage());
+        }
+        
+        return filas;
     }
     
 }

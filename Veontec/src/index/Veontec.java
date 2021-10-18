@@ -4,7 +4,6 @@ import controlador.CtrlHiloConexion;
 import controlador.ventanas.CtrlMain;
 import hilos.HiloConexion;
 import hilos.HiloPrincipal;
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
@@ -17,7 +16,6 @@ import modelo.dto.ConexionDto;
 import modelo.dto.CuentaDto;
 import modelo.dto.EjecucionDto;
 import modelo.dto.UsuarioDto;
-import src.Info;
 import src.Recursos;
 import src.idiomas.Idiomas;
 import vista.ventanas.VentanaHome;
@@ -27,7 +25,7 @@ public class Veontec {
     
     public static VentanaHome ventanaHome;
     public static VentanaMain ventanaSession;
-    public static Properties idioma = new Idiomas("en");
+    public static Properties idioma = new Idiomas("es");
     public static long ctrlID;
     public static String IdiomaDefinido;
     public static UsuarioDao usuarioDao;

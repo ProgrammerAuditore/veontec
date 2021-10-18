@@ -5,14 +5,9 @@
  */
 package vista.paneles.componentes;
 
-import index.Veontec;
 import java.awt.Color;
 import java.awt.Dimension;
 
-/**
- *
- * @author victo
- */
 public class PanelCardProducto extends javax.swing.JPanel {
 
     /**

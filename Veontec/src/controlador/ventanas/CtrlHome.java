@@ -1,12 +1,12 @@
 package controlador.ventanas;
 
-import controlador.CtrlBienvenida;
-import controlador.CtrlCompras;
+import controlador.tabs.CtrlBienvenida;
+import controlador.tabs.CtrlCompras;
 import controlador.CtrlHiloConexion;
-import controlador.CtrlMiCuenta;
-import controlador.CtrlMiTienda;
-import controlador.CtrlPreguntas;
-import controlador.CtrlVentas;
+import controlador.tabs.CtrlMiCuenta;
+import controlador.tabs.CtrlMiTienda;
+import controlador.tabs.CtrlPreguntas;
+import controlador.tabs.CtrlVentas;
 import index.Veontec;
 import java.util.Objects;
 import javax.swing.JOptionPane;
@@ -21,26 +21,26 @@ enum TabsHome {
 
 public class CtrlHome{
     
-    // * Vista
+    // ***** Vista
     public VentanaHome laVista;
     
-    // * Modelos
+    // ***** Modelos
     // Vacío
     
-    // * Atributos
+    // ***** Atributos
     private int tabPreviaSeleccionada;
     private Integer estadoVeontec;
     private Integer estadoSuccessVeontec;
     private String titulo;
 
-    // * Constructor
+    // ***** Constructor
     public CtrlHome(VentanaHome laVista) {
         this.laVista = laVista;
         this.tabPreviaSeleccionada = 0;
         
     }
     
-    // * Eventos
+    // ***** Eventos
     private void mtdEventoPnTabMenu(){
         laVista.pnTabMenu.addChangeListener(new ChangeListener() {
             @Override
@@ -50,7 +50,7 @@ public class CtrlHome{
         });
     }
     
-    // * Métodos
+    // ***** Métodos
     public void mtdInit(){
         
         // * Establecer oyentes

@@ -14,7 +14,7 @@ public class Idiomas extends Properties{
             
             case "eng" :
             case "en"  : mtdObtenerIdioma("messages_en.properties"); break;
-            default: mtdObtenerIdioma("messages_en.properties"); break;
+            default: mtdObtenerIdioma("messages_es.properties"); break;
         } 
     }
     

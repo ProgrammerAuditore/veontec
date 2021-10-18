@@ -1,8 +1,6 @@
 package controlador.ventanas;
 
 import controlador.CtrlHiloConexion;
-import controlador.CtrlIniciarSesion;
-import controlador.CtrlRegistrarme;
 import index.Veontec;
 import java.util.Objects;
 import java.util.logging.Logger;
@@ -25,10 +23,10 @@ enum TabsMain {
 
 public class CtrlMain {
     
-    // * Vista
+    // ***** Vista
     private VentanaMain laVista;
     
-    // * Modelo
+    // ***** Modelo
     private UsuarioDao usuarioDao;
     private UsuarioDto usuarioDto;
     private CategoriaDao categoriaDao;
@@ -36,7 +34,7 @@ public class CtrlMain {
     private CuentaDao cuentaDao;
     private CuentaDto cuentaDto;
     
-    // * Atributos
+    // ***** Atributos
     private int tabPreviaSeleccionada;
     private Integer estadoVeontec;
     private Integer estadoSuccessVeontec;
@@ -45,7 +43,7 @@ public class CtrlMain {
     private static final Logger LOG = Logger.getLogger(CtrlMain.class.getName());
     
     
-    // * Constructor
+    // ***** Constructor
     public CtrlMain(VentanaMain laVista) {
         this.laVista = laVista;
         this.usuarioDao = new UsuarioDao();
@@ -56,7 +54,7 @@ public class CtrlMain {
         this.cuentaDto = new CuentaDto();
     }
     
-    // * Eventos
+    // ***** Eventos
     private void mtdEventoPnTabMenu(){
         laVista.pnTabMenus.addChangeListener(new ChangeListener() {
             @Override
@@ -68,7 +66,7 @@ public class CtrlMain {
         });
     }
     
-    // * Métodos
+    // ***** Métodos
     public void mtdInit(){
         LOG.info("Ejecutando metodo una vez (Obligatorio)");
         laVista.setTitle(Info.NombreSoftware);
