@@ -359,52 +359,6 @@ public class ProductoDao implements keyword_query<ProductoDto>, keyword_producto
         return productos;
     }
     
-    
-    
-    public List<ProductoDto> mtdListarBuscarProductoDeUsuario(ProductoDto obj_dto, int inicio, int fin) {
-        // * Funciona perfectamente
-        
-        List<ProductoDto> productos = null;
-        PreparedStatement ps = null;
-        Connection conn = CtrlHiloConexion.getConexion();
-        String query = "SELECT * FROM tblproductos "
-                + "WHERE prodUsuario = ? AND prodTitulo LIKE BINARY ?  "
-                + "LIMIT ? OFFSET ? ;";
-        
-        try {
-            
-            ps = conn.prepareStatement(query.toLowerCase());
-            ps.setInt(1, obj_dto.getProdUsuario());
-            ps.setString(2, obj_dto.getProdTitulo());
-            ps.setInt(3, inicio);
-            ps.setInt(4, fin);
-            ResultSet rs = ps.executeQuery();
-            
-            productos = new ArrayList<>();
-            while( rs.next() ){
-                ProductoDto prod = new ProductoDto();
-                
-                prod.setProdID( rs.getInt("prodID") );
-                prod.setProdTitulo(rs.getString("prodTitulo") );
-                prod.setProdDescripcion(rs.getString("prodDescripcion") );
-                prod.setProdCategoria(rs.getString("prodCategoria") );
-                prod.setProdPrecio( rs.getDouble("prodPrecio") );
-                prod.setProdStock(rs.getInt("prodStock"));
-                prod.setProdTipo(rs.getInt("prodTipo") );
-                prod.setProdEnlace(rs.getString("prodEnlace") );
-                prod.setProdUsuario(rs.getInt("prodUsuario") );
-                prod.setProdImg( rs.getBytes("prodMedia") );
-                
-                productos.add(prod);
-            }
-            
-        } catch (SQLException e) {
-            System.out.println("" + e.getMessage());
-        }
-        
-        return productos;
-    }
-
     @Override
     public long mtdRowCount() {
         // * Funciona perfectamente
@@ -560,6 +514,78 @@ public class ProductoDao implements keyword_query<ProductoDto>, keyword_producto
     @Override
     public boolean mtdEliminar(ProductoDto obj_dto) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+    public long mtdRowCountAllProductosPorUsuarioSimilares(ProductoDto obj_dto) {
+        // * Funciona perfectamente
+        
+        long filas = 0;
+        PreparedStatement ps = null;
+        Connection conn = CtrlHiloConexion.getConexion();
+        String query = "SELECT COUNT(*) FROM tblproductos "
+                + "WHERE prodUsuario = ? AND (prodTitulo LIKE ? OR prodCategoria LIKE ?);";
+        
+        try {
+            
+            ps = conn.prepareStatement(query.toLowerCase());
+            ps.setInt(1, obj_dto.getProdUsuario());
+            ps.setString(2, obj_dto.getProdTitulo());
+            ps.setString(3, obj_dto.getProdCategoria());
+            ResultSet rs = ps.executeQuery();
+            rs.next();
+            filas = rs.getInt(1);
+            
+            
+        } catch (SQLException e) {
+            System.out.println("" + e.getMessage());
+        }
+        
+        return filas;
+    }
+    
+    public List<ProductoDto> mtdBuscarAllProductosPorUsuarioSimilares(ProductoDto obj_dto, int inicio, int fin) {
+        // * Funciona perfectamente
+        
+        List<ProductoDto> productos = null;
+        PreparedStatement ps = null;
+        Connection conn = CtrlHiloConexion.getConexion();
+        String query = "SELECT * FROM tblproductos "
+                + "WHERE prodUsuario = ? AND ( prodTitulo LIKE ? OR prodCategoria LIKE ? ) "
+                + "LIMIT ? OFFSET ? ;";
+        
+        try {
+            
+            ps = conn.prepareStatement(query.toLowerCase());
+            ps.setInt(1, obj_dto.getProdUsuario());
+            ps.setString(2, obj_dto.getProdTitulo());
+            ps.setString(3, obj_dto.getProdCategoria());
+            ps.setInt(4, inicio);
+            ps.setInt(5, fin);
+            ResultSet rs = ps.executeQuery();
+            
+            productos = new ArrayList<>();
+            while( rs.next() ){
+                ProductoDto prod = new ProductoDto();
+                
+                prod.setProdID( rs.getInt("prodID") );
+                prod.setProdTitulo(rs.getString("prodTitulo") );
+                prod.setProdDescripcion(rs.getString("prodDescripcion") );
+                prod.setProdCategoria(rs.getString("prodCategoria") );
+                prod.setProdPrecio( rs.getDouble("prodPrecio") );
+                prod.setProdStock(rs.getInt("prodStock"));
+                prod.setProdTipo(rs.getInt("prodTipo") );
+                prod.setProdEnlace(rs.getString("prodEnlace") );
+                prod.setProdUsuario(rs.getInt("prodUsuario") );
+                prod.setProdImg( rs.getBytes("prodMedia") );
+                
+                productos.add(prod);
+            }
+            
+        } catch (SQLException e) {
+            System.out.println("" + e.getMessage());
+        }
+        
+        return productos;
     }
     
 }

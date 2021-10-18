@@ -68,6 +68,7 @@ public class CtrlMiTienda{
     private Integer pagProductos;
     private Integer totalProductosExistentes;
     private Integer productoPorPagina;
+    private boolean busquedaProductos;
     private static final Logger LOG = Logger.getLogger(CtrlBienvenida.class.getName());
 
     // Constructor
@@ -83,8 +84,9 @@ public class CtrlMiTienda{
         this.categoria_dto = new CategoriaDto();
         this.lstCategoriaRaiz = new DefaultMutableTreeNode("Categorias");
         this.lstCategoriaModelo = new DefaultTreeModel(lstCategoriaRaiz);
-        pagProductos = 0;
-        productoPorPagina = 3;
+        this.pagProductos = 0;
+        this.productoPorPagina = 3;
+        this.busquedaProductos = false;
     }
     
     // Obtener instancia | Singleton
@@ -153,10 +155,8 @@ public class CtrlMiTienda{
         laVista.btnBuscar.addMouseListener(new MouseAdapter(){
             @Override
             public void mouseReleased(MouseEvent e) {
-                pagProductos=0;
-                laVista.btnPrevia.setEnabled(true);
-                laVista.btnSiguiente.setEnabled(true);
-                mtdMostrarProducto(true);
+                mtdEstabecerBusqueda();
+                mtdMostrarProducto(busquedaProductos);
             }
         });
     }
@@ -166,10 +166,8 @@ public class CtrlMiTienda{
             @Override
             public void keyPressed(KeyEvent e) {
                 if(e.getKeyCode() == KeyEvent.VK_ENTER ){
-                    pagProductos=0;
-                    laVista.btnPrevia.setEnabled(true);
-                    laVista.btnSiguiente.setEnabled(true);
-                    mtdMostrarProducto(true);
+                    mtdEstabecerBusqueda();
+                    mtdMostrarProducto(busquedaProductos);
                 } 
             }
         });
@@ -214,23 +212,27 @@ public class CtrlMiTienda{
     
     private void mtdMostrarProducto(boolean busqueda){
         logger.info("Iniciando ...");
-        int totalProductos = 0;
+        
         //lstMisProductos.clear();
+        int totalProductos = 0;
         laVista.pnContenedor.removeAll();
         laVista.pnContenedor.setLayout(new GridBagLayout());
         
         logger.info("Listando mis productos...");
         producto_dto.setProdUsuario( usuario_dto.getCmpID() );
-        totalProductosExistentes = Integer.parseInt(""+producto_dao.mtdRowCount(producto_dto));
+        
         
         if( busqueda == false ){
             lstMisProductos = producto_dao.mtdListar(producto_dto, productoPorPagina, pagProductos);
+            totalProductosExistentes = Integer.parseInt(""+producto_dao.mtdRowCount(producto_dto));
         }else{
-            producto_dto.setProdTitulo('%'+laVista.cmpBusqueda.getText()+'%');
-            lstMisProductos = producto_dao.mtdListarBuscarProductoDeUsuario(producto_dto, productoPorPagina, pagProductos);
+            producto_dto.setProdTitulo('%'+laVista.cmpBusqueda.getText().trim()+'%');
+            producto_dto.setProdCategoria('%'+laVista.cmpBusqueda.getText().trim()+'%');
+            lstMisProductos = producto_dao.mtdBuscarAllProductosPorUsuarioSimilares(producto_dto, productoPorPagina, pagProductos);
+            totalProductosExistentes = Integer.parseInt(""+producto_dao.mtdRowCountAllProductosPorUsuarioSimilares(producto_dto));
         }
-        totalProductos = lstMisProductos.size();
         
+        totalProductos = lstMisProductos.size();
         if( totalProductos > 0){
             
             logger.warn("Recorriendo productos ....");
@@ -466,7 +468,7 @@ public class CtrlMiTienda{
         }
         
         laVista.btnSiguiente.setEnabled(true);
-        mtdMostrarProducto(false);
+        mtdMostrarProducto(busquedaProductos);
         
     }
     
@@ -483,8 +485,21 @@ public class CtrlMiTienda{
         }
         
         laVista.btnPrevia.setEnabled(true);
-        mtdMostrarProducto(false);
+        mtdMostrarProducto(busquedaProductos);
         
+    }
+    
+    private void mtdEstabecerBusqueda(){
+        laVista.btnPrevia.setEnabled(true);
+        laVista.btnSiguiente.setEnabled(true);
+        
+        pagProductos=0;
+        if( laVista.cmpBusqueda.getText().trim().isEmpty() || laVista.cmpBusqueda.isVacio() ){
+            busquedaProductos = false;
+        }else{
+            busquedaProductos = true;
+        }
+        System.out.println("busquedaProductos " + busquedaProductos);
     }
     
     public static void mtdEliminarInstancia(){
