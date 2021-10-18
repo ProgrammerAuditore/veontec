@@ -47,7 +47,7 @@ public class PanelBienvenida extends javax.swing.JPanel {
         jPanel1 = new javax.swing.JPanel();
         titulo1 = new vista.componentes.etiqueta.Titulo();
         jPanel2 = new javax.swing.JPanel();
-        cmpBuscarProducto = new vista.componentes.campos.CampoTexto();
+        cmpBusqueda = new vista.componentes.campos.CampoTexto();
         btnBuscar = new vista.componentes.boton.Boton();
         btnSiguiente = new vista.componentes.boton.Boton();
         btnPrevia = new vista.componentes.boton.Boton();
@@ -74,7 +74,7 @@ public class PanelBienvenida extends javax.swing.JPanel {
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Opciones"));
 
-        cmpBuscarProducto.setPlaceholder("Buscar un producto");
+        cmpBusqueda.setPlaceholder("Buscar un producto");
 
         btnBuscar.setImgButtonType("dark");
         btnBuscar.setTexto("Buscar");
@@ -90,7 +90,7 @@ public class PanelBienvenida extends javax.swing.JPanel {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(cmpBuscarProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(cmpBusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -112,7 +112,7 @@ public class PanelBienvenida extends javax.swing.JPanel {
                             .addComponent(btnSiguiente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                 .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(cmpBuscarProducto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(cmpBusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
 
@@ -181,7 +181,7 @@ public class PanelBienvenida extends javax.swing.JPanel {
     public vista.componentes.boton.Boton btnBuscar;
     public vista.componentes.boton.Boton btnPrevia;
     public vista.componentes.boton.Boton btnSiguiente;
-    public vista.componentes.campos.CampoTexto cmpBuscarProducto;
+    public vista.componentes.campos.CampoTexto cmpBusqueda;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;

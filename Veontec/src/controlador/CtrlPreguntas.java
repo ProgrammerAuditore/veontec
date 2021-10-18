@@ -38,10 +38,10 @@ public class CtrlPreguntas{
     private static CtrlPreguntas instancia;
     private List<PreguntaDto> lstPreguntas;
     Integer usuarioID;
-    private Integer pagProductos;
+    private Integer cantidadResultado;
     private Integer totalProductosExistentes;
-    private Integer productoPorPagina;
-    private boolean tipoBusqueda;
+    private Integer cantidadPorPagina;
+    private boolean activarBusqueda;
     private static final Logger LOG = Logger.getLogger(CtrlBienvenida.class.getName());
     
     // * Constructor
@@ -56,9 +56,9 @@ public class CtrlPreguntas{
         this.preguntaDao = new PreguntaDao();
         this.producto_dto = new ProductoDto();
         this.producto_dao = new ProductoDao();
-        this.pagProductos = 0;
-        this.productoPorPagina = 3;
-        this.tipoBusqueda = false;
+        this.cantidadResultado = 0;
+        this.cantidadPorPagina = 3;
+        this.activarBusqueda = false;
     }
     
     // * Eventos    
@@ -67,7 +67,7 @@ public class CtrlPreguntas{
             @Override
             public void mouseReleased(MouseEvent e) {
                 mtdEstabecerBusqueda();
-                mtdMostrarPreguntas(tipoBusqueda);
+                mtdMostrarPreguntas(activarBusqueda);
             }
         });
     }
@@ -78,7 +78,7 @@ public class CtrlPreguntas{
             public void keyPressed(KeyEvent e) {
                 if(e.getKeyCode() == KeyEvent.VK_ENTER ){
                     mtdEstabecerBusqueda();
-                    mtdMostrarPreguntas(tipoBusqueda);
+                    mtdMostrarPreguntas(activarBusqueda);
                 } 
             }
         });
@@ -135,6 +135,7 @@ public class CtrlPreguntas{
     
     private void mtdMostrarPreguntas(boolean busqueda){
         logger.info("Iniciando ...");
+        
         int totalPreguntas = 0;
         laVista.pnContenedor.setLayout(new GridBagLayout());
         laVista.pnContenedor.removeAll();
@@ -145,11 +146,11 @@ public class CtrlPreguntas{
         
         
         if( busqueda == false ){
-            lstPreguntas = preguntaDao.mtdListar(preguntaDto ,productoPorPagina, pagProductos);
+            lstPreguntas = preguntaDao.mtdListar(preguntaDto ,cantidadPorPagina, cantidadResultado);
             totalProductosExistentes = Integer.parseInt(""+preguntaDao.mtdRowCount(preguntaDto));
         }else{
             preguntaDto.setPregTitulo('%'+laVista.cmpBusqueda.getText()+'%');
-            lstPreguntas = preguntaDao.mtdBuscarAllPreguntasSimilares(preguntaDto, productoPorPagina, pagProductos);
+            lstPreguntas = preguntaDao.mtdBuscarAllPreguntasSimilares(preguntaDto, cantidadPorPagina, cantidadResultado);
             totalProductosExistentes = Integer.parseInt(""+preguntaDao.mtdRowCountAllPreguntasSimilares(preguntaDto));
         }
         
@@ -186,36 +187,36 @@ public class CtrlPreguntas{
     }
     
     private void mtdMostrarProductosPrevias(){
-        pagProductos -= productoPorPagina;
-        //pagProductos = pagProductos <= 0 ? 0 : pagProductos;
-        //LOG.info("Productos previas : " + pagProductos );
+        cantidadResultado -= cantidadPorPagina;
+        //pagProductos = cantidadResultado <= 0 ? 0 : cantidadResultado;
+        //LOG.info("Productos previas : " + cantidadResultado );
         
-        if( pagProductos < 0  ){
-            pagProductos = 0;
-            JOptionPane.showMessageDialog(laVista, "No hay más productos para mostrar");
+        if( cantidadResultado < 0  ){
+            cantidadResultado = 0;
+            JOptionPane.showMessageDialog(laVista, "No hay más resultados por mostrar.");
             laVista.btnPrevia.setEnabled(false);
             return;
         }
         
         laVista.btnSiguiente.setEnabled(true);
-        mtdMostrarPreguntas(tipoBusqueda);
+        mtdMostrarPreguntas(activarBusqueda);
         
     }
     
     private void mtdMostrarProductosSiguiente(){
-        pagProductos += productoPorPagina;
-        //pagProductos = pagProductos >= totalProductosExistentes ? totalProductosExistentes: pagProductos;
-        //LOG.info("Productos siguientes : " + pagProductos );
+        cantidadResultado += cantidadPorPagina;
+        //pagProductos = cantidadResultado >= totalProductosExistentes ? totalProductosExistentes: cantidadResultado;
+        //LOG.info("Productos siguientes : " + cantidadResultado );
         
-        if( pagProductos >= totalProductosExistentes ){
-            pagProductos = totalProductosExistentes;
-            JOptionPane.showMessageDialog(laVista, "No hay más productos para mostrar");
+        if( cantidadResultado >= totalProductosExistentes ){
+            cantidadResultado = totalProductosExistentes;
+            JOptionPane.showMessageDialog(laVista, "No hay más resultados por mostrar.");
             laVista.btnSiguiente.setEnabled(false);
             return;
         }
         
         laVista.btnPrevia.setEnabled(true);
-        mtdMostrarPreguntas(tipoBusqueda);
+        mtdMostrarPreguntas(activarBusqueda);
         
     }
     
@@ -223,13 +224,12 @@ public class CtrlPreguntas{
         laVista.btnPrevia.setEnabled(true);
         laVista.btnSiguiente.setEnabled(true);
         
-        pagProductos=0;
+        cantidadResultado=0;
         if( laVista.cmpBusqueda.getText().trim().isEmpty() || laVista.cmpBusqueda.isVacio() ){
-            tipoBusqueda = false;
+            activarBusqueda = false;
         }else{
-            tipoBusqueda = true;
+            activarBusqueda = true;
         }
-        System.out.println("busquedaProductos " + tipoBusqueda);
     }
     
     public static void mtdEliminarInstancia(){
