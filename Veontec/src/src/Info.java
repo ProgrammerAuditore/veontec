@@ -23,10 +23,10 @@ public class Info {
     */
     
     /* Desarrollo mailtrap */
-    public static final String smtpHostName = "HOST";
+    public static final String smtpHostName = "smtp.mailtrap.io";
     public static final Integer smtpPort = 2525;
-    public static final String smtpUser = "USER";
-    public static final String smtpPasswd = "PASSWORD";
+    public static final String smtpUser = "1367cd978cc57a";
+    public static final String smtpPasswd = "04df52819fb63e";
     public static final String smtpSetFrom = "sfw.veontec@support.com";
     public static final boolean smtpOnSSL = false;
     public static final boolean smtpOnTLS = false;

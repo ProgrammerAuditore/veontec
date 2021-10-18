@@ -136,6 +136,10 @@ public class CampoTexto extends JTextField implements FocusListener{
         return !getText().equals( getPlaceholder() );          
     }
     
+    public boolean isVacio(){
+        return getText().equals( getPlaceholder() );          
+    }
+    
     @Override
     public void focusGained(FocusEvent e) {
         if( verificarCampo ){
