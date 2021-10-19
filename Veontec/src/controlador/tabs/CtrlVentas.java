@@ -142,7 +142,7 @@ public class CtrlVentas{
         ventDto.setVentVendedor( Veontec.usuarioDto.getCmpID() );
         
         if( busqueda == false ){
-            lstMisVentas = ventDao.mtdListar(ventDto, cantidadPorPagina, cantidadResultados);
+            lstMisVentas = ventDao.mtdListarAllVentasPorUsuario(ventDto, cantidadPorPagina, cantidadResultados);
             totalProductosExistentes = Integer.valueOf( ""+ventDao.mtdRowCountAllVentasPorUsuario(ventDto) );
         }else{
             ventDto.setVentTitulo('%'+laVista.cmpBusqueda.getText()+'%');

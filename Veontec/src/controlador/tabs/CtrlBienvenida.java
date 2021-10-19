@@ -134,7 +134,7 @@ public class CtrlBienvenida{
         laVista.pnContenedor.removeAll();
         
         if( busqueda == false ){
-            lstMisProductos = producto_dao.mtdListar(cantidaPorPagina, cantidadResultado);
+            lstMisProductos = producto_dao.mtdListarAllProductos(cantidaPorPagina, cantidadResultado);
             totalProductosExistentes = Integer.parseInt(""+producto_dao.mtdRowCountAllProductos());
         }else{
             producto_dto.setProdTitulo('%'+laVista.cmpBusqueda.getText().trim()+'%');

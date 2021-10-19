@@ -219,7 +219,7 @@ public class CtrlMiTienda{
         
         
         if( busqueda == false ){
-            lstMisProductos = producto_dao.mtdListar(producto_dto, cantidadPorPagina, cantidadResultados);
+            lstMisProductos = producto_dao.mtdListarAllProductosPorUsuario(producto_dto, cantidadPorPagina, cantidadResultados);
             totalProductosExistentes = Integer.parseInt(""+producto_dao.mtdRowCountAllProductosPorUsuario(producto_dto));
         }else{
             producto_dto.setProdTitulo('%'+laVista.cmpBusqueda.getText().trim()+'%');
