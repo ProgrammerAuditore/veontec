@@ -173,7 +173,7 @@ public class PreguntaDao implements keyword_query<PreguntaDto>{
         return preguntas;
     }
 
-    public List<PreguntaDto> mtdListar(PreguntaDto obj_dto, int cantidad, int inicio) {
+    public List<PreguntaDto> mtdListarAllPreguntasPorUsuario(PreguntaDto obj_dto, int cantidad, int inicio) {
         // Funciona correctamente
         
         List<PreguntaDto> preguntas = null;

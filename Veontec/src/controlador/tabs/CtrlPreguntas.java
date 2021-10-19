@@ -144,7 +144,7 @@ public class CtrlPreguntas{
         
         
         if( busqueda == false ){
-            lstPreguntas = preguntaDao.mtdListar(preguntaDto ,cantidadPorPagina, cantidadResultado);
+            lstPreguntas = preguntaDao.mtdListarAllPreguntasPorUsuario(preguntaDto ,cantidadPorPagina, cantidadResultado);
             totalProductosExistentes = Integer.parseInt(""+preguntaDao.mtdRowCountAllPreguntasPorUsuario(preguntaDto));
         }else{
             preguntaDto.setPregTitulo('%'+laVista.cmpBusqueda.getText()+'%');

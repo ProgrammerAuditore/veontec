@@ -6,6 +6,8 @@ import java.io.File;
 import java.io.IOException;
 import java.lang.management.ManagementFactory;
 import java.util.HashMap;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 
 class CargarRecurgos {
     
@@ -106,6 +108,13 @@ class CargarRecurgos {
             return Toolkit.getDefaultToolkit().getImage(getClass().getResource(Rutas.pathIconoDefultMs));
         }
         
+    }
+    
+    public Icon iconoDefaultCategorias(){
+        Image img = Toolkit.getDefaultToolkit().getImage(getClass().getResource(Rutas.pathIconoCategorias));
+        img = img.getScaledInstance(20, 20, Image.SCALE_SMOOTH);
+        Icon closedIcon = new ImageIcon(img);
+        return closedIcon;
     }
     
     public HashMap<String, String> docCotizacionJasper(){

@@ -231,7 +231,7 @@ public class VentaDao implements keyword_query<VentaDto> {
         return ventas;
     }
 
-    public List<VentaDto> mtdListar(VentaDto obj_dto, int inicio, int fin) {
+    public List<VentaDto> mtdListarAllVentasPorUsuario(VentaDto obj_dto, int inicio, int fin) {
         // Funciona perfectamente
         
         List<VentaDto> ventas = null;
