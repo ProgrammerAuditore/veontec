@@ -34,6 +34,7 @@ import modelo.dto.ImagesDto;
 import modelo.dto.ProductoDto;
 import modelo.dto.UsuarioDto;
 import src.Info;
+import src.Recursos;
 import vista.paneles.acciones.PanelCrearProducto;
 import vista.paneles.PanelMiTienda;
 
@@ -219,7 +220,7 @@ public class CtrlMiTienda{
         
         
         if( busqueda == false ){
-            lstMisProductos = producto_dao.mtdListar(producto_dto, cantidadPorPagina, cantidadResultados);
+            lstMisProductos = producto_dao.mtdListarAllProductosPorUsuario(producto_dto, cantidadPorPagina, cantidadResultados);
             totalProductosExistentes = Integer.parseInt(""+producto_dao.mtdRowCountAllProductosPorUsuario(producto_dto));
         }else{
             producto_dto.setProdTitulo('%'+laVista.cmpBusqueda.getText().trim()+'%');
@@ -276,12 +277,9 @@ public class CtrlMiTienda{
     
     private void mtdDefinirIconos(){
         DefaultTreeCellRenderer renderer = (DefaultTreeCellRenderer) laVista.lstCategorias.getCellRenderer();
-        Icon closedIcon = new ImageIcon(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/storage/icons/icono.jpg")).getScaledInstance(20, 20, Image.SCALE_SMOOTH));
-        Icon openIcon = new ImageIcon(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/storage/icons/icono.jpg")).getScaledInstance(20, 20, Image.SCALE_SMOOTH));
-        Icon leafIcon = new ImageIcon(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/storage/icons/icono.jpg")).getScaledInstance(20, 20, Image.SCALE_SMOOTH));
-        renderer.setClosedIcon(closedIcon);
-        renderer.setOpenIcon(openIcon);
-        renderer.setLeafIcon(leafIcon);
+        renderer.setClosedIcon(Recursos.imgIconoDefaultCategorias());
+        renderer.setOpenIcon(Recursos.imgIconoDefaultCategorias());
+        renderer.setLeafIcon(Recursos.imgIconoDefaultCategorias());
     }
     
     private void mtdCrearCategoria(){

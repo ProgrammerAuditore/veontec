@@ -173,48 +173,6 @@ public class CompraDao implements keyword_query<CompraDto>{
         return compra;
     }
 
-    public List<CompraDto> mtdListar(CompraDto obj_dto) {
-        // * Funciona perfectamente
-        
-        List<CompraDto> ventas = null;
-        PreparedStatement ps = null;
-        Connection conn = CtrlHiloConexion.getConexion();
-        String query = "SELECT * FROM " + nombreTabla + " "
-                // * Buscamos el producto del usuario respectivo
-                + "WHERE compComprador = ? ;";
-        
-        try {
-            
-            // * Preparar la consulta
-            ps = conn.prepareStatement(query.toLowerCase());
-            ps.setInt(1, obj_dto.getCompComprador());
-            
-            // * Ejecutar la consulta
-            ResultSet rs = ps.executeQuery();
-            
-            ventas = new ArrayList<>();
-            while( rs.next() ){
-                CompraDto compra = new CompraDto(); 
-                compra.setCompID( rs.getInt("compID") );
-                compra.setCompProducto( rs.getInt("compProducto") );
-                compra.setCompComprador( rs.getInt("compComprador") );
-                compra.setCompVendedor(rs.getInt("compVendedor") );
-                compra.setCompTitulo( rs.getString("compTitulo") );
-                compra.setCompFecha( rs.getString("compFecha") );
-                compra.setCompPrecio( rs.getDouble("compPrecio") );
-                compra.setCompCantidad( rs.getInt("compCantidad") );
-                compra.setCompEstado( rs.getInt("compEstado") );
-                compra.setCompHashCode( rs.getInt("compHashCode") );
-                ventas.add(compra);
-            }
-            
-        } catch (SQLException e) {
-            System.out.println("" + e.getMessage());
-        }
-        
-        return ventas;
-    }
-    
     /**
     * Returns an Image object that can then be painted on the screen. 
     * The url argument must specify an absolute {@link URL}. The name
@@ -231,7 +189,7 @@ public class CompraDao implements keyword_query<CompraDto>{
     * @return      Una lista de objetos de tipo <tt>CompraDto<tt>
     * @see         CompraDto
     */
-    public List<CompraDto> mtdListar(CompraDto obj_dto, int inicio, int fin) {
+    public List<CompraDto> mtdListarAllComprasPorUsuario(CompraDto obj_dto, int inicio, int fin) {
         // Funciona perfectamente
         
         List<CompraDto> ventas = null;

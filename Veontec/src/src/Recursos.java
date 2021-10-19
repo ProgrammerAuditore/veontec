@@ -6,6 +6,7 @@ import java.awt.Image;
 import java.io.File;
 import java.lang.management.ManagementFactory;
 import java.util.HashMap;
+import javax.swing.Icon;
 
 public class Recursos {
     
@@ -14,6 +15,7 @@ public class Recursos {
     public static final File dataConexion(){ return new CargarRecurgos().dataConexion(); }
     public static final File dataCuenta(){ return new CargarRecurgos().dataCuenta(); }
     public static final Image imgIconoDefault(){ return new CargarRecurgos().iconoDefault(); }
+    public static final Icon imgIconoDefaultCategorias(){ return new CargarRecurgos().iconoDefaultCategorias(); }
     public static final HashMap<String, String> docCotizacionJasper(){ return new CargarRecurgos().docCotizacionJasper(); }
     //public static final HashMap<String, String> docInformeJasper = new CargarRecurgos().docInformeJasper();
     

@@ -271,7 +271,7 @@ public class ProductoDao implements keyword_query<ProductoDto>{
         return productos;
     }
 
-    public List<ProductoDto> mtdListar(int inicio, int fin) {
+    public List<ProductoDto> mtdListarAllProductos(int inicio, int fin) {
         // * Funciona perfectamente
         
         List<ProductoDto> productos = null;
@@ -311,7 +311,7 @@ public class ProductoDao implements keyword_query<ProductoDto>{
         return productos;
     }
     
-    public List<ProductoDto> mtdListar(ProductoDto obj_dto, int inicio, int fin) {
+    public List<ProductoDto> mtdListarAllProductosPorUsuario(ProductoDto obj_dto, int inicio, int fin) {
         // * Funciona perfectamente
         
         List<ProductoDto> productos = null;

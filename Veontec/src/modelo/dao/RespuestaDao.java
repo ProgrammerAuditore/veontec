@@ -8,10 +8,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import modelo.dto.RespuestaDto;
-import modelo.interfaces.keyword_extra;
 import modelo.interfaces.keyword_query;
 
-public class RespuestaDao implements keyword_query<RespuestaDto> , keyword_extra<RespuestaDto>{
+public class RespuestaDao implements keyword_query<RespuestaDto>{
 
     private final String nombreTabla = "tblrespuestas";
     
@@ -129,7 +128,6 @@ public class RespuestaDao implements keyword_query<RespuestaDto> , keyword_extra
         return respuesta;
     }
 
-    @Override
     public List<RespuestaDto> mtdListar(RespuestaDto obj_dto) {
         // * Funciona perfectamente
         
@@ -173,7 +171,6 @@ public class RespuestaDao implements keyword_query<RespuestaDto> , keyword_extra
         return preguntas;
     }
 
-    @Override
     public List<RespuestaDto> mtdListar(RespuestaDto obj_dto, int cantidad, int inicio) {
         // * Funciona perfectamente
         
@@ -222,41 +219,6 @@ public class RespuestaDao implements keyword_query<RespuestaDto> , keyword_extra
     
     @Override
     public boolean mtdActualizar(RespuestaDto obj_dto) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-    
-    @Override
-    public List<RespuestaDto> mtdListar() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-    
-    @Override
-    public List<RespuestaDto> mtdListar(int inicio, int fin) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public long mtdRowCount() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public long mtdRowCount(RespuestaDto obj_dto) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public long mtdRowCount(int estado) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public boolean mtdComprobar(RespuestaDto obj_dto) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public boolean mtdEliminar(RespuestaDto obj_dto) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     

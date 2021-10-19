@@ -150,7 +150,7 @@ public class CtrlCompras{
         
         LOG.info("listando...");
         if( busqueda == false){
-            lstMisCompras = compra_dao.mtdListar(compra_dto, cantidadPorPagina, cantidadResultados);
+            lstMisCompras = compra_dao.mtdListarAllComprasPorUsuario(compra_dto, cantidadPorPagina, cantidadResultados);
             totalProductosExistentes = Integer.parseInt(""+ compra_dao.mtdRowCountAllComprasPorUsuario(compra_dto));
         } else{
             compra_dto.setCompTitulo('%'+laVista.cmpBusqueda.getText()+'%');
