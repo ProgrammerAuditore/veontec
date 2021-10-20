@@ -98,7 +98,7 @@ public class CtrlMiTienda{
             
         }else{
             instancia.mtdMostrarCategorias();
-            instancia.mtdMostrarProducto(false);
+            instancia.mtdMostrarMisProductos(false);
         
         }
         
@@ -107,7 +107,7 @@ public class CtrlMiTienda{
     
     public static boolean mtdRecargarMisProductos(){
         instancia.mtdMostrarCategorias();
-        instancia.mtdMostrarProducto(false);
+        instancia.mtdMostrarMisProductos(false);
         return true;
     }
     
@@ -154,7 +154,7 @@ public class CtrlMiTienda{
             @Override
             public void mouseReleased(MouseEvent e) {
                 mtdEstabecerBusqueda();
-                mtdMostrarProducto(activarBusqueda);
+                mtdMostrarMisProductos(activarBusqueda);
             }
         });
     }
@@ -165,7 +165,7 @@ public class CtrlMiTienda{
             public void keyPressed(KeyEvent e) {
                 if(e.getKeyCode() == KeyEvent.VK_ENTER ){
                     mtdEstabecerBusqueda();
-                    mtdMostrarProducto(activarBusqueda);
+                    mtdMostrarMisProductos(activarBusqueda);
                 } 
             }
         });
@@ -205,10 +205,10 @@ public class CtrlMiTienda{
         mtdEventoBtnSiguiente();
         mtdDefinirIconos();
         mtdMostrarCategorias();
-        mtdMostrarProducto(false);
+        mtdMostrarMisProductos(false);
     }
     
-    private void mtdMostrarProducto(boolean busqueda){
+    private void mtdMostrarMisProductos(boolean busqueda){
         LOG.info("Iniciando ...");
         
         int totalProductos = 0;
@@ -462,7 +462,7 @@ public class CtrlMiTienda{
         }
         
         laVista.btnSiguiente.setEnabled(true);
-        mtdMostrarProducto(activarBusqueda);
+        mtdMostrarMisProductos(activarBusqueda);
         
     }
     
@@ -479,7 +479,7 @@ public class CtrlMiTienda{
         }
         
         laVista.btnPrevia.setEnabled(true);
-        mtdMostrarProducto(activarBusqueda);
+        mtdMostrarMisProductos(activarBusqueda);
         
     }
     

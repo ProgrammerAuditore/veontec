@@ -68,7 +68,7 @@ public class CtrlCompras{
             instancia.mtdInit();
         
         }else{
-            instancia.mtdMostrarProducto(false);
+            instancia.mtdMostrarCompras(false);
         
         }
         
@@ -81,7 +81,7 @@ public class CtrlCompras{
             @Override
             public void mouseReleased(MouseEvent e) {
                 mtdEstabecerBusqueda();
-                mtdMostrarProducto(activarBusqueda);
+                mtdMostrarCompras(activarBusqueda);
             }
         });
     }
@@ -92,7 +92,7 @@ public class CtrlCompras{
             public void keyPressed(KeyEvent e) {
                 if(e.getKeyCode() == KeyEvent.VK_ENTER ){
                     mtdEstabecerBusqueda();
-                    mtdMostrarProducto(activarBusqueda);
+                    mtdMostrarCompras(activarBusqueda);
                 } 
             }
         });
@@ -124,7 +124,7 @@ public class CtrlCompras{
         mtdEventoBtnPrevia();
         mtdEventoBtnSiguiente();
         mtdEventoCmpBuscarProducto();
-        mtdMostrarProducto(false);
+        mtdMostrarCompras(false);
     }
     
     public static boolean mtdRecargarCompras(){
@@ -133,11 +133,11 @@ public class CtrlCompras{
             //instancia.mtdInit();
         //}
         
-        instancia.mtdMostrarProducto(false);
+        instancia.mtdMostrarCompras(false);
         return true;
     }
     
-    private void mtdMostrarProducto(boolean busqueda){
+    private void mtdMostrarCompras(boolean busqueda){
         LOG.info("Iniciando...");
         
         int totalProductos = 0;
@@ -191,7 +191,7 @@ public class CtrlCompras{
         }
         
         laVista.btnSiguiente.setEnabled(true);
-        mtdMostrarProducto(activarBusqueda);
+        mtdMostrarCompras(activarBusqueda);
         
     }
     
@@ -208,7 +208,7 @@ public class CtrlCompras{
         }
         
         laVista.btnPrevia.setEnabled(true);
-        mtdMostrarProducto(activarBusqueda);
+        mtdMostrarCompras(activarBusqueda);
         
     }
     
