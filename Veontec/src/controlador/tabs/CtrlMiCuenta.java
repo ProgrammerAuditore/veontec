@@ -536,7 +536,7 @@ public class CtrlMiCuenta{
             mtdEliminarInstancias();
             Veontec.ventanaSession = new VentanaMain();
             CtrlMain ctrl = new CtrlMain(Veontec.ventanaSession);
-            ctrl.mtdInit();
+            ctrl.mtdInitLoggin();
         }
         
     }

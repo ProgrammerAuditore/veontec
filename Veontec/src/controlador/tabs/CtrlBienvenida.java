@@ -62,7 +62,7 @@ public class CtrlBienvenida{
             instancia.mtdInit();
             
         }else{
-            instancia.mtdMostrarProducto(false);
+            instancia.mtdMostrarProductos(false);
             
         }
         
@@ -75,7 +75,7 @@ public class CtrlBienvenida{
             @Override
             public void mouseReleased(MouseEvent e) {
                 mtdEstabecerBusqueda();
-                mtdMostrarProducto(activarBusqueda);
+                mtdMostrarProductos(activarBusqueda);
             }
         });
     }
@@ -86,7 +86,7 @@ public class CtrlBienvenida{
             public void keyPressed(KeyEvent e) {
                 if(e.getKeyCode() == KeyEvent.VK_ENTER ){
                     mtdEstabecerBusqueda();
-                    mtdMostrarProducto(activarBusqueda);
+                    mtdMostrarProductos(activarBusqueda);
                 } 
             }
         });
@@ -118,15 +118,15 @@ public class CtrlBienvenida{
         mtdEventoBtnPrevia();
         mtdEventoBtnBuscar();
         mtdEventoCmpBuscarProducto();
-        mtdMostrarProducto(false);
+        mtdMostrarProductos(false);
     }
     
     public static boolean mtdRecargar(){
-        instancia.mtdMostrarProducto(false);
+        instancia.mtdMostrarProductos(false);
         return true;
     }
     
-    private synchronized void mtdMostrarProducto(boolean busqueda){
+    private synchronized void mtdMostrarProductos(boolean busqueda){
         LOG.warning("Inicializando ... ");
         
         int totalProductos=0;
@@ -186,7 +186,7 @@ public class CtrlBienvenida{
         }
         
         laVista.btnSiguiente.setEnabled(true);
-        mtdMostrarProducto(activarBusqueda);
+        mtdMostrarProductos(activarBusqueda);
         
     }
     
@@ -203,7 +203,7 @@ public class CtrlBienvenida{
         }
         
         laVista.btnPrevia.setEnabled(true);
-        mtdMostrarProducto(activarBusqueda);
+        mtdMostrarProductos(activarBusqueda);
         
     }
     
