@@ -67,7 +67,7 @@ public class CtrlMain {
     }
     
     // ***** Métodos
-    public void mtdInit(){
+    private void mtdInit(){
         LOG.info("Ejecutando metodo una vez (Obligatorio)");
         laVista.setTitle(Info.NombreSoftware);
         mtdEventoPnTabMenu();
