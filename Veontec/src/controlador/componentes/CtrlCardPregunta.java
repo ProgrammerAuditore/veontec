@@ -31,17 +31,17 @@ import vista.paneles.componentes.PanelCardPregunta;
 public class CtrlCardPregunta {
     
     // ***** Vista
-    PanelCardPregunta laVista;
+    private PanelCardPregunta pnCardPregunta;
     
     // ***** Modelo
-    PreguntaDao preguntaDao;
-    PreguntaDto preguntaDto;
-    ProductoDto productoDto;
-    ProductoDao productoDao;
-    RespuestaDao respuestaDao;
-    RespuestaDto respuestaDto;
-    UsuarioDto usuarioDto;
-    UsuarioDao usuarioDao;
+    private PreguntaDao preguntaDao;
+    private PreguntaDto preguntaDto;
+    private ProductoDto productoDto;
+    private ProductoDao productoDao;
+    private RespuestaDao respuestaDao;
+    private RespuestaDto respuestaDto;
+    private UsuarioDto usuarioDto;
+    private UsuarioDao usuarioDao;
     
     // ***** Atributos
     private GridBagConstraints laVista_dimensiones;
@@ -58,7 +58,7 @@ public class CtrlCardPregunta {
         
         // * Instaciar obligatorio
         this.productoDao = new ProductoDao();
-        this.laVista = new PanelCardPregunta();
+        this.pnCardPregunta = new PanelCardPregunta();
         this.preguntaDao = new PreguntaDao();
         this.usuarioDao = new UsuarioDao();
         this.respuestaDao = new RespuestaDao();
@@ -69,7 +69,7 @@ public class CtrlCardPregunta {
     // ***** Eventos
     private void mtdEventoBtnPreguntar(){
         MouseListener evtBtnPreguntar = null;
-        laVista.btnRespCons.removeMouseListener(evtBtnPreguntar);
+        pnCardPregunta.btnRespCons.removeMouseListener(evtBtnPreguntar);
         
         evtBtnPreguntar = new MouseAdapter() {
             @Override
@@ -79,12 +79,12 @@ public class CtrlCardPregunta {
             }
         };
         
-        laVista.btnRespCons.addMouseListener(evtBtnPreguntar);
+        pnCardPregunta.btnRespCons.addMouseListener(evtBtnPreguntar);
     }
     
     private void mtdEventoBtnEliminar(){
         MouseListener evtBtnEliminar = null;
-        laVista.btnEliminarPregunta.removeMouseListener(evtBtnEliminar);
+        pnCardPregunta.btnEliminarPregunta.removeMouseListener(evtBtnEliminar);
         
         evtBtnEliminar = new MouseAdapter() {
             @Override
@@ -93,12 +93,12 @@ public class CtrlCardPregunta {
             }
         };
         
-        laVista.btnEliminarPregunta.addMouseListener(evtBtnEliminar);
+        pnCardPregunta.btnEliminarPregunta.addMouseListener(evtBtnEliminar);
     }
     
     private void mtdEventoBtnContestar(){
         MouseListener evtBtnContestar = null;
-        laVista.btnRespCons.removeMouseListener(evtBtnContestar);
+        pnCardPregunta.btnRespCons.removeMouseListener(evtBtnContestar);
         
         evtBtnContestar = new MouseAdapter() {
             @Override
@@ -107,7 +107,7 @@ public class CtrlCardPregunta {
             }
         };
         
-        laVista.btnRespCons.addMouseListener(evtBtnContestar);
+        pnCardPregunta.btnRespCons.addMouseListener(evtBtnContestar);
     }
     
     // ***** Metodos
@@ -132,12 +132,12 @@ public class CtrlCardPregunta {
     
     private void mtdEstablecerDatos(){
         // * Establecer datos en los campos
-        laVista.etqTitulo.setText( productoDto.getProdTitulo() );
-        laVista.cmpVendedor.setText( usuarioDto.getCmpNombreCompleto() );
-        laVista.cmpFecha.setText( preguntaDto.getPregFecha() );
+        pnCardPregunta.etqTitulo.setText( productoDto.getProdTitulo() );
+        pnCardPregunta.cmpVendedor.setText( usuarioDto.getCmpNombreCompleto() );
+        pnCardPregunta.cmpFecha.setText( preguntaDto.getPregFecha() );
         
         // * Establecer Pregunta
-        String detallePregunta = laVista.cmpDetallePregunta.getText();
+        String detallePregunta = pnCardPregunta.cmpDetallePregunta.getText();
         detallePregunta = detallePregunta.replace("<Pregunta>", preguntaDto.getPregPregunta());
         
         // * Obtener todas las respuestas
@@ -157,25 +157,25 @@ public class CtrlCardPregunta {
         
         // * Establecer respuestas
         detallePregunta = detallePregunta.replace("<Respuesta>", lstRespuestas.size() == 0 ? "Sin respuesta" : respuestas );
-        laVista.cmpDetallePregunta.setText(detallePregunta);
+        pnCardPregunta.cmpDetallePregunta.setText(detallePregunta);
         
         // * Establecer los botones
         if( preguntaDto.getPregVendedor().equals(Veontec.usuarioDto.getCmpID()) ){
-            laVista.btnEliminarPregunta.setEnabled(false);
-            laVista.btnEliminarPregunta.setVisible(false);
-            laVista.btnRespCons.setTexto("Contestar +1");
+            pnCardPregunta.btnEliminarPregunta.setEnabled(false);
+            pnCardPregunta.btnEliminarPregunta.setVisible(false);
+            pnCardPregunta.btnRespCons.setTexto("Contestar +1");
         }else{
-            laVista.btnEliminarPregunta.setTexto("Eliminar");
-            laVista.btnRespCons.setTexto("Preguntar +1");
+            pnCardPregunta.btnEliminarPregunta.setTexto("Eliminar");
+            pnCardPregunta.btnRespCons.setTexto("Preguntar +1");
         }
     }
     
     private void mtdEstablecerEventos(){
         if( preguntaDto.getPregVendedor().equals(Veontec.usuarioDto.getCmpID()) ){
-            laVista.mtdBackgroundVendedor();
+            pnCardPregunta.mtdBackgroundVendedor();
             mtdEventoBtnContestar();
         }else{
-            laVista.mtdBackgroundComprador();
+            pnCardPregunta.mtdBackgroundComprador();
             mtdEventoBtnEliminar();
             mtdEventoBtnPreguntar();
         }
@@ -189,18 +189,18 @@ public class CtrlCardPregunta {
                 BufferedImage buffimg = null;
                 InputStream inputimg = new ByteArrayInputStream(img);
                 buffimg = ImageIO.read(inputimg);
-                laVista.pnImgPortada.removeAll();
-                portada = new ImageIcon(buffimg.getScaledInstance(laVista.pnImgPortada.getWidth(), laVista.pnImgPortada.getHeight(), Image.SCALE_SMOOTH));
+                pnCardPregunta.pnImgPortada.removeAll();
+                portada = new ImageIcon(buffimg.getScaledInstance(pnCardPregunta.pnImgPortada.getWidth(), pnCardPregunta.pnImgPortada.getHeight(), Image.SCALE_SMOOTH));
                 JLabel iconocc = new JLabel(portada);
-                iconocc.setBounds(0, 0, laVista.pnImgPortada.getWidth(), laVista.pnImgPortada.getHeight());
-                iconocc.setSize(laVista.pnImgPortada.getWidth(), laVista.pnImgPortada.getHeight());
+                iconocc.setBounds(0, 0, pnCardPregunta.pnImgPortada.getWidth(), pnCardPregunta.pnImgPortada.getHeight());
+                iconocc.setSize(pnCardPregunta.pnImgPortada.getWidth(), pnCardPregunta.pnImgPortada.getHeight());
                 iconocc.setLocation(0, 0);
-                iconocc.setPreferredSize(new Dimension(laVista.pnImgPortada.getWidth(), laVista.pnImgPortada.getHeight()));
-                laVista.pnImgPortada.add(iconocc);
+                iconocc.setPreferredSize(new Dimension(pnCardPregunta.pnImgPortada.getWidth(), pnCardPregunta.pnImgPortada.getHeight()));
+                pnCardPregunta.pnImgPortada.add(iconocc);
                 //laVista.updateUI();
-                laVista.validate();
-                laVista.revalidate();
-                laVista.repaint();
+                pnCardPregunta.validate();
+                pnCardPregunta.revalidate();
+                pnCardPregunta.repaint();
                 
             } catch (Exception e) {
             }
@@ -208,21 +208,21 @@ public class CtrlCardPregunta {
     }
     
     private void mtdEliminarPregunta(){
-        int opc  = JOptionPane.showConfirmDialog(laVista, 
+        int opc  = JOptionPane.showConfirmDialog(pnCardPregunta, 
                 "¿Seguro que deseas eliminar la pregunta?", 
                 "Eliminar pregunta", JOptionPane.YES_NO_OPTION);
         
         if( opc == JOptionPane.YES_OPTION ){
             if( preguntaDao.mtdRemover(preguntaDto) ){
                 CtrlPreguntas.mtdRecargarPreguntas();
-                JOptionPane.showMessageDialog(laVista, "Pregunta eliminada exitosamente.");
+                JOptionPane.showMessageDialog(pnCardPregunta, "Pregunta eliminada exitosamente.");
             }
         }
         
     }
     
     private void mtdContestarPregunta(){
-        String respuesta = JOptionPane.showInputDialog(laVista,"Responder", productoDto.getProdTitulo(), JOptionPane.QUESTION_MESSAGE);
+        String respuesta = JOptionPane.showInputDialog(pnCardPregunta,"Responder", productoDto.getProdTitulo(), JOptionPane.QUESTION_MESSAGE);
         if( respuesta != null && !respuesta.trim().isEmpty() ){
             RespuestaDto dto = new RespuestaDto();
             
@@ -236,18 +236,18 @@ public class CtrlCardPregunta {
             
             if( respuestaDao.mtdInsetar(dto) ){
                 try { CtrlPreguntas.mtdRecargarPreguntas(); } catch (Exception e) { }
-                JOptionPane.showMessageDialog(laVista, "Respuesta enviado exitosamente.");
+                JOptionPane.showMessageDialog(pnCardPregunta, "Respuesta enviado exitosamente.");
             }
             
         }
     }
 
-    public PanelCardPregunta getLaVista() {
-        return laVista;
+    public PanelCardPregunta getPnCardPregunta() {
+        return pnCardPregunta;
     }
 
-    public void setLaVista(PanelCardPregunta laVista) {
-        this.laVista = laVista;
+    public void setPnCardPregunta(PanelCardPregunta pnCardPregunta) {
+        this.pnCardPregunta = pnCardPregunta;
     }
 
     public GridBagConstraints getTarjeta_dimensiones() {

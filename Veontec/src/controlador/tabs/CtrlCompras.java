@@ -23,16 +23,16 @@ import vista.paneles.PanelCompras;
 public class CtrlCompras{
     
     // ***** Vista
-    public PanelCompras laVista;
+    public PanelCompras pnCompras;
     public JDialog modalCrearProducto;
     
     // ***** Modelos
-    private UsuarioDto usuario_dto;
-    private UsuarioDao usuario_dao;
-    private ProductoDao producto_dao;
-    private ProductoDto producto_dto;
-    private CompraDao compra_dao;
-    private CompraDto compra_dto;
+    private UsuarioDto usuarioDto;
+    private UsuarioDao usuarioDao;
+    private ProductoDao productoDao;
+    private ProductoDto productoDto;
+    private CompraDao compraDao;
+    private CompraDto compraDto;
     private DefaultMutableTreeNode treeNode1;
     
     // ***** Atributos
@@ -46,13 +46,13 @@ public class CtrlCompras{
 
     // ***** Constructor
     public CtrlCompras(PanelCompras laVista, UsuarioDto dto, UsuarioDao dao) {
-        this.laVista = laVista;
-        this.usuario_dto = dto;
-        this.usuario_dao = dao;
-        this.producto_dao = new ProductoDao();
-        this.producto_dto = new ProductoDto();
-        this.compra_dao = new CompraDao();
-        this.compra_dto = new CompraDto();
+        this.pnCompras = laVista;
+        this.usuarioDto = dto;
+        this.usuarioDao = dao;
+        this.productoDao = new ProductoDao();
+        this.productoDto = new ProductoDto();
+        this.compraDao = new CompraDao();
+        this.compraDto = new CompraDto();
         this.cantidadResultados = 0;
         this.cantidadPorPagina = Info.veontecResultadoPorPagina;
         this.activarBusqueda = false;
@@ -77,7 +77,7 @@ public class CtrlCompras{
     
     // ***** Eventos
     private void mtdEventoBtnBuscar(){
-        laVista.btnBuscar.addMouseListener(new MouseAdapter(){
+        pnCompras.btnBuscar.addMouseListener(new MouseAdapter(){
             @Override
             public void mouseReleased(MouseEvent e) {
                 mtdEstabecerBusqueda();
@@ -87,7 +87,7 @@ public class CtrlCompras{
     }
     
     private void mtdEventoCmpBuscarProducto(){
-        laVista.cmpBusqueda.addKeyListener(new KeyAdapter(){
+        pnCompras.cmpBusqueda.addKeyListener(new KeyAdapter(){
             @Override
             public void keyPressed(KeyEvent e) {
                 if(e.getKeyCode() == KeyEvent.VK_ENTER ){
@@ -100,7 +100,7 @@ public class CtrlCompras{
     }
     
     private void mtdEventoBtnPrevia(){
-        laVista.btnPrevia.addMouseListener(new MouseAdapter(){
+        pnCompras.btnPrevia.addMouseListener(new MouseAdapter(){
             @Override
             public void mouseReleased(MouseEvent e) {
                 mtdMostrarProductosPrevias();
@@ -109,7 +109,7 @@ public class CtrlCompras{
     }
     
     private void mtdEventoBtnSiguiente(){
-        laVista.btnSiguiente.addMouseListener(new MouseAdapter(){
+        pnCompras.btnSiguiente.addMouseListener(new MouseAdapter(){
             @Override
             public void mouseReleased(MouseEvent e) {
                 mtdMostrarProductosSiguiente();
@@ -141,21 +141,21 @@ public class CtrlCompras{
         LOG.info("Iniciando...");
         
         int totalProductos = 0;
-        laVista.pnContenedor.setLayout(new GridBagLayout());
-        laVista.pnContenedor.removeAll();
+        pnCompras.pnContenedor.setLayout(new GridBagLayout());
+        pnCompras.pnContenedor.removeAll();
         
         
         // El usuario actual es el comprador
-        compra_dto.setCompComprador( usuario_dto.getCmpID() );
+        compraDto.setCompComprador(usuarioDto.getCmpID() );
         
         LOG.info("listando...");
         if( busqueda == false){
-            lstMisCompras = compra_dao.mtdListarAllComprasPorUsuario(compra_dto, cantidadPorPagina, cantidadResultados);
-            totalProductosExistentes = Integer.parseInt(""+ compra_dao.mtdRowCountAllComprasPorUsuario(compra_dto));
+            lstMisCompras = compraDao.mtdListarAllComprasPorUsuario(compraDto, cantidadPorPagina, cantidadResultados);
+            totalProductosExistentes = Integer.parseInt(""+ compraDao.mtdRowCountAllComprasPorUsuario(compraDto));
         } else{
-            compra_dto.setCompTitulo('%'+laVista.cmpBusqueda.getText()+'%');
-            lstMisCompras = compra_dao.mtdBuscarAllComprasPorUsuarioSimilares(compra_dto, cantidadPorPagina, cantidadResultados);
-            totalProductosExistentes = Integer.parseInt(""+ compra_dao.mtdRowCountAllComprasPorUsuarioSimilares(compra_dto));
+            compraDto.setCompTitulo('%'+pnCompras.cmpBusqueda.getText()+'%');
+            lstMisCompras = compraDao.mtdBuscarAllComprasPorUsuarioSimilares(compraDto, cantidadPorPagina, cantidadResultados);
+            totalProductosExistentes = Integer.parseInt(""+ compraDao.mtdRowCountAllComprasPorUsuarioSimilares(compraDto));
         }
         
         totalProductos = lstMisCompras.size();
@@ -166,15 +166,15 @@ public class CtrlCompras{
                 CtrlCardCompra tarjeta = new CtrlCardCompra(lstMisCompras.get(i));
                 tarjeta.setItem(i);
                 tarjeta.mtdInit();
-                laVista.pnContenedor.add(tarjeta.getLaVista(), tarjeta.getTarjeta_dimensiones());
+                pnCompras.pnContenedor.add(tarjeta.getLaVista(), tarjeta.getTarjeta_dimensiones());
             }
             
         }
             
         
-        laVista.pnContenedor.validate();
-        laVista.pnContenedor.revalidate();
-        laVista.pnContenedor.repaint();
+        pnCompras.pnContenedor.validate();
+        pnCompras.pnContenedor.revalidate();
+        pnCompras.pnContenedor.repaint();
         
     }
     
@@ -185,12 +185,12 @@ public class CtrlCompras{
         
         if( cantidadResultados < 0  ){
             cantidadResultados = 0;
-            JOptionPane.showMessageDialog(laVista, "No hay más resultados por mostrar.");
-            laVista.btnPrevia.setEnabled(false);
+            JOptionPane.showMessageDialog(pnCompras, "No hay más resultados por mostrar.");
+            pnCompras.btnPrevia.setEnabled(false);
             return;
         }
         
-        laVista.btnSiguiente.setEnabled(true);
+        pnCompras.btnSiguiente.setEnabled(true);
         mtdMostrarCompras(activarBusqueda);
         
     }
@@ -202,22 +202,22 @@ public class CtrlCompras{
         
         if( cantidadResultados >= totalProductosExistentes ){
             cantidadResultados = totalProductosExistentes;
-            JOptionPane.showMessageDialog(laVista, "No hay más resultados por mostrar.");
-            laVista.btnSiguiente.setEnabled(false);
+            JOptionPane.showMessageDialog(pnCompras, "No hay más resultados por mostrar.");
+            pnCompras.btnSiguiente.setEnabled(false);
             return;
         }
         
-        laVista.btnPrevia.setEnabled(true);
+        pnCompras.btnPrevia.setEnabled(true);
         mtdMostrarCompras(activarBusqueda);
         
     }
     
     private void mtdEstabecerBusqueda(){
-        laVista.btnPrevia.setEnabled(true);
-        laVista.btnSiguiente.setEnabled(true);
+        pnCompras.btnPrevia.setEnabled(true);
+        pnCompras.btnSiguiente.setEnabled(true);
         
         cantidadResultados=0;
-        if( laVista.cmpBusqueda.getText().trim().isEmpty() || laVista.cmpBusqueda.isVacio() ){
+        if( pnCompras.cmpBusqueda.getText().trim().isEmpty() || pnCompras.cmpBusqueda.isVacio() ){
             activarBusqueda = false;
         }else{
             activarBusqueda = true;

@@ -17,7 +17,7 @@ import vista.paneles.PanelRegistrarme;
 public class CtrlRegistrarme {
     
     // ***** Vista
-    private PanelRegistrarme pnSignUp;
+    private PanelRegistrarme pnRegistrarme;
     
     // ***** Modelo
     private UsuarioDao usuarioDao;
@@ -32,7 +32,7 @@ public class CtrlRegistrarme {
     
     // ***** Constructor
     private CtrlRegistrarme(PanelRegistrarme pnRegistrarme) {
-        this.pnSignUp = pnRegistrarme;
+        this.pnRegistrarme = pnRegistrarme;
         this.usuarioDao = new UsuarioDao();
         this.usuarioDto = new UsuarioDto();
         this.categoriaDao = new CategoriaDao();
@@ -41,7 +41,7 @@ public class CtrlRegistrarme {
     
     // ***** Eventos
     private void mtdEventoBtnRegistrarme(){
-        pnSignUp.btnRegistrarme.addMouseListener(new MouseAdapter(){
+        pnRegistrarme.btnRegistrarme.addMouseListener(new MouseAdapter(){
             @Override
             public void mouseReleased(MouseEvent e) {
                 mtdRegistrarme();
@@ -95,9 +95,9 @@ public class CtrlRegistrarme {
     private void mtdCreandoUsuario(){
         usuarioDto = new UsuarioDto();
         usuarioDao = new UsuarioDao();
-        usuarioDto.setCmpNombreCompleto(pnSignUp.campoTexto1.getText().trim() );
-        usuarioDto.setCmpCorreo(pnSignUp.campoCorreo1.getText().trim() );
-        usuarioDto.setCmpPassword(new Funciones().mtdObtenerPasswordEncriptado(pnSignUp.campoPassword2.getPassword()));
+        usuarioDto.setCmpNombreCompleto(pnRegistrarme.campoTexto1.getText().trim() );
+        usuarioDto.setCmpCorreo(pnRegistrarme.campoCorreo1.getText().trim() );
+        usuarioDto.setCmpPassword(new Funciones().mtdObtenerPasswordEncriptado(pnRegistrarme.campoPassword2.getPassword()));
         usuarioDto.setCmpKey("No");
         usuarioDto.setCmpEstado(0);
     }
@@ -129,30 +129,30 @@ public class CtrlRegistrarme {
     int campos_incorrectos = 0;
     String msg = "Verifica los siguientes datos: \n";
     
-        if( pnSignUp.campoTexto1.getText().trim().isEmpty() 
-                || !pnSignUp.campoTexto1.isAprobado() ){
+        if( pnRegistrarme.campoTexto1.getText().trim().isEmpty() 
+                || !pnRegistrarme.campoTexto1.isAprobado() ){
             campos_incorrectos++;
             msg += "El campo nombre es incorrecto. \n";
         }
         
-        if( pnSignUp.campoCorreo1.getText().trim().isEmpty() 
-                || !pnSignUp.campoCorreo1.isAprobado()  ){
+        if( pnRegistrarme.campoCorreo1.getText().trim().isEmpty() 
+                || !pnRegistrarme.campoCorreo1.isAprobado()  ){
             campos_incorrectos++;
             msg += "El campo correo es incorrecto. \n";
         }
 
-        if( String.valueOf(pnSignUp.campoPassword1.getPassword()).trim().isEmpty() ){
+        if( String.valueOf(pnRegistrarme.campoPassword1.getPassword()).trim().isEmpty() ){
             campos_incorrectos++;
             msg += "El campo contraseña está vacio. \n";
         }
         
-        if( String.valueOf(pnSignUp.campoPassword2.getPassword()).trim().isEmpty() ){
+        if( String.valueOf(pnRegistrarme.campoPassword2.getPassword()).trim().isEmpty() ){
             campos_incorrectos++;
             msg += "El campo repetir contraseña está vacio. \n";
         }
         
-        if( !String.valueOf(pnSignUp.campoPassword1.getPassword()).trim()
-                .equals(String.valueOf(pnSignUp.campoPassword2.getPassword()).trim()) ){
+        if( !String.valueOf(pnRegistrarme.campoPassword1.getPassword()).trim()
+                .equals(String.valueOf(pnRegistrarme.campoPassword2.getPassword()).trim()) ){
             campos_incorrectos++;
             msg += "La contraseña no coindice. \n";
         }
@@ -165,10 +165,10 @@ public class CtrlRegistrarme {
     }
     
     private void mtdVaciarCampos_Registrarme(){
-        pnSignUp.campoTexto1.setText("");
-        pnSignUp.campoCorreo1.setText("");
-        pnSignUp.campoPassword1.setText("");
-        pnSignUp.campoPassword2.setText("");
+        pnRegistrarme.campoTexto1.setText("");
+        pnRegistrarme.campoCorreo1.setText("");
+        pnRegistrarme.campoPassword1.setText("");
+        pnRegistrarme.campoPassword2.setText("");
     }
     
     public static void mtdEliminarInstancia(){

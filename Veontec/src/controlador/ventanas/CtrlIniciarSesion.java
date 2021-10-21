@@ -24,7 +24,7 @@ import vista.ventanas.VentanaHome;
 public class CtrlIniciarSesion {
     
     // ***** Vista
-    private PanelIniciarSesion pnSignOn;
+    private PanelIniciarSesion pnIniciarSesion;
     
     // ***** Modelo
     private UsuarioDao usuarioDao;
@@ -39,7 +39,7 @@ public class CtrlIniciarSesion {
     
     // ***** Constructor
     private CtrlIniciarSesion(PanelIniciarSesion pnSignOn) {
-        this.pnSignOn = pnSignOn;
+        this.pnIniciarSesion = pnSignOn;
         this.usuarioDao = new UsuarioDao();
         this.usuarioDto = new UsuarioDto();
         this.categoriaDao = new CategoriaDao();
@@ -48,7 +48,7 @@ public class CtrlIniciarSesion {
     
     // ***** Eventos
     private void mtdEventoBtnIniciarSesion(){
-        pnSignOn.btnIniciarSession.addMouseListener(new MouseAdapter(){
+        pnIniciarSesion.btnIniciarSession.addMouseListener(new MouseAdapter(){
             @Override
             public void mouseReleased(MouseEvent e) {
                 mtdIniciarSession();
@@ -57,7 +57,7 @@ public class CtrlIniciarSesion {
     }
     
     private void mtdEventoBtnRecuperarCuenta(){
-        pnSignOn.btnRecuperarCuenta.addMouseListener(new MouseAdapter(){
+        pnIniciarSesion.btnRecuperarCuenta.addMouseListener(new MouseAdapter(){
             @Override
             public void mouseReleased(MouseEvent e) {
                 mtdRecuperarCuenta();
@@ -146,11 +146,11 @@ public class CtrlIniciarSesion {
             }
 
             // * Obtener cuenta de usuarioDto si existe
-            if( mtdObtenerUsuario(pnSignOn.campoCorreo1.getText().trim()) ){
+            if( mtdObtenerUsuario(pnIniciarSesion.campoCorreo1.getText().trim()) ){
 
                 // * Verificar datos capturado son correctos
-                if( mtdValidarDatosDeUsuario(pnSignOn.campoCorreo1.getText().trim(), 
-                String.valueOf(pnSignOn.campoPassword1.getPassword())) ){
+                if( mtdValidarDatosDeUsuario(pnIniciarSesion.campoCorreo1.getText().trim(), 
+                String.valueOf(pnIniciarSesion.campoPassword1.getPassword())) ){
 
                     // * Abrir ventana home
                     mtdAbrirVentanaHome();
@@ -178,8 +178,8 @@ public class CtrlIniciarSesion {
             // * Crear controlador y mostrar la ventana principal
             CtrlHome ctrl = new CtrlHome(Veontec.ventanaHome);
             ctrl.mtdInit();
-            ctrl.laVista.setLocationRelativeTo(null);
-            ctrl.laVista.setVisible(true);
+            ctrl.ventanaHome.setLocationRelativeTo(null);
+            ctrl.ventanaHome.setVisible(true);
 
             // * Cerrar y destruir la ventana de SingUp
             Veontec.ventanaSession.setVisible(false);
@@ -212,8 +212,8 @@ public class CtrlIniciarSesion {
             // * Registrar los datos del usuarioDto
             Veontec.cuentaDto = new CuentaDto();
             Veontec.cuentaDao = new CuentaDao(); 
-            Veontec.cuentaDto.setCorreo(pnSignOn.campoCorreo1.getText().trim());
-            Veontec.cuentaDto.setPasswd(String.valueOf(pnSignOn.campoPassword1.getPassword()).trim());
+            Veontec.cuentaDto.setCorreo(pnIniciarSesion.campoCorreo1.getText().trim());
+            Veontec.cuentaDto.setPasswd(String.valueOf(pnIniciarSesion.campoPassword1.getPassword()).trim());
             Veontec.cuentaDao.regitrar_datos(Veontec.cuentaDto);
             Veontec.cuentaDto = Veontec.cuentaDao.obtener_datos();
             System.out.println("Cuenta : " + Veontec.cuentaDto.getCorreo());
@@ -225,13 +225,13 @@ public class CtrlIniciarSesion {
     int campos_incorrectos = 0;
     String msg = "Verifica los siguientes datos: \n";
         
-        if( pnSignOn.campoCorreo1.getText().trim().isEmpty() 
-                || !pnSignOn.campoCorreo1.isAprobado()  ){
+        if( pnIniciarSesion.campoCorreo1.getText().trim().isEmpty() 
+                || !pnIniciarSesion.campoCorreo1.isAprobado()  ){
             campos_incorrectos++;
             msg += "El campo correo es incorrecto. \n";
         }
         
-        if( String.valueOf(pnSignOn.campoPassword1.getPassword()).trim().isEmpty() ){
+        if( String.valueOf(pnIniciarSesion.campoPassword1.getPassword()).trim().isEmpty() ){
             campos_incorrectos++;
             msg += "El campo contraseña está vacio. \n";
         }
