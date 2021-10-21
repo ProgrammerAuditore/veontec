@@ -4,8 +4,6 @@ import controlador.acciones.CtrlModalCrearProducto;
 import controlador.componentes.CtrlCardMiProducto;
 import index.Veontec;
 import java.awt.GridBagLayout;
-import java.awt.Image;
-import java.awt.Toolkit;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
@@ -13,13 +11,10 @@ import java.awt.event.MouseEvent;
 import java.util.List;
 import java.util.logging.Logger;
 import javax.swing.Box;
-import javax.swing.Icon;
-import javax.swing.ImageIcon;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
-import javax.swing.JTree;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeCellRenderer;
 import javax.swing.tree.DefaultTreeModel;
@@ -41,21 +36,20 @@ import vista.paneles.PanelMiTienda;
 public class CtrlMiTienda{
     
     // ***** Vista
-    public PanelMiTienda laVista;
+    public PanelMiTienda pnMiTienda;
     public JDialog modalCrearProducto;
     
     // ***** Modelos
-    private UsuarioDto usuario_dto;
-    private UsuarioDao usuario_dao;
-    private ProductoDao producto_dao;
-    private ProductoDto producto_dto;
-    private ImagesDao images_dao;
-    private ImagesDto images_dto;
-    private CategoriaDto categoria_dto;
-    private CategoriaDao categoria_dao;
+    private UsuarioDto usuarioDto;
+    private UsuarioDao usuarioDao;
+    private ProductoDao productoDao;
+    private ProductoDto productoDto;
+    private ImagesDao imagesDao;
+    private ImagesDto imagesDto;
+    private CategoriaDto categoriaDto;
+    private CategoriaDao categoriaDao;
     private DefaultMutableTreeNode lstCategoriaRaiz;
     private DefaultTreeModel lstCategoriaModelo;
-    private JTree lstCategoriasArbol;
     
     // ***** Atributos
     private static CtrlMiTienda instancia;
@@ -71,15 +65,15 @@ public class CtrlMiTienda{
 
     // ***** Constructor
     public CtrlMiTienda(PanelMiTienda laVista, UsuarioDto dto, UsuarioDao dao) {
-        this.laVista = laVista;
-        this.usuario_dto = dto;
-        this.usuario_dao = dao;
-        this.producto_dao = new ProductoDao();
-        this.producto_dto = new ProductoDto();
-        this.images_dao = new ImagesDao();
-        this.images_dto = new ImagesDto();
-        this.categoria_dao = new CategoriaDao();
-        this.categoria_dto = new CategoriaDto();
+        this.pnMiTienda = laVista;
+        this.usuarioDto = dto;
+        this.usuarioDao = dao;
+        this.productoDao = new ProductoDao();
+        this.productoDto = new ProductoDto();
+        this.imagesDao = new ImagesDao();
+        this.imagesDto = new ImagesDto();
+        this.categoriaDao = new CategoriaDao();
+        this.categoriaDto = new CategoriaDto();
         this.lstCategoriaRaiz = new DefaultMutableTreeNode("Categorias");
         this.lstCategoriaModelo = new DefaultTreeModel(lstCategoriaRaiz);
         this.cantidadResultados = 0;
@@ -113,7 +107,7 @@ public class CtrlMiTienda{
     
     // ***** Eventos
     private void mtdEventoBtnCrearProducto(){
-        laVista.btnCrearProducto.addMouseListener(new MouseAdapter(){
+        pnMiTienda.btnCrearProducto.addMouseListener(new MouseAdapter(){
             @Override
             public void mouseReleased(MouseEvent e) {
                 CtrlModalCrearProducto crear = new CtrlModalCrearProducto();
@@ -123,7 +117,7 @@ public class CtrlMiTienda{
     }
     
     private void mtdEventoBtnAgregarCategoria(){
-        laVista.btnAgregar.addMouseListener(new MouseAdapter(){
+        pnMiTienda.btnAgregar.addMouseListener(new MouseAdapter(){
             @Override
             public void mouseReleased(MouseEvent e) {
                  mtdCrearCategoria();
@@ -132,7 +126,7 @@ public class CtrlMiTienda{
     }
     
     private void mtdEventoBtnModificarCategoria(){
-        laVista.btnModificar.addMouseListener(new MouseAdapter(){
+        pnMiTienda.btnModificar.addMouseListener(new MouseAdapter(){
             @Override
             public void mouseReleased(MouseEvent e) {
                 mtdModificarCategoria();
@@ -141,7 +135,7 @@ public class CtrlMiTienda{
     }
     
     private void mtdEventoBtnEliminarCategoria(){
-        laVista.btnEliminar.addMouseListener(new MouseAdapter(){
+        pnMiTienda.btnEliminar.addMouseListener(new MouseAdapter(){
             @Override
             public void mouseReleased(MouseEvent e) {
                 mtdEliminarCategoria();
@@ -150,7 +144,7 @@ public class CtrlMiTienda{
     }
     
     private void mtdEventoBtnBuscar(){
-        laVista.btnBuscar.addMouseListener(new MouseAdapter(){
+        pnMiTienda.btnBuscar.addMouseListener(new MouseAdapter(){
             @Override
             public void mouseReleased(MouseEvent e) {
                 mtdEstabecerBusqueda();
@@ -160,7 +154,7 @@ public class CtrlMiTienda{
     }
     
     private void mtdEventoCmpBuscarProducto(){
-        laVista.cmpBusqueda.addKeyListener(new KeyAdapter(){
+        pnMiTienda.cmpBusqueda.addKeyListener(new KeyAdapter(){
             @Override
             public void keyPressed(KeyEvent e) {
                 if(e.getKeyCode() == KeyEvent.VK_ENTER ){
@@ -173,7 +167,7 @@ public class CtrlMiTienda{
     }
     
     private void mtdEventoBtnPrevia(){
-        laVista.btnPrevia.addMouseListener(new MouseAdapter(){
+        pnMiTienda.btnPrevia.addMouseListener(new MouseAdapter(){
             @Override
             public void mouseReleased(MouseEvent e) {
                 mtdMostrarProductosPrevias();
@@ -182,7 +176,7 @@ public class CtrlMiTienda{
     }
     
     private void mtdEventoBtnSiguiente(){
-        laVista.btnSiguiente.addMouseListener(new MouseAdapter(){
+        pnMiTienda.btnSiguiente.addMouseListener(new MouseAdapter(){
             @Override
             public void mouseReleased(MouseEvent e) {
                 mtdMostrarProductosSiguiente();
@@ -193,8 +187,8 @@ public class CtrlMiTienda{
     // ***** Métodos
     private void mtdInit(){
         LOG.info("Ejecutando metodo una vez (Obligatorio)");
-        laVista.pnContenedor.setLayout(new GridBagLayout());
-        images_dto.setImagUsuario( usuario_dto.getCmpID() );
+        pnMiTienda.pnContenedor.setLayout(new GridBagLayout());
+        imagesDto.setImagUsuario(usuarioDto.getCmpID() );
         mtdEventoBtnAgregarCategoria();
         mtdEventoBtnModificarCategoria();
         mtdEventoBtnCrearProducto();
@@ -212,21 +206,21 @@ public class CtrlMiTienda{
         LOG.info("Iniciando ...");
         
         int totalProductos = 0;
-        laVista.pnContenedor.removeAll();
-        laVista.pnContenedor.setLayout(new GridBagLayout());
+        pnMiTienda.pnContenedor.removeAll();
+        pnMiTienda.pnContenedor.setLayout(new GridBagLayout());
         
         LOG.info("Listando mis productos...");
-        producto_dto.setProdUsuario( usuario_dto.getCmpID() );
+        productoDto.setProdUsuario(usuarioDto.getCmpID() );
         
         
         if( busqueda == false ){
-            lstMisProductos = producto_dao.mtdListarAllProductosPorUsuario(producto_dto, cantidadPorPagina, cantidadResultados);
-            totalProductosExistentes = Integer.parseInt(""+producto_dao.mtdRowCountAllProductosPorUsuario(producto_dto));
+            lstMisProductos = productoDao.mtdListarAllProductosPorUsuario(productoDto, cantidadPorPagina, cantidadResultados);
+            totalProductosExistentes = Integer.parseInt(""+productoDao.mtdRowCountAllProductosPorUsuario(productoDto));
         }else{
-            producto_dto.setProdTitulo('%'+laVista.cmpBusqueda.getText().trim()+'%');
-            producto_dto.setProdCategoria('%'+laVista.cmpBusqueda.getText().trim()+'%');
-            lstMisProductos = producto_dao.mtdBuscarAllProductosPorUsuarioSimilares(producto_dto, cantidadPorPagina, cantidadResultados);
-            totalProductosExistentes = Integer.parseInt(""+producto_dao.mtdRowCountAllProductosPorUsuarioSimilares(producto_dto));
+            productoDto.setProdTitulo('%'+pnMiTienda.cmpBusqueda.getText().trim()+'%');
+            productoDto.setProdCategoria('%'+pnMiTienda.cmpBusqueda.getText().trim()+'%');
+            lstMisProductos = productoDao.mtdBuscarAllProductosPorUsuarioSimilares(productoDto, cantidadPorPagina, cantidadResultados);
+            totalProductosExistentes = Integer.parseInt(""+productoDao.mtdRowCountAllProductosPorUsuarioSimilares(productoDto));
         }
         
         totalProductos = lstMisProductos.size();
@@ -234,28 +228,28 @@ public class CtrlMiTienda{
             
             LOG.warning("Recorriendo productos ....");
             for (int i = 0; i < totalProductos; i++) {
-                CtrlCardMiProducto tarjeta = new CtrlCardMiProducto(lstMisProductos.get(i), producto_dao);
+                CtrlCardMiProducto tarjeta = new CtrlCardMiProducto(lstMisProductos.get(i), productoDao);
                 tarjeta.setItem(i);
                 tarjeta.mtdInit();
-                laVista.pnContenedor.add(tarjeta.getLaVista(), tarjeta.getTarjeta_dimensiones());
+                pnMiTienda.pnContenedor.add(tarjeta.getLaVista(), tarjeta.getTarjeta_dimensiones());
             }
             
         }
         
-        laVista.pnContenedor.validate();
-        laVista.pnContenedor.revalidate();
-        laVista.pnContenedor.repaint();
+        pnMiTienda.pnContenedor.validate();
+        pnMiTienda.pnContenedor.revalidate();
+        pnMiTienda.pnContenedor.repaint();
         
     }
            
     public void mtdMostrarCategorias(){
         LOG.info("Iniciando ...");
-        laVista.lstCategorias.setModel(null);
+        pnMiTienda.lstCategorias.setModel(null);
         lstCategoriaRaiz.removeAllChildren();
         
         LOG.info("Listando mis categorias...");
-        categoria_dto.setCateUsuario(usuario_dto.getCmpID());
-        lstMisCategorias = categoria_dao.mtdListar(categoria_dto);
+        categoriaDto.setCateUsuario(usuarioDto.getCmpID());
+        lstMisCategorias = categoriaDao.mtdListar(categoriaDto);
         int totalCategorias = lstMisCategorias.size();
         LOG.info("Total categorias: " + totalCategorias);
         
@@ -271,12 +265,12 @@ public class CtrlMiTienda{
         }
         
         lstCategoriaModelo.reload();
-        laVista.lstCategorias.setModel(lstCategoriaModelo);
-        laVista.lstCategorias.getSelectionModel().setSelectionMode(TreeSelectionModel.SINGLE_TREE_SELECTION);
+        pnMiTienda.lstCategorias.setModel(lstCategoriaModelo);
+        pnMiTienda.lstCategorias.getSelectionModel().setSelectionMode(TreeSelectionModel.SINGLE_TREE_SELECTION);
     }
     
     private void mtdDefinirIconos(){
-        DefaultTreeCellRenderer renderer = (DefaultTreeCellRenderer) laVista.lstCategorias.getCellRenderer();
+        DefaultTreeCellRenderer renderer = (DefaultTreeCellRenderer) pnMiTienda.lstCategorias.getCellRenderer();
         renderer.setClosedIcon(Recursos.imgIconoDefaultCategorias());
         renderer.setOpenIcon(Recursos.imgIconoDefaultCategorias());
         renderer.setLeafIcon(Recursos.imgIconoDefaultCategorias());
@@ -293,7 +287,7 @@ public class CtrlMiTienda{
         boxCorreo.add(cmpCategoriaNueva);
         
         boxCorreo.setLocation(Veontec.ventanaHome.getLocation());
-        int opc = JOptionPane.showConfirmDialog(laVista, boxCorreo, "Crear nueva categoria",
+        int opc = JOptionPane.showConfirmDialog(pnMiTienda, boxCorreo, "Crear nueva categoria",
                 JOptionPane.OK_CANCEL_OPTION, JOptionPane.WARNING_MESSAGE);
         
         if( opc == JOptionPane.OK_OPTION ){
@@ -311,7 +305,7 @@ public class CtrlMiTienda{
             Box boxCorreo = Box.createVerticalBox();
             JLabel info1 = new JLabel("Nombre categoria actual");
             boxCorreo.add(info1);
-            JTextField cmpCategoriaActual = new  JTextField(categoria_dto.getCateNombre());
+            JTextField cmpCategoriaActual = new  JTextField(categoriaDto.getCateNombre());
             cmpCategoriaActual.setEditable(false);
             boxCorreo.add(cmpCategoriaActual);
 
@@ -321,7 +315,7 @@ public class CtrlMiTienda{
             boxCorreo.add(cmpCategoriaNueva);
 
             boxCorreo.setLocation(Veontec.ventanaHome.getLocation());
-            int opc = JOptionPane.showConfirmDialog(laVista, boxCorreo, "Cambiar nombre de categoria",
+            int opc = JOptionPane.showConfirmDialog(pnMiTienda, boxCorreo, "Cambiar nombre de categoria",
                     JOptionPane.OK_CANCEL_OPTION, JOptionPane.WARNING_MESSAGE);
 
             if( opc == JOptionPane.OK_OPTION ){
@@ -348,13 +342,13 @@ public class CtrlMiTienda{
             boxCorreo.add(info2);
 
             boxCorreo.setLocation(Veontec.ventanaHome.getLocation());
-            int opc = JOptionPane.showConfirmDialog(laVista, boxCorreo, "Eliminar categoria",
+            int opc = JOptionPane.showConfirmDialog(pnMiTienda, boxCorreo, "Eliminar categoria",
                     JOptionPane.OK_CANCEL_OPTION, JOptionPane.WARNING_MESSAGE);
 
             if( opc == JOptionPane.OK_OPTION ){
-                if( categoria_dao.mtdRemover(categoria_dto) ){
+                if( categoriaDao.mtdRemover(categoriaDto) ){
                     mtdMostrarCategorias();
-                    JOptionPane.showMessageDialog(laVista, "Categoria eliminada exitosamente.");
+                    JOptionPane.showMessageDialog(pnMiTienda, "Categoria eliminada exitosamente.");
                 }
             }
             
@@ -363,32 +357,32 @@ public class CtrlMiTienda{
     
     private void mtdProcesoModificarCategoria(String categoriaActual, String categoriaNueva ){
         if( categoriaNueva.trim().isEmpty()){
-            JOptionPane.showMessageDialog(laVista, "Los campos están incompletos");
+            JOptionPane.showMessageDialog(pnMiTienda, "Los campos están incompletos");
 
         }else if( categoriaNueva.equals("Categorias") || categoriaNueva.equals("Nueva") ){
-            JOptionPane.showMessageDialog(laVista, "Nombre de categoria no valido.");
+            JOptionPane.showMessageDialog(pnMiTienda, "Nombre de categoria no valido.");
 
             // * Verificar que la categoria sean diferentes
         }else if( categoriaActual.equals(categoriaNueva) ){
-            JOptionPane.showMessageDialog(laVista, "La categoria nueva no está disponible.");
+            JOptionPane.showMessageDialog(pnMiTienda, "La categoria nueva no está disponible.");
 
         }else if( categoriaActual.length() > 30){
-            JOptionPane.showMessageDialog(laVista, "* Solo se acepta 30 caracteres");
+            JOptionPane.showMessageDialog(pnMiTienda, "* Solo se acepta 30 caracteres");
 
         }else{
 
-            categoria_dto.setCateNombre(categoriaNueva);
-            categoria_dto.setCateUsuario(Veontec.usuarioDto.getCmpID());
+            categoriaDto.setCateNombre(categoriaNueva);
+            categoriaDto.setCateUsuario(Veontec.usuarioDto.getCmpID());
 
             // * Verificar si la categoria está disponible
             // es decir, que no está registrado
-            if( categoria_dao.mtdComprobar(categoria_dto) ){
-                if( categoria_dao.mtdActualizar(categoria_dto) ){
+            if( categoriaDao.mtdComprobar(categoriaDto) ){
+                if( categoriaDao.mtdActualizar(categoriaDto) ){
                     mtdMostrarCategorias();
-                    JOptionPane.showMessageDialog(laVista, "Categoria modificado exitosamente");
+                    JOptionPane.showMessageDialog(pnMiTienda, "Categoria modificado exitosamente");
                 }
             }else{
-               JOptionPane.showMessageDialog(laVista, "La categoria nueva no está disponible.");
+               JOptionPane.showMessageDialog(pnMiTienda, "La categoria nueva no está disponible.");
 
             }
 
@@ -397,28 +391,28 @@ public class CtrlMiTienda{
     
     private void mtdProcesoCrearCategoria(String categoriaNueva) {
         if( categoriaNueva.trim().isEmpty()){
-            JOptionPane.showMessageDialog(laVista, "Los campos están incompletos");
+            JOptionPane.showMessageDialog(pnMiTienda, "Los campos están incompletos");
 
         }else if(categoriaNueva.equals("Categorias") || categoriaNueva.equals("Nueva")){
-            JOptionPane.showMessageDialog(laVista, "Nombre de categoria no valido.");
+            JOptionPane.showMessageDialog(pnMiTienda, "Nombre de categoria no valido.");
 
         }else if( categoriaNueva.length() > 30){
-            JOptionPane.showMessageDialog(laVista, "* Solo se acepta 30 caracteres");
+            JOptionPane.showMessageDialog(pnMiTienda, "* Solo se acepta 30 caracteres");
 
         }else{
 
             // * Verificar que la categoria sean diferentes
-            categoria_dto.setCateNombre(categoriaNueva);
-            categoria_dto.setCateUsuario( Veontec.usuarioDto.getCmpID() );
-            categoria_dto.setCateTotalProductos(0);
+            categoriaDto.setCateNombre(categoriaNueva);
+            categoriaDto.setCateUsuario( Veontec.usuarioDto.getCmpID() );
+            categoriaDto.setCateTotalProductos(0);
 
-            if( categoria_dao.mtdComprobar(categoria_dto) ){
-                if(categoria_dao.mtdInsetar(categoria_dto)){
+            if( categoriaDao.mtdComprobar(categoriaDto) ){
+                if(categoriaDao.mtdInsetar(categoriaDto)){
                     mtdMostrarCategorias();
-                    JOptionPane.showMessageDialog(laVista, "Categoria nueva creada exitosamente.");
+                    JOptionPane.showMessageDialog(pnMiTienda, "Categoria nueva creada exitosamente.");
                 }
             }else{
-                JOptionPane.showMessageDialog(laVista, "La categoria nueva no está disponible.");
+                JOptionPane.showMessageDialog(pnMiTienda, "La categoria nueva no está disponible.");
 
             }
 
@@ -430,21 +424,21 @@ public class CtrlMiTienda{
         
         int indexCategoria = -1;
         try {
-            indexCategoria = laVista.lstCategorias.getSelectionRows()[0];
+            indexCategoria = pnMiTienda.lstCategorias.getSelectionRows()[0];
         } catch (Exception e) {}
 
         if(indexCategoria == -1) return false;
         
-        TreePath a = laVista.lstCategorias.getPathForRow( indexCategoria );
+        TreePath a = pnMiTienda.lstCategorias.getPathForRow( indexCategoria );
         categoriaSeleccionda = String.valueOf( a.getLastPathComponent() );
         
         if(categoriaSeleccionda.equals("Categorias") || categoriaSeleccionda.equals("Nueva") ) return false;
         
         // * Obtener los datos de la categoria seleccionada
-        categoria_dto = new CategoriaDto();
-        categoria_dto.setCateNombre(categoriaSeleccionda);
-        categoria_dto.setCateUsuario(Veontec.usuarioDto.getCmpID());
-        categoria_dto = categoria_dao.mtdConsultarNombreUsuario(categoria_dto);
+        categoriaDto = new CategoriaDto();
+        categoriaDto.setCateNombre(categoriaSeleccionda);
+        categoriaDto.setCateUsuario(Veontec.usuarioDto.getCmpID());
+        categoriaDto = categoriaDao.mtdConsultarNombreUsuario(categoriaDto);
         
         return true;
     }
@@ -456,12 +450,12 @@ public class CtrlMiTienda{
         
         if( cantidadResultados < 0  ){
             cantidadResultados = 0;
-            JOptionPane.showMessageDialog(laVista, "No hay más resultados por mostrar.");
-            laVista.btnPrevia.setEnabled(false);
+            JOptionPane.showMessageDialog(pnMiTienda, "No hay más resultados por mostrar.");
+            pnMiTienda.btnPrevia.setEnabled(false);
             return;
         }
         
-        laVista.btnSiguiente.setEnabled(true);
+        pnMiTienda.btnSiguiente.setEnabled(true);
         mtdMostrarMisProductos(activarBusqueda);
         
     }
@@ -473,22 +467,22 @@ public class CtrlMiTienda{
         
         if( cantidadResultados >= totalProductosExistentes ){
             cantidadResultados = totalProductosExistentes;
-            JOptionPane.showMessageDialog(laVista, "No hay más resultados por mostrar.");
-            laVista.btnSiguiente.setEnabled(false);
+            JOptionPane.showMessageDialog(pnMiTienda, "No hay más resultados por mostrar.");
+            pnMiTienda.btnSiguiente.setEnabled(false);
             return;
         }
         
-        laVista.btnPrevia.setEnabled(true);
+        pnMiTienda.btnPrevia.setEnabled(true);
         mtdMostrarMisProductos(activarBusqueda);
         
     }
     
     private void mtdEstabecerBusqueda(){
-        laVista.btnPrevia.setEnabled(true);
-        laVista.btnSiguiente.setEnabled(true);
+        pnMiTienda.btnPrevia.setEnabled(true);
+        pnMiTienda.btnSiguiente.setEnabled(true);
         
         cantidadResultados=0;
-        if( laVista.cmpBusqueda.getText().trim().isEmpty() || laVista.cmpBusqueda.isVacio() ){
+        if( pnMiTienda.cmpBusqueda.getText().trim().isEmpty() || pnMiTienda.cmpBusqueda.isVacio() ){
             activarBusqueda = false;
         }else{
             activarBusqueda = true;
