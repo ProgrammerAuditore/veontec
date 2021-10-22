@@ -25,6 +25,7 @@ import modelo.dao.CategoriaDao;
 import modelo.dao.ProductoDao;
 import modelo.dto.CategoriaDto;
 import modelo.dto.ProductoDto;
+import src.Funciones;
 import vista.paneles.acciones.PanelCrearProducto;
 
 public class CtrlModalCrearProducto implements ActionListener{
@@ -156,6 +157,8 @@ public class CtrlModalCrearProducto implements ActionListener{
             productoDto.setProdEnlace(pnCrearProducto.cmpEnlace.getText() );
             productoDto.setProdPrecio(Double.parseDouble(pnCrearProducto.cmpPrecio.getText()) );
             productoDto.setProdStock(Integer.parseInt(pnCrearProducto.cmpStock.getText()) );
+            productoDto.setProdCreadoEn( new Funciones().fncObtenerFechaYHoraActualSQL() );
+            productoDto.setProdActualizadoEn( new Funciones().fncObtenerFechaYHoraActualSQL() );
             mtdEstablecerTipoProductoYEnlace();
 
             if( productoDao.mtdInsetar(productoDto) ){

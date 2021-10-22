@@ -133,12 +133,14 @@ public class CtrlModalHacerPregunta {
         if( pnHacerPregunta.mtdComprobar() ){
             
             preguntaDto.setPregComprador( Veontec.usuarioDto.getCmpID() );
-            preguntaDto.setPregEstado(0);
-            preguntaDto.setPregFecha( new Funciones().fncObtenerFechaActual());
+            preguntaDto.setPregEstado(1);
+            preguntaDto.setPregFecha( new Funciones().fncObtenerFechaYHoraActualNoSQL() );
             preguntaDto.setPregPregunta(pnHacerPregunta.cmpPregunta.getText() );
             preguntaDto.setPregProducto( productoDto.getProdID() );
             preguntaDto.setPregTitulo( productoDto.getProdTitulo() );
             preguntaDto.setPregVendedor( productoDto.getProdUsuario() );
+            preguntaDto.setPregCreadoEn( new Funciones().fncObtenerFechaYHoraActualSQL() );
+            preguntaDto.setPregActualizadoEn( new Funciones().fncObtenerFechaYHoraActualSQL() );
             
             if( preguntaDao.mtdInsetar(preguntaDto) ){
                 try { CtrlPreguntas.mtdRecargarPreguntas(); } catch (Exception e) { }

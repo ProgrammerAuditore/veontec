@@ -10,6 +10,8 @@ public class PreguntaDto {
     private String pregPregunta;
     private String pregFecha;
     private Integer pregEstado;
+    private String pregCreadoEn;
+    private String pregActualizadoEn;
 
     public Integer getPregID() {
         return pregID;
@@ -75,9 +77,25 @@ public class PreguntaDto {
         this.pregEstado = pregEstado;
     }
 
+    public String getPregCreadoEn() {
+        return pregCreadoEn;
+    }
+
+    public void setPregCreadoEn(String pregCreadoEn) {
+        this.pregCreadoEn = pregCreadoEn;
+    }
+
+    public String getPregActualizadoEn() {
+        return pregActualizadoEn;
+    }
+
+    public void setPregActualizadoEn(String pregActualizadoEn) {
+        this.pregActualizadoEn = pregActualizadoEn;
+    }
+
     @Override
     public String toString() {
-        return "PreguntaDto{" + "pregID=" + pregID + ", pregProducto=" + pregProducto + ", pregVendedor=" + pregVendedor + ", pregComprador=" + pregComprador + ", pregPregunta=" + pregPregunta + ", pregFecha=" + pregFecha + ", pregEstado=" + pregEstado + '}';
+        return "PreguntaDto{" + "pregID=" + pregID + ", pregTitulo=" + pregTitulo + ", pregProducto=" + pregProducto + ", pregVendedor=" + pregVendedor + ", pregComprador=" + pregComprador + ", pregPregunta=" + pregPregunta + ", pregFecha=" + pregFecha + ", pregEstado=" + pregEstado + ", pregCreadoEn=" + pregCreadoEn + ", pregActualizadoEn=" + pregActualizadoEn + '}';
     }
     
 }

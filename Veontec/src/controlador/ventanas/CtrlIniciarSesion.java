@@ -94,7 +94,7 @@ public class CtrlIniciarSesion {
         boxVRecuperarCuenta.add(cmpCampoCorreo);
         
         boxVRecuperarCuenta.setLocation(Veontec.ventanaSession.getLocation());
-        int opc = JOptionPane.showConfirmDialog(null, boxVRecuperarCuenta, "Recuperar cuenta", 
+        int opc = JOptionPane.showConfirmDialog(Veontec.ventanaSession, boxVRecuperarCuenta, "Recuperar cuenta", 
                 JOptionPane.OK_CANCEL_OPTION, JOptionPane.WARNING_MESSAGE);
         
         if( opc == JOptionPane.OK_OPTION ){
@@ -114,9 +114,9 @@ public class CtrlIniciarSesion {
                 Veontec.usuarioDto.setCmpCorreo(correoActual);
                 Veontec.usuarioDto = Veontec.usuarioDao.mtdConsultar(Veontec.usuarioDto);
                 if( Veontec.usuarioDto == null){
-                    JOptionPane.showMessageDialog(null, "No existe una cuenta con el correo introducido.");
+                    JOptionPane.showMessageDialog(Veontec.ventanaSession, "No existe una cuenta con el correo introducido.");
                 }else if( Veontec.usuarioDto.getCmpCorreo() == null || Veontec.usuarioDto.getCmpPassword() == null ){
-                    JOptionPane.showMessageDialog(null, "No existe una cuenta con el correo introducido.");
+                    JOptionPane.showMessageDialog(Veontec.ventanaSession, "No existe una cuenta con el correo introducido.");
                 }else{
                     
                     if( Veontec.usuarioDto.getCmpEstado().equals(333) ){
@@ -195,7 +195,7 @@ public class CtrlIniciarSesion {
         Veontec.usuarioDto = Veontec.usuarioDao.mtdConsultar(Veontec.usuarioDto);
         
         if( Veontec.usuarioDto.getCmpCorreo() == null || Veontec.usuarioDto.getCmpPassword() == null ){
-                JOptionPane.showMessageDialog(null, "No hay cuenta asociado con el correo introducido.");
+                JOptionPane.showMessageDialog(Veontec.ventanaSession, "No hay cuenta asociado con el correo introducido.");
                 return false;
         }
         
