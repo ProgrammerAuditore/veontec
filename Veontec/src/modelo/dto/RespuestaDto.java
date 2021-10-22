@@ -10,7 +10,9 @@ public class RespuestaDto {
     private String respRespuesta;
     private String respFecha;
     private Integer respEstado;
-
+    private String respCreadoEn;
+    private String respActualizadoEn;
+    
     public Integer getRespID() {
         return respID;
     }
@@ -74,6 +76,22 @@ public class RespuestaDto {
     public void setRespEstado(Integer respEstado) {
         this.respEstado = respEstado;
     }
+
+    public String getRespCreadoEn() {
+        return respCreadoEn;
+    }
+
+    public void setRespCreadoEn(String respCreadoEn) {
+        this.respCreadoEn = respCreadoEn;
+    }
+
+    public String getRespActualizadoEn() {
+        return respActualizadoEn;
+    }
+
+    public void setRespActualizadoEn(String respActualizadoEn) {
+        this.respActualizadoEn = respActualizadoEn;
+    }
     
     @Override
     public String toString() {
@@ -86,6 +104,8 @@ public class RespuestaDto {
         msg += "respRespuesta = " + respRespuesta + "\n";
         msg += "respFecha = " + respFecha + "\n";
         msg += "respEstado = " + respEstado + "\n";
+        msg += "respEstado = " + respCreadoEn + "\n";
+        msg += "respEstado = " + respActualizadoEn + "\n";
         msg += "}\n";
         return msg; 
     }
