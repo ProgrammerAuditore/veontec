@@ -75,13 +75,13 @@ public class CtrlRegistrarme {
                 return ;
             }
 
-            // * Registrando usuarioDto
+            // * Creando usuarioDto
             mtdCreandoUsuario();
 
             // * Comprobar si el correo está disponible
             // es decir, si no está registrado
             if( !usuarioDao.mtdComprobar(usuarioDto) ){
-                JOptionPane.showMessageDialog(null, "El correo ya está registrado.");
+                JOptionPane.showMessageDialog(Veontec.ventanaSession, "El correo ya está registrado.");
             }else{
                 mtdProcesoRegistrarCuenta();
             }
@@ -100,12 +100,15 @@ public class CtrlRegistrarme {
         usuarioDto.setCmpPassword(new Funciones().mtdObtenerPasswordEncriptado(pnRegistrarme.campoPassword2.getPassword()));
         usuarioDto.setCmpKey("No");
         usuarioDto.setCmpEstado(0);
+        usuarioDto.setCmpCreadoEn(new Funciones().fncObtenerFechaYHoraActualSQL());
+        usuarioDto.setCmpActualizadoEn(new Funciones().fncObtenerFechaYHoraActualSQL());
     }
     
     private void mtdProcesoRegistrarCuenta(){
         if( ObjEmail.mtdEnviarValidarEmail(usuarioDto) ){
             if( usuarioDao.mtdInsetar(usuarioDto) ){
                 // * Obtener datos de la nueva cuenta
+                usuarioDto.setCmpActualizadoEn(new Funciones().fncObtenerFechaYHoraActualSQL());
                 usuarioDto = usuarioDao.mtdConsultar(usuarioDto);
 
                 if(usuarioDao.mtdActualizar(usuarioDto)){
