@@ -91,7 +91,7 @@ public class CtrlCardMiProducto {
         
         // * Descripción de detalles
         pnCardMiProducto.cmpDetalleMiProducto.setText(productoDto.getProdDescripcion() );
-        pnCardMiProducto.etqFecha.setText( "15/09/2021" );
+        pnCardMiProducto.etqFecha.setText( productoDto.getProdCreadoEn() );
         
         if( productoDto.getProdImg() != null ){
             // * Establecer imagen de portada
