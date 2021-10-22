@@ -26,7 +26,7 @@ import modelo.dto.PreguntaDto;
 import modelo.dto.ProductoDto;
 import modelo.dto.RespuestaDto;
 import modelo.dto.UsuarioDto;
-import src.Funciones;
+import src.FncGlobales;
 import vista.paneles.componentes.PanelCardPregunta;
 
 public class CtrlCardPregunta {
@@ -232,10 +232,10 @@ public class CtrlCardPregunta {
             dto.setRespComprador( preguntaDto.getPregComprador() );
             dto.setRespVendedor(preguntaDto.getPregVendedor() );
             dto.setRespRespuesta(respuesta);
-            dto.setRespFecha(new Funciones().fncObtenerFechaYHoraActualNoSQL());
+            dto.setRespFecha(new FncGlobales().fncObtenerFechaYHoraActualNoSQL());
             dto.setRespEstado(1);
-            dto.setRespCreadoEn(new Funciones().fncObtenerFechaYHoraActualSQL());
-            dto.setRespActualizadoEn(new Funciones().fncObtenerFechaYHoraActualSQL());
+            dto.setRespCreadoEn(new FncGlobales().fncObtenerFechaYHoraActualSQL());
+            dto.setRespActualizadoEn(new FncGlobales().fncObtenerFechaYHoraActualSQL());
             
             
             if( respuestaDao.mtdInsetar(dto) ){

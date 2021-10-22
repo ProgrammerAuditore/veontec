@@ -11,7 +11,7 @@ import modelo.dao.CategoriaDao;
 import modelo.dao.UsuarioDao;
 import modelo.dto.CategoriaDto;
 import modelo.dto.UsuarioDto;
-import src.Funciones;
+import src.FncGlobales;
 import vista.paneles.PanelRegistrarme;
 
 public class CtrlRegistrarme {
@@ -97,18 +97,18 @@ public class CtrlRegistrarme {
         usuarioDao = new UsuarioDao();
         usuarioDto.setCmpNombreCompleto(pnRegistrarme.campoTexto1.getText().trim() );
         usuarioDto.setCmpCorreo(pnRegistrarme.campoCorreo1.getText().trim() );
-        usuarioDto.setCmpPassword(new Funciones().mtdObtenerPasswordEncriptado(pnRegistrarme.campoPassword2.getPassword()));
+        usuarioDto.setCmpPassword(new FncGlobales().mtdObtenerPasswordEncriptado(pnRegistrarme.campoPassword2.getPassword()));
         usuarioDto.setCmpKey("No");
         usuarioDto.setCmpEstado(0);
-        usuarioDto.setCmpCreadoEn(new Funciones().fncObtenerFechaYHoraActualSQL());
-        usuarioDto.setCmpActualizadoEn(new Funciones().fncObtenerFechaYHoraActualSQL());
+        usuarioDto.setCmpCreadoEn(new FncGlobales().fncObtenerFechaYHoraActualSQL());
+        usuarioDto.setCmpActualizadoEn(new FncGlobales().fncObtenerFechaYHoraActualSQL());
     }
     
     private void mtdProcesoRegistrarCuenta(){
         if( ObjEmail.mtdEnviarValidarEmail(usuarioDto) ){
             if( usuarioDao.mtdInsetar(usuarioDto) ){
                 // * Obtener datos de la nueva cuenta
-                usuarioDto.setCmpActualizadoEn(new Funciones().fncObtenerFechaYHoraActualSQL());
+                usuarioDto.setCmpActualizadoEn(new FncGlobales().fncObtenerFechaYHoraActualSQL());
                 usuarioDto = usuarioDao.mtdConsultar(usuarioDto);
 
                 if(usuarioDao.mtdActualizar(usuarioDto)){

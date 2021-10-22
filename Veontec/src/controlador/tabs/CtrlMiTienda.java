@@ -28,7 +28,7 @@ import modelo.dto.CategoriaDto;
 import modelo.dto.ImagesDto;
 import modelo.dto.ProductoDto;
 import modelo.dto.UsuarioDto;
-import src.Info;
+import src.Software;
 import src.Recursos;
 import vista.paneles.acciones.PanelCrearProducto;
 import vista.paneles.PanelMiTienda;
@@ -77,7 +77,7 @@ public class CtrlMiTienda{
         this.lstCategoriaRaiz = new DefaultMutableTreeNode("Categorias");
         this.lstCategoriaModelo = new DefaultTreeModel(lstCategoriaRaiz);
         this.cantidadResultados = 0;
-        this.cantidadPorPagina = Info.veontecResultadoPorPagina;
+        this.cantidadPorPagina = Software.veontecResultadoPorPagina;
         this.activarBusqueda = false;
     }
     

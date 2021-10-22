@@ -8,7 +8,7 @@ import modelo.dto.CompraDto;
 import modelo.dto.VentaDto;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 
-public class Funciones {
+public class FncGlobales {
     
     public boolean mtdComprobarPassword(String passwdDB,  char[] passwordInput){
         // Create instance
@@ -90,7 +90,7 @@ public class Funciones {
         append(ventaDto.getVentVendedor()).
         append(ventaDto.getVentID()).
         append(compDto.getCompID()).
-        append(new Funciones().fncObtenerFechaYHoraActualNoSQL()).
+        append(new FncGlobales().fncObtenerFechaYHoraActualNoSQL()).
         toHashCode();
     }
     

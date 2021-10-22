@@ -23,7 +23,7 @@ import modelo.dto.CompraDto;
 import modelo.dto.ProductoDto;
 import modelo.dto.UsuarioDto;
 import modelo.dto.VentaDto;
-import src.Funciones;
+import src.FncGlobales;
 import vista.paneles.acciones.PanelHacerCompra;
 
 public class CtrlModalComprarProducto {
@@ -202,7 +202,7 @@ public class CtrlModalComprarProducto {
         
         }else{
             
-            String FechaActual = new Funciones().fncObtenerFechaActual();
+            String FechaActual = new FncGlobales().fncObtenerFechaActual();
             Integer cmpCantidad = Integer.parseInt( pnHacerCompra.cmpCantidad.getText() );
             Double cmpPrecio = Double.parseDouble( pnHacerCompra.cmpPrecio.getText() );
             BigDecimal precio  = new BigDecimal( (cmpCantidad * cmpPrecio) );
@@ -233,7 +233,7 @@ public class CtrlModalComprarProducto {
             productoDto.setProdStock(productoDto.getProdStock() - cmpCantidad );
             
             // * Establecer hash code
-            int hashCode = new Funciones().hashCodeCompraVenta(ventaDto, compraDto);
+            int hashCode = new FncGlobales().hashCodeCompraVenta(ventaDto, compraDto);
             ventaDto.setVentHashCode(hashCode);
             compraDto.setCompHashCode(hashCode);
             

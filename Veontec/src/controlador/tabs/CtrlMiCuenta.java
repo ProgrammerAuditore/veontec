@@ -19,8 +19,8 @@ import javax.swing.JTextField;
 import modelo.ObjEmail;
 import modelo.dao.UsuarioDao;
 import modelo.dto.UsuarioDto;
-import src.Funciones;
-import src.Info;
+import src.FncGlobales;
+import src.Software;
 import src.Recursos;
 import vista.paneles.PanelMiCuenta;
 import vista.ventanas.VentanaMain;
@@ -192,7 +192,7 @@ public class CtrlMiCuenta{
     private void mtdEliminarCuenta(){
         passwd = "";
         // * Verificar el estado de cuenta
-        if( Objects.equals(usuarioDto.getCmpEstado(), Info.veontecCuentaNoVerificada) ){
+        if( Objects.equals(usuarioDto.getCmpEstado(), Software.veontecCuentaNoVerificada) ){
                 JOptionPane.showMessageDialog(pnMiCuenta, "Por favor, verifique la cuenta.");
                 return;
         }
@@ -244,7 +244,7 @@ public class CtrlMiCuenta{
     
     private void mtdCambiarContrasena() {
         // * Verificar el estado de cuenta
-        if( Objects.equals(usuarioDto.getCmpEstado(), Info.veontecCuentaNoVerificada) ){
+        if( Objects.equals(usuarioDto.getCmpEstado(), Software.veontecCuentaNoVerificada) ){
                 JOptionPane.showMessageDialog(pnMiCuenta, "Por favor, verifique la cuenta.");
                 return;
         }
@@ -282,8 +282,8 @@ public class CtrlMiCuenta{
                         
                         // * Encriptar contraseña y alamacenarlo en el DTO 
                         usuarioDto.setCmpPassword( mtdEncriptarPassword( passwdRepetir.toCharArray() ) );
-                        usuarioDto.setCmpActualizadoEn( new Funciones().fncObtenerFechaYHoraActualSQL() );
-                        usuarioDto.setCmpEstado(Info.veontecCuentaVerificada);
+                        usuarioDto.setCmpActualizadoEn(new FncGlobales().fncObtenerFechaYHoraActualSQL() );
+                        usuarioDto.setCmpEstado(Software.veontecCuentaVerificada);
                         usuarioDto.setCmpKey("No");
                         
                         // * Intetamos actualizar los datos del usuario
@@ -310,7 +310,7 @@ public class CtrlMiCuenta{
     private void mtdCambiarCorreo() {
         
         // * Verificar el estado de cuenta
-        if( Objects.equals(usuarioDto.getCmpEstado(), Info.veontecCuentaNoVerificada) ){
+        if( Objects.equals(usuarioDto.getCmpEstado(), Software.veontecCuentaNoVerificada) ){
                 JOptionPane.showMessageDialog(pnMiCuenta, "Por favor, verifique la cuenta.");
                 return;
         }
@@ -347,8 +347,8 @@ public class CtrlMiCuenta{
                     if( correoNueva.equals(correoRepetir) ){
                         
                         // * Actualizar los datos del usuario
-                        usuarioDto.setCmpActualizadoEn( new Funciones().fncObtenerFechaYHoraActualSQL() );
-                        usuarioDto.setCmpEstado(Info.veontecCuentaVerificada);
+                        usuarioDto.setCmpActualizadoEn(new FncGlobales().fncObtenerFechaYHoraActualSQL() );
+                        usuarioDto.setCmpEstado(Software.veontecCuentaVerificada);
                         // Salvar el nuevo correo
                         usuarioDto.setCmpCorreo( correoRepetir.trim() );
                         usuarioDto.setCmpKey("No");
@@ -367,7 +367,7 @@ public class CtrlMiCuenta{
 
                                 // * Establecer el titulo de la ventana
                                 Veontec.ventanaHome.setTitle( Veontec.usuarioDto.getCmpNombreCompleto() 
-                                + " | "  + Veontec.usuarioDto.getCmpCorreo() + " - " + Info.NombreSoftware );
+                                + " | "  + Veontec.usuarioDto.getCmpCorreo() + " - " + Software.NombreSoftware );
                                 
                                 // * Actualizar los datos
                                 mtdEstablecerDatos();
@@ -390,7 +390,7 @@ public class CtrlMiCuenta{
     private void  mtdActualizarDatos(){
         
         // * Verificar el estado de cuenta
-        if( Objects.equals(usuarioDto.getCmpEstado(), Info.veontecCuentaNoVerificada) ){
+        if( Objects.equals(usuarioDto.getCmpEstado(), Software.veontecCuentaNoVerificada) ){
                 JOptionPane.showMessageDialog(pnMiCuenta, "Por favor, verifique la cuenta.");
                 return;
         }
@@ -398,12 +398,12 @@ public class CtrlMiCuenta{
         if( pnMiCuenta.mtdVerificarCampos() ){
             
             // * Establecer los nuevos datos
-            usuarioDto.setCmpActualizadoEn( new Funciones().fncObtenerFechaYHoraActualSQL() );
+            usuarioDto.setCmpActualizadoEn(new FncGlobales().fncObtenerFechaYHoraActualSQL() );
             usuarioDto.setCmpNombreCompleto(pnMiCuenta.cmpNombreCompleto.getText().trim());
             usuarioDto.setCmpDireccion(pnMiCuenta.cmpDireccion.getText().trim() );
             usuarioDto.setCmpTelefono(pnMiCuenta.cmpTelefono.getText().trim() );
             usuarioDto.setCmpCorreo(pnMiCuenta.cmpCorreo.getText().trim() );
-            usuarioDto.setCmpEstado(Info.veontecCuentaVerificada);
+            usuarioDto.setCmpEstado(Software.veontecCuentaVerificada);
             usuarioDto.setCmpKey("No");
             
                 // * Intentar actualizar los datos con una consulta
@@ -412,7 +412,7 @@ public class CtrlMiCuenta{
                     Veontec.usuarioDto = usuarioDto;
                     // * Establecer el titulo de la ventana
                     Veontec.ventanaHome.setTitle( Veontec.usuarioDto.getCmpNombreCompleto() 
-                    + " | "  + Veontec.usuarioDto.getCmpCorreo() + " - " + Info.NombreSoftware );
+                    + " | "  + Veontec.usuarioDto.getCmpCorreo() + " - " + Software.NombreSoftware );
                     // * Actualizar los datos
                     mtdEstablecerDatos();
                     JOptionPane.showMessageDialog(pnMiCuenta, "Datos actualizados exitosamnete.");
@@ -426,7 +426,7 @@ public class CtrlMiCuenta{
     private void mtdVerificarEmail(){
         
         // * Verificar el estado de cuenta
-        if( !Objects.equals(usuarioDto.getCmpEstado(), Info.veontecCuentaNoVerificada) ){
+        if( !Objects.equals(usuarioDto.getCmpEstado(), Software.veontecCuentaNoVerificada) ){
                 JOptionPane.showMessageDialog(pnMiCuenta, "La cuenta ya está verificada.");
                 return;
         }
@@ -465,8 +465,8 @@ public class CtrlMiCuenta{
                         ObjEmail.mtdEnviarBienvenida(usuarioDto);
                         
                         // * Actualizar los datos del usuario
-                        usuarioDto.setCmpActualizadoEn(new Funciones().fncObtenerFechaYHoraActualSQL());
-                        usuarioDto.setCmpEstado(Info.veontecCuentaVerificada);
+                        usuarioDto.setCmpActualizadoEn(new FncGlobales().fncObtenerFechaYHoraActualSQL());
+                        usuarioDto.setCmpEstado(Software.veontecCuentaVerificada);
                         usuarioDto.setCmpKey("No");
                         usuarioDao.mtdActualizar(usuarioDto);
                         

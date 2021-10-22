@@ -16,7 +16,7 @@ import modelo.dao.UsuarioDao;
 import modelo.dto.PreguntaDto;
 import modelo.dto.ProductoDto;
 import modelo.dto.UsuarioDto;
-import src.Info;
+import src.Software;
 import vista.paneles.PanelPreguntas;
 
 public class CtrlPreguntas{
@@ -55,7 +55,7 @@ public class CtrlPreguntas{
         this.productoDto = new ProductoDto();
         this.productoDao = new ProductoDao();
         this.cantidadResultado = 0;
-        this.cantidadPorPagina = Info.veontecResultadoPorPagina;
+        this.cantidadPorPagina = Software.veontecResultadoPorPagina;
         this.activarBusqueda = false;
     }
     
