@@ -11,7 +11,7 @@ import modelo.dto.UsuarioDto;
 import org.apache.commons.mail.DefaultAuthenticator;
 import org.apache.commons.mail.EmailException;
 import org.apache.commons.mail.HtmlEmail;
-import src.Info;
+import src.Software;
 
 public class ObjEmail {
     
@@ -31,12 +31,12 @@ public class ObjEmail {
         
         try {
             // Create the emailHtml message
-            emailHtml.setHostName(Info.smtpHostName);
-            emailHtml.setSmtpPort(Info.smtpPort);
-            emailHtml.setAuthenticator(new DefaultAuthenticator(Info.smtpUser, Info.smtpPasswd));
-            emailHtml.setSSLOnConnect(Info.smtpOnSSL);
-            emailHtml.setStartTLSEnabled(Info.smtpOnTLS);
-            emailHtml.setFrom(Info.smtpSetFrom);
+            emailHtml.setHostName(Software.smtpHostName);
+            emailHtml.setSmtpPort(Software.smtpPort);
+            emailHtml.setAuthenticator(new DefaultAuthenticator(Software.smtpUser, Software.smtpPasswd));
+            emailHtml.setSSLOnConnect(Software.smtpOnSSL);
+            emailHtml.setStartTLSEnabled(Software.smtpOnTLS);
+            emailHtml.setFrom(Software.smtpSetFrom);
             emailHtml.setSubject("Account verification hash code");
             emailHtml.addTo("" + usuarioDto.getCmpCorreo());
 
@@ -61,7 +61,7 @@ public class ObjEmail {
         }
         
         usuarioDto.setCmpKey(keyCodificado);
-        usuarioDto.setCmpEstado(Info.veontecCuentaNoVerificada);
+        usuarioDto.setCmpEstado(Software.veontecCuentaNoVerificada);
         
         return true;
     }
@@ -84,12 +84,12 @@ public class ObjEmail {
         
         try {
             // Create the emailHtml message
-            emailHtml.setHostName(Info.smtpHostName);
-            emailHtml.setSmtpPort(Info.smtpPort);
-            emailHtml.setAuthenticator(new DefaultAuthenticator(Info.smtpUser, Info.smtpPasswd));
-            emailHtml.setSSLOnConnect(Info.smtpOnSSL);
-            emailHtml.setStartTLSEnabled(Info.smtpOnTLS);
-            emailHtml.setFrom(Info.smtpSetFrom);
+            emailHtml.setHostName(Software.smtpHostName);
+            emailHtml.setSmtpPort(Software.smtpPort);
+            emailHtml.setAuthenticator(new DefaultAuthenticator(Software.smtpUser, Software.smtpPasswd));
+            emailHtml.setSSLOnConnect(Software.smtpOnSSL);
+            emailHtml.setStartTLSEnabled(Software.smtpOnTLS);
+            emailHtml.setFrom(Software.smtpSetFrom);
             emailHtml.setSubject("Temporary password for account recovery");
             emailHtml.addTo("" + usuarioDto.getCmpCorreo());
 
@@ -114,7 +114,7 @@ public class ObjEmail {
         }
         
         usuarioDto.setCmpKey(keyCodificado);
-        usuarioDto.setCmpEstado(Info.veontecRecuperarCuenta);
+        usuarioDto.setCmpEstado(Software.veontecRecuperarCuenta);
         
         return true;
     }
@@ -128,12 +128,12 @@ public class ObjEmail {
             //File archivo = new File("P:\\Pictures\\ezio.png");
             
             // Create the emailHtml message
-            emailHtml.setHostName(Info.smtpHostName);
-            emailHtml.setSmtpPort(Info.smtpPort);
-            emailHtml.setAuthenticator(new DefaultAuthenticator(Info.smtpUser, Info.smtpPasswd));
-            emailHtml.setSSLOnConnect(Info.smtpOnSSL);
-            emailHtml.setStartTLSEnabled(Info.smtpOnTLS);
-            emailHtml.setFrom(Info.smtpSetFrom);
+            emailHtml.setHostName(Software.smtpHostName);
+            emailHtml.setSmtpPort(Software.smtpPort);
+            emailHtml.setAuthenticator(new DefaultAuthenticator(Software.smtpUser, Software.smtpPasswd));
+            emailHtml.setSSLOnConnect(Software.smtpOnSSL);
+            emailHtml.setStartTLSEnabled(Software.smtpOnTLS);
+            emailHtml.setFrom(Software.smtpSetFrom);
             emailHtml.setSubject("Account verification");
             emailHtml.addTo("" + usuarioDto.getCmpCorreo());
 
@@ -161,7 +161,7 @@ public class ObjEmail {
         }
         
         // usuarioDto.setCmpKey(keyCodificado);
-        usuarioDto.setCmpEstado(Info.veontecCuentaVerificada);
+        usuarioDto.setCmpEstado(Software.veontecCuentaVerificada);
         return true;
     }
     

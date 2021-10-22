@@ -12,7 +12,7 @@ import java.util.Objects;
 import javax.swing.JOptionPane;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
-import src.Info;
+import src.Software;
 import vista.ventanas.VentanaHome;
 
 enum TabsHome {
@@ -129,12 +129,12 @@ public class CtrlHome{
             } 
              
             // * Verificar si la cuenta no está verificada
-            if(Objects.equals(Veontec.usuarioDto.getCmpEstado(), Info.veontecCuentaNoVerificada)){
+            if(Objects.equals(Veontec.usuarioDto.getCmpEstado(), Software.veontecCuentaNoVerificada)){
                 return 2;
             }
             
             // * Verificar si la cuenta no está en modo recuperada
-            if(Objects.equals(Veontec.usuarioDto.getCmpEstado(), Info.veontecRecuperarCuenta)){
+            if(Objects.equals(Veontec.usuarioDto.getCmpEstado(), Software.veontecRecuperarCuenta)){
                 return 3;
             }
             

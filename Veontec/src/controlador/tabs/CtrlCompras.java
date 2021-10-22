@@ -17,7 +17,7 @@ import modelo.dao.UsuarioDao;
 import modelo.dto.CompraDto;
 import modelo.dto.ProductoDto;
 import modelo.dto.UsuarioDto;
-import src.Info;
+import src.Software;
 import vista.paneles.PanelCompras;
 
 public class CtrlCompras{
@@ -54,7 +54,7 @@ public class CtrlCompras{
         this.compraDao = new CompraDao();
         this.compraDto = new CompraDto();
         this.cantidadResultados = 0;
-        this.cantidadPorPagina = Info.veontecResultadoPorPagina;
+        this.cantidadPorPagina = Software.veontecResultadoPorPagina;
         this.activarBusqueda = false;
     }
     

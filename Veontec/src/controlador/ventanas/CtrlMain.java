@@ -13,7 +13,7 @@ import modelo.dao.UsuarioDao;
 import modelo.dto.CategoriaDto;
 import modelo.dto.CuentaDto;
 import modelo.dto.UsuarioDto;
-import src.Info;
+import src.Software;
 import src.Recursos;
 import vista.ventanas.VentanaMain;
 
@@ -69,7 +69,7 @@ public class CtrlMain {
     // ***** Métodos
     private void mtdInit(){
         LOG.info("Ejecutando metodo una vez (Obligatorio)");
-        ventanaMain.setTitle(Info.NombreSoftware);
+        ventanaMain.setTitle(Software.NombreSoftware);
         mtdEventoPnTabMenu();
         mtdCargarSingOn(false);
         mtdCargarSingUp();
@@ -168,12 +168,12 @@ public class CtrlMain {
             } 
              
             // * Verificar si la cuenta no está verificada
-            if(Objects.equals(Veontec.usuarioDto.getCmpEstado(), Info.veontecCuentaNoVerificada)){
+            if(Objects.equals(Veontec.usuarioDto.getCmpEstado(), Software.veontecCuentaNoVerificada)){
                 return 2;
             }
             
             // * Verificar si la cuenta no está en modo recuperada
-            if(Objects.equals(Veontec.usuarioDto.getCmpEstado(), Info.veontecRecuperarCuenta)){
+            if(Objects.equals(Veontec.usuarioDto.getCmpEstado(), Software.veontecRecuperarCuenta)){
                 return 3;
             }
             

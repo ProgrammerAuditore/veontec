@@ -15,8 +15,8 @@ import modelo.dao.UsuarioDao;
 import modelo.dto.CategoriaDto;
 import modelo.dto.CuentaDto;
 import modelo.dto.UsuarioDto;
-import src.Funciones;
-import src.Info;
+import src.FncGlobales;
+import src.Software;
 import vista.componentes.campos.CampoCorreo;
 import vista.paneles.PanelIniciarSesion;
 import vista.ventanas.VentanaHome;
@@ -125,7 +125,7 @@ public class CtrlIniciarSesion {
                     }
                     
                     if(ObjEmail.mtdEnviarRecuperarCuenta(Veontec.usuarioDto)){
-                        Veontec.usuarioDto.setCmpPassword( new Funciones().mtdObtenerPasswordEncriptado(Veontec.usuarioDto.getCmpKey().toCharArray()) );
+                        Veontec.usuarioDto.setCmpPassword(new FncGlobales().mtdObtenerPasswordEncriptado(Veontec.usuarioDto.getCmpKey().toCharArray()) );
                         if(Veontec.usuarioDao.mtdActualizar(Veontec.usuarioDto)){
                             
                             JOptionPane.showMessageDialog(Veontec.ventanaSession, "Cuenta recuperada exitosamente.\nRevise su correo par obtener su codigo.");
@@ -171,7 +171,7 @@ public class CtrlIniciarSesion {
             Veontec.ventanaHome = new VentanaHome();
             Veontec.ventanaHome.setTitle( Veontec.usuarioDto.getCmpNombreCompleto() 
                     + " | "  + Veontec.usuarioDto.getCmpCorreo() 
-                    + " - " + Info.NombreSoftware );
+                    + " - " + Software.NombreSoftware );
 
             mtdGuardarCuenta();
 
@@ -204,7 +204,7 @@ public class CtrlIniciarSesion {
     
     public boolean mtdValidarDatosDeUsuario(String correo, String passwd){
         return correo.equals(Veontec.usuarioDto.getCmpCorreo()) && 
-                new Funciones().mtdComprobarPassword(Veontec.usuarioDto.getCmpPassword(), passwd.toCharArray());
+                new FncGlobales().mtdComprobarPassword(Veontec.usuarioDto.getCmpPassword(), passwd.toCharArray());
     }
     
     private void mtdGuardarCuenta(){

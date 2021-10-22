@@ -15,7 +15,7 @@ import modelo.dao.PreguntaDao;
 import modelo.dao.ProductoDao;
 import modelo.dto.PreguntaDto;
 import modelo.dto.ProductoDto;
-import src.Funciones;
+import src.FncGlobales;
 import vista.paneles.acciones.PanelHacerPreguntar;
 
 public class CtrlModalHacerPregunta {
@@ -134,13 +134,13 @@ public class CtrlModalHacerPregunta {
             
             preguntaDto.setPregComprador( Veontec.usuarioDto.getCmpID() );
             preguntaDto.setPregEstado(1);
-            preguntaDto.setPregFecha( new Funciones().fncObtenerFechaYHoraActualNoSQL() );
+            preguntaDto.setPregFecha(new FncGlobales().fncObtenerFechaYHoraActualNoSQL() );
             preguntaDto.setPregPregunta(pnHacerPregunta.cmpPregunta.getText() );
             preguntaDto.setPregProducto( productoDto.getProdID() );
             preguntaDto.setPregTitulo( productoDto.getProdTitulo() );
             preguntaDto.setPregVendedor( productoDto.getProdUsuario() );
-            preguntaDto.setPregCreadoEn( new Funciones().fncObtenerFechaYHoraActualSQL() );
-            preguntaDto.setPregActualizadoEn( new Funciones().fncObtenerFechaYHoraActualSQL() );
+            preguntaDto.setPregCreadoEn(new FncGlobales().fncObtenerFechaYHoraActualSQL() );
+            preguntaDto.setPregActualizadoEn(new FncGlobales().fncObtenerFechaYHoraActualSQL() );
             
             if( preguntaDao.mtdInsetar(preguntaDto) ){
                 try { CtrlPreguntas.mtdRecargarPreguntas(); } catch (Exception e) { }

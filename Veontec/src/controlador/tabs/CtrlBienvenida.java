@@ -15,7 +15,7 @@ import modelo.dao.ProductoDao;
 import modelo.dao.UsuarioDao;
 import modelo.dto.ProductoDto;
 import modelo.dto.UsuarioDto;
-import src.Info;
+import src.Software;
 import vista.paneles.PanelBienvenida;
 
 public class CtrlBienvenida{
@@ -49,7 +49,7 @@ public class CtrlBienvenida{
         this.productoDao = new ProductoDao();
         this.productoDto = new ProductoDto();
         this.cantidadResultado = 0;
-        this.cantidaPorPagina = Info.veontecResultadoPorPagina;
+        this.cantidaPorPagina = Software.veontecResultadoPorPagina;
         this.activarBusqueda = false;
     }
     
@@ -147,7 +147,7 @@ public class CtrlBienvenida{
         if( totalProductos > 0 ){
         
             int columna = 0, fila = 0; // Establecer contadores para columnas y filas
-            int productos = Info.veontecCardsPorFila; // Establecer cantida de producto a mostrar por fila
+            int productos = Software.veontecCardsPorFila; // Establecer cantida de producto a mostrar por fila
             LOG.warning(" Recorriendo productos. ");
             for (int i = 0; i < totalProductos; i++) {
                 CtrlCardProducto tarjeta = new CtrlCardProducto(lstProductos.get(i), productoDao);
