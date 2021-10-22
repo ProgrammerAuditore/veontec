@@ -65,7 +65,7 @@ public class Funciones {
     
     public String fncObtenerFechaYHoraActualNoSQL(){
         LocalDateTime myDateObj = LocalDateTime.now();
-        DateTimeFormatter myFormatObj = DateTimeFormatter.ofPattern("MM-dd-yyyy HH:mm:ss");
+        DateTimeFormatter myFormatObj = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
         String formattedDate = myDateObj.format(myFormatObj);
         return formattedDate;
     }
