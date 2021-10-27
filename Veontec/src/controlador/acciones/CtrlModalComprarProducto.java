@@ -27,7 +27,6 @@ import modelo.dto.UsuarioDto;
 import modelo.dto.VentaDto;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 import src.Funciones;
-import ticket.GenTicket;
 import vista.paneles.acciones.PanelHacerCompra;
 
 public class CtrlModalComprarProducto {
@@ -129,7 +128,6 @@ public class CtrlModalComprarProducto {
                             }else{
                                 pnHacerCompra.cmpCantidad.aceptarCampo();
                                 pnHacerCompra.cmpTotal.setText( "" + ( cantidad * prodDto.getProdPrecio()  ) );
-                                
                             }
                         }
 
@@ -193,10 +191,10 @@ public class CtrlModalComprarProducto {
     }
     
     private void mtdComprar() {
-        String Metodo="";
+        
         if( !pnHacerCompra.btnMtdDebito.isSelected() && !pnHacerCompra.btnMtdPaypal.isSelected() ){
-            System.out.println(pnHacerCompra.btnMtdDebito.getText());
             JOptionPane.showMessageDialog(Veontec.ventanaHome, "Selecciona un método de pago.");
+        
         }else
         if( !pnHacerCompra.cmpCantidad.isAprobado() || Integer.valueOf(pnHacerCompra.cmpCantidad.getText()) == 0  ){
             JOptionPane.showMessageDialog(Veontec.ventanaHome, "Introduce la cantida de compra.");
@@ -206,7 +204,6 @@ public class CtrlModalComprarProducto {
             JOptionPane.showMessageDialog(Veontec.ventanaHome, "Verifique que los campos en el método de pago sean correctos.");
         
         }else{
-            
             
             String FechaActual = new Funciones().fncObtenerFechaActual();
             Integer cmpCantidad = Integer.parseInt( pnHacerCompra.cmpCantidad.getText() );
@@ -249,18 +246,6 @@ public class CtrlModalComprarProducto {
                 CtrlBienvenida.mtdRecargar();
                 mtdCerrarModal();
                 JOptionPane.showMessageDialog(Veontec.ventanaHome, "La compra se realizo exitosamente.");
-                
-                if (pnHacerCompra.btnMtdDebito.isSelected()) {
-                Metodo = pnHacerCompra.btnMtdDebito.getText();
-                }else if(pnHacerCompra.btnMtdPaypal.isSelected()){
-                Metodo = pnHacerCompra.btnMtdPaypal.getText();
-                }
-                
-                
-                GenTicket ticket = new GenTicket();
-                
-                ticket.ConexionTicket(cmpTitulo, cmpCantidad,precio.doubleValue(), usuaDto.getCmpNombreCompleto(), Metodo); 
-                
             }
                 
         }
