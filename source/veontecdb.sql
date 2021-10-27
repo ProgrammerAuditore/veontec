@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 22-10-2021 a las 23:09:10
+-- Tiempo de generación: 27-10-2021 a las 04:27:54
 -- Versión del servidor: 10.4.21-MariaDB
 -- Versión de PHP: 8.0.11
 
@@ -34,16 +34,6 @@ CREATE TABLE `tblcategorias` (
   `cateTotalProductos` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---
--- Volcado de datos para la tabla `tblcategorias`
---
-
-INSERT INTO `tblcategorias` (`cateID`, `cateUsuario`, `cateNombre`, `cateTotalProductos`) VALUES
-(56, 46, 'Nueva', 0),
-(57, 47, 'Nueva', 0),
-(58, 48, 'Nueva', 0),
-(59, 49, 'Nueva', 0);
-
 -- --------------------------------------------------------
 
 --
@@ -58,7 +48,7 @@ CREATE TABLE `tblcompras` (
   `compTitulo` varchar(60) COLLATE utf8_bin NOT NULL,
   `compCantidad` int(11) NOT NULL,
   `compPrecio` double NOT NULL,
-  `compFecha` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `compFecha` varchar(60) COLLATE utf8_bin DEFAULT NULL,
   `compHashCode` int(11) NOT NULL,
   `compEstado` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
@@ -95,16 +85,6 @@ CREATE TABLE `tblpreguntas` (
   `pregActualizadoEn` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
---
--- Volcado de datos para la tabla `tblpreguntas`
---
-
-INSERT INTO `tblpreguntas` (`pregID`, `pregProducto`, `pregVendedor`, `pregComprador`, `pregPregunta`, `pregFecha`, `pregEstado`, `pregTitulo`, `pregCreadoEn`, `pregActualizadoEn`) VALUES
-(44, 95, 46, 47, 'xxxxxxxxx', '22/10/2021', 0, 'Hola mundo', '2021-10-22 15:00:24', '2021-10-22 15:00:24'),
-(45, 96, 47, 46, 'sadsadsa', '10-22-2021 15:21:10', 1, 'Proyecto X (Editado)', '2021-10-22 15:21:10', '2021-10-22 15:21:10'),
-(46, 96, 47, 46, 'Hola como estás', '22/10/2021 15:23:59', 1, 'Proyecto X (Editado)', '2021-10-22 15:23:59', '2021-10-22 15:23:59'),
-(47, 96, 47, 46, 'Hola', '22/10/2021 15:25', 1, 'Proyecto X (Editado)', '2021-10-22 15:25:39', '2021-10-22 15:25:39');
-
 -- --------------------------------------------------------
 
 --
@@ -126,14 +106,6 @@ CREATE TABLE `tblproductos` (
   `prodActualizadoEn` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
---
--- Volcado de datos para la tabla `tblproductos`
---
-
-INSERT INTO `tblproductos` (`prodID`, `prodTitulo`, `prodDescripcion`, `prodCategoria`, `prodPrecio`, `prodStock`, `prodTipo`, `prodEnlace`, `prodUsuario`, `prodMedia`, `prodCreadoEn`, `prodActualizadoEn`) VALUES
-(95, 'Hola mundo', 'Es nueva', 'Nueva', 222, 21, 1, 'Vacio', 46, NULL, '2021-10-22 02:22:04', '2021-10-22 02:22:04'),
-(96, 'Proyecto X (Editado)', 'Es nueva', 'Nueva', 1102, 122, 1, 'Vacio', 47, NULL, '2021-10-22 14:37:43', '2021-10-22 14:41:13');
-
 -- --------------------------------------------------------
 
 --
@@ -152,13 +124,6 @@ CREATE TABLE `tblrespuestas` (
   `respCreadoEn` datetime NOT NULL DEFAULT current_timestamp(),
   `respActualizadoEn` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
-
---
--- Volcado de datos para la tabla `tblrespuestas`
---
-
-INSERT INTO `tblrespuestas` (`respID`, `respPregunta`, `respProducto`, `respVendedor`, `respComprador`, `respRespuesta`, `respFecha`, `respEstado`, `respCreadoEn`, `respActualizadoEn`) VALUES
-(21, 44, 95, 46, 47, 'Hola mundo', '10-22-2021 15:04:22', 0, '2021-10-22 15:04:22', '2021-10-22 15:04:22');
 
 -- --------------------------------------------------------
 
@@ -179,16 +144,6 @@ CREATE TABLE `tblusuarios` (
   `usuaActualizadoEn` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
---
--- Volcado de datos para la tabla `tblusuarios`
---
-
-INSERT INTO `tblusuarios` (`usuaID`, `usuaNombre`, `usuaCorreo`, `usuaPassword`, `usuaDireccion`, `usuaTelefono`, `usuaKey`, `usuaEstado`, `usuaCreadoEn`, `usuaActualizadoEn`) VALUES
-(46, 'Victor J:', 'victor@example.com', '$argon2i$v=19$m=65536,t=10,p=1$2UxR87qfC1opcoof/THZwA$qKNlAfVn42xpKB3t2K9hznfNO5QwDNb+q5qkbjVJvsg', 'Desconocido', '000000000', 'No', 1333, '2021-10-22 07:16:15', '2021-10-22 07:19:14'),
-(47, 'Boris Example', 'boris@example.com', '$argon2i$v=19$m=65536,t=10,p=1$r65XQTXc+0sGkWksLPYVdA$jMKYCy0Axgr/zklohn2IPXjU1pjuItf49RtWK/LKqL4', 'Desconocido', '000000000', 'No', 1333, '2021-10-22 07:16:15', '2021-10-22 07:19:14'),
-(48, 'Angel Example', 'angel@example.com', '$argon2i$v=19$m=65536,t=10,p=1$ld3Roh6x44L32QVl30X93A$MwtjF9os722O4UByd6w+PpFsegIuTADFfI/GLmXhxs0', 'Desconocido', '000000000', 'EJMWy5YmVwEVaLCBJRG4mpv2gR/NrL9anRQOMiMOG98=', 333, '2021-10-22 20:40:04', '2021-10-22 20:40:04'),
-(49, 'Esteban Example', 'esteban@example.com', '$argon2i$v=19$m=65536,t=10,p=1$Ly6dycr6icofy59zrrabOw$P9KDrasNDx9F9ym2m5YtyWjNu3hNKj10+noJd1atYSQ', 'Desconocido', '000000000', 'No', 1333, '2021-10-22 20:55:59', '2021-10-22 20:58:28');
-
 -- --------------------------------------------------------
 
 --
@@ -203,7 +158,7 @@ CREATE TABLE `tblventas` (
   `ventTitulo` varchar(60) COLLATE utf8_bin NOT NULL,
   `ventCantidad` int(11) NOT NULL,
   `ventPrecio` double NOT NULL,
-  `ventFecha` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `ventFecha` varchar(60) COLLATE utf8_bin DEFAULT NULL,
   `ventHashCode` int(11) NOT NULL,
   `ventEstado` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
@@ -279,13 +234,13 @@ ALTER TABLE `tblventas`
 -- AUTO_INCREMENT de la tabla `tblcategorias`
 --
 ALTER TABLE `tblcategorias`
-  MODIFY `cateID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=60;
+  MODIFY `cateID` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `tblcompras`
 --
 ALTER TABLE `tblcompras`
-  MODIFY `compID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
+  MODIFY `compID` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `tblimages`
@@ -321,7 +276,7 @@ ALTER TABLE `tblusuarios`
 -- AUTO_INCREMENT de la tabla `tblventas`
 --
 ALTER TABLE `tblventas`
-  MODIFY `ventID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `ventID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- Restricciones para tablas volcadas
