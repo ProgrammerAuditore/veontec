@@ -1,8 +1,5 @@
 package modelo.dto;
 
-import java.awt.Image;
-import java.math.BigDecimal;
-
 public class ProductoDto {
     
     private Integer prodID;
@@ -14,8 +11,9 @@ public class ProductoDto {
     private Integer prodTipo;
     private String prodEnlace;
     private Integer prodUsuario;
-    private Image prodMedia;
     private byte[] prodImg;
+    private String prodCreadoEn;
+    private String prodActualizadoEn;
 
     public Integer getProdID() {
         return prodID;
@@ -89,14 +87,6 @@ public class ProductoDto {
         this.prodUsuario = prodUsuario;
     }
 
-    public Image getProdMedia() {
-        return prodMedia;
-    }
-
-    public void setProdMedia(Image prodMedia) {
-        this.prodMedia = prodMedia;
-    }
-
     public byte[] getProdImg() {
         return prodImg;
     }
@@ -104,13 +94,26 @@ public class ProductoDto {
     public void setProdImg(byte[] prodImg) {
         this.prodImg = prodImg;
     }
-    
+
+    public String getProdCreadoEn() {
+        return prodCreadoEn;
+    }
+
+    public void setProdCreadoEn(String prodCreadoEn) {
+        this.prodCreadoEn = prodCreadoEn;
+    }
+
+    public String getProdActualizadoEn() {
+        return prodActualizadoEn;
+    }
+
+    public void setProdActualizadoEn(String prodActualizadoEn) {
+        this.prodActualizadoEn = prodActualizadoEn;
+    }
+
     @Override
     public String toString() {
-        String msg = "";
-        msg += "prodID = " + prodID + "\n";
-        msg += "prodUsuario = " + prodUsuario + "\n";
-        return msg; //To change body of generated methods, choose Tools | Templates.
+        return "ProductoDto{" + "prodID=" + prodID + ", prodTitulo=" + prodTitulo + ", prodDescripcion=" + prodDescripcion + ", prodCategoria=" + prodCategoria + ", prodPrecio=" + prodPrecio + ", prodStock=" + prodStock + ", prodTipo=" + prodTipo + ", prodEnlace=" + prodEnlace + ", prodUsuario=" + prodUsuario + ", prodImg=" + prodImg + ", prodCreadoEn=" + prodCreadoEn + ", prodActualizadoEn=" + prodActualizadoEn + '}';
     }
     
 }

@@ -7,13 +7,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import modelo.dto.CategoriaDto;
-import modelo.interfaces.keyword_extra;
 import modelo.interfaces.keyword_query;
 
-public class CategoriaDao implements keyword_query<CategoriaDto>, keyword_extra<CategoriaDto>{
+public class CategoriaDao implements keyword_query<CategoriaDto>{
 
     @Override
     public boolean mtdInsetar(CategoriaDto obj_dto) {
@@ -167,12 +164,6 @@ public class CategoriaDao implements keyword_query<CategoriaDto>, keyword_extra<
         return categoria;
     }
 
-    @Override
-    public List<CategoriaDto> mtdListar() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
     public List<CategoriaDto> mtdListar(CategoriaDto obj_dto) {
         PreparedStatement ps = null;
         List<CategoriaDto> categorias = null;
@@ -207,22 +198,6 @@ public class CategoriaDao implements keyword_query<CategoriaDto>, keyword_extra<
         return categorias;
     }
 
-    @Override
-    public List<CategoriaDto> mtdListar(int inicio, int fin) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public List<CategoriaDto> mtdListar(CategoriaDto obj_dto, int inicio, int fin) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public long mtdRowCount() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
     public long mtdRowCount(CategoriaDto obj_dto) {
         PreparedStatement ps = null;
         Connection conn = CtrlHiloConexion.getConexion();
@@ -251,12 +226,6 @@ public class CategoriaDao implements keyword_query<CategoriaDto>, keyword_extra<
         return registros;
     }
 
-    @Override
-    public long mtdRowCount(int estado) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
     public boolean mtdComprobar(CategoriaDto obj_dto) {
         PreparedStatement ps = null;
         Connection conn = CtrlHiloConexion.getConexion();
@@ -284,11 +253,6 @@ public class CategoriaDao implements keyword_query<CategoriaDto>, keyword_extra<
         }
         
         return (registros == 0);
-    }
-
-    @Override
-    public boolean mtdEliminar(CategoriaDto obj_dto) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }

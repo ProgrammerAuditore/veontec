@@ -1,6 +1,4 @@
-    package index;
-
-import src.Recursos;
+package index;
 
 public class Index {
     

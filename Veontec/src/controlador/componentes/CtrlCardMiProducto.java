@@ -1,9 +1,7 @@
 package controlador.componentes;
 
-import controlador.CtrlMiTienda;
+import controlador.tabs.CtrlMiTienda;
 import controlador.acciones.CtrlModalEditarProducto;
-import index.Veontec;
-import java.awt.Dialog;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.Image;
@@ -11,8 +9,6 @@ import java.awt.Insets;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
@@ -24,36 +20,35 @@ import javax.swing.JOptionPane;
 import modelo.dao.ProductoDao;
 import modelo.dto.ProductoDto;
 import vista.paneles.componentes.PanelCardMiProducto;
-import vista.paneles.acciones.PanelCrearProducto;
 
 public class CtrlCardMiProducto {
 
     
-    // * Vista
-    private PanelCardMiProducto tarjeta;
+    // ***** Vista
+    private PanelCardMiProducto pnCardMiProducto;
     public JDialog modalCrearProducto;
     
-    // * Modelo
-    private ProductoDto prodDto;
-    private ProductoDao prodDao;
+    // ***** Modelo
+    private ProductoDto productoDto;
+    private ProductoDao productoDao;
     
-    // * Atributos
+    // ***** Atributos
     private GridBagConstraints tarjeta_dimensiones;
     private Integer item;
     private ImageIcon portada;
     
-    // Constructor
+    // ***** Constructor
     public CtrlCardMiProducto(ProductoDto prodDto, ProductoDao prodDao) {
-        this.tarjeta = new PanelCardMiProducto();
-        this.prodDto = prodDto;
-        this.prodDao = prodDao;
+        this.pnCardMiProducto = new PanelCardMiProducto();
+        this.productoDto = prodDto;
+        this.productoDao = prodDao;
         this.tarjeta_dimensiones = new GridBagConstraints();
     }
     
-    // Eventos
+    // ***** Eventos
     private void mtdCrearEventoBtnRemover(){
         MouseListener eventoBtnComprar = null;
-        tarjeta.btnEliminar.removeMouseListener(eventoBtnComprar);
+        pnCardMiProducto.btnEliminar.removeMouseListener(eventoBtnComprar);
         
         eventoBtnComprar =  new MouseAdapter(){
             @Override
@@ -62,26 +57,26 @@ public class CtrlCardMiProducto {
             }
         };
         
-        tarjeta.btnEliminar.addMouseListener(eventoBtnComprar);
+        pnCardMiProducto.btnEliminar.addMouseListener(eventoBtnComprar);
     }
     
     private void mtdCrearEventoBtnEditar(){
         MouseListener eventoBtnEditar = null;
-        tarjeta.btnEditar.removeMouseListener(eventoBtnEditar);
+        pnCardMiProducto.btnEditar.removeMouseListener(eventoBtnEditar);
         
         eventoBtnEditar =  new MouseAdapter(){
             @Override
             public void mouseReleased(MouseEvent e) {
-                CtrlModalEditarProducto editar = new CtrlModalEditarProducto(prodDto);
+                CtrlModalEditarProducto editar = new CtrlModalEditarProducto(productoDto);
                 editar.mtdInit();
                 //editar.modal.setVisible(true);
             }
         };
         
-        tarjeta.btnEditar.addMouseListener(eventoBtnEditar);
+        pnCardMiProducto.btnEditar.addMouseListener(eventoBtnEditar);
     }
     
-    // Métodos
+    // ***** Métodos
     public void mtdInit(){
         mtdEstablecerDimensiones();
         mtdCrearEventoBtnRemover();
@@ -90,33 +85,33 @@ public class CtrlCardMiProducto {
     }
     
     private void mtdCardEstablecerDatos(){
-        tarjeta.etqTitulo.setText( prodDto.getProdTitulo() );
-        tarjeta.cmpPrecioUnidad.setText( "" + prodDto.getProdPrecio() );
-        tarjeta.cmpStockDisponible.setText( ""  + prodDto.getProdStock());
+        pnCardMiProducto.etqTitulo.setText(productoDto.getProdTitulo() );
+        pnCardMiProducto.cmpPrecioUnidad.setText("" + productoDto.getProdPrecio() );
+        pnCardMiProducto.cmpStockDisponible.setText(""  + productoDto.getProdStock());
         
         // * Descripción de detalles
-        tarjeta.cmpDetalleMiProducto.setText( prodDto.getProdDescripcion() );
-        tarjeta.etqFecha.setText( "15/09/2021" );
+        pnCardMiProducto.cmpDetalleMiProducto.setText(productoDto.getProdDescripcion() );
+        pnCardMiProducto.etqFecha.setText( productoDto.getProdCreadoEn() );
         
-        if( prodDto.getProdImg() != null ){
+        if( productoDto.getProdImg() != null ){
             // * Establecer imagen de portada
             try {
-                byte[] img = prodDto.getProdImg();
+                byte[] img = productoDto.getProdImg();
                 BufferedImage buffimg = null;
                 InputStream inputimg = new ByteArrayInputStream(img);
                 buffimg = ImageIO.read(inputimg);
-                tarjeta.pnImgPortada.removeAll();
-                portada = new ImageIcon(buffimg.getScaledInstance(tarjeta.pnImgPortada.getWidth(), tarjeta.pnImgPortada.getHeight(), Image.SCALE_SMOOTH));
+                pnCardMiProducto.pnImgPortada.removeAll();
+                portada = new ImageIcon(buffimg.getScaledInstance(pnCardMiProducto.pnImgPortada.getWidth(), pnCardMiProducto.pnImgPortada.getHeight(), Image.SCALE_SMOOTH));
                 JLabel iconocc = new JLabel(portada);
-                iconocc.setBounds(0, 0, tarjeta.pnImgPortada.getWidth(), tarjeta.pnImgPortada.getHeight());
-                iconocc.setSize(tarjeta.pnImgPortada.getWidth(), tarjeta.pnImgPortada.getHeight());
+                iconocc.setBounds(0, 0, pnCardMiProducto.pnImgPortada.getWidth(), pnCardMiProducto.pnImgPortada.getHeight());
+                iconocc.setSize(pnCardMiProducto.pnImgPortada.getWidth(), pnCardMiProducto.pnImgPortada.getHeight());
                 iconocc.setLocation(0, 0);
-                iconocc.setPreferredSize(new Dimension(tarjeta.pnImgPortada.getWidth(), tarjeta.pnImgPortada.getHeight()));
-                tarjeta.pnImgPortada.add(iconocc);
+                iconocc.setPreferredSize(new Dimension(pnCardMiProducto.pnImgPortada.getWidth(), pnCardMiProducto.pnImgPortada.getHeight()));
+                pnCardMiProducto.pnImgPortada.add(iconocc);
                 //tarjeta.updateUI();
-                tarjeta.validate();
-                tarjeta.revalidate();
-                tarjeta.repaint();
+                pnCardMiProducto.validate();
+                pnCardMiProducto.revalidate();
+                pnCardMiProducto.repaint();
                 
             } catch (Exception e) {
             }
@@ -137,26 +132,26 @@ public class CtrlCardMiProducto {
     }
     
     private void mtdModalEliminarProducto(){
-        int opc = JOptionPane.showConfirmDialog(tarjeta, 
+        int opc = JOptionPane.showConfirmDialog(pnCardMiProducto, 
                 "¿Seguro que desar eliminar este producto?",
-                "Eliminar | " + prodDto.getProdTitulo(), 
+                "Eliminar | " + productoDto.getProdTitulo(), 
                 JOptionPane.YES_NO_OPTION );
         
         if( opc == JOptionPane.YES_OPTION ){
-            if( prodDao.mtdRemover(prodDto) ){
+            if( productoDao.mtdRemover(productoDto) ){
                 CtrlMiTienda.mtdRecargarMisProductos();
-                JOptionPane.showMessageDialog(tarjeta, "Producto eliminado exitosamente.");
+                JOptionPane.showMessageDialog(pnCardMiProducto, "Producto eliminado exitosamente.");
             }
         }
         
     }
 
     public PanelCardMiProducto getLaVista() {
-        return tarjeta;
+        return pnCardMiProducto;
     }
 
     public void setLaVista(PanelCardMiProducto laVista) {
-        this.tarjeta = laVista;
+        this.pnCardMiProducto = laVista;
     }
 
     public Integer getItem() {

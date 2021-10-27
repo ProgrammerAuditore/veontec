@@ -1,6 +1,5 @@
 package controlador.componentes;
 
-import static com.lowagie.text.pdf.PdfFileSpecification.url;
 import controlador.acciones.CtrlModalComprarProducto;
 import controlador.acciones.CtrlModalHacerPregunta;
 import index.Veontec;
@@ -29,88 +28,88 @@ import modelo.dto.UsuarioDto;
 import vista.paneles.componentes.PanelCardProducto;
 
 public class CtrlCardProducto {
-    // * Vista
-    private PanelCardProducto tarjeta;
+    // ***** Vista
+    private PanelCardProducto pnCardProducto;
     
-    // * Modelo
-    private ProductoDto prodDto;
-    private ProductoDao prodDao;
-    private UsuarioDto usuaDto;
-    private UsuarioDao usuaDao;
+    // ***** Modelo
+    private ProductoDto productoDto;
+    private ProductoDao productoDao;
+    private UsuarioDto usuarioDto;
+    private UsuarioDao usuarioDao;
     
-    // * Atributos
+    // ***** Atributos
     private GridBagConstraints tarjeta_dimensiones;
     private Integer item;
     private Integer columna;
     private ImageIcon portada;
     
-    // Constructor
+    // ***** Constructor
     public CtrlCardProducto(ProductoDto prodDto, ProductoDao prodDao) {
-        this.prodDto = prodDto;
-        this.prodDao = prodDao;
-        this.tarjeta = new PanelCardProducto();
+        this.productoDto = prodDto;
+        this.productoDao = prodDao;
+        this.pnCardProducto = new PanelCardProducto();
         this.tarjeta_dimensiones = new GridBagConstraints();
-        this.usuaDao = new UsuarioDao();
-        this.usuaDto = new UsuarioDto();
+        this.usuarioDao = new UsuarioDao();
+        this.usuarioDto = new UsuarioDto();
     }
     
-    // Eventos
+    // ***** Eventos
     private void mtdCrearEventoBtnComprar(){
-        tarjeta.btnComprar.setTexto("Comparar");
+        pnCardProducto.btnComprar.setTexto("Comparar");
         
-        if( Objects.equals(Veontec.usuarioDto.getCmpID(), prodDto.getProdUsuario()) ){
-            tarjeta.btnComprar.setEnabled(false);
+        if( Objects.equals(Veontec.usuarioDto.getCmpID(), productoDto.getProdUsuario()) ){
+            pnCardProducto.btnComprar.setEnabled(false);
             return;
         }
         
         MouseListener eventoBtnComprar = null;
-        tarjeta.btnComprar.removeMouseListener(eventoBtnComprar);
+        pnCardProducto.btnComprar.removeMouseListener(eventoBtnComprar);
         
         eventoBtnComprar = new MouseAdapter(){
             @Override
             public void mouseReleased(MouseEvent e) {
                 // * Llamar al controlador de accion para comprar 
-                CtrlModalComprarProducto comprar = new CtrlModalComprarProducto(prodDto);
+                CtrlModalComprarProducto comprar = new CtrlModalComprarProducto(productoDto);
                 comprar.mtdInit();
             }
         };
         
-        tarjeta.btnComprar.addMouseListener(eventoBtnComprar);
+        pnCardProducto.btnComprar.addMouseListener(eventoBtnComprar);
     }
     
     private void mtdCrearEventoBtnPreguntar(){
-        tarjeta.btnPreguntar.setTexto("Preguntar");
+        pnCardProducto.btnPreguntar.setTexto("Preguntar");
         
-        if( Objects.equals(Veontec.usuarioDto.getCmpID(), prodDto.getProdUsuario()) ){
-            tarjeta.btnPreguntar.setEnabled(false);
+        if( Objects.equals(Veontec.usuarioDto.getCmpID(), productoDto.getProdUsuario()) ){
+            pnCardProducto.btnPreguntar.setEnabled(false);
             return;
         }
         
         MouseListener eventoBtnPregunta = null;
-        tarjeta.btnPreguntar.removeMouseListener(eventoBtnPregunta);
+        pnCardProducto.btnPreguntar.removeMouseListener(eventoBtnPregunta);
         
         eventoBtnPregunta = new MouseAdapter(){
             @Override
             public void mouseReleased(MouseEvent e) {
                 // * Llamar al controlador de accion para preguntar
-                CtrlModalHacerPregunta preguntar = new CtrlModalHacerPregunta(prodDto);
+                CtrlModalHacerPregunta preguntar = new CtrlModalHacerPregunta(productoDto);
                 preguntar.mtdInit();
             }
         };
         
-        tarjeta.btnPreguntar.addMouseListener(eventoBtnPregunta);
+        pnCardProducto.btnPreguntar.addMouseListener(eventoBtnPregunta);
     }
     
     private void mtdCrearEventoBtnVerProducto(){
-        tarjeta.btnComprar.setTexto("Ver producto");
+        pnCardProducto.btnComprar.setTexto("Ver producto");
         
-        if( Objects.equals(Veontec.usuarioDto.getCmpID(), prodDto.getProdUsuario()) ){
-            tarjeta.btnComprar.setEnabled(false);
+        if( Objects.equals(Veontec.usuarioDto.getCmpID(), productoDto.getProdUsuario()) ){
+            pnCardProducto.btnComprar.setEnabled(false);
             return;
         }
         
         MouseListener eventoBtnPregunta = null;
-        tarjeta.btnComprar.removeMouseListener(eventoBtnPregunta);
+        pnCardProducto.btnComprar.removeMouseListener(eventoBtnPregunta);
         
         eventoBtnPregunta = new MouseAdapter(){
             @Override
@@ -119,20 +118,20 @@ public class CtrlCardProducto {
             }
         };
         
-        tarjeta.btnComprar.addMouseListener(eventoBtnPregunta);
+        pnCardProducto.btnComprar.addMouseListener(eventoBtnPregunta);
     }
     
-    // Métodos
+    // ***** Métodos
     public void mtdInit(){
         mtdEstablecerImagen();
         mtdEstablecerOpciones();
         
         // * Establecer boton
-        if( prodDto.getProdTipo() == 1 ){
-            tarjeta.mtdBackgroundProductoInterno();
+        if( productoDto.getProdTipo() == 1 ){
+            pnCardProducto.mtdBackgroundProductoInterno();
             mtdCrearEventoBtnComprar();
         }else{
-            tarjeta.mtdBackgroundProductoExterno();
+            pnCardProducto.mtdBackgroundProductoExterno();
             mtdCrearEventoBtnVerProducto();
         }
         
@@ -142,45 +141,45 @@ public class CtrlCardProducto {
     }
     
     private void mtdEstablecerDatos(){
-        tarjeta.etqTitulo.setText( prodDto.getProdTitulo() );
-        tarjeta.cmpPrecioUnidad.setText( "" + prodDto.getProdPrecio() );
-        tarjeta.cmpStockDisponible.setText( ""  + prodDto.getProdStock());
+        pnCardProducto.etqTitulo.setText(productoDto.getProdTitulo() );
+        pnCardProducto.cmpPrecioUnidad.setText("" + productoDto.getProdPrecio() );
+        pnCardProducto.cmpStockDisponible.setText(""  + productoDto.getProdStock());
         
-        String detalles = tarjeta.cmpDetalleProducto.getText();
+        String detalles = pnCardProducto.cmpDetalleProducto.getText();
         String vendedor = "";
         
         // Establecer el vendedor 
-        usuaDto = usuaDao.mtdConsultar(prodDto.getProdUsuario());
-        vendedor = usuaDto == null ? "Desconocido" : usuaDto.getCmpNombreCompleto();
-        tarjeta.cmpVendedor.setText(vendedor);
+        usuarioDto = usuarioDao.mtdConsultar(productoDto.getProdUsuario());
+        vendedor = usuarioDto == null ? "Desconocido" : usuarioDto.getCmpNombreCompleto();
+        pnCardProducto.cmpVendedor.setText(vendedor);
 
         // Establecer descripcion
-        detalles = detalles.replaceAll("<Descripcion>", prodDto.getProdDescripcion());
+        detalles = detalles.replaceAll("<Descripcion>", productoDto.getProdDescripcion());
         
         // * Establecer los detalles del producto
-        tarjeta.cmpDetalleProducto.setText(detalles);
+        pnCardProducto.cmpDetalleProducto.setText(detalles);
     }
     
     private void mtdEstablecerImagen(){
-        if( prodDto.getProdImg() != null ){
+        if( productoDto.getProdImg() != null ){
             // * Establecer imagen de portada
             try {
-                byte[] img = prodDto.getProdImg();
+                byte[] img = productoDto.getProdImg();
                 BufferedImage buffimg = null;
                 InputStream inputimg = new ByteArrayInputStream(img);
                 buffimg = ImageIO.read(inputimg);
-                tarjeta.pnImgPortada.removeAll();
-                portada = new ImageIcon(buffimg.getScaledInstance(tarjeta.pnImgPortada.getWidth(), tarjeta.pnImgPortada.getHeight(), Image.SCALE_SMOOTH));
+                pnCardProducto.pnImgPortada.removeAll();
+                portada = new ImageIcon(buffimg.getScaledInstance(pnCardProducto.pnImgPortada.getWidth(), pnCardProducto.pnImgPortada.getHeight(), Image.SCALE_SMOOTH));
                 JLabel iconocc = new JLabel(portada);
-                iconocc.setBounds(0, 0, tarjeta.pnImgPortada.getWidth(), tarjeta.pnImgPortada.getHeight());
-                iconocc.setSize(tarjeta.pnImgPortada.getWidth(), tarjeta.pnImgPortada.getHeight());
+                iconocc.setBounds(0, 0, pnCardProducto.pnImgPortada.getWidth(), pnCardProducto.pnImgPortada.getHeight());
+                iconocc.setSize(pnCardProducto.pnImgPortada.getWidth(), pnCardProducto.pnImgPortada.getHeight());
                 iconocc.setLocation(0, 0);
-                iconocc.setPreferredSize(new Dimension(tarjeta.pnImgPortada.getWidth(), tarjeta.pnImgPortada.getHeight()));
-                tarjeta.pnImgPortada.add(iconocc);
+                iconocc.setPreferredSize(new Dimension(pnCardProducto.pnImgPortada.getWidth(), pnCardProducto.pnImgPortada.getHeight()));
+                pnCardProducto.pnImgPortada.add(iconocc);
                 //tarjeta.updateUI();
-                tarjeta.validate();
-                tarjeta.revalidate();
-                tarjeta.repaint();
+                pnCardProducto.validate();
+                pnCardProducto.revalidate();
+                pnCardProducto.repaint();
                 
             } catch (Exception e) {
             }
@@ -201,14 +200,14 @@ public class CtrlCardProducto {
         tarjeta_dimensiones.weighty = 0.0;// Estirar en alto
         tarjeta_dimensiones.insets = new Insets(20, 10, 20, 10);  //top padding
         tarjeta_dimensiones.fill = GridBagConstraints.BOTH; // El modo de estirar
-        tarjeta.setVisible(true);
+        pnCardProducto.setVisible(true);
     }
     
     private void mtdVerProducto(){
         if(Desktop.isDesktopSupported()){
             Desktop desktop = Desktop.getDesktop();
             try {
-                desktop.browse(new URI(prodDto.getProdEnlace()));
+                desktop.browse(new URI(productoDto.getProdEnlace()));
             } catch (IOException | URISyntaxException e) {
                 // TODO Auto-generated catch block
                 //e.printStackTrace();
@@ -216,7 +215,7 @@ public class CtrlCardProducto {
         }else{
             Runtime runtime = Runtime.getRuntime();
             try {
-                runtime.exec("xdg-open " + prodDto.getProdEnlace());
+                runtime.exec("xdg-open " + productoDto.getProdEnlace());
             } catch (IOException e) {
                 // TODO Auto-generated catch block
                 //e.printStackTrace();
@@ -225,11 +224,11 @@ public class CtrlCardProducto {
     }
     
     public PanelCardProducto getLaVista() {
-        return tarjeta;
+        return pnCardProducto;
     }
 
     public void setLaVista(PanelCardProducto laVista) {
-        this.tarjeta = laVista;
+        this.pnCardProducto = laVista;
     }
 
     public Integer getItem() {

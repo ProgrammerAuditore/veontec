@@ -105,7 +105,7 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="cmpBuscarProducto" min="-2" pref="260" max="-2" attributes="0"/>
+                      <Component id="cmpBusqueda" min="-2" pref="260" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="btnBuscar" min="-2" pref="90" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
@@ -130,7 +130,7 @@
                                   <Component id="btnSiguiente" alignment="1" max="32767" attributes="0"/>
                                   <Group type="103" alignment="0" groupAlignment="1" attributes="0">
                                       <Component id="btnBuscar" min="-2" max="-2" attributes="0"/>
-                                      <Component id="cmpBuscarProducto" min="-2" max="-2" attributes="0"/>
+                                      <Component id="cmpBusqueda" min="-2" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                               <EmptySpace max="32767" attributes="0"/>
@@ -141,7 +141,7 @@
             </DimensionLayout>
           </Layout>
           <SubComponents>
-            <Component class="vista.componentes.campos.CampoTexto" name="cmpBuscarProducto">
+            <Component class="vista.componentes.campos.CampoTexto" name="cmpBusqueda">
               <Properties>
                 <Property name="placeholder" type="java.lang.String" value="Buscar un producto"/>
               </Properties>

@@ -1,6 +1,6 @@
 package controlador.acciones;
 
-import controlador.CtrlPreguntas;
+import controlador.tabs.CtrlPreguntas;
 import index.Veontec;
 import java.awt.Dialog;
 import java.awt.event.MouseAdapter;
@@ -15,27 +15,27 @@ import modelo.dao.PreguntaDao;
 import modelo.dao.ProductoDao;
 import modelo.dto.PreguntaDto;
 import modelo.dto.ProductoDto;
-import src.Funciones;
+import src.FncGlobales;
 import vista.paneles.acciones.PanelHacerPreguntar;
 
 public class CtrlModalHacerPregunta {
 
-    // * Vista
-    private PanelHacerPreguntar laVista;
+    // ***** Vista
+    private PanelHacerPreguntar pnHacerPregunta;
     private JDialog modal;
     
-    // * Modelo
+    // ***** Modelo
     private PreguntaDto preguntaDto;
     private PreguntaDao preguntaDao;
     private ProductoDto productoDto;
     private ProductoDao productoDao;
     
-    // * Atributo
+    // ***** Atributo
     
-    // * Constructor
+    // ***** Constructor
     public CtrlModalHacerPregunta(ProductoDto productoDto) {
         this.productoDto = productoDto;
-        this.laVista = new PanelHacerPreguntar();
+        this.pnHacerPregunta = new PanelHacerPreguntar();
         this.modal = new JDialog(Veontec.ventanaHome);
         this.preguntaDto = new PreguntaDto();
         this.preguntaDao = new PreguntaDao();
@@ -43,10 +43,10 @@ public class CtrlModalHacerPregunta {
         
     }
     
-    // * Eventos
+    // ***** Eventos
     private void mtdEventoBtnCancelar() {
         MouseListener btnCancelar = null;
-        laVista.btnCancelar.removeMouseListener(btnCancelar);
+        pnHacerPregunta.btnCancelar.removeMouseListener(btnCancelar);
         
         btnCancelar = new MouseAdapter() {
             @Override
@@ -55,12 +55,12 @@ public class CtrlModalHacerPregunta {
             }
         };
         
-        laVista.btnCancelar.addMouseListener(btnCancelar);
+        pnHacerPregunta.btnCancelar.addMouseListener(btnCancelar);
     }
     
     private void mtdEventoBtnAceptar() {
         MouseListener btnAceptar = null;
-        laVista.btnAceptar.removeMouseListener(btnAceptar);
+        pnHacerPregunta.btnAceptar.removeMouseListener(btnAceptar);
         
         btnAceptar = new MouseAdapter() {
             @Override
@@ -69,7 +69,7 @@ public class CtrlModalHacerPregunta {
             }
         };
         
-        laVista.btnAceptar.addMouseListener(btnAceptar);
+        pnHacerPregunta.btnAceptar.addMouseListener(btnAceptar);
     }
     
     private void mtdAgregerEventoWindow(){
@@ -84,17 +84,17 @@ public class CtrlModalHacerPregunta {
 
             @Override
             public void windowOpened(WindowEvent e) {
-                laVista.updateUI();
+                pnHacerPregunta.updateUI();
                 modal.validate();
                 modal.repaint();
-                JOptionPane.showMessageDialog(laVista, "Presiona aceptar para enviar una pregunta...");
+                JOptionPane.showMessageDialog(pnHacerPregunta, "Presiona aceptar para enviar una pregunta...");
             }
         };
         
         modal.addWindowListener(evtWindow);
     }
     
-    // * Métodos
+    // ***** Métodos
     public void mtdInit(){
         mtdEstablecerDatos();
         mtdAgregerEventoWindow();
@@ -104,11 +104,11 @@ public class CtrlModalHacerPregunta {
     }
     
     private void mtdEstablecerDatos(){
-        laVista.cmpTitulo.setText( productoDto.getProdTitulo()  );
-        laVista.cmpDescripcion.setText( productoDto.getProdDescripcion() );
-        laVista.cmpPrecio.setText( "" + productoDto.getProdPrecio() );
-        laVista.cmpStock.setText( "" + productoDto.getProdStock());
-        laVista.cmpEnlace.setText( productoDto.getProdEnlace() );
+        pnHacerPregunta.cmpTitulo.setText( productoDto.getProdTitulo()  );
+        pnHacerPregunta.cmpDescripcion.setText( productoDto.getProdDescripcion() );
+        pnHacerPregunta.cmpPrecio.setText( "" + productoDto.getProdPrecio() );
+        pnHacerPregunta.cmpStock.setText( "" + productoDto.getProdStock());
+        pnHacerPregunta.cmpEnlace.setText( productoDto.getProdEnlace() );
         
     }
 
@@ -118,37 +118,39 @@ public class CtrlModalHacerPregunta {
         modal.setModalityType(Dialog.ModalityType.APPLICATION_MODAL);
         modal.setTitle(productoDto.getProdTitulo());
         modal.setResizable(false);
-        modal.setSize( laVista.getSize() );
-        modal.setPreferredSize(laVista.getSize() );
-        modal.setContentPane(laVista);
+        modal.setSize(pnHacerPregunta.getSize() );
+        modal.setPreferredSize(pnHacerPregunta.getSize() );
+        modal.setContentPane(pnHacerPregunta);
         modal.setLocationRelativeTo(Veontec.ventanaHome);
         modal.validate();
-        laVista.updateUI();
+        pnHacerPregunta.updateUI();
         modal.repaint();
         modal.setVisible(true);
     }
     
     private void mtdHacerPregunta(){
         // Comprabar que los campos no esten vacíos
-        if( laVista.mtdComprobar() ){
+        if( pnHacerPregunta.mtdComprobar() ){
             
             preguntaDto.setPregComprador( Veontec.usuarioDto.getCmpID() );
-            preguntaDto.setPregEstado(0);
-            preguntaDto.setPregFecha( new Funciones().fncObtenerFechaActual());
-            preguntaDto.setPregPregunta( laVista.cmpPregunta.getText() );
+            preguntaDto.setPregEstado(1);
+            preguntaDto.setPregFecha(new FncGlobales().fncObtenerFechaYHoraActualNoSQL() );
+            preguntaDto.setPregPregunta(pnHacerPregunta.cmpPregunta.getText() );
             preguntaDto.setPregProducto( productoDto.getProdID() );
             preguntaDto.setPregTitulo( productoDto.getProdTitulo() );
             preguntaDto.setPregVendedor( productoDto.getProdUsuario() );
+            preguntaDto.setPregCreadoEn(new FncGlobales().fncObtenerFechaYHoraActualSQL() );
+            preguntaDto.setPregActualizadoEn(new FncGlobales().fncObtenerFechaYHoraActualSQL() );
             
             if( preguntaDao.mtdInsetar(preguntaDto) ){
                 try { CtrlPreguntas.mtdRecargarPreguntas(); } catch (Exception e) { }
                 
-                JOptionPane.showMessageDialog(laVista, "La pregunta se envio al vendedor....");
+                JOptionPane.showMessageDialog(pnHacerPregunta, "La pregunta se envio al vendedor....");
                 mtdCerrarModal();
             }
             
         }else{
-            JOptionPane.showMessageDialog(laVista, "Verifica que los datos sean correctos");
+            JOptionPane.showMessageDialog(pnHacerPregunta, "Verifica que los datos sean correctos");
         }
         
     }

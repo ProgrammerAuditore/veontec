@@ -8,10 +8,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import modelo.dto.RespuestaDto;
-import modelo.interfaces.keyword_extra;
 import modelo.interfaces.keyword_query;
 
-public class RespuestaDao implements keyword_query<RespuestaDto> , keyword_extra<RespuestaDto>{
+public class RespuestaDao implements keyword_query<RespuestaDto>{
 
     private final String nombreTabla = "tblrespuestas";
     
@@ -22,9 +21,10 @@ public class RespuestaDao implements keyword_query<RespuestaDto> , keyword_extra
         PreparedStatement ps = null;
         Connection conn = CtrlHiloConexion.getConexion();
         String query = "INSERT INTO " + nombreTabla + " "
-                + "( respPregunta, respProducto, respVendedor, respComprador, respRespuesta, respFecha, respEstado )"
+                + "( respPregunta, respProducto, respVendedor, respComprador, respRespuesta, respFecha, respEstado, "
+                + " respCreadoEn, respActualizadoEn )"
                 + "VALUES "
-                + "( ?, ?, ?, ?, ?, ?, ? ) ;";
+                + "( ?, ?, ?, ?, ?, ?, ?, ?, ? ) ;";
         
         try {
             
@@ -37,6 +37,8 @@ public class RespuestaDao implements keyword_query<RespuestaDto> , keyword_extra
             ps.setString(5, obj_dto.getRespRespuesta());
             ps.setString(6, obj_dto.getRespFecha());
             ps.setInt(7, obj_dto.getRespEstado());
+            ps.setString(8, obj_dto.getRespCreadoEn());
+            ps.setString(9, obj_dto.getRespActualizadoEn());
             
             // * Ejecutar la consulta
             int respuesta = ps.executeUpdate();
@@ -50,6 +52,11 @@ public class RespuestaDao implements keyword_query<RespuestaDto> , keyword_extra
         }
         
         return false;
+    }
+    
+    @Override
+    public boolean mtdActualizar(RespuestaDto obj_dto) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
@@ -119,6 +126,8 @@ public class RespuestaDao implements keyword_query<RespuestaDto> , keyword_extra
                 respuesta.setRespRespuesta( rs.getString("respRespuesta") );
                 respuesta.setRespFecha( rs.getString("respFecha") );
                 respuesta.setRespEstado( rs.getInt("respEstado") );
+                respuesta.setRespCreadoEn(rs.getString("respCreadoEn") );
+                respuesta.setRespActualizadoEn(rs.getString("respActualizadoEn") );
             }
 
             
@@ -129,7 +138,6 @@ public class RespuestaDao implements keyword_query<RespuestaDto> , keyword_extra
         return respuesta;
     }
 
-    @Override
     public List<RespuestaDto> mtdListar(RespuestaDto obj_dto) {
         // * Funciona perfectamente
         
@@ -162,6 +170,8 @@ public class RespuestaDao implements keyword_query<RespuestaDto> , keyword_extra
                 respuesta.setRespRespuesta( rs.getString("respRespuesta") );
                 respuesta.setRespFecha( rs.getString("respFecha") );
                 respuesta.setRespEstado( rs.getInt("respEstado") );
+                respuesta.setRespCreadoEn(rs.getString("respCreadoEn") );
+                respuesta.setRespActualizadoEn(rs.getString("respActualizadoEn") );
                 preguntas.add(respuesta);
             }
 
@@ -173,7 +183,6 @@ public class RespuestaDao implements keyword_query<RespuestaDto> , keyword_extra
         return preguntas;
     }
 
-    @Override
     public List<RespuestaDto> mtdListar(RespuestaDto obj_dto, int cantidad, int inicio) {
         // * Funciona perfectamente
         
@@ -209,6 +218,8 @@ public class RespuestaDao implements keyword_query<RespuestaDto> , keyword_extra
                 respuesta.setRespRespuesta( rs.getString("respRespuesta") );
                 respuesta.setRespFecha( rs.getString("respFecha") );
                 respuesta.setRespEstado( rs.getInt("respEstado") );
+                respuesta.setRespCreadoEn(rs.getString("respCreadoEn") );
+                respuesta.setRespActualizadoEn(rs.getString("respActualizadoEn") );
                 respuestas.add(respuesta);
             }
 
@@ -218,46 +229,6 @@ public class RespuestaDao implements keyword_query<RespuestaDto> , keyword_extra
         }
         
         return respuestas;
-    }
-    
-    @Override
-    public boolean mtdActualizar(RespuestaDto obj_dto) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-    
-    @Override
-    public List<RespuestaDto> mtdListar() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-    
-    @Override
-    public List<RespuestaDto> mtdListar(int inicio, int fin) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public long mtdRowCount() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public long mtdRowCount(RespuestaDto obj_dto) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public long mtdRowCount(int estado) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public boolean mtdComprobar(RespuestaDto obj_dto) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public boolean mtdEliminar(RespuestaDto obj_dto) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }

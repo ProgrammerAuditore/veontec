@@ -9,9 +9,8 @@ import java.util.ArrayList;
 import java.util.List;
 import modelo.dto.ProductoDto;
 import modelo.interfaces.keyword_query;
-import modelo.interfaces.keyword_producto;
 
-public class ProductoDao implements keyword_query<ProductoDto>, keyword_producto<ProductoDto>{
+public class ProductoDao implements keyword_query<ProductoDto>{
 
     @Override
     public boolean mtdInsetar(ProductoDto obj_dto) {
@@ -20,9 +19,10 @@ public class ProductoDao implements keyword_query<ProductoDto>, keyword_producto
         PreparedStatement ps = null;
         Connection conn = CtrlHiloConexion.getConexion();
         String query = "INSERT INTO tblproductos "
-                + "( prodTitulo, prodDescripcion, prodCategoria, prodPrecio, prodStock, prodTipo, prodEnlace, prodUsuario, prodMedia )"
+                + "( prodTitulo, prodDescripcion, prodCategoria, prodPrecio, prodStock, "
+                + "prodTipo, prodEnlace, prodUsuario, prodMedia, prodCreadoEn, prodActualizadoEn ) "
                 + "VALUES "
-                + "( ?, ?, ?, ?, ?, ?, ?, ?, ?); ";
+                + "( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?); ";
         
         try {
             
@@ -36,6 +36,8 @@ public class ProductoDao implements keyword_query<ProductoDto>, keyword_producto
             ps.setString(7, obj_dto.getProdEnlace());
             ps.setInt(8, obj_dto.getProdUsuario());
             ps.setBytes(9, obj_dto.getProdImg());
+            ps.setString(10, obj_dto.getProdCreadoEn());
+            ps.setString(11, obj_dto.getProdActualizadoEn());
             int respuesta = ps.executeUpdate();
             
             // * Si la respuesta es mayor a 0 significa que la consulta fue exitosa.
@@ -84,7 +86,8 @@ public class ProductoDao implements keyword_query<ProductoDto>, keyword_producto
         PreparedStatement ps = null;
         Connection conn = CtrlHiloConexion.getConexion();
         String query = "UPDATE tblproductos SET prodTitulo = ?, prodDescripcion = ?, prodCategoria = ?, "
-                + "prodPrecio = ?, prodStock = ?, prodTipo = ?, prodEnlace = ?, prodMedia = ? "
+                + "prodPrecio = ?, prodStock = ?, prodTipo = ?, prodEnlace = ?, prodMedia = ?, "
+                + "prodCreadoEn = ?, prodActualizadoEn = ? "
                 // * Buscamos el producto del usuario respectivo
                 + "WHERE prodUsuario = ? AND prodID = ? ;";
         
@@ -99,8 +102,10 @@ public class ProductoDao implements keyword_query<ProductoDto>, keyword_producto
             ps.setInt(6, obj_dto.getProdTipo());
             ps.setString(7, obj_dto.getProdEnlace());
             ps.setBytes(8, obj_dto.getProdImg());
-            ps.setInt(9, obj_dto.getProdUsuario());
-            ps.setInt(10, obj_dto.getProdID());
+            ps.setString(9, obj_dto.getProdCreadoEn());
+            ps.setString(10, obj_dto.getProdActualizadoEn());
+            ps.setInt(11, obj_dto.getProdUsuario());
+            ps.setInt(12, obj_dto.getProdID());
             int respuesta = ps.executeUpdate();
             
             // * Si la respuesta es mayor a 0 significa que la consulta fue exitosa.
@@ -144,6 +149,8 @@ public class ProductoDao implements keyword_query<ProductoDto>, keyword_producto
                 prod.setProdEnlace(rs.getString("prodEnlace") );
                 prod.setProdUsuario(rs.getInt("prodUsuario") );
                 prod.setProdImg( rs.getBytes("prodMedia") );
+                prod.setProdCreadoEn( rs.getString("prodCreadoEn") );
+                prod.setProdActualizadoEn( rs.getString("prodActualizadoEn") );
                 
                 //System.out.println("" + prod.toString());
             }
@@ -183,6 +190,8 @@ public class ProductoDao implements keyword_query<ProductoDto>, keyword_producto
                 prod.setProdEnlace(rs.getString("prodEnlace") );
                 prod.setProdUsuario(rs.getInt("prodUsuario") );
                 prod.setProdImg( rs.getBytes("prodMedia") );
+                prod.setProdCreadoEn( rs.getString("prodCreadoEn") );
+                prod.setProdActualizadoEn( rs.getString("prodActualizadoEn") );
                 
                 //System.out.println("" + prod.toString());
             }
@@ -194,7 +203,6 @@ public class ProductoDao implements keyword_query<ProductoDto>, keyword_producto
         return prod;
     }
 
-    @Override
     public List<ProductoDto> mtdListar() {
         // * Funciona perfectamente
         
@@ -222,6 +230,8 @@ public class ProductoDao implements keyword_query<ProductoDto>, keyword_producto
                 prod.setProdEnlace(rs.getString("prodEnlace") );
                 prod.setProdUsuario(rs.getInt("prodUsuario") );
                 prod.setProdImg( rs.getBytes("prodMedia") );
+                prod.setProdCreadoEn( rs.getString("prodCreadoEn") );
+                prod.setProdActualizadoEn( rs.getString("prodActualizadoEn") );
                 
                 productos.add(prod);
             }
@@ -233,7 +243,6 @@ public class ProductoDao implements keyword_query<ProductoDto>, keyword_producto
         return productos;
     }
     
-    @Override
     public List<ProductoDto> mtdListar(ProductoDto dto) {
         // * Funciona perfectamente
         
@@ -263,6 +272,8 @@ public class ProductoDao implements keyword_query<ProductoDto>, keyword_producto
                 prod.setProdEnlace(rs.getString("prodEnlace") );
                 prod.setProdUsuario(rs.getInt("prodUsuario") );
                 prod.setProdImg( rs.getBytes("prodMedia") );
+                prod.setProdCreadoEn( rs.getString("prodCreadoEn") );
+                prod.setProdActualizadoEn( rs.getString("prodActualizadoEn") );
                 
                 productos.add(prod);
             }
@@ -274,8 +285,7 @@ public class ProductoDao implements keyword_query<ProductoDto>, keyword_producto
         return productos;
     }
 
-    @Override
-    public List<ProductoDto> mtdListar(int inicio, int fin) {
+    public List<ProductoDto> mtdListarAllProductos(int inicio, int fin) {
         // * Funciona perfectamente
         
         List<ProductoDto> productos = null;
@@ -304,6 +314,8 @@ public class ProductoDao implements keyword_query<ProductoDto>, keyword_producto
                 prod.setProdEnlace(rs.getString("prodEnlace") );
                 prod.setProdUsuario(rs.getInt("prodUsuario") );
                 prod.setProdImg( rs.getBytes("prodMedia") );
+                prod.setProdCreadoEn( rs.getString("prodCreadoEn") );
+                prod.setProdActualizadoEn( rs.getString("prodActualizadoEn") );
                 
                 productos.add(prod);
             }
@@ -315,8 +327,7 @@ public class ProductoDao implements keyword_query<ProductoDto>, keyword_producto
         return productos;
     }
     
-    @Override
-    public List<ProductoDto> mtdListar(ProductoDto obj_dto, int inicio, int fin) {
+    public List<ProductoDto> mtdListarAllProductosPorUsuario(ProductoDto obj_dto, int inicio, int fin) {
         // * Funciona perfectamente
         
         List<ProductoDto> productos = null;
@@ -348,6 +359,8 @@ public class ProductoDao implements keyword_query<ProductoDto>, keyword_producto
                 prod.setProdEnlace(rs.getString("prodEnlace") );
                 prod.setProdUsuario(rs.getInt("prodUsuario") );
                 prod.setProdImg( rs.getBytes("prodMedia") );
+                prod.setProdCreadoEn( rs.getString("prodCreadoEn") );
+                prod.setProdActualizadoEn( rs.getString("prodActualizadoEn") );
                 
                 productos.add(prod);
             }
@@ -359,94 +372,6 @@ public class ProductoDao implements keyword_query<ProductoDto>, keyword_producto
         return productos;
     }
     
-    public List<ProductoDto> mtdListarBuscarProducto(ProductoDto obj_dto, int inicio, int fin) {
-        // * Funciona perfectamente
-        
-        List<ProductoDto> productos = null;
-        PreparedStatement ps = null;
-        Connection conn = CtrlHiloConexion.getConexion();
-        String query = "SELECT * FROM tblproductos "
-                + "WHERE prodTitulo LIKE BINARY ?  "
-                + "LIMIT ? OFFSET ? ;";
-        
-        try {
-            
-            ps = conn.prepareStatement(query.toLowerCase());
-            ps.setString(1, obj_dto.getProdTitulo());
-            ps.setInt(2, inicio);
-            ps.setInt(3, fin);
-            ResultSet rs = ps.executeQuery();
-            
-            productos = new ArrayList<>();
-            while( rs.next() ){
-                ProductoDto prod = new ProductoDto();
-                
-                prod.setProdID( rs.getInt("prodID") );
-                prod.setProdTitulo(rs.getString("prodTitulo") );
-                prod.setProdDescripcion(rs.getString("prodDescripcion") );
-                prod.setProdCategoria(rs.getString("prodCategoria") );
-                prod.setProdPrecio( rs.getDouble("prodPrecio") );
-                prod.setProdStock(rs.getInt("prodStock"));
-                prod.setProdTipo(rs.getInt("prodTipo") );
-                prod.setProdEnlace(rs.getString("prodEnlace") );
-                prod.setProdUsuario(rs.getInt("prodUsuario") );
-                prod.setProdImg( rs.getBytes("prodMedia") );
-                
-                productos.add(prod);
-            }
-            
-        } catch (SQLException e) {
-            System.out.println("" + e.getMessage());
-        }
-        
-        return productos;
-    }
-    
-    public List<ProductoDto> mtdListarBuscarProductoDeUsuario(ProductoDto obj_dto, int inicio, int fin) {
-        // * Funciona perfectamente
-        
-        List<ProductoDto> productos = null;
-        PreparedStatement ps = null;
-        Connection conn = CtrlHiloConexion.getConexion();
-        String query = "SELECT * FROM tblproductos "
-                + "WHERE prodUsuario = ? AND prodTitulo LIKE BINARY ?  "
-                + "LIMIT ? OFFSET ? ;";
-        
-        try {
-            
-            ps = conn.prepareStatement(query.toLowerCase());
-            ps.setInt(1, obj_dto.getProdUsuario());
-            ps.setString(2, obj_dto.getProdTitulo());
-            ps.setInt(3, inicio);
-            ps.setInt(4, fin);
-            ResultSet rs = ps.executeQuery();
-            
-            productos = new ArrayList<>();
-            while( rs.next() ){
-                ProductoDto prod = new ProductoDto();
-                
-                prod.setProdID( rs.getInt("prodID") );
-                prod.setProdTitulo(rs.getString("prodTitulo") );
-                prod.setProdDescripcion(rs.getString("prodDescripcion") );
-                prod.setProdCategoria(rs.getString("prodCategoria") );
-                prod.setProdPrecio( rs.getDouble("prodPrecio") );
-                prod.setProdStock(rs.getInt("prodStock"));
-                prod.setProdTipo(rs.getInt("prodTipo") );
-                prod.setProdEnlace(rs.getString("prodEnlace") );
-                prod.setProdUsuario(rs.getInt("prodUsuario") );
-                prod.setProdImg( rs.getBytes("prodMedia") );
-                
-                productos.add(prod);
-            }
-            
-        } catch (SQLException e) {
-            System.out.println("" + e.getMessage());
-        }
-        
-        return productos;
-    }
-
-    @Override
     public long mtdRowCount() {
         // * Funciona perfectamente
         
@@ -470,10 +395,10 @@ public class ProductoDao implements keyword_query<ProductoDto>, keyword_producto
         return filas;
     }
     
-    public int mtdRowCountInteger() {
+    public long mtdRowCountAllProductos() {
         // * Funciona perfectamente
         
-        int filas = 0;
+        long filas = 0;
         PreparedStatement ps = null;
         Connection conn = CtrlHiloConexion.getConexion();
         String query = "SELECT COUNT(*) FROM tblproductos ;";
@@ -492,9 +417,79 @@ public class ProductoDao implements keyword_query<ProductoDto>, keyword_producto
         
         return filas;
     }
+    
+    public List<ProductoDto> mtdBuscarAllProductosSimilares(ProductoDto obj_dto, int inicio, int fin) {
+        // * Funciona perfectamente
+        
+        List<ProductoDto> productos = null;
+        PreparedStatement ps = null;
+        Connection conn = CtrlHiloConexion.getConexion();
+        String query = "SELECT * FROM tblproductos "
+                + "WHERE prodTitulo LIKE ? OR prodCategoria LIKE ?"
+                + "LIMIT ? OFFSET ? ;";
+        
+        try {
+            
+            ps = conn.prepareStatement(query.toLowerCase());
+            ps.setString(1, obj_dto.getProdTitulo());
+            ps.setString(2, obj_dto.getProdCategoria());
+            ps.setInt(3, inicio);
+            ps.setInt(4, fin);
+            ResultSet rs = ps.executeQuery();
+            
+            productos = new ArrayList<>();
+            while( rs.next() ){
+                ProductoDto prod = new ProductoDto();
+                
+                prod.setProdID( rs.getInt("prodID") );
+                prod.setProdTitulo(rs.getString("prodTitulo") );
+                prod.setProdDescripcion(rs.getString("prodDescripcion") );
+                prod.setProdCategoria(rs.getString("prodCategoria") );
+                prod.setProdPrecio( rs.getDouble("prodPrecio") );
+                prod.setProdStock(rs.getInt("prodStock"));
+                prod.setProdTipo(rs.getInt("prodTipo") );
+                prod.setProdEnlace(rs.getString("prodEnlace") );
+                prod.setProdUsuario(rs.getInt("prodUsuario") );
+                prod.setProdImg( rs.getBytes("prodMedia") );
+                prod.setProdCreadoEn( rs.getString("prodCreadoEn") );
+                prod.setProdActualizadoEn( rs.getString("prodActualizadoEn") );
+                
+                productos.add(prod);
+            }
+            
+        } catch (SQLException e) {
+            System.out.println("" + e.getMessage());
+        }
+        
+        return productos;
+    }
+    
+    public int mtdRowCountAllProductosSimilares(ProductoDto obj_dto) {
+        // * Funciona perfectamente
+        
+        int filas = 0;
+        PreparedStatement ps = null;
+        Connection conn = CtrlHiloConexion.getConexion();
+        String query = "SELECT COUNT(*) FROM tblproductos WHERE prodTitulo LIKE ? OR prodCategoria LIKE ?;";
+        
+        try {
+            
+            ps = conn.prepareStatement(query.toLowerCase());
+            ps.setString(1, obj_dto.getProdTitulo());
+            ps.setString(2, obj_dto.getProdDescripcion());
+            ResultSet rs = ps.executeQuery();
+            rs.next();
+            filas = rs.getInt(1);
+            
+            
+        } catch (SQLException e) {
+            System.out.println("" + e.getMessage());
+        }
+        
+        return filas;
+    }
 
-    @Override
-    public long mtdRowCount(ProductoDto obj_dto) {
+    public long mtdRowCountAllProductosPorUsuario(ProductoDto obj_dto) {
         // * Funciona perfectamente
         
         long filas = 0;
@@ -519,19 +514,78 @@ public class ProductoDao implements keyword_query<ProductoDto>, keyword_producto
         return filas;
     }
     
-    @Override
-    public long mtdRowCount(int estado) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public long mtdRowCountAllProductosPorUsuarioSimilares(ProductoDto obj_dto) {
+        // * Funciona perfectamente
+        
+        long filas = 0;
+        PreparedStatement ps = null;
+        Connection conn = CtrlHiloConexion.getConexion();
+        String query = "SELECT COUNT(*) FROM tblproductos "
+                + "WHERE prodUsuario = ? AND (prodTitulo LIKE ? OR prodCategoria LIKE ?);";
+        
+        try {
+            
+            ps = conn.prepareStatement(query.toLowerCase());
+            ps.setInt(1, obj_dto.getProdUsuario());
+            ps.setString(2, obj_dto.getProdTitulo());
+            ps.setString(3, obj_dto.getProdCategoria());
+            ResultSet rs = ps.executeQuery();
+            rs.next();
+            filas = rs.getInt(1);
+            
+            
+        } catch (SQLException e) {
+            System.out.println("" + e.getMessage());
+        }
+        
+        return filas;
     }
     
-    @Override
-    public boolean mtdComprobar(ProductoDto obj_dto) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-    
-    @Override
-    public boolean mtdEliminar(ProductoDto obj_dto) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public List<ProductoDto> mtdBuscarAllProductosPorUsuarioSimilares(ProductoDto obj_dto, int inicio, int fin) {
+        // * Funciona perfectamente
+        
+        List<ProductoDto> productos = null;
+        PreparedStatement ps = null;
+        Connection conn = CtrlHiloConexion.getConexion();
+        String query = "SELECT * FROM tblproductos "
+                + "WHERE prodUsuario = ? AND ( prodTitulo LIKE ? OR prodCategoria LIKE ? ) "
+                + "LIMIT ? OFFSET ? ;";
+        
+        try {
+            
+            ps = conn.prepareStatement(query.toLowerCase());
+            ps.setInt(1, obj_dto.getProdUsuario());
+            ps.setString(2, obj_dto.getProdTitulo());
+            ps.setString(3, obj_dto.getProdCategoria());
+            ps.setInt(4, inicio);
+            ps.setInt(5, fin);
+            ResultSet rs = ps.executeQuery();
+            
+            productos = new ArrayList<>();
+            while( rs.next() ){
+                ProductoDto prod = new ProductoDto();
+                
+                prod.setProdID( rs.getInt("prodID") );
+                prod.setProdTitulo(rs.getString("prodTitulo") );
+                prod.setProdDescripcion(rs.getString("prodDescripcion") );
+                prod.setProdCategoria(rs.getString("prodCategoria") );
+                prod.setProdPrecio( rs.getDouble("prodPrecio") );
+                prod.setProdStock(rs.getInt("prodStock"));
+                prod.setProdTipo(rs.getInt("prodTipo") );
+                prod.setProdEnlace(rs.getString("prodEnlace") );
+                prod.setProdUsuario(rs.getInt("prodUsuario") );
+                prod.setProdImg( rs.getBytes("prodMedia") );
+                prod.setProdCreadoEn( rs.getString("prodCreadoEn") );
+                prod.setProdActualizadoEn( rs.getString("prodActualizadoEn") );
+                
+                productos.add(prod);
+            }
+            
+        } catch (SQLException e) {
+            System.out.println("" + e.getMessage());
+        }
+        
+        return productos;
     }
     
 }

@@ -24,50 +24,50 @@ import vista.paneles.componentes.PanelCardVenta;
 public class CtrlCardVenta {
 
     
-    // * Vista
-    private PanelCardVenta tarjeta;
+    // ***** Vista
+    private PanelCardVenta pnCardVenta;
     
-    // * Modelo
-    private VentaDto ventDto;
-    private VentaDao ventDao;
-    private ProductoDto prodDto;
-    private ProductoDao prodDao;
-    private UsuarioDto usuaDto;
-    private UsuarioDao usuaDao;
+    // ***** Modelo
+    private VentaDto ventaDto;
+    private VentaDao ventaDao;
+    private ProductoDto productoDto;
+    private ProductoDao productoDao;
+    private UsuarioDto usuarioDto;
+    private UsuarioDao usuarioDao;
     
-    // * Atributos
+    // ***** Atributos
     private GridBagConstraints tarjeta_dimensiones;
     private Integer item;
     private ImageIcon portada;
     
-    // Constructor
+    // ***** Constructor
     public CtrlCardVenta(VentaDto ventDto, ProductoDto prodDto) {
-        this.tarjeta = new PanelCardVenta();
-        this.ventDto = ventDto;
-        this.ventDao = new VentaDao();
-        this.prodDto = prodDto;
-        this.prodDao = new ProductoDao();
-        this.usuaDao = new UsuarioDao();
-        this.usuaDto = new UsuarioDto();
+        this.pnCardVenta = new PanelCardVenta();
+        this.ventaDto = ventDto;
+        this.ventaDao = new VentaDao();
+        this.productoDto = prodDto;
+        this.productoDao = new ProductoDao();
+        this.usuarioDao = new UsuarioDao();
+        this.usuarioDto = new UsuarioDto();
         this.tarjeta_dimensiones = new GridBagConstraints();
     }
     
-    // Eventos
+    // ***** Eventos
     private void mtdCrearEventoBtnGuardar(){
         MouseListener eventoBtnComprar = null;
-        tarjeta.etqTitulo.removeMouseListener(eventoBtnComprar);
+        pnCardVenta.etqTitulo.removeMouseListener(eventoBtnComprar);
         
         eventoBtnComprar =  new MouseAdapter(){
             @Override
             public void mouseReleased(MouseEvent e) {
-                //System.out.println("" + prodDto.getProdTitulo());
+                //System.out.println("" + productoDto.getProdTitulo());
             }
         };
         
-        tarjeta.etqTitulo.addMouseListener(eventoBtnComprar);
+        pnCardVenta.etqTitulo.addMouseListener(eventoBtnComprar);
     }
     
-    // Métodos
+    // ***** Métodos
     public void mtdInit(){
         mtdEstablecerDimensiones();
         mtdEstablecerOpciones();
@@ -77,52 +77,52 @@ public class CtrlCardVenta {
     }
     
     private void mtdEstablecerDatos(){
-        String detalles = tarjeta.cmpDetalleVenta.getText();
+        String detalles = pnCardVenta.cmpDetalleVenta.getText();
         
-        tarjeta.etqTitulo.setText(ventDto.getVentTitulo() );
-        tarjeta.cmpPrecioUnidad.setText("" + ventDto.getVentPrecio() );
-        tarjeta.cmpStockVendido.setText(""  + ventDto.getVentCantidad() );
+        pnCardVenta.etqTitulo.setText(ventaDto.getVentTitulo() );
+        pnCardVenta.cmpPrecioUnidad.setText("" + ventaDto.getVentPrecio() );
+        pnCardVenta.cmpStockVendido.setText(""  + ventaDto.getVentCantidad() );
         
-        detalles = detalles.replaceAll("<FechaVendido>", ventDto.getVentFecha());
+        detalles = detalles.replaceAll("<FechaVendido>", ventaDto.getVentFecha());
         
         // * Establecer el comprador
-        usuaDto = usuaDao.mtdConsultar( ventDto.getVentComprador() );
-        String comprador = usuaDto == null ? "Desconocido" : usuaDto.getCmpNombreCompleto();
+        usuarioDto = usuarioDao.mtdConsultar(ventaDto.getVentComprador() );
+        String comprador = usuarioDto == null ? "Desconocido" : usuarioDto.getCmpNombreCompleto();
         detalles = detalles.replaceAll("<Comprador>", comprador);
         
         // * Establecer descripción
-        detalles = detalles.replaceAll("<Descripcion>", prodDto.getProdDescripcion());
+        detalles = detalles.replaceAll("<Descripcion>", productoDto.getProdDescripcion());
         
-        tarjeta.cmpDetalleVenta.setText(detalles);
+        pnCardVenta.cmpDetalleVenta.setText(detalles);
         
     }
     
     private void mtdEstablecerImagen(){
-        prodDto = new ProductoDto();  
-        prodDto.setProdUsuario(  ventDto.getVentVendedor()  );
-        prodDto.setProdID( ventDto.getVentProducto() );
-        prodDto = prodDao.mtdConsultar(prodDto);
+        productoDto = new ProductoDto();  
+        productoDto.setProdUsuario(ventaDto.getVentVendedor()  );
+        productoDto.setProdID(ventaDto.getVentProducto() );
+        productoDto = productoDao.mtdConsultar(productoDto);
       
-        if( prodDto != null  ){
-            if( prodDto.getProdImg() != null ){
+        if( productoDto != null  ){
+            if( productoDto.getProdImg() != null ){
                 // * Establecer imagen de portada
                 try {
-                    byte[] img = prodDto.getProdImg();
+                    byte[] img = productoDto.getProdImg();
                     BufferedImage buffimg = null;
                     InputStream inputimg = new ByteArrayInputStream(img);
                     buffimg = ImageIO.read(inputimg);
-                    tarjeta.pnImgPortada.removeAll();
-                    portada = new ImageIcon(buffimg.getScaledInstance(tarjeta.pnImgPortada.getWidth(), tarjeta.pnImgPortada.getHeight(), Image.SCALE_SMOOTH));
+                    pnCardVenta.pnImgPortada.removeAll();
+                    portada = new ImageIcon(buffimg.getScaledInstance(pnCardVenta.pnImgPortada.getWidth(), pnCardVenta.pnImgPortada.getHeight(), Image.SCALE_SMOOTH));
                     JLabel iconocc = new JLabel(portada);
-                    iconocc.setBounds(0, 0, tarjeta.pnImgPortada.getWidth(), tarjeta.pnImgPortada.getHeight());
-                    iconocc.setSize(tarjeta.pnImgPortada.getWidth(), tarjeta.pnImgPortada.getHeight());
+                    iconocc.setBounds(0, 0, pnCardVenta.pnImgPortada.getWidth(), pnCardVenta.pnImgPortada.getHeight());
+                    iconocc.setSize(pnCardVenta.pnImgPortada.getWidth(), pnCardVenta.pnImgPortada.getHeight());
                     iconocc.setLocation(0, 0);
-                    iconocc.setPreferredSize(new Dimension(tarjeta.pnImgPortada.getWidth(), tarjeta.pnImgPortada.getHeight()));
-                    tarjeta.pnImgPortada.add(iconocc);
+                    iconocc.setPreferredSize(new Dimension(pnCardVenta.pnImgPortada.getWidth(), pnCardVenta.pnImgPortada.getHeight()));
+                    pnCardVenta.pnImgPortada.add(iconocc);
                     //tarjeta.updateUI();
-                    tarjeta.validate();
-                    tarjeta.revalidate();
-                    tarjeta.repaint();
+                    pnCardVenta.validate();
+                    pnCardVenta.revalidate();
+                    pnCardVenta.repaint();
 
                 } catch (Exception e) {
                 }
@@ -148,11 +148,11 @@ public class CtrlCardVenta {
     }
     
     public PanelCardVenta getLaVista() {
-        return tarjeta;
+        return pnCardVenta;
     }
 
     public void setLaVista(PanelCardVenta laVista) {
-        this.tarjeta = laVista;
+        this.pnCardVenta = laVista;
     }
 
     public Integer getItem() {
