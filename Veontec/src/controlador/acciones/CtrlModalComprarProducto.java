@@ -24,6 +24,7 @@ import modelo.dto.ProductoDto;
 import modelo.dto.UsuarioDto;
 import modelo.dto.VentaDto;
 import src.FncGlobales;
+import ticket.GenTicket;
 import vista.paneles.acciones.PanelHacerCompra;
 
 public class CtrlModalComprarProducto {
@@ -244,6 +245,15 @@ public class CtrlModalComprarProducto {
                 mtdCerrarModal();
                 JOptionPane.showMessageDialog(Veontec.ventanaHome, "La compra se realizo exitosamente.");
             }
+            
+            String metodoPago="";
+            GenTicket ticket = new GenTicket();
+            if (pnHacerCompra.btnMtdDebito.isSelected()) {
+                metodoPago = pnHacerCompra.btnMtdDebito.getText();
+            }else{
+            metodoPago = pnHacerCompra.btnMtdPaypal.getText();
+            }
+            ticket.ConexionTicket(cmpTitulo, cmpCantidad, precio.doubleValue(),usuarioDto.getCmpNombreCompleto() , metodoPago);
                 
         }
     }
