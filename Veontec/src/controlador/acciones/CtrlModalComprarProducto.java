@@ -24,8 +24,6 @@ import modelo.dto.ProductoDto;
 import modelo.dto.UsuarioDto;
 import modelo.dto.VentaDto;
 import src.FncGlobales;
-import org.apache.commons.lang.builder.HashCodeBuilder;
-import src.Funciones;
 import ticket.GenTicket;
 import vista.paneles.acciones.PanelHacerCompra;
 
@@ -255,7 +253,7 @@ public class CtrlModalComprarProducto {
             }else{
             metodoPago = pnHacerCompra.btnMtdPaypal.getText();
             }
-            ticket.ConexionTicket(cmpTitulo, cmpCantidad, precio.doubleValue(),usuaDto.getCmpNombreCompleto() , metodoPago);
+            ticket.ConexionTicket(cmpTitulo, cmpCantidad, precio.doubleValue(),usuarioDto.getCmpNombreCompleto() , metodoPago);
                 
         }
     }

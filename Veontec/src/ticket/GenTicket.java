@@ -2,6 +2,7 @@
 package ticket;
 
 import java.util.HashMap;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -29,7 +30,7 @@ public class GenTicket {
            
             if (select == JOptionPane.YES_OPTION) {
             //Obtenmos datos para los parametros 
-            HashMap Datos = new HashMap();
+            Map<String, Object> Datos = new HashMap<String, Object>();
             Datos.clear();
             Datos.put("cmpTitulo",titulo);
             Datos.put("cmpCantidad",cantidad);
