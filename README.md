@@ -15,7 +15,7 @@ Compras en el sistema | :white_check_mark:
 Ventas en el sistema | :white_check_mark: 
 Sistema de Preguntas y Respuestas | :white_check_mark: 
 Recuperar contraseña | :white_check_mark:
-Comprobante de compra | :white_large_square:
+Comprobante de compra | :white_check_mark:
 
 # Secciones
 El software tiene las siguientes secciones principales: <br>
