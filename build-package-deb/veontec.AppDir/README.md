@@ -1,4 +1,4 @@
-# Veontec v0.9.97Alpha
+# Veontec v1.0.0Beta
 ![logo veontec][logo_veontec]
 <br>
 Victor J. Maximo <br>
