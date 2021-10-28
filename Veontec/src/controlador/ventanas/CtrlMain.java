@@ -13,7 +13,7 @@ import modelo.dao.UsuarioDao;
 import modelo.dto.CategoriaDto;
 import modelo.dto.CuentaDto;
 import modelo.dto.UsuarioDto;
-import src.Info;
+import src.Software;
 import src.Recursos;
 import vista.ventanas.VentanaMain;
 
@@ -24,7 +24,7 @@ enum TabsMain {
 public class CtrlMain {
     
     // ***** Vista
-    private VentanaMain laVista;
+    private VentanaMain ventanaMain;
     
     // ***** Modelo
     private UsuarioDao usuarioDao;
@@ -45,7 +45,7 @@ public class CtrlMain {
     
     // ***** Constructor
     public CtrlMain(VentanaMain laVista) {
-        this.laVista = laVista;
+        this.ventanaMain = laVista;
         this.usuarioDao = new UsuarioDao();
         this.usuarioDto = new UsuarioDto();
         this.categoriaDao = new CategoriaDao();
@@ -56,7 +56,7 @@ public class CtrlMain {
     
     // ***** Eventos
     private void mtdEventoPnTabMenu(){
-        laVista.pnTabMenus.addChangeListener(new ChangeListener() {
+        ventanaMain.pnTabMenus.addChangeListener(new ChangeListener() {
             @Override
             public void stateChanged(ChangeEvent e) {
                 mtdCargarTabSeleccionado();
@@ -67,15 +67,15 @@ public class CtrlMain {
     }
     
     // ***** Métodos
-    public void mtdInit(){
+    private void mtdInit(){
         LOG.info("Ejecutando metodo una vez (Obligatorio)");
-        laVista.setTitle(Info.NombreSoftware);
+        ventanaMain.setTitle(Software.NombreSoftware);
         mtdEventoPnTabMenu();
         mtdCargarSingOn(false);
         mtdCargarSingUp();
         
-        laVista.setLocationRelativeTo(null);
-        laVista.setVisible(true);
+        ventanaMain.setLocationRelativeTo(null);
+        ventanaMain.setVisible(true);
     }
     
     public void mtdInitLoggin(){
@@ -103,7 +103,7 @@ public class CtrlMain {
     }
     
     private void mtdIniciarSessionAutoLoggin(){
-        ctrlIniciarSession = CtrlIniciarSesion.getInstancia(laVista.pnLoggin);
+        ctrlIniciarSession = CtrlIniciarSesion.getInstancia(ventanaMain.pnLoggin);
             
             // * Verificar si existe el usuario de los credenciales en .dta 
             if(ctrlIniciarSession.mtdObtenerUsuario(cuentaDto.getCorreo())){
@@ -131,7 +131,7 @@ public class CtrlMain {
         if( autologgin == false ){
             // * Cargar la pestaña de iniciar sesion
             if(  estadoVeontec >= estadoSuccessVeontec ){
-                ctrlIniciarSession = CtrlIniciarSesion.getInstancia(laVista.pnLoggin);
+                ctrlIniciarSession = CtrlIniciarSesion.getInstancia(ventanaMain.pnLoggin);
             }
             
         }else{
@@ -144,7 +144,7 @@ public class CtrlMain {
     private void mtdCargarSingUp(){
         mtdValidarAcceso();
         if(  estadoVeontec >= estadoSuccessVeontec ){
-            CtrlRegistrarme ctrl = CtrlRegistrarme.getInstancia(laVista.pnRegistrarme);
+            CtrlRegistrarme ctrl = CtrlRegistrarme.getInstancia(ventanaMain.pnRegistrarme);
         }
     }
     
@@ -152,7 +152,7 @@ public class CtrlMain {
         estadoVeontec = mtdObtenerEstadoVeontec();
         estadoSuccessVeontec = 4;
         switch(estadoVeontec){
-            case 1 : JOptionPane.showMessageDialog(laVista, "Software Veontec, no hay conexión"); break;
+            case 1 : JOptionPane.showMessageDialog(ventanaMain, "Software Veontec, no hay conexión"); break;
             case 2 : Veontec.ventanaHome.setTitle( titulo + " (cuenta no verificada)"); break;
             case 3 : Veontec.ventanaHome.setTitle( titulo + " (cuenta recuperada)"); break;
             case -1 : estadoVeontec = estadoSuccessVeontec; break;
@@ -168,12 +168,12 @@ public class CtrlMain {
             } 
              
             // * Verificar si la cuenta no está verificada
-            if(Objects.equals(Veontec.usuarioDto.getCmpEstado(), Info.veontecCuentaNoVerificada)){
+            if(Objects.equals(Veontec.usuarioDto.getCmpEstado(), Software.veontecCuentaNoVerificada)){
                 return 2;
             }
             
             // * Verificar si la cuenta no está en modo recuperada
-            if(Objects.equals(Veontec.usuarioDto.getCmpEstado(), Info.veontecRecuperarCuenta)){
+            if(Objects.equals(Veontec.usuarioDto.getCmpEstado(), Software.veontecRecuperarCuenta)){
                 return 3;
             }
             
@@ -183,7 +183,7 @@ public class CtrlMain {
     }
     
     private void mtdCargarTabSeleccionado() {
-        if( laVista.pnTabMenus.getSelectedIndex() == TabsMain.SignOn.ordinal() 
+        if( ventanaMain.pnTabMenus.getSelectedIndex() == TabsMain.SignOn.ordinal() 
             && tabPreviaSeleccionada != TabsMain.SignOn.ordinal() ){
             
             mtdCargarSingOn(false);
@@ -191,7 +191,7 @@ public class CtrlMain {
             
         }
         
-        if( laVista.pnTabMenus.getSelectedIndex() == TabsMain.SignUp.ordinal() 
+        if( ventanaMain.pnTabMenus.getSelectedIndex() == TabsMain.SignUp.ordinal() 
             && tabPreviaSeleccionada != TabsMain.SignUp.ordinal() ){
             
             mtdCargarSingUp();

@@ -12,7 +12,7 @@ import java.util.Objects;
 import javax.swing.JOptionPane;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
-import src.Info;
+import src.Software;
 import vista.ventanas.VentanaHome;
 
 enum TabsHome {
@@ -22,7 +22,7 @@ enum TabsHome {
 public class CtrlHome{
     
     // ***** Vista
-    public VentanaHome laVista;
+    public VentanaHome ventanaHome;
     
     // ***** Modelos
     // Vacío
@@ -35,14 +35,14 @@ public class CtrlHome{
 
     // ***** Constructor
     public CtrlHome(VentanaHome laVista) {
-        this.laVista = laVista;
+        this.ventanaHome = laVista;
         this.tabPreviaSeleccionada = 0;
         
     }
     
     // ***** Eventos
     private void mtdEventoPnTabMenu(){
-        laVista.pnTabMenu.addChangeListener(new ChangeListener() {
+        ventanaHome.pnTabMenu.addChangeListener(new ChangeListener() {
             @Override
             public void stateChanged(ChangeEvent e) {
                 mtdCargarTabSeleccionado();
@@ -64,7 +64,7 @@ public class CtrlHome{
         
         mtdValidarAcceso();
         if(  estadoVeontec >= estadoSuccessVeontec ){
-            CtrlBienvenida ctrl = CtrlBienvenida.getInstancia(laVista.panelHome, Veontec.usuarioDto, Veontec.usuarioDao);
+            CtrlBienvenida ctrl = CtrlBienvenida.getInstancia(ventanaHome.panelHome, Veontec.usuarioDto, Veontec.usuarioDao);
         }
         
     }
@@ -72,7 +72,7 @@ public class CtrlHome{
     private void mtdCargarMiTienda(){
         mtdValidarAcceso();
         if(  estadoVeontec >= estadoSuccessVeontec ){
-            CtrlMiTienda ctrl = CtrlMiTienda.getInstancia(laVista.pnMiTienda, Veontec.usuarioDto, Veontec.usuarioDao);
+            CtrlMiTienda ctrl = CtrlMiTienda.getInstancia(ventanaHome.pnMiTienda, Veontec.usuarioDto, Veontec.usuarioDao);
         }
         
     }
@@ -80,7 +80,7 @@ public class CtrlHome{
     private void mtdCargarMiCuenta(){
         mtdValidarAcceso();
         if(  estadoVeontec > 1 ){
-            CtrlMiCuenta ctrl = CtrlMiCuenta.getInstancia(laVista.pnMiCuenta, Veontec.usuarioDto, Veontec.usuarioDao);
+            CtrlMiCuenta ctrl = CtrlMiCuenta.getInstancia(ventanaHome.pnMiCuenta, Veontec.usuarioDto, Veontec.usuarioDao);
         }
         
     }
@@ -88,7 +88,7 @@ public class CtrlHome{
     private void mtdCargarVentas(){
         mtdValidarAcceso();
         if(  estadoVeontec >= estadoSuccessVeontec ){
-            CtrlVentas ctrl = CtrlVentas.getInstancia(laVista.pnVentas, Veontec.usuarioDto, Veontec.usuarioDao);
+            CtrlVentas ctrl = CtrlVentas.getInstancia(ventanaHome.pnVentas, Veontec.usuarioDto, Veontec.usuarioDao);
         }
         
     }
@@ -96,7 +96,7 @@ public class CtrlHome{
     private void mtdCargarCompras(){
         mtdValidarAcceso();
         if(  estadoVeontec >= estadoSuccessVeontec ){
-            CtrlCompras ctrl = CtrlCompras.getInstancia(laVista.pnCompras, Veontec.usuarioDto, Veontec.usuarioDao);
+            CtrlCompras ctrl = CtrlCompras.getInstancia(ventanaHome.pnCompras, Veontec.usuarioDto, Veontec.usuarioDao);
         }
         
     }
@@ -104,7 +104,7 @@ public class CtrlHome{
     private void mtdCargarPreguntas(){
         mtdValidarAcceso();
         if(  estadoVeontec >= estadoSuccessVeontec ){
-            CtrlPreguntas ctrl = CtrlPreguntas.getInstancia(laVista.panelPreguntas, Veontec.usuarioDto, Veontec.usuarioDao);
+            CtrlPreguntas ctrl = CtrlPreguntas.getInstancia(ventanaHome.panelPreguntas, Veontec.usuarioDto, Veontec.usuarioDao);
         }
         
     }
@@ -113,7 +113,7 @@ public class CtrlHome{
         estadoVeontec = mtdObtenerEstadoVeontec();
         estadoSuccessVeontec = 4;
         switch(estadoVeontec){
-            case 1 : JOptionPane.showMessageDialog(laVista, "Software Veontec, no hay conexión"); break;
+            case 1 : JOptionPane.showMessageDialog(ventanaHome, "Software Veontec, no hay conexión"); break;
             case 2 : Veontec.ventanaHome.setTitle( titulo + " (cuenta no verificada)"); break;
             case 3 : Veontec.ventanaHome.setTitle( titulo + " (cuenta recuperada)"); break;
             case -1 : estadoVeontec = estadoSuccessVeontec; break;
@@ -129,12 +129,12 @@ public class CtrlHome{
             } 
              
             // * Verificar si la cuenta no está verificada
-            if(Objects.equals(Veontec.usuarioDto.getCmpEstado(), Info.veontecCuentaNoVerificada)){
+            if(Objects.equals(Veontec.usuarioDto.getCmpEstado(), Software.veontecCuentaNoVerificada)){
                 return 2;
             }
             
             // * Verificar si la cuenta no está en modo recuperada
-            if(Objects.equals(Veontec.usuarioDto.getCmpEstado(), Info.veontecRecuperarCuenta)){
+            if(Objects.equals(Veontec.usuarioDto.getCmpEstado(), Software.veontecRecuperarCuenta)){
                 return 3;
             }
             
@@ -144,7 +144,7 @@ public class CtrlHome{
     }
     
     private void mtdCargarTabSeleccionado(){
-        if( laVista.pnTabMenu.getSelectedIndex() == TabsHome.Inicio.ordinal() 
+        if( ventanaHome.pnTabMenu.getSelectedIndex() == TabsHome.Inicio.ordinal() 
             && tabPreviaSeleccionada != TabsHome.Inicio.ordinal() ){
             
             mtdCargarBienvenida();
@@ -152,35 +152,35 @@ public class CtrlHome{
             
         }
         
-        if( laVista.pnTabMenu.getSelectedIndex() == TabsHome.MiTienda.ordinal() 
+        if( ventanaHome.pnTabMenu.getSelectedIndex() == TabsHome.MiTienda.ordinal() 
             && tabPreviaSeleccionada != TabsHome.MiTienda.ordinal() ){
             
             mtdCargarMiTienda();
             tabPreviaSeleccionada = TabsHome.MiTienda.ordinal();
         }
         
-        if( laVista.pnTabMenu.getSelectedIndex() == TabsHome.Compras.ordinal() 
+        if( ventanaHome.pnTabMenu.getSelectedIndex() == TabsHome.Compras.ordinal() 
             && tabPreviaSeleccionada != TabsHome.Compras.ordinal() ){
             
             mtdCargarCompras();
             tabPreviaSeleccionada = TabsHome.Compras.ordinal();
         }
         
-        if( laVista.pnTabMenu.getSelectedIndex() == TabsHome.Ventas.ordinal() 
+        if( ventanaHome.pnTabMenu.getSelectedIndex() == TabsHome.Ventas.ordinal() 
             && tabPreviaSeleccionada != TabsHome.Ventas.ordinal() ){
             
             mtdCargarVentas();
             tabPreviaSeleccionada = TabsHome.Ventas.ordinal();
         }
         
-        if( laVista.pnTabMenu.getSelectedIndex() == TabsHome.Preguntas.ordinal() 
+        if( ventanaHome.pnTabMenu.getSelectedIndex() == TabsHome.Preguntas.ordinal() 
             && tabPreviaSeleccionada != TabsHome.Preguntas.ordinal() ){
             
             mtdCargarPreguntas();
             tabPreviaSeleccionada = TabsHome.Preguntas.ordinal();
         }
         
-        if( laVista.pnTabMenu.getSelectedIndex() == TabsHome.MiCuenta.ordinal() 
+        if( ventanaHome.pnTabMenu.getSelectedIndex() == TabsHome.MiCuenta.ordinal() 
             && tabPreviaSeleccionada != TabsHome.MiCuenta.ordinal() ){
             
             mtdCargarMiCuenta();

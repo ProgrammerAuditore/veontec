@@ -1,0 +1,21 @@
+#!/bin/sh
+
+# PATH run Veontec
+SFW_RUN=/opt/veontec/run.sh
+
+# PATH Veontec BIN
+SFW_RUN=/usr/bin/veontec
+
+# Create Veontec BIN
+if [ -f "$SFW_RUN" ]; then
+    cp $SFW_RUN $SFW_RUN
+    
+    # Remove run Veontec
+    if [ -f "$SFW_RUN" ]; then
+            rm $SFW_RUN
+    fi
+    
+    echo "veontec bin created success"
+fi
+
+

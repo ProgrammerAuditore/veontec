@@ -12,6 +12,8 @@ public class UsuarioDto {
     private String cmpTelefono;
     private String cmpKey;
     private Integer cmpEstado;
+    private String cmpCreadoEn;
+    private String cmpActualizadoEn;
 
     public Integer getCmpID() {
         return cmpID;
@@ -77,9 +79,25 @@ public class UsuarioDto {
         this.cmpEstado = cmpEstado;
     }
 
+    public String getCmpCreadoEn() {
+        return cmpCreadoEn;
+    }
+
+    public void setCmpCreadoEn(String cmpCreadoEn) {
+        this.cmpCreadoEn = cmpCreadoEn;
+    }
+
+    public String getCmpActualizadoEn() {
+        return cmpActualizadoEn;
+    }
+
+    public void setCmpActualizadoEn(String cmpActualizadoEn) {
+        this.cmpActualizadoEn = cmpActualizadoEn;
+    }
+
     @Override
     public String toString() {
-        return "UsuarioDto{" + "cmpID=" + cmpID + ", cmpNombreCompleto=" + cmpNombreCompleto + ", cmpCorreo=" + cmpCorreo + ", cmpPassword=" + cmpPassword + ", cmpDireccion=" + cmpDireccion + ", cmpTelefono=" + cmpTelefono + ", cmpKey=" + cmpKey + ", cmpEstado=" + cmpEstado + '}';
+        return "UsuarioDto{" + "cmpID=" + cmpID + ", cmpNombreCompleto=" + cmpNombreCompleto + ", cmpCorreo=" + cmpCorreo + ", cmpPassword=" + cmpPassword + ", cmpDireccion=" + cmpDireccion + ", cmpTelefono=" + cmpTelefono + ", cmpKey=" + cmpKey + ", cmpEstado=" + cmpEstado + ", cmCreadoEn=" + cmpCreadoEn + ", cmpActualizadoEn=" + cmpActualizadoEn + '}';
     }
     
 }

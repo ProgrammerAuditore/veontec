@@ -23,7 +23,8 @@ import modelo.dto.CompraDto;
 import modelo.dto.ProductoDto;
 import modelo.dto.UsuarioDto;
 import modelo.dto.VentaDto;
-import src.Funciones;
+import src.FncGlobales;
+import ticket.GenTicket;
 import vista.paneles.acciones.PanelHacerCompra;
 
 public class CtrlModalComprarProducto {
@@ -33,25 +34,25 @@ public class CtrlModalComprarProducto {
     private JDialog modal;
 
     // ***** Modelo
-    private ProductoDto prodDto;
-    private ProductoDao prodDao;
-    private CompraDto compDto;
-    private CompraDao compDao;
+    private ProductoDto productoDto;
+    private ProductoDao productoDao;
+    private CompraDto compraDto;
+    private CompraDao compraDao;
     private VentaDao ventaDao;
     private VentaDto ventaDto;
-    private UsuarioDao usuaDao;
-    private UsuarioDto usuaDto;
+    private UsuarioDao usuarioDao;
+    private UsuarioDto usuarioDto;
 
     // ***** Atributos
 
     // ***** Controlador
     public CtrlModalComprarProducto(ProductoDto producto_dto) {
-        this.prodDto = producto_dto;
-        this.prodDao = new ProductoDao();
-        this.usuaDto = new UsuarioDto();
-        this.usuaDao = new UsuarioDao();
-        this.compDto = new CompraDto();
-        this.compDao = new CompraDao();
+        this.productoDto = producto_dto;
+        this.productoDao = new ProductoDao();
+        this.usuarioDto = new UsuarioDto();
+        this.usuarioDao = new UsuarioDao();
+        this.compraDto = new CompraDto();
+        this.compraDao = new CompraDao();
         this.ventaDto = new VentaDto();
         this.ventaDao = new VentaDao();
     }
@@ -118,17 +119,17 @@ public class CtrlModalComprarProducto {
 
                         if( pnHacerCompra.cmpCantidad.isAprobado() ){
                             
-                            if( cantidad > prodDto.getProdStock() ){
+                            if( cantidad > productoDto.getProdStock() ){
                                 pnHacerCompra.cmpCantidad.rechazarCampo();
                                 JOptionPane.showMessageDialog(Veontec.ventanaHome, "La cantidad es superior al stock");
                                 e.consume();
                             }else{
                                 pnHacerCompra.cmpCantidad.aceptarCampo();
-                                pnHacerCompra.cmpTotal.setText( "" + ( cantidad * prodDto.getProdPrecio()  ) );
+                                pnHacerCompra.cmpTotal.setText("" + ( cantidad * productoDto.getProdPrecio()  ) );
                             }
                         }
 
-                        //System.out.println("" + ( cantidad * prodDto.getProdPrecio()  ) );
+                        //System.out.println("" + ( cantidad * productoDto.getProdPrecio()  ) );
                 } catch (NumberFormatException err) {
                     e.consume();
                     //System.out.println("" + err.getMessage() );
@@ -157,7 +158,7 @@ public class CtrlModalComprarProducto {
         //modal.setModal(true);
         //modal.setType(Window.Type.UTILITY);
         modal.setModalityType(Dialog.ModalityType.APPLICATION_MODAL);
-        modal.setTitle("Comprar | " + prodDto.getProdTitulo());
+        modal.setTitle("Comprar | " + productoDto.getProdTitulo());
         modal.setResizable(false);
         modal.setSize(pnHacerCompra.getSize());
         modal.setPreferredSize(pnHacerCompra.getSize());
@@ -180,11 +181,11 @@ public class CtrlModalComprarProducto {
     }
 
     private void mtdEstablecerDatosParaModal() {
-        pnHacerCompra.cmpTitulo.setText( prodDto.getProdTitulo() );
-        pnHacerCompra.cmpDescripcion.setText( prodDto.getProdDescripcion() );
-        pnHacerCompra.cmpPrecio.setText( "" + prodDto.getProdPrecio() );
-        pnHacerCompra.cmpStock.setText( "" + prodDto.getProdStock());   
-        pnHacerCompra.cmpEnlace.setText( prodDto.getProdEnlace() );
+        pnHacerCompra.cmpTitulo.setText(productoDto.getProdTitulo() );
+        pnHacerCompra.cmpDescripcion.setText(productoDto.getProdDescripcion() );
+        pnHacerCompra.cmpPrecio.setText("" + productoDto.getProdPrecio() );
+        pnHacerCompra.cmpStock.setText("" + productoDto.getProdStock());   
+        pnHacerCompra.cmpEnlace.setText(productoDto.getProdEnlace() );
     }
     
     private void mtdComprar() {
@@ -202,48 +203,57 @@ public class CtrlModalComprarProducto {
         
         }else{
             
-            String FechaActual = new Funciones().fncObtenerFechaActual();
+            String FechaActual = new FncGlobales().fncObtenerFechaActual();
             Integer cmpCantidad = Integer.parseInt( pnHacerCompra.cmpCantidad.getText() );
             Double cmpPrecio = Double.parseDouble( pnHacerCompra.cmpPrecio.getText() );
             BigDecimal precio  = new BigDecimal( (cmpCantidad * cmpPrecio) );
             String cmpTitulo = pnHacerCompra.cmpTitulo.getText();
-            usuaDto = Veontec.usuarioDto; 
+            usuarioDto = Veontec.usuarioDto; 
             
             // * Establecer la compra
-            compDto.setCompProducto( prodDto.getProdID() );
-            compDto.setCompVendedor( prodDto.getProdUsuario() );
-            compDto.setCompComprador( usuaDto.getCmpID() );
-            compDto.setCompTitulo( cmpTitulo );
-            compDto.setCompCantidad( cmpCantidad );        
-            compDto.setCompPrecio( precio.doubleValue() );
-            compDto.setCompFecha( FechaActual );
-            compDto.setCompEstado(0);      
+            compraDto.setCompProducto(productoDto.getProdID() );
+            compraDto.setCompVendedor(productoDto.getProdUsuario() );
+            compraDto.setCompComprador(usuarioDto.getCmpID() );
+            compraDto.setCompTitulo( cmpTitulo );
+            compraDto.setCompCantidad( cmpCantidad );        
+            compraDto.setCompPrecio( precio.doubleValue() );
+            compraDto.setCompFecha( FechaActual );
+            compraDto.setCompEstado(0);      
             
             // * Establecer la venta
             ventaDto.setVentCantidad( cmpCantidad );
-            ventaDto.setVentComprador( usuaDto.getCmpID() );
-            ventaDto.setVentVendedor( prodDto.getProdUsuario() );
-            ventaDto.setVentTitulo( prodDto.getProdTitulo() );
-            ventaDto.setVentProducto( prodDto.getProdID() );
-            ventaDto.setVentPrecio( prodDto.getProdPrecio() );
+            ventaDto.setVentComprador(usuarioDto.getCmpID() );
+            ventaDto.setVentVendedor(productoDto.getProdUsuario() );
+            ventaDto.setVentTitulo(productoDto.getProdTitulo() );
+            ventaDto.setVentProducto(productoDto.getProdID() );
+            ventaDto.setVentPrecio(productoDto.getProdPrecio() );
             ventaDto.setVentFecha( FechaActual );
             ventaDto.setVentEstado(0);
             
             // * Establecer el producto
-            prodDto.setProdStock( prodDto.getProdStock() - cmpCantidad );
+            productoDto.setProdStock(productoDto.getProdStock() - cmpCantidad );
             
             // * Establecer hash code
-            int hashCode = new Funciones().hashCodeCompraVenta(ventaDto, compDto);
+            int hashCode = new FncGlobales().hashCodeCompraVenta(ventaDto, compraDto);
             ventaDto.setVentHashCode(hashCode);
-            compDto.setCompHashCode(hashCode);
+            compraDto.setCompHashCode(hashCode);
             
 
             // * Realizar la compra
-            if( compDao.mtdInsetar(compDto) && prodDao.mtdActualizar(prodDto) && ventaDao.mtdInsetar(ventaDto) ){
+            if( compraDao.mtdInsetar(compraDto) && productoDao.mtdActualizar(productoDto) && ventaDao.mtdInsetar(ventaDto) ){
                 CtrlBienvenida.mtdRecargar();
                 mtdCerrarModal();
                 JOptionPane.showMessageDialog(Veontec.ventanaHome, "La compra se realizo exitosamente.");
             }
+            
+            String metodoPago="";
+            GenTicket ticket = new GenTicket();
+            if (pnHacerCompra.btnMtdDebito.isSelected()) {
+                metodoPago = pnHacerCompra.btnMtdDebito.getText();
+            }else{
+            metodoPago = pnHacerCompra.btnMtdPaypal.getText();
+            }
+            ticket.ConexionTicket(cmpTitulo, cmpCantidad, precio.doubleValue(),usuarioDto.getCmpNombreCompleto() , metodoPago);
                 
         }
     }

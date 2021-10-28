@@ -21,9 +21,10 @@ public class PreguntaDao implements keyword_query<PreguntaDto>{
         PreparedStatement ps = null;
         Connection conn = CtrlHiloConexion.getConexion();
         String query = "INSERT INTO " + nombreTabla + " "
-                + "( pregTitulo, pregProducto, pregVendedor, pregComprador, pregPregunta, pregFecha, pregEstado )"
-                + "VALUES "
-                + "( ? ,?, ?, ?, ?, ?, ? ) ;";
+                + " ( pregTitulo, pregProducto, pregVendedor, pregComprador, pregPregunta, pregFecha, pregEstado, "
+                + " pregCreadoEn, pregActualizadoEn ) "
+                + " VALUES "
+                + " ( ? ,?, ?, ?, ?, ?, ?, ?, ? ) ;";
         
         try {
             
@@ -36,6 +37,8 @@ public class PreguntaDao implements keyword_query<PreguntaDto>{
             ps.setString(5, obj_dto.getPregPregunta());
             ps.setString(6, obj_dto.getPregFecha());
             ps.setInt(7, obj_dto.getPregEstado());
+            ps.setString(8, obj_dto.getPregCreadoEn());
+            ps.setString(9, obj_dto.getPregActualizadoEn());
             
             // * Ejecutar la consulta
             int respuesta = ps.executeUpdate();
@@ -120,6 +123,8 @@ public class PreguntaDao implements keyword_query<PreguntaDto>{
                 pregunta.setPregPregunta( rs.getString("pregPregunta") );
                 pregunta.setPregFecha( rs.getString("pregFecha") );
                 pregunta.setPregEstado( rs.getInt("pregEstado") );
+                pregunta.setPregCreadoEn( rs.getString("pregCreadoEn") );
+                pregunta.setPregActualizadoEn( rs.getString("pregActualizadoEn") );
             }
 
             
@@ -162,6 +167,8 @@ public class PreguntaDao implements keyword_query<PreguntaDto>{
                 pregunta.setPregPregunta( rs.getString("pregPregunta") );
                 pregunta.setPregFecha( rs.getString("pregFecha") );
                 pregunta.setPregEstado( rs.getInt("pregEstado") );
+                pregunta.setPregCreadoEn( rs.getString("pregCreadoEn") );
+                pregunta.setPregActualizadoEn( rs.getString("pregActualizadoEn") );
                 preguntas.add(pregunta);
             }
 
@@ -208,6 +215,8 @@ public class PreguntaDao implements keyword_query<PreguntaDto>{
                 pregunta.setPregPregunta( rs.getString("pregPregunta") );
                 pregunta.setPregFecha( rs.getString("pregFecha") );
                 pregunta.setPregEstado( rs.getInt("pregEstado") );
+                pregunta.setPregCreadoEn( rs.getString("pregCreadoEn") );
+                pregunta.setPregActualizadoEn( rs.getString("pregActualizadoEn") );
                 preguntas.add(pregunta);
             }
 
@@ -255,6 +264,8 @@ public class PreguntaDao implements keyword_query<PreguntaDto>{
                 pregunta.setPregPregunta( rs.getString("pregPregunta") );
                 pregunta.setPregFecha( rs.getString("pregFecha") );
                 pregunta.setPregEstado( rs.getInt("pregEstado") );
+                pregunta.setPregCreadoEn( rs.getString("pregCreadoEn") );
+                pregunta.setPregActualizadoEn( rs.getString("pregActualizadoEn") );
                 preguntas.add(pregunta);
             }
 

@@ -21,9 +21,10 @@ public class RespuestaDao implements keyword_query<RespuestaDto>{
         PreparedStatement ps = null;
         Connection conn = CtrlHiloConexion.getConexion();
         String query = "INSERT INTO " + nombreTabla + " "
-                + "( respPregunta, respProducto, respVendedor, respComprador, respRespuesta, respFecha, respEstado )"
+                + "( respPregunta, respProducto, respVendedor, respComprador, respRespuesta, respFecha, respEstado, "
+                + " respCreadoEn, respActualizadoEn )"
                 + "VALUES "
-                + "( ?, ?, ?, ?, ?, ?, ? ) ;";
+                + "( ?, ?, ?, ?, ?, ?, ?, ?, ? ) ;";
         
         try {
             
@@ -36,6 +37,8 @@ public class RespuestaDao implements keyword_query<RespuestaDto>{
             ps.setString(5, obj_dto.getRespRespuesta());
             ps.setString(6, obj_dto.getRespFecha());
             ps.setInt(7, obj_dto.getRespEstado());
+            ps.setString(8, obj_dto.getRespCreadoEn());
+            ps.setString(9, obj_dto.getRespActualizadoEn());
             
             // * Ejecutar la consulta
             int respuesta = ps.executeUpdate();
@@ -49,6 +52,11 @@ public class RespuestaDao implements keyword_query<RespuestaDto>{
         }
         
         return false;
+    }
+    
+    @Override
+    public boolean mtdActualizar(RespuestaDto obj_dto) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
@@ -118,6 +126,8 @@ public class RespuestaDao implements keyword_query<RespuestaDto>{
                 respuesta.setRespRespuesta( rs.getString("respRespuesta") );
                 respuesta.setRespFecha( rs.getString("respFecha") );
                 respuesta.setRespEstado( rs.getInt("respEstado") );
+                respuesta.setRespCreadoEn(rs.getString("respCreadoEn") );
+                respuesta.setRespActualizadoEn(rs.getString("respActualizadoEn") );
             }
 
             
@@ -160,6 +170,8 @@ public class RespuestaDao implements keyword_query<RespuestaDto>{
                 respuesta.setRespRespuesta( rs.getString("respRespuesta") );
                 respuesta.setRespFecha( rs.getString("respFecha") );
                 respuesta.setRespEstado( rs.getInt("respEstado") );
+                respuesta.setRespCreadoEn(rs.getString("respCreadoEn") );
+                respuesta.setRespActualizadoEn(rs.getString("respActualizadoEn") );
                 preguntas.add(respuesta);
             }
 
@@ -206,6 +218,8 @@ public class RespuestaDao implements keyword_query<RespuestaDto>{
                 respuesta.setRespRespuesta( rs.getString("respRespuesta") );
                 respuesta.setRespFecha( rs.getString("respFecha") );
                 respuesta.setRespEstado( rs.getInt("respEstado") );
+                respuesta.setRespCreadoEn(rs.getString("respCreadoEn") );
+                respuesta.setRespActualizadoEn(rs.getString("respActualizadoEn") );
                 respuestas.add(respuesta);
             }
 
@@ -215,11 +229,6 @@ public class RespuestaDao implements keyword_query<RespuestaDto>{
         }
         
         return respuestas;
-    }
-    
-    @Override
-    public boolean mtdActualizar(RespuestaDto obj_dto) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }

@@ -17,21 +17,21 @@ import modelo.dao.VentaDao;
 import modelo.dto.ProductoDto;
 import modelo.dto.UsuarioDto;
 import modelo.dto.VentaDto;
-import src.Info;
+import src.Software;
 import vista.paneles.PanelVentas;
 
 public class CtrlVentas{
     
     // ***** Vista
-    public PanelVentas laVista;
+    public PanelVentas pnVentas;
     
     // ***** Modelos
-    private UsuarioDto usuario_dto;
-    private UsuarioDao usuario_dao;
-    private ProductoDao producto_dao;
-    private ProductoDto producto_dto;
-    private VentaDto ventDto;
-    private VentaDao ventDao;
+    private UsuarioDto usuarioDto;
+    private UsuarioDao usuarioDao;
+    private ProductoDao productoDao;
+    private ProductoDto productoDto;
+    private VentaDto ventaDto;
+    private VentaDao ventaDao;
     private DefaultMutableTreeNode treeNode1;
     
     // ***** Atributos
@@ -46,15 +46,15 @@ public class CtrlVentas{
 
     // ***** Constructor
     public CtrlVentas(PanelVentas laVista, UsuarioDto dto, UsuarioDao dao) {
-        this.laVista = laVista;
-        this.usuario_dto = dto;
-        this.usuario_dao = dao;
-        this.producto_dao = new ProductoDao();
-        this.producto_dto = new ProductoDto();
-        this.ventDao = new VentaDao();
-        this.ventDto = new VentaDto();
+        this.pnVentas = laVista;
+        this.usuarioDto = dto;
+        this.usuarioDao = dao;
+        this.productoDao = new ProductoDao();
+        this.productoDto = new ProductoDto();
+        this.ventaDao = new VentaDao();
+        this.ventaDto = new VentaDto();
         this.cantidadResultados = 0;
-        this.cantidadPorPagina = Info.veontecResultadoPorPagina;
+        this.cantidadPorPagina = Software.veontecResultadoPorPagina;
         this.activarBusqueda = false;
     }
     
@@ -67,7 +67,7 @@ public class CtrlVentas{
             instancia.mtdInit();
         
         }else{
-            instancia.mtdMostrarProducto(false);
+            instancia.mtdMostrarVentas(false);
         
         }
         
@@ -76,22 +76,22 @@ public class CtrlVentas{
     
     // ***** Eventos
     private void mtdEventoBtnBuscar(){
-        laVista.btnBuscar.addMouseListener(new MouseAdapter(){
+        pnVentas.btnBuscar.addMouseListener(new MouseAdapter(){
             @Override
             public void mouseReleased(MouseEvent e) {
                 mtdEstabecerBusqueda();
-                mtdMostrarProducto(activarBusqueda);
+                mtdMostrarVentas(activarBusqueda);
             }
         });
     }
     
     private void mtdEventoCmpBuscarProducto(){
-        laVista.cmpBusqueda.addKeyListener(new KeyAdapter(){
+        pnVentas.cmpBusqueda.addKeyListener(new KeyAdapter(){
             @Override
             public void keyPressed(KeyEvent e) {
                 if(e.getKeyCode() == KeyEvent.VK_ENTER ){
                     mtdEstabecerBusqueda();
-                    mtdMostrarProducto(activarBusqueda);
+                    mtdMostrarVentas(activarBusqueda);
                 } 
             }
         });
@@ -99,22 +99,22 @@ public class CtrlVentas{
     }
     
     private void mtdEventoBtnPrevia(){
-        laVista.btnPrevia.addMouseListener(new MouseAdapter(){
+        pnVentas.btnPrevia.addMouseListener(new MouseAdapter(){
             @Override
             public void mouseReleased(MouseEvent e) {
-                laVista.btnPrevia.setEnabled(true);
-                laVista.btnSiguiente.setEnabled(true);
+                pnVentas.btnPrevia.setEnabled(true);
+                pnVentas.btnSiguiente.setEnabled(true);
                 mtdMostrarProductosPrevias();
             }
         });
     }
     
     private void mtdEventoBtnSiguiente(){
-        laVista.btnSiguiente.addMouseListener(new MouseAdapter(){
+        pnVentas.btnSiguiente.addMouseListener(new MouseAdapter(){
             @Override
             public void mouseReleased(MouseEvent e) {
-                laVista.btnPrevia.setEnabled(true);
-                laVista.btnSiguiente.setEnabled(true);
+                pnVentas.btnPrevia.setEnabled(true);
+                pnVentas.btnSiguiente.setEnabled(true);
                 mtdMostrarProductosSiguiente();
             }
         });
@@ -127,27 +127,27 @@ public class CtrlVentas{
         mtdEventoBtnSiguiente();
         mtdEventoBtnPrevia();
         mtdEventoCmpBuscarProducto();
-        mtdMostrarProducto(false);
+        mtdMostrarVentas(false);
     }
     
     
-    private void mtdMostrarProducto(boolean busqueda){
+    private void mtdMostrarVentas(boolean busqueda){
         LOG.info("Iniciando ...");
         
         int totalProductos = 0;
-        laVista.pnContenedor.setLayout(new GridBagLayout());
-        laVista.pnContenedor.removeAll();
+        pnVentas.pnContenedor.setLayout(new GridBagLayout());
+        pnVentas.pnContenedor.removeAll();
         
         LOG.info("Listando ventas...");
-        ventDto.setVentVendedor( Veontec.usuarioDto.getCmpID() );
+        ventaDto.setVentVendedor( Veontec.usuarioDto.getCmpID() );
         
         if( busqueda == false ){
-            lstMisVentas = ventDao.mtdListarAllVentasPorUsuario(ventDto, cantidadPorPagina, cantidadResultados);
-            totalProductosExistentes = Integer.valueOf( ""+ventDao.mtdRowCountAllVentasPorUsuario(ventDto) );
+            lstMisVentas = ventaDao.mtdListarAllVentasPorUsuario(ventaDto, cantidadPorPagina, cantidadResultados);
+            totalProductosExistentes = Integer.valueOf(""+ventaDao.mtdRowCountAllVentasPorUsuario(ventaDto) );
         }else{
-            ventDto.setVentTitulo('%'+laVista.cmpBusqueda.getText()+'%');
-            lstMisVentas = ventDao.mtdBuscarAllVentasPorUsuarioSimilares(ventDto, cantidadPorPagina, cantidadResultados);
-            totalProductosExistentes = Integer.valueOf( ""+ventDao.mtdRowCountAllVentasPorUsuarioSimilares(ventDto) );
+            ventaDto.setVentTitulo('%'+pnVentas.cmpBusqueda.getText()+'%');
+            lstMisVentas = ventaDao.mtdBuscarAllVentasPorUsuarioSimilares(ventaDto, cantidadPorPagina, cantidadResultados);
+            totalProductosExistentes = Integer.valueOf(""+ventaDao.mtdRowCountAllVentasPorUsuarioSimilares(ventaDto) );
         }
         
         totalProductos = lstMisVentas.size();
@@ -155,25 +155,25 @@ public class CtrlVentas{
             
             LOG.warning("Recorriendo productos ....");
             for (int i = 0; i < totalProductos; i++) {
-                producto_dto = new ProductoDto();
-                producto_dto.setProdID( lstMisVentas.get(i).getVentProducto() );
-                producto_dto.setProdUsuario( lstMisVentas.get(i).getVentVendedor() );
-                producto_dto = producto_dao.mtdConsultar(producto_dto);
+                productoDto = new ProductoDto();
+                productoDto.setProdID( lstMisVentas.get(i).getVentProducto() );
+                productoDto.setProdUsuario( lstMisVentas.get(i).getVentVendedor() );
+                productoDto = productoDao.mtdConsultar(productoDto);
 
-                if( producto_dto != null){ 
-                    CtrlCardVenta tarjeta = new CtrlCardVenta(lstMisVentas.get(i), producto_dto);
+                if( productoDto != null){ 
+                    CtrlCardVenta tarjeta = new CtrlCardVenta(lstMisVentas.get(i), productoDto);
                     tarjeta.setItem(i);
                     tarjeta.mtdInit();
-                    laVista.pnContenedor.add(tarjeta.getLaVista(), tarjeta.getTarjeta_dimensiones());
+                    pnVentas.pnContenedor.add(tarjeta.getLaVista(), tarjeta.getTarjeta_dimensiones());
                 }
 
             }
             
         }
         
-        laVista.pnContenedor.validate();
-        laVista.pnContenedor.revalidate();
-        laVista.pnContenedor.repaint();
+        pnVentas.pnContenedor.validate();
+        pnVentas.pnContenedor.revalidate();
+        pnVentas.pnContenedor.repaint();
         
     }
     
@@ -184,13 +184,13 @@ public class CtrlVentas{
         
         if( cantidadResultados < 0  ){
             cantidadResultados = 0;
-            JOptionPane.showMessageDialog(laVista, "No hay más resultados por mostrar.");
-            laVista.btnPrevia.setEnabled(false);
+            JOptionPane.showMessageDialog(pnVentas, "No hay más resultados por mostrar.");
+            pnVentas.btnPrevia.setEnabled(false);
             return;
         }
         
-        laVista.btnSiguiente.setEnabled(true);
-        mtdMostrarProducto(activarBusqueda);
+        pnVentas.btnSiguiente.setEnabled(true);
+        mtdMostrarVentas(activarBusqueda);
         
     }
     
@@ -201,22 +201,22 @@ public class CtrlVentas{
         
         if( cantidadResultados >= totalProductosExistentes ){
             cantidadResultados = totalProductosExistentes;
-            JOptionPane.showMessageDialog(laVista, "No hay más resultados por mostrar.");
-            laVista.btnSiguiente.setEnabled(false);
+            JOptionPane.showMessageDialog(pnVentas, "No hay más resultados por mostrar.");
+            pnVentas.btnSiguiente.setEnabled(false);
             return;
         }
         
-        laVista.btnPrevia.setEnabled(true);
-        mtdMostrarProducto(activarBusqueda);
+        pnVentas.btnPrevia.setEnabled(true);
+        mtdMostrarVentas(activarBusqueda);
         
     }
     
     private void mtdEstabecerBusqueda(){
-        laVista.btnPrevia.setEnabled(true);
-        laVista.btnSiguiente.setEnabled(true);
+        pnVentas.btnPrevia.setEnabled(true);
+        pnVentas.btnSiguiente.setEnabled(true);
         
         cantidadResultados=0;
-        if( laVista.cmpBusqueda.getText().trim().isEmpty() || laVista.cmpBusqueda.isVacio() ){
+        if( pnVentas.cmpBusqueda.getText().trim().isEmpty() || pnVentas.cmpBusqueda.isVacio() ){
             activarBusqueda = false;
         }else{
             activarBusqueda = true;

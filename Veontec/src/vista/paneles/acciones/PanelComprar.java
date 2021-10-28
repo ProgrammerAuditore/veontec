@@ -145,7 +145,6 @@ public class PanelComprar extends javax.swing.JPanel {
 
         cmpTotal.setEditable(false);
         cmpTotal.setComponenteDidireccional(etqTotal);
-        cmpTotal.setNextFocusableComponent(etqTotal);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);

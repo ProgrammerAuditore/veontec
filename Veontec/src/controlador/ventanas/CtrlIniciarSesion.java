@@ -15,8 +15,8 @@ import modelo.dao.UsuarioDao;
 import modelo.dto.CategoriaDto;
 import modelo.dto.CuentaDto;
 import modelo.dto.UsuarioDto;
-import src.Funciones;
-import src.Info;
+import src.FncGlobales;
+import src.Software;
 import vista.componentes.campos.CampoCorreo;
 import vista.paneles.PanelIniciarSesion;
 import vista.ventanas.VentanaHome;
@@ -24,7 +24,7 @@ import vista.ventanas.VentanaHome;
 public class CtrlIniciarSesion {
     
     // ***** Vista
-    private PanelIniciarSesion pnSignOn;
+    private PanelIniciarSesion pnIniciarSesion;
     
     // ***** Modelo
     private UsuarioDao usuarioDao;
@@ -39,7 +39,7 @@ public class CtrlIniciarSesion {
     
     // ***** Constructor
     private CtrlIniciarSesion(PanelIniciarSesion pnSignOn) {
-        this.pnSignOn = pnSignOn;
+        this.pnIniciarSesion = pnSignOn;
         this.usuarioDao = new UsuarioDao();
         this.usuarioDto = new UsuarioDto();
         this.categoriaDao = new CategoriaDao();
@@ -48,7 +48,7 @@ public class CtrlIniciarSesion {
     
     // ***** Eventos
     private void mtdEventoBtnIniciarSesion(){
-        pnSignOn.btnIniciarSession.addMouseListener(new MouseAdapter(){
+        pnIniciarSesion.btnIniciarSession.addMouseListener(new MouseAdapter(){
             @Override
             public void mouseReleased(MouseEvent e) {
                 mtdIniciarSession();
@@ -57,7 +57,7 @@ public class CtrlIniciarSesion {
     }
     
     private void mtdEventoBtnRecuperarCuenta(){
-        pnSignOn.btnRecuperarCuenta.addMouseListener(new MouseAdapter(){
+        pnIniciarSesion.btnRecuperarCuenta.addMouseListener(new MouseAdapter(){
             @Override
             public void mouseReleased(MouseEvent e) {
                 mtdRecuperarCuenta();
@@ -94,7 +94,7 @@ public class CtrlIniciarSesion {
         boxVRecuperarCuenta.add(cmpCampoCorreo);
         
         boxVRecuperarCuenta.setLocation(Veontec.ventanaSession.getLocation());
-        int opc = JOptionPane.showConfirmDialog(null, boxVRecuperarCuenta, "Recuperar cuenta", 
+        int opc = JOptionPane.showConfirmDialog(Veontec.ventanaSession, boxVRecuperarCuenta, "Recuperar cuenta", 
                 JOptionPane.OK_CANCEL_OPTION, JOptionPane.WARNING_MESSAGE);
         
         if( opc == JOptionPane.OK_OPTION ){
@@ -114,9 +114,9 @@ public class CtrlIniciarSesion {
                 Veontec.usuarioDto.setCmpCorreo(correoActual);
                 Veontec.usuarioDto = Veontec.usuarioDao.mtdConsultar(Veontec.usuarioDto);
                 if( Veontec.usuarioDto == null){
-                    JOptionPane.showMessageDialog(null, "No existe una cuenta con el correo introducido.");
+                    JOptionPane.showMessageDialog(Veontec.ventanaSession, "No existe una cuenta con el correo introducido.");
                 }else if( Veontec.usuarioDto.getCmpCorreo() == null || Veontec.usuarioDto.getCmpPassword() == null ){
-                    JOptionPane.showMessageDialog(null, "No existe una cuenta con el correo introducido.");
+                    JOptionPane.showMessageDialog(Veontec.ventanaSession, "No existe una cuenta con el correo introducido.");
                 }else{
                     
                     if( Veontec.usuarioDto.getCmpEstado().equals(333) ){
@@ -125,7 +125,7 @@ public class CtrlIniciarSesion {
                     }
                     
                     if(ObjEmail.mtdEnviarRecuperarCuenta(Veontec.usuarioDto)){
-                        Veontec.usuarioDto.setCmpPassword( new Funciones().mtdObtenerPasswordEncriptado(Veontec.usuarioDto.getCmpKey().toCharArray()) );
+                        Veontec.usuarioDto.setCmpPassword(new FncGlobales().mtdObtenerPasswordEncriptado(Veontec.usuarioDto.getCmpKey().toCharArray()) );
                         if(Veontec.usuarioDao.mtdActualizar(Veontec.usuarioDto)){
                             
                             JOptionPane.showMessageDialog(Veontec.ventanaSession, "Cuenta recuperada exitosamente.\nRevise su correo par obtener su codigo.");
@@ -146,11 +146,11 @@ public class CtrlIniciarSesion {
             }
 
             // * Obtener cuenta de usuarioDto si existe
-            if( mtdObtenerUsuario(pnSignOn.campoCorreo1.getText().trim()) ){
+            if( mtdObtenerUsuario(pnIniciarSesion.campoCorreo1.getText().trim()) ){
 
                 // * Verificar datos capturado son correctos
-                if( mtdValidarDatosDeUsuario(pnSignOn.campoCorreo1.getText().trim(), 
-                String.valueOf(pnSignOn.campoPassword1.getPassword())) ){
+                if( mtdValidarDatosDeUsuario(pnIniciarSesion.campoCorreo1.getText().trim(), 
+                String.valueOf(pnIniciarSesion.campoPassword1.getPassword())) ){
 
                     // * Abrir ventana home
                     mtdAbrirVentanaHome();
@@ -171,15 +171,15 @@ public class CtrlIniciarSesion {
             Veontec.ventanaHome = new VentanaHome();
             Veontec.ventanaHome.setTitle( Veontec.usuarioDto.getCmpNombreCompleto() 
                     + " | "  + Veontec.usuarioDto.getCmpCorreo() 
-                    + " - " + Info.NombreSoftware );
+                    + " - " + Software.NombreSoftware );
 
             mtdGuardarCuenta();
 
             // * Crear controlador y mostrar la ventana principal
             CtrlHome ctrl = new CtrlHome(Veontec.ventanaHome);
             ctrl.mtdInit();
-            ctrl.laVista.setLocationRelativeTo(null);
-            ctrl.laVista.setVisible(true);
+            ctrl.ventanaHome.setLocationRelativeTo(null);
+            ctrl.ventanaHome.setVisible(true);
 
             // * Cerrar y destruir la ventana de SingUp
             Veontec.ventanaSession.setVisible(false);
@@ -195,7 +195,7 @@ public class CtrlIniciarSesion {
         Veontec.usuarioDto = Veontec.usuarioDao.mtdConsultar(Veontec.usuarioDto);
         
         if( Veontec.usuarioDto.getCmpCorreo() == null || Veontec.usuarioDto.getCmpPassword() == null ){
-                JOptionPane.showMessageDialog(null, "No hay cuenta asociado con el correo introducido.");
+                JOptionPane.showMessageDialog(Veontec.ventanaSession, "No hay cuenta asociado con el correo introducido.");
                 return false;
         }
         
@@ -204,7 +204,7 @@ public class CtrlIniciarSesion {
     
     public boolean mtdValidarDatosDeUsuario(String correo, String passwd){
         return correo.equals(Veontec.usuarioDto.getCmpCorreo()) && 
-                new Funciones().mtdComprobarPassword(Veontec.usuarioDto.getCmpPassword(), passwd.toCharArray());
+                new FncGlobales().mtdComprobarPassword(Veontec.usuarioDto.getCmpPassword(), passwd.toCharArray());
     }
     
     private void mtdGuardarCuenta(){
@@ -212,8 +212,8 @@ public class CtrlIniciarSesion {
             // * Registrar los datos del usuarioDto
             Veontec.cuentaDto = new CuentaDto();
             Veontec.cuentaDao = new CuentaDao(); 
-            Veontec.cuentaDto.setCorreo(pnSignOn.campoCorreo1.getText().trim());
-            Veontec.cuentaDto.setPasswd(String.valueOf(pnSignOn.campoPassword1.getPassword()).trim());
+            Veontec.cuentaDto.setCorreo(pnIniciarSesion.campoCorreo1.getText().trim());
+            Veontec.cuentaDto.setPasswd(String.valueOf(pnIniciarSesion.campoPassword1.getPassword()).trim());
             Veontec.cuentaDao.regitrar_datos(Veontec.cuentaDto);
             Veontec.cuentaDto = Veontec.cuentaDao.obtener_datos();
             System.out.println("Cuenta : " + Veontec.cuentaDto.getCorreo());
@@ -225,13 +225,13 @@ public class CtrlIniciarSesion {
     int campos_incorrectos = 0;
     String msg = "Verifica los siguientes datos: \n";
         
-        if( pnSignOn.campoCorreo1.getText().trim().isEmpty() 
-                || !pnSignOn.campoCorreo1.isAprobado()  ){
+        if( pnIniciarSesion.campoCorreo1.getText().trim().isEmpty() 
+                || !pnIniciarSesion.campoCorreo1.isAprobado()  ){
             campos_incorrectos++;
             msg += "El campo correo es incorrecto. \n";
         }
         
-        if( String.valueOf(pnSignOn.campoPassword1.getPassword()).trim().isEmpty() ){
+        if( String.valueOf(pnIniciarSesion.campoPassword1.getPassword()).trim().isEmpty() ){
             campos_incorrectos++;
             msg += "El campo contraseña está vacio. \n";
         }

@@ -19,9 +19,10 @@ public class ProductoDao implements keyword_query<ProductoDto>{
         PreparedStatement ps = null;
         Connection conn = CtrlHiloConexion.getConexion();
         String query = "INSERT INTO tblproductos "
-                + "( prodTitulo, prodDescripcion, prodCategoria, prodPrecio, prodStock, prodTipo, prodEnlace, prodUsuario, prodMedia )"
+                + "( prodTitulo, prodDescripcion, prodCategoria, prodPrecio, prodStock, "
+                + "prodTipo, prodEnlace, prodUsuario, prodMedia, prodCreadoEn, prodActualizadoEn ) "
                 + "VALUES "
-                + "( ?, ?, ?, ?, ?, ?, ?, ?, ?); ";
+                + "( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?); ";
         
         try {
             
@@ -35,6 +36,8 @@ public class ProductoDao implements keyword_query<ProductoDto>{
             ps.setString(7, obj_dto.getProdEnlace());
             ps.setInt(8, obj_dto.getProdUsuario());
             ps.setBytes(9, obj_dto.getProdImg());
+            ps.setString(10, obj_dto.getProdCreadoEn());
+            ps.setString(11, obj_dto.getProdActualizadoEn());
             int respuesta = ps.executeUpdate();
             
             // * Si la respuesta es mayor a 0 significa que la consulta fue exitosa.
@@ -83,7 +86,8 @@ public class ProductoDao implements keyword_query<ProductoDto>{
         PreparedStatement ps = null;
         Connection conn = CtrlHiloConexion.getConexion();
         String query = "UPDATE tblproductos SET prodTitulo = ?, prodDescripcion = ?, prodCategoria = ?, "
-                + "prodPrecio = ?, prodStock = ?, prodTipo = ?, prodEnlace = ?, prodMedia = ? "
+                + "prodPrecio = ?, prodStock = ?, prodTipo = ?, prodEnlace = ?, prodMedia = ?, "
+                + "prodCreadoEn = ?, prodActualizadoEn = ? "
                 // * Buscamos el producto del usuario respectivo
                 + "WHERE prodUsuario = ? AND prodID = ? ;";
         
@@ -98,8 +102,10 @@ public class ProductoDao implements keyword_query<ProductoDto>{
             ps.setInt(6, obj_dto.getProdTipo());
             ps.setString(7, obj_dto.getProdEnlace());
             ps.setBytes(8, obj_dto.getProdImg());
-            ps.setInt(9, obj_dto.getProdUsuario());
-            ps.setInt(10, obj_dto.getProdID());
+            ps.setString(9, obj_dto.getProdCreadoEn());
+            ps.setString(10, obj_dto.getProdActualizadoEn());
+            ps.setInt(11, obj_dto.getProdUsuario());
+            ps.setInt(12, obj_dto.getProdID());
             int respuesta = ps.executeUpdate();
             
             // * Si la respuesta es mayor a 0 significa que la consulta fue exitosa.
@@ -143,6 +149,8 @@ public class ProductoDao implements keyword_query<ProductoDto>{
                 prod.setProdEnlace(rs.getString("prodEnlace") );
                 prod.setProdUsuario(rs.getInt("prodUsuario") );
                 prod.setProdImg( rs.getBytes("prodMedia") );
+                prod.setProdCreadoEn( rs.getString("prodCreadoEn") );
+                prod.setProdActualizadoEn( rs.getString("prodActualizadoEn") );
                 
                 //System.out.println("" + prod.toString());
             }
@@ -182,6 +190,8 @@ public class ProductoDao implements keyword_query<ProductoDto>{
                 prod.setProdEnlace(rs.getString("prodEnlace") );
                 prod.setProdUsuario(rs.getInt("prodUsuario") );
                 prod.setProdImg( rs.getBytes("prodMedia") );
+                prod.setProdCreadoEn( rs.getString("prodCreadoEn") );
+                prod.setProdActualizadoEn( rs.getString("prodActualizadoEn") );
                 
                 //System.out.println("" + prod.toString());
             }
@@ -220,6 +230,8 @@ public class ProductoDao implements keyword_query<ProductoDto>{
                 prod.setProdEnlace(rs.getString("prodEnlace") );
                 prod.setProdUsuario(rs.getInt("prodUsuario") );
                 prod.setProdImg( rs.getBytes("prodMedia") );
+                prod.setProdCreadoEn( rs.getString("prodCreadoEn") );
+                prod.setProdActualizadoEn( rs.getString("prodActualizadoEn") );
                 
                 productos.add(prod);
             }
@@ -260,6 +272,8 @@ public class ProductoDao implements keyword_query<ProductoDto>{
                 prod.setProdEnlace(rs.getString("prodEnlace") );
                 prod.setProdUsuario(rs.getInt("prodUsuario") );
                 prod.setProdImg( rs.getBytes("prodMedia") );
+                prod.setProdCreadoEn( rs.getString("prodCreadoEn") );
+                prod.setProdActualizadoEn( rs.getString("prodActualizadoEn") );
                 
                 productos.add(prod);
             }
@@ -300,6 +314,8 @@ public class ProductoDao implements keyword_query<ProductoDto>{
                 prod.setProdEnlace(rs.getString("prodEnlace") );
                 prod.setProdUsuario(rs.getInt("prodUsuario") );
                 prod.setProdImg( rs.getBytes("prodMedia") );
+                prod.setProdCreadoEn( rs.getString("prodCreadoEn") );
+                prod.setProdActualizadoEn( rs.getString("prodActualizadoEn") );
                 
                 productos.add(prod);
             }
@@ -343,6 +359,8 @@ public class ProductoDao implements keyword_query<ProductoDto>{
                 prod.setProdEnlace(rs.getString("prodEnlace") );
                 prod.setProdUsuario(rs.getInt("prodUsuario") );
                 prod.setProdImg( rs.getBytes("prodMedia") );
+                prod.setProdCreadoEn( rs.getString("prodCreadoEn") );
+                prod.setProdActualizadoEn( rs.getString("prodActualizadoEn") );
                 
                 productos.add(prod);
             }
@@ -433,6 +451,8 @@ public class ProductoDao implements keyword_query<ProductoDto>{
                 prod.setProdEnlace(rs.getString("prodEnlace") );
                 prod.setProdUsuario(rs.getInt("prodUsuario") );
                 prod.setProdImg( rs.getBytes("prodMedia") );
+                prod.setProdCreadoEn( rs.getString("prodCreadoEn") );
+                prod.setProdActualizadoEn( rs.getString("prodActualizadoEn") );
                 
                 productos.add(prod);
             }
@@ -555,6 +575,8 @@ public class ProductoDao implements keyword_query<ProductoDto>{
                 prod.setProdEnlace(rs.getString("prodEnlace") );
                 prod.setProdUsuario(rs.getInt("prodUsuario") );
                 prod.setProdImg( rs.getBytes("prodMedia") );
+                prod.setProdCreadoEn( rs.getString("prodCreadoEn") );
+                prod.setProdActualizadoEn( rs.getString("prodActualizadoEn") );
                 
                 productos.add(prod);
             }

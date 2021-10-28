@@ -25,12 +25,13 @@ import modelo.dao.CategoriaDao;
 import modelo.dao.ProductoDao;
 import modelo.dto.CategoriaDto;
 import modelo.dto.ProductoDto;
+import src.FncGlobales;
 import vista.paneles.acciones.PanelCrearProducto;
 
 public class CtrlModalCrearProducto implements ActionListener{
     
     // ***** Vista
-    private PanelCrearProducto laVista;
+    private PanelCrearProducto pnCrearProducto;
     private JDialog modal;
     
     // ***** Modelo
@@ -44,7 +45,7 @@ public class CtrlModalCrearProducto implements ActionListener{
     
     // ***** Constructor
     public CtrlModalCrearProducto() {
-        this.laVista = new PanelCrearProducto();
+        this.pnCrearProducto = new PanelCrearProducto();
         this.productoDao = new ProductoDao();
         this.productoDto = new ProductoDto();
         this.categoriaDao = new CategoriaDao();
@@ -55,7 +56,7 @@ public class CtrlModalCrearProducto implements ActionListener{
     // ***** Eventos
     private void mtdEventoBtnAceptar() {
         MouseListener btnAceptar = null;
-        laVista.btnAceptar.removeMouseListener(btnAceptar);
+        pnCrearProducto.btnAceptar.removeMouseListener(btnAceptar);
         
         btnAceptar = new MouseAdapter() {
             @Override
@@ -64,12 +65,12 @@ public class CtrlModalCrearProducto implements ActionListener{
             }
         };
         
-        laVista.btnAceptar.addMouseListener(btnAceptar);
+        pnCrearProducto.btnAceptar.addMouseListener(btnAceptar);
     }
     
     private void mtdEventoBtnCancelar() {
         MouseListener btnCancelar = null;
-        laVista.btnCancelar.removeMouseListener(btnCancelar);
+        pnCrearProducto.btnCancelar.removeMouseListener(btnCancelar);
         
         btnCancelar = new MouseAdapter() {
             @Override
@@ -78,7 +79,7 @@ public class CtrlModalCrearProducto implements ActionListener{
             }
         };
         
-        laVista.btnCancelar.addMouseListener(btnCancelar);
+        pnCrearProducto.btnCancelar.addMouseListener(btnCancelar);
     }
     
     private void mtdAgregerEventoWindow(){
@@ -93,7 +94,7 @@ public class CtrlModalCrearProducto implements ActionListener{
 
             @Override
             public void windowOpened(WindowEvent e) {
-                laVista.updateUI();
+                pnCrearProducto.updateUI();
                 modal.validate();
                 modal.repaint();
                 JOptionPane.showMessageDialog(null, "Crear un producto...");
@@ -105,7 +106,7 @@ public class CtrlModalCrearProducto implements ActionListener{
     
     private void mtdEventoBtnSeleccionarImg() {
         MouseListener btnSeleccionarImg = null;
-        laVista.btnSeleccionarImg.removeMouseListener(btnSeleccionarImg);
+        pnCrearProducto.btnSeleccionarImg.removeMouseListener(btnSeleccionarImg);
         
         btnSeleccionarImg = new MouseAdapter() {
             @Override
@@ -114,14 +115,14 @@ public class CtrlModalCrearProducto implements ActionListener{
             }
         };
         
-        laVista.btnSeleccionarImg.addMouseListener(btnSeleccionarImg);
+        pnCrearProducto.btnSeleccionarImg.addMouseListener(btnSeleccionarImg);
     }
     
     // ***** Métodos
     public void mtdInit(){
-        laVista.cboxBoleto.addActionListener(this);
-        laVista.cboxProductoExterno.addActionListener(this);
-        laVista.cmboxVuelos.addActionListener(this);
+        pnCrearProducto.cboxBoleto.addActionListener(this);
+        pnCrearProducto.cboxProductoExterno.addActionListener(this);
+        pnCrearProducto.cmboxVuelos.addActionListener(this);
         
         mtdMostrarCategorias();
         mtdAgregerEventoWindow();
@@ -137,30 +138,32 @@ public class CtrlModalCrearProducto implements ActionListener{
         modal.setModalityType(Dialog.ModalityType.APPLICATION_MODAL);
         modal.setTitle(productoDto.getProdTitulo());
         modal.setResizable(false);
-        modal.setSize( laVista.getSize() );
-        modal.setPreferredSize(laVista.getSize() );
-        modal.setContentPane(laVista);
+        modal.setSize(pnCrearProducto.getSize() );
+        modal.setPreferredSize(pnCrearProducto.getSize() );
+        modal.setContentPane(pnCrearProducto);
         modal.setLocationRelativeTo(Veontec.ventanaHome);
         modal.validate();
-        laVista.updateUI();
+        pnCrearProducto.updateUI();
         modal.repaint();
         modal.setVisible(true);
     }
     
     private void mtdCrearProducto() {
-        if( laVista.mtdComprobar() ){
+        if( pnCrearProducto.mtdComprobar() ){
             productoDto.setProdUsuario( Veontec.usuarioDto.getCmpID() );
-            productoDto.setProdCategoria( String.valueOf( laVista.cmpCategorias.getSelectedItem() ) );
-            productoDto.setProdDescripcion( laVista.cmpDescripcion.getText() );
-            productoDto.setProdTitulo( laVista.cmpTitulo.getText() );
-            productoDto.setProdEnlace( laVista.cmpEnlace.getText() );
-            productoDto.setProdPrecio( Double.parseDouble(laVista.cmpPrecio.getText()) );
-            productoDto.setProdStock( Integer.parseInt(laVista.cmpStock.getText()) );
+            productoDto.setProdCategoria(String.valueOf(pnCrearProducto.cmpCategorias.getSelectedItem() ) );
+            productoDto.setProdDescripcion(pnCrearProducto.cmpDescripcion.getText() );
+            productoDto.setProdTitulo(pnCrearProducto.cmpTitulo.getText() );
+            productoDto.setProdEnlace(pnCrearProducto.cmpEnlace.getText() );
+            productoDto.setProdPrecio(Double.parseDouble(pnCrearProducto.cmpPrecio.getText()) );
+            productoDto.setProdStock(Integer.parseInt(pnCrearProducto.cmpStock.getText()) );
+            productoDto.setProdCreadoEn(new FncGlobales().fncObtenerFechaYHoraActualSQL() );
+            productoDto.setProdActualizadoEn(new FncGlobales().fncObtenerFechaYHoraActualSQL() );
             mtdEstablecerTipoProductoYEnlace();
 
             if( productoDao.mtdInsetar(productoDto) ){
                 CtrlMiTienda.mtdRecargarMisProductos();
-                JOptionPane.showMessageDialog(laVista, "Producto se creo exitosamente.");
+                JOptionPane.showMessageDialog(pnCrearProducto, "Producto se creo exitosamente.");
                 mtdCerrarModal();
             }
             
@@ -171,7 +174,7 @@ public class CtrlModalCrearProducto implements ActionListener{
     }
     
     private void mtdMostrarCategorias(){
-        laVista.cmpCategorias.removeAllItems();
+        pnCrearProducto.cmpCategorias.removeAllItems();
         
         categoriaDto.setCateUsuario(Veontec.usuarioDto.getCmpID());
         lstCategorias = categoriaDao.mtdListar(categoriaDto);
@@ -179,7 +182,7 @@ public class CtrlModalCrearProducto implements ActionListener{
         
         if( categorias > 0 ){
             for (int i = 0; i < categorias; i++) {
-                laVista.cmpCategorias.addItem(lstCategorias.get(i).getCateNombre());
+                pnCrearProducto.cmpCategorias.addItem(lstCategorias.get(i).getCateNombre());
             }
         }
         
@@ -190,20 +193,20 @@ public class CtrlModalCrearProducto implements ActionListener{
         FileNameExtensionFilter fill = new FileNameExtensionFilter("JPG, PNG, &GIF", "jpg", "png", "gif");
         
         seleccionarArchivo.setFileFilter(fill);
-        seleccionarArchivo.showOpenDialog(laVista);
+        seleccionarArchivo.showOpenDialog(pnCrearProducto);
         File archivo = seleccionarArchivo.getSelectedFile();
         
         if( archivo != null ){
             String path_img = archivo.getAbsolutePath();
             ImageIcon img = new ImageIcon(path_img);
-            laVista.cmpImagenPath.setText( archivo.getAbsolutePath() );
+            pnCrearProducto.cmpImagenPath.setText( archivo.getAbsolutePath() );
           
             if( archivo.length() > 805867 ){
                 JOptionPane.showMessageDialog(null, "La imágen es demasiado grande.");
-                laVista.cmpImagenPath.rechazarCampo();
+                pnCrearProducto.cmpImagenPath.rechazarCampo();
             }else{
                 productoDto.setProdImg(getImagen(path_img));
-                laVista.cmpImagenPath.aceptarCampo();
+                pnCrearProducto.cmpImagenPath.aceptarCampo();
             }
         }
     }
@@ -228,19 +231,19 @@ public class CtrlModalCrearProducto implements ActionListener{
     }
     
     private void mtdDeseleccionar( JCheckBox opcion, boolean marca){
-        laVista.cboxBoleto.setSelected(false);
-        laVista.cboxProductoExterno.setSelected(false);
-        laVista.cmboxVuelos.setSelected(false);
-        laVista.cmpEnlace.setEditable(false);
-        laVista.cmpEnlace.setEnabled(false);
-        laVista.cmpEnlace.setVerificarCampo(false);
-        laVista.cmpEnlace.getEstiloTextEstablecido();
+        pnCrearProducto.cboxBoleto.setSelected(false);
+        pnCrearProducto.cboxProductoExterno.setSelected(false);
+        pnCrearProducto.cmboxVuelos.setSelected(false);
+        pnCrearProducto.cmpEnlace.setEditable(false);
+        pnCrearProducto.cmpEnlace.setEnabled(false);
+        pnCrearProducto.cmpEnlace.setVerificarCampo(false);
+        pnCrearProducto.cmpEnlace.getEstiloTextEstablecido();
         
         if(marca){
             opcion.setSelected(true);
-            laVista.cmpEnlace.setEditable(true);
-            laVista.cmpEnlace.setEnabled(true);
-            laVista.cmpEnlace.setVerificarCampo(true);
+            pnCrearProducto.cmpEnlace.setEditable(true);
+            pnCrearProducto.cmpEnlace.setEnabled(true);
+            pnCrearProducto.cmpEnlace.setVerificarCampo(true);
         }
     }
     
@@ -252,15 +255,15 @@ public class CtrlModalCrearProducto implements ActionListener{
         // 9 ; Significa producto externo para Vuelos
         String strEnlace = "";
         
-        if( laVista.cboxProductoExterno.isSelected() ){
+        if( pnCrearProducto.cboxProductoExterno.isSelected() ){
             productoDto.setProdTipo(3);
             
         }else 
-        if( laVista.cboxBoleto.isSelected() ){
+        if( pnCrearProducto.cboxBoleto.isSelected() ){
             productoDto.setProdTipo(7);
             
         }else 
-        if( laVista.cmboxVuelos.isSelected() ){
+        if( pnCrearProducto.cmboxVuelos.isSelected() ){
             productoDto.setProdTipo(9);
             
         } 
@@ -272,7 +275,7 @@ public class CtrlModalCrearProducto implements ActionListener{
         if( productoDto.getProdTipo().intValue() == 1 ){
             productoDto.setProdEnlace("Vacio");
         }else{
-            strEnlace = laVista.cmpEnlace.getText().trim();
+            strEnlace = pnCrearProducto.cmpEnlace.getText().trim();
             productoDto.setProdEnlace(strEnlace);
         }
     }
@@ -280,25 +283,25 @@ public class CtrlModalCrearProducto implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent e) {
         
-        if( e.getSource() == laVista.cmboxVuelos ){
-            if( laVista.cmboxVuelos.isSelected() ){
-                mtdDeseleccionar(laVista.cmboxVuelos , true);
+        if( e.getSource() == pnCrearProducto.cmboxVuelos ){
+            if( pnCrearProducto.cmboxVuelos.isSelected() ){
+                mtdDeseleccionar(pnCrearProducto.cmboxVuelos , true);
             }else{
                 mtdDeseleccionar(null, false);
             }
         }
         
-        if( e.getSource() == laVista.cboxBoleto ){
-            if( laVista.cboxBoleto.isSelected() ){
-                mtdDeseleccionar(laVista.cboxBoleto , true);
+        if( e.getSource() == pnCrearProducto.cboxBoleto ){
+            if( pnCrearProducto.cboxBoleto.isSelected() ){
+                mtdDeseleccionar(pnCrearProducto.cboxBoleto , true);
             }else{
                 mtdDeseleccionar(null, false);
             }
         }
         
-        if( e.getSource() == laVista.cboxProductoExterno ){
-            if( laVista.cboxProductoExterno.isSelected() ){
-                mtdDeseleccionar(laVista.cboxProductoExterno , true);
+        if( e.getSource() == pnCrearProducto.cboxProductoExterno ){
+            if( pnCrearProducto.cboxProductoExterno.isSelected() ){
+                mtdDeseleccionar(pnCrearProducto.cboxProductoExterno , true);
             }else{
                 mtdDeseleccionar(null, false);
             }

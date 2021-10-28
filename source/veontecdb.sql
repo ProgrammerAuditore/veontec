@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 17-10-2021 a las 03:57:54
+-- Tiempo de generación: 27-10-2021 a las 04:27:54
 -- Versión del servidor: 10.4.21-MariaDB
 -- Versión de PHP: 8.0.11
 
@@ -48,7 +48,7 @@ CREATE TABLE `tblcompras` (
   `compTitulo` varchar(60) COLLATE utf8_bin NOT NULL,
   `compCantidad` int(11) NOT NULL,
   `compPrecio` double NOT NULL,
-  `compFecha` varchar(60) COLLATE utf8_bin NOT NULL,
+  `compFecha` varchar(60) COLLATE utf8_bin DEFAULT NULL,
   `compHashCode` int(11) NOT NULL,
   `compEstado` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
@@ -80,7 +80,9 @@ CREATE TABLE `tblpreguntas` (
   `pregPregunta` varchar(120) COLLATE utf8_bin NOT NULL,
   `pregFecha` varchar(60) COLLATE utf8_bin NOT NULL,
   `pregEstado` int(11) NOT NULL,
-  `pregTitulo` varchar(60) COLLATE utf8_bin NOT NULL DEFAULT ''
+  `pregTitulo` varchar(60) COLLATE utf8_bin NOT NULL DEFAULT '',
+  `pregCreadoEn` datetime NOT NULL DEFAULT current_timestamp(),
+  `pregActualizadoEn` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 -- --------------------------------------------------------
@@ -99,7 +101,9 @@ CREATE TABLE `tblproductos` (
   `prodTipo` int(11) NOT NULL,
   `prodEnlace` text COLLATE utf8_bin DEFAULT NULL,
   `prodUsuario` int(11) NOT NULL,
-  `prodMedia` longblob DEFAULT NULL
+  `prodMedia` longblob DEFAULT NULL,
+  `prodCreadoEn` datetime DEFAULT NULL,
+  `prodActualizadoEn` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 -- --------------------------------------------------------
@@ -116,7 +120,9 @@ CREATE TABLE `tblrespuestas` (
   `respComprador` int(11) NOT NULL,
   `respRespuesta` varchar(160) COLLATE utf8_bin NOT NULL,
   `respFecha` varchar(60) COLLATE utf8_bin NOT NULL,
-  `respEstado` int(11) NOT NULL
+  `respEstado` int(11) NOT NULL,
+  `respCreadoEn` datetime NOT NULL DEFAULT current_timestamp(),
+  `respActualizadoEn` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 -- --------------------------------------------------------
@@ -133,7 +139,9 @@ CREATE TABLE `tblusuarios` (
   `usuaDireccion` varchar(60) COLLATE utf8_bin DEFAULT 'Desconocido',
   `usuaTelefono` varchar(30) COLLATE utf8_bin DEFAULT '000000000',
   `usuaKey` varchar(250) COLLATE utf8_bin DEFAULT 'No',
-  `usuaEstado` int(11) NOT NULL
+  `usuaEstado` int(11) NOT NULL,
+  `usuaCreadoEn` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `usuaActualizadoEn` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 -- --------------------------------------------------------
@@ -150,7 +158,7 @@ CREATE TABLE `tblventas` (
   `ventTitulo` varchar(60) COLLATE utf8_bin NOT NULL,
   `ventCantidad` int(11) NOT NULL,
   `ventPrecio` double NOT NULL,
-  `ventFecha` varchar(60) COLLATE utf8_bin NOT NULL,
+  `ventFecha` varchar(60) COLLATE utf8_bin DEFAULT NULL,
   `ventHashCode` int(11) NOT NULL,
   `ventEstado` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
@@ -226,13 +234,13 @@ ALTER TABLE `tblventas`
 -- AUTO_INCREMENT de la tabla `tblcategorias`
 --
 ALTER TABLE `tblcategorias`
-  MODIFY `cateID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=56;
+  MODIFY `cateID` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `tblcompras`
 --
 ALTER TABLE `tblcompras`
-  MODIFY `compID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
+  MODIFY `compID` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `tblimages`
@@ -244,31 +252,31 @@ ALTER TABLE `tblimages`
 -- AUTO_INCREMENT de la tabla `tblpreguntas`
 --
 ALTER TABLE `tblpreguntas`
-  MODIFY `pregID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
+  MODIFY `pregID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
 
 --
 -- AUTO_INCREMENT de la tabla `tblproductos`
 --
 ALTER TABLE `tblproductos`
-  MODIFY `prodID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=95;
+  MODIFY `prodID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=97;
 
 --
 -- AUTO_INCREMENT de la tabla `tblrespuestas`
 --
 ALTER TABLE `tblrespuestas`
-  MODIFY `respID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `respID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT de la tabla `tblusuarios`
 --
 ALTER TABLE `tblusuarios`
-  MODIFY `usuaID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
+  MODIFY `usuaID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
 
 --
 -- AUTO_INCREMENT de la tabla `tblventas`
 --
 ALTER TABLE `tblventas`
-  MODIFY `ventID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `ventID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- Restricciones para tablas volcadas
