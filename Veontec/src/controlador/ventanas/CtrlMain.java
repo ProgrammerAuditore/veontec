@@ -69,13 +69,14 @@ public class CtrlMain {
     // ***** Métodos
     private void mtdInit(){
         LOG.info("Ejecutando metodo una vez (Obligatorio)");
-        ventanaMain.setTitle(Software.NombreSoftware);
+        this.ventanaMain.setTitle(Software.NombreSoftware);
         mtdEventoPnTabMenu();
         mtdCargarSingOn(false);
         mtdCargarSingUp();
         
-        ventanaMain.setLocationRelativeTo(null);
-        ventanaMain.setVisible(true);
+        this.ventanaMain.setIconImage(Recursos.imgIconoDefault());
+        this.ventanaMain.setLocationRelativeTo(null);
+        this.ventanaMain.setVisible(true);
     }
     
     public void mtdInitLoggin(){

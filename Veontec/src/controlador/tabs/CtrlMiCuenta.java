@@ -294,6 +294,10 @@ public class CtrlMiCuenta{
                             Veontec.cuentaDto.setPasswd(passwdRepetir);
                             Veontec.cuentaDao.regitrar_datos(Veontec.cuentaDto);
                             
+                            // * Establecer el titulo de la ventana
+                            Veontec.ventanaHome.setTitle( Veontec.usuarioDto.getCmpNombreCompleto() 
+                            + " | "  + Veontec.usuarioDto.getCmpCorreo() + " - " + Software.NombreSoftware );
+                            
                             JOptionPane.showMessageDialog(pnMiCuenta, "Contraseña modificado exitosamnete.");
                         }
                         
@@ -469,6 +473,10 @@ public class CtrlMiCuenta{
                         usuarioDto.setCmpEstado(Software.veontecCuentaVerificada);
                         usuarioDto.setCmpKey("No");
                         usuarioDao.mtdActualizar(usuarioDto);
+                        
+                        // * Establecer el titulo de la ventana
+                        Veontec.ventanaHome.setTitle( Veontec.usuarioDto.getCmpNombreCompleto() 
+                        + " | "  + Veontec.usuarioDto.getCmpCorreo() + " - " + Software.NombreSoftware );
                         
                         Veontec.usuarioDto = usuarioDto;
                         mtdCerrarSession();

@@ -12,6 +12,7 @@ import java.util.Objects;
 import javax.swing.JOptionPane;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
+import src.Recursos;
 import src.Software;
 import vista.ventanas.VentanaHome;
 
@@ -57,6 +58,7 @@ public class CtrlHome{
         mtdEventoPnTabMenu();
         mtdCargarBienvenida();
         titulo = Veontec.ventanaHome.getTitle();
+        this.ventanaHome.setIconImage(Recursos.imgIconoDefault());
         
     }
     
