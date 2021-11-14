@@ -195,7 +195,7 @@ public class CtrlModalComprarProducto {
         
         }else
         if( !pnHacerCompra.cmpCantidad.isAprobado() || Integer.valueOf(pnHacerCompra.cmpCantidad.getText()) == 0  ){
-            JOptionPane.showMessageDialog(Veontec.ventanaHome, "Introduce la cantida de compra.");
+            JOptionPane.showMessageDialog(Veontec.ventanaHome, "Ingrese la cantidad de compra.");
         
         }else
         if(  !pnHacerCompra.mtdComprobarMtdDebito() && !pnHacerCompra.mtdComprobarMtdPayPal()  ){
@@ -243,7 +243,7 @@ public class CtrlModalComprarProducto {
             if( compraDao.mtdInsetar(compraDto) && productoDao.mtdActualizar(productoDto) && ventaDao.mtdInsetar(ventaDto) ){
                 CtrlBienvenida.mtdRecargar();
                 mtdCerrarModal();
-                JOptionPane.showMessageDialog(Veontec.ventanaHome, "La compra se realizo exitosamente.");
+                JOptionPane.showMessageDialog(Veontec.ventanaHome, "La compra se realizó exitosamente.");
             }
             
             String metodoPago="";

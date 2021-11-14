@@ -40,7 +40,7 @@ public class Veontec {
         Recursos.dataConexion().exists();
         
         // * Establecer conexion..
-        ConexionDto conec = new ConexionDto("PORT", "HOST", "DATABASE", "USER", "PASSWORD");
+        ConexionDto conec = new ConexionDto("3306", "localhost", "veontecdb", "root", "");
         CtrlHiloConexion.ctrlDatos = conec;
         CtrlHiloConexion.mtdEstablecer();
         
