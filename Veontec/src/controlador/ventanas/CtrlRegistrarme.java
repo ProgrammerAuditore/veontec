@@ -121,7 +121,8 @@ public class CtrlRegistrarme {
                         categoriaDao.mtdInsetar(categoriaDto);
 
                         mtdVaciarCampos_Registrarme();
-                        JOptionPane.showMessageDialog(Veontec.ventanaSession, "Se registró exitosamente.");
+                        JOptionPane.showMessageDialog(Veontec.ventanaSession, "Se registró exitosamente. Es necesario que inicié sesión y verifique su cuenta.\n "
+                                + "Verifique su email para obtener el código de verificación de cuenta.");
 
                 }
             }
