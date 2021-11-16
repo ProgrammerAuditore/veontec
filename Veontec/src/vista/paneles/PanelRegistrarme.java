@@ -29,7 +29,7 @@ public class PanelRegistrarme extends javax.swing.JPanel {
         campoTexto1 = new vista.componentes.campos.CampoTexto();
         etiqueta4 = new vista.componentes.etiqueta.Etiqueta();
 
-        etiqueta1.setText("Correo electronico");
+        etiqueta1.setText("Correo electrónico");
 
         btnRegistrarme.setImgButtonType("success");
         btnRegistrarme.setTexto("Registrarme");

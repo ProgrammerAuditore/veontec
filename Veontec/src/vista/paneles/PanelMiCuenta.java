@@ -63,7 +63,7 @@ public class PanelMiCuenta extends javax.swing.JPanel {
         btnVerificarEmail = new vista.componentes.boton.Boton();
 
         btnCerrarSession.setImgButtonType("danger");
-        btnCerrarSession.setTexto("Cerrrar sesion");
+        btnCerrarSession.setTexto("Cerrar sesión");
 
         jPanel1.setBackground(new java.awt.Color(0, 102, 102));
 
@@ -88,7 +88,7 @@ public class PanelMiCuenta extends javax.swing.JPanel {
 
         cmpCorreo.setEditable(false);
 
-        etiqueta1.setText("Correo electronico");
+        etiqueta1.setText("Correo electrónico");
 
         etiqueta3.setText("No. Télefono / Movil");
 

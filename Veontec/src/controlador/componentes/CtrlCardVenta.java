@@ -82,13 +82,12 @@ public class CtrlCardVenta {
         pnCardVenta.etqTitulo.setText(ventaDto.getVentTitulo() );
         pnCardVenta.cmpPrecioUnidad.setText("" + ventaDto.getVentPrecio() );
         pnCardVenta.cmpStockVendido.setText(""  + ventaDto.getVentCantidad() );
-        
-        detalles = detalles.replaceAll("<FechaVendido>", ventaDto.getVentFecha());
+        pnCardVenta.etqFecha.setText(ventaDto.getVentFecha());
         
         // * Establecer el comprador
         usuarioDto = usuarioDao.mtdConsultar(ventaDto.getVentComprador() );
         String comprador = usuarioDto == null ? "Desconocido" : usuarioDto.getCmpNombreCompleto();
-        detalles = detalles.replaceAll("<Comprador>", comprador);
+        pnCardVenta.etqUsuario.setText(comprador);
         
         // * Establecer descripción
         detalles = detalles.replaceAll("<Descripcion>", productoDto.getProdDescripcion());

@@ -92,6 +92,7 @@ public class CtrlCardMiProducto {
         // * Descripción de detalles
         pnCardMiProducto.cmpDetalleMiProducto.setText(productoDto.getProdDescripcion() );
         pnCardMiProducto.etqFecha.setText( productoDto.getProdCreadoEn() );
+        pnCardMiProducto.etqCategoria.setText( productoDto.getProdCategoria() );
         
         if( productoDto.getProdImg() != null ){
             // * Establecer imagen de portada
