@@ -14,6 +14,7 @@ public class Recursos {
     public static final File dataRun(){ return new CargarRecurgos().dataRun(); }
     public static final File dataConexion(){ return new CargarRecurgos().dataConexion(); }
     public static final File dataCuenta(){ return new CargarRecurgos().dataCuenta(); }
+    public static final Image imgBannerDefault(){ return new CargarRecurgos().bannerDefault(); }
     public static final Image imgIconoDefault(){ return new CargarRecurgos().iconoDefault(); }
     public static final Icon imgIconoDefaultCategorias(){ return new CargarRecurgos().iconoDefaultCategorias(); }
     public static final HashMap<String, String> docCotizacionJasper(){ return new CargarRecurgos().docCotizacionJasper(); }

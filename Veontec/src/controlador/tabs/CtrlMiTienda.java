@@ -281,13 +281,13 @@ public class CtrlMiTienda{
         String categoriaNueva="";
         Box boxCorreo = Box.createVerticalBox();
 
-        JLabel info2 = new JLabel("Introduza la categoria nueva");
+        JLabel info2 = new JLabel("Introduzca la categoría nueva");
         boxCorreo.add(info2);
         JTextField cmpCategoriaNueva = new JTextField(24);
         boxCorreo.add(cmpCategoriaNueva);
         
         boxCorreo.setLocation(Veontec.ventanaHome.getLocation());
-        int opc = JOptionPane.showConfirmDialog(pnMiTienda, boxCorreo, "Crear nueva categoria",
+        int opc = JOptionPane.showConfirmDialog(pnMiTienda, boxCorreo, "Crear nueva categoría",
                 JOptionPane.OK_CANCEL_OPTION, JOptionPane.WARNING_MESSAGE);
         
         if( opc == JOptionPane.OK_OPTION ){
@@ -303,19 +303,19 @@ public class CtrlMiTienda{
         
             String categoriaActual="", categoriaNueva="";
             Box boxCorreo = Box.createVerticalBox();
-            JLabel info1 = new JLabel("Nombre categoria actual");
+            JLabel info1 = new JLabel("Nombre categoría actual");
             boxCorreo.add(info1);
             JTextField cmpCategoriaActual = new  JTextField(categoriaDto.getCateNombre());
             cmpCategoriaActual.setEditable(false);
             boxCorreo.add(cmpCategoriaActual);
 
-            JLabel info2 = new JLabel("Introduza la categoria nueva");
+            JLabel info2 = new JLabel("Introduzca la categoría nueva");
             boxCorreo.add(info2);
             JTextField cmpCategoriaNueva = new JTextField(24);
             boxCorreo.add(cmpCategoriaNueva);
 
             boxCorreo.setLocation(Veontec.ventanaHome.getLocation());
-            int opc = JOptionPane.showConfirmDialog(pnMiTienda, boxCorreo, "Cambiar nombre de categoria",
+            int opc = JOptionPane.showConfirmDialog(pnMiTienda, boxCorreo, "Cambiar nombre de categoría",
                     JOptionPane.OK_CANCEL_OPTION, JOptionPane.WARNING_MESSAGE);
 
             if( opc == JOptionPane.OK_OPTION ){
@@ -332,23 +332,23 @@ public class CtrlMiTienda{
         if( mtdValidarCategoria() ){
 
             Box boxCorreo = Box.createVerticalBox();
-            JLabel info1 = new JLabel("Categoria seleccionada");
+            JLabel info1 = new JLabel("Categoría seleccionada");
             boxCorreo.add(info1);
             JTextField cmpCategoriaActual = new  JTextField(categoriaSeleccionda);
             cmpCategoriaActual.setEditable(false);
             boxCorreo.add(cmpCategoriaActual);
 
-            JLabel info2 = new JLabel("¿Seguro que desear eliminar la categoria?");
+            JLabel info2 = new JLabel("¿Seguro que deseas eliminar la categoría?");
             boxCorreo.add(info2);
 
             boxCorreo.setLocation(Veontec.ventanaHome.getLocation());
-            int opc = JOptionPane.showConfirmDialog(pnMiTienda, boxCorreo, "Eliminar categoria",
+            int opc = JOptionPane.showConfirmDialog(pnMiTienda, boxCorreo, "Eliminar categoría",
                     JOptionPane.OK_CANCEL_OPTION, JOptionPane.WARNING_MESSAGE);
 
             if( opc == JOptionPane.OK_OPTION ){
                 if( categoriaDao.mtdRemover(categoriaDto) ){
                     mtdMostrarCategorias();
-                    JOptionPane.showMessageDialog(pnMiTienda, "Categoria eliminada exitosamente.");
+                    JOptionPane.showMessageDialog(pnMiTienda, "Categoría eliminada exitosamente.");
                 }
             }
             
@@ -359,12 +359,12 @@ public class CtrlMiTienda{
         if( categoriaNueva.trim().isEmpty()){
             JOptionPane.showMessageDialog(pnMiTienda, "Los campos están incompletos");
 
-        }else if( categoriaNueva.equals("Categorias") || categoriaNueva.equals("Nueva") ){
-            JOptionPane.showMessageDialog(pnMiTienda, "Nombre de categoria no valido.");
+        }else if( categoriaNueva.equals("Categorías") || categoriaNueva.equals("Nueva") ){
+            JOptionPane.showMessageDialog(pnMiTienda, "Nombre de categoría no válido.");
 
             // * Verificar que la categoria sean diferentes
         }else if( categoriaActual.equals(categoriaNueva) ){
-            JOptionPane.showMessageDialog(pnMiTienda, "La categoria nueva no está disponible.");
+            JOptionPane.showMessageDialog(pnMiTienda, "La categoría nueva no está disponible.");
 
         }else if( categoriaActual.length() > 30){
             JOptionPane.showMessageDialog(pnMiTienda, "* Solo se acepta 30 caracteres");
@@ -379,10 +379,10 @@ public class CtrlMiTienda{
             if( categoriaDao.mtdComprobar(categoriaDto) ){
                 if( categoriaDao.mtdActualizar(categoriaDto) ){
                     mtdMostrarCategorias();
-                    JOptionPane.showMessageDialog(pnMiTienda, "Categoria modificado exitosamente");
+                    JOptionPane.showMessageDialog(pnMiTienda, "Categoría modificada exitosamente.");
                 }
             }else{
-               JOptionPane.showMessageDialog(pnMiTienda, "La categoria nueva no está disponible.");
+               JOptionPane.showMessageDialog(pnMiTienda, "La categoría nueva no está disponible.");
 
             }
 
@@ -391,13 +391,13 @@ public class CtrlMiTienda{
     
     private void mtdProcesoCrearCategoria(String categoriaNueva) {
         if( categoriaNueva.trim().isEmpty()){
-            JOptionPane.showMessageDialog(pnMiTienda, "Los campos están incompletos");
+            JOptionPane.showMessageDialog(pnMiTienda, "Los campos están incompletos.");
 
         }else if(categoriaNueva.equals("Categorias") || categoriaNueva.equals("Nueva")){
-            JOptionPane.showMessageDialog(pnMiTienda, "Nombre de categoria no valido.");
+            JOptionPane.showMessageDialog(pnMiTienda, "Nombre de categoría no válido.");
 
         }else if( categoriaNueva.length() > 30){
-            JOptionPane.showMessageDialog(pnMiTienda, "* Solo se acepta 30 caracteres");
+            JOptionPane.showMessageDialog(pnMiTienda, "* Solo se aceptan 30 caracteres.");
 
         }else{
 
@@ -409,10 +409,10 @@ public class CtrlMiTienda{
             if( categoriaDao.mtdComprobar(categoriaDto) ){
                 if(categoriaDao.mtdInsetar(categoriaDto)){
                     mtdMostrarCategorias();
-                    JOptionPane.showMessageDialog(pnMiTienda, "Categoria nueva creada exitosamente.");
+                    JOptionPane.showMessageDialog(pnMiTienda, "Categoría nueva creada exitosamente.");
                 }
             }else{
-                JOptionPane.showMessageDialog(pnMiTienda, "La categoria nueva no está disponible.");
+                JOptionPane.showMessageDialog(pnMiTienda, "La categoría nueva no está disponible.");
 
             }
 
@@ -432,7 +432,7 @@ public class CtrlMiTienda{
         TreePath a = pnMiTienda.lstCategorias.getPathForRow( indexCategoria );
         categoriaSeleccionda = String.valueOf( a.getLastPathComponent() );
         
-        if(categoriaSeleccionda.equals("Categorias") || categoriaSeleccionda.equals("Nueva") ) return false;
+        if(categoriaSeleccionda.equals("Categorías") || categoriaSeleccionda.equals("Nueva") ) return false;
         
         // * Obtener los datos de la categoria seleccionada
         categoriaDto = new CategoriaDto();

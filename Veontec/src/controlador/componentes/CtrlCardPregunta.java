@@ -240,7 +240,7 @@ public class CtrlCardPregunta {
             
             if( respuestaDao.mtdInsetar(dto) ){
                 try { CtrlPreguntas.mtdRecargarPreguntas(); } catch (Exception e) { }
-                JOptionPane.showMessageDialog(pnCardPregunta, "Respuesta enviado exitosamente.");
+                JOptionPane.showMessageDialog(pnCardPregunta, "Respuesta enviada exitosamente.");
             }
             
         }

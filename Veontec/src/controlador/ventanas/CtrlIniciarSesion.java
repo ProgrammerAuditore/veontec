@@ -128,7 +128,7 @@ public class CtrlIniciarSesion {
                         Veontec.usuarioDto.setCmpPassword(new FncGlobales().mtdObtenerPasswordEncriptado(Veontec.usuarioDto.getCmpKey().toCharArray()) );
                         if(Veontec.usuarioDao.mtdActualizar(Veontec.usuarioDto)){
                             
-                            JOptionPane.showMessageDialog(Veontec.ventanaSession, "Cuenta recuperada exitosamente.\nRevise su correo par obtener su codigo.");
+                            JOptionPane.showMessageDialog(Veontec.ventanaSession, "Cuenta recuperada exitosamente.\nRevise su correo para obtener su código.");
                             
                         }
                     }
@@ -156,12 +156,12 @@ public class CtrlIniciarSesion {
                     mtdAbrirVentanaHome();
 
                 }else
-                JOptionPane.showMessageDialog(Veontec.ventanaSession, "Verifique que los datos introducido sean correctos.");
+                JOptionPane.showMessageDialog(Veontec.ventanaSession, "Verifique que los datos introducidos sean correctos.");
 
             }
             
         }else
-        JOptionPane.showMessageDialog(Veontec.ventanaSession, "No hay conexión");
+        JOptionPane.showMessageDialog(Veontec.ventanaSession, "No hay conexión.");
         
     }
     
@@ -195,7 +195,7 @@ public class CtrlIniciarSesion {
         Veontec.usuarioDto = Veontec.usuarioDao.mtdConsultar(Veontec.usuarioDto);
         
         if( Veontec.usuarioDto.getCmpCorreo() == null || Veontec.usuarioDto.getCmpPassword() == null ){
-                JOptionPane.showMessageDialog(Veontec.ventanaSession, "No hay cuenta asociado con el correo introducido.");
+                JOptionPane.showMessageDialog(Veontec.ventanaSession, "No hay cuenta asociada con el correo introducido.");
                 return false;
         }
         
@@ -216,8 +216,8 @@ public class CtrlIniciarSesion {
             Veontec.cuentaDto.setPasswd(String.valueOf(pnIniciarSesion.campoPassword1.getPassword()).trim());
             Veontec.cuentaDao.regitrar_datos(Veontec.cuentaDto);
             Veontec.cuentaDto = Veontec.cuentaDao.obtener_datos();
-            System.out.println("Cuenta : " + Veontec.cuentaDto.getCorreo());
-            System.out.println("Cuenta : " + Veontec.cuentaDto.getPasswd());
+            //System.out.println("Cuenta : " + Veontec.cuentaDto.getCorreo());
+            //System.out.println("Cuenta : " + Veontec.cuentaDto.getPasswd());
         }
     }
     
@@ -228,7 +228,7 @@ public class CtrlIniciarSesion {
         if( pnIniciarSesion.campoCorreo1.getText().trim().isEmpty() 
                 || !pnIniciarSesion.campoCorreo1.isAprobado()  ){
             campos_incorrectos++;
-            msg += "El campo correo es incorrecto. \n";
+            msg += "El campo correo está incorrecto. \n";
         }
         
         if( String.valueOf(pnIniciarSesion.campoPassword1.getPassword()).trim().isEmpty() ){

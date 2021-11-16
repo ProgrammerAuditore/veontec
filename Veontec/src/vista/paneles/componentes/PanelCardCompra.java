@@ -15,7 +15,7 @@ public class PanelCardCompra extends javax.swing.JPanel {
      */
     public PanelCardCompra() {
         initComponents();
-        Dimension tam = new Dimension(654, 254);
+        Dimension tam = new Dimension(682, 254);
         this.setPreferredSize( tam );
         this.setSize( tam );
         this.panelBackground.setBackground(new Color(40,175,176));
@@ -113,9 +113,10 @@ public class PanelCardCompra extends javax.swing.JPanel {
 
         btnHacerPregunta.setTexto("Hacer pregunta");
 
-        cmpFecha.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        cmpFecha.setText("Fecha");
 
-        cmpVendedor.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        cmpVendedor.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        cmpVendedor.setText("Nombre");
 
         pnImgPortada.setImgBackgroundEnabled(true);
 
@@ -138,21 +139,21 @@ public class PanelCardCompra extends javax.swing.JPanel {
                 .addComponent(pnImgPortada, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(panelBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(etqTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, 414, Short.MAX_VALUE)
+                    .addComponent(etqTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, 440, Short.MAX_VALUE)
                     .addComponent(jScrollPane1)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelBackgroundLayout.createSequentialGroup()
                         .addGroup(panelBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(etqStockDisponible, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE)
                             .addComponent(cmpStockCompra, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE)
                             .addComponent(btnCancelarCompra, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 94, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 120, Short.MAX_VALUE)
                         .addGroup(panelBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(btnHacerPregunta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(cmpPrecioUnidad, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(etqPrecioUnidad, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE)))
                     .addGroup(panelBackgroundLayout.createSequentialGroup()
                         .addComponent(cmpFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(109, 109, 109)
+                        .addGap(18, 18, 18)
                         .addComponent(cmpVendedor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -189,7 +190,7 @@ public class PanelCardCompra extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panelBackground, javax.swing.GroupLayout.DEFAULT_SIZE, 654, Short.MAX_VALUE)
+            .addComponent(panelBackground, javax.swing.GroupLayout.DEFAULT_SIZE, 680, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

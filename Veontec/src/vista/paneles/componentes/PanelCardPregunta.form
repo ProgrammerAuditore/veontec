@@ -38,7 +38,7 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="panelBackground" pref="654" max="32767" attributes="0"/>
+          <Component id="panelBackground" pref="680" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
@@ -74,17 +74,17 @@
                   <Component id="pnImgPortada" min="-2" pref="212" max="-2" attributes="0"/>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="etqTitulo" alignment="0" pref="414" max="32767" attributes="0"/>
+                      <Component id="etqTitulo" alignment="0" max="32767" attributes="0"/>
                       <Component id="jScrollPane1" alignment="0" max="32767" attributes="0"/>
                       <Group type="102" alignment="1" attributes="0">
                           <Component id="btnEliminarPregunta" min="-2" pref="160" max="-2" attributes="0"/>
-                          <EmptySpace pref="94" max="32767" attributes="0"/>
+                          <EmptySpace max="32767" attributes="0"/>
                           <Component id="btnRespCons" min="-2" pref="160" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
-                          <Component id="cmpFecha" min="-2" pref="160" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="109" max="-2" attributes="0"/>
-                          <Component id="cmpVendedor" max="32767" attributes="0"/>
+                          <Component id="cmpFecha" min="-2" pref="162" max="-2" attributes="0"/>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <Component id="cmpVendedor" min="-2" pref="260" max="-2" attributes="0"/>
                       </Group>
                       <Component id="etiqueta1" alignment="0" max="32767" attributes="0"/>
                   </Group>
@@ -98,9 +98,9 @@
                   <EmptySpace min="-2" max="-2" attributes="0"/>
                   <Component id="etqTitulo" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="unrelated" min="-2" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="cmpFecha" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="cmpVendedor" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="1" attributes="0">
+                      <Component id="cmpVendedor" min="-2" max="-2" attributes="0"/>
+                      <Component id="cmpFecha" min="-2" pref="16" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Component id="etiqueta1" min="-2" max="-2" attributes="0"/>
@@ -173,6 +173,7 @@
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
             </Property>
+            <Property name="text" type="java.lang.String" value="Fecha"/>
           </Properties>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
@@ -184,6 +185,7 @@
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
             </Property>
             <Property name="horizontalAlignment" type="int" value="11"/>
+            <Property name="text" type="java.lang.String" value="Nombre"/>
           </Properties>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>

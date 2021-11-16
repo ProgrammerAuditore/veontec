@@ -110,6 +110,11 @@ class CargarRecurgos {
         
     }
     
+     public Image bannerDefault(){
+        
+        return Toolkit.getDefaultToolkit().getImage(getClass().getResource(Rutas.pathBannerVeontec));
+    }
+    
     public Icon iconoDefaultCategorias(){
         Image img = Toolkit.getDefaultToolkit().getImage(getClass().getResource(Rutas.pathIconoCategorias));
         img = img.getScaledInstance(20, 20, Image.SCALE_SMOOTH);

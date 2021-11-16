@@ -87,7 +87,7 @@ public class CtrlRegistrarme {
             }
             
         }else{
-            JOptionPane.showMessageDialog(Veontec.ventanaSession, "No hay conexión");
+            JOptionPane.showMessageDialog(Veontec.ventanaSession, "No hay conexión.");
         }
         
     }
@@ -121,7 +121,8 @@ public class CtrlRegistrarme {
                         categoriaDao.mtdInsetar(categoriaDto);
 
                         mtdVaciarCampos_Registrarme();
-                        JOptionPane.showMessageDialog(Veontec.ventanaSession, "Se registro exitosamente.");
+                        JOptionPane.showMessageDialog(Veontec.ventanaSession, "Se registró exitosamente. Es necesario que inicié sesión y verifique su cuenta.\n "
+                                + "Verifique su email para obtener el código de verificación de cuenta.");
 
                 }
             }
@@ -141,23 +142,23 @@ public class CtrlRegistrarme {
         if( pnRegistrarme.campoCorreo1.getText().trim().isEmpty() 
                 || !pnRegistrarme.campoCorreo1.isAprobado()  ){
             campos_incorrectos++;
-            msg += "El campo correo es incorrecto. \n";
+            msg += "El campo correo está incorrecto. \n";
         }
 
         if( String.valueOf(pnRegistrarme.campoPassword1.getPassword()).trim().isEmpty() ){
             campos_incorrectos++;
-            msg += "El campo contraseña está vacio. \n";
+            msg += "El campo contraseña está vacío. \n";
         }
         
         if( String.valueOf(pnRegistrarme.campoPassword2.getPassword()).trim().isEmpty() ){
             campos_incorrectos++;
-            msg += "El campo repetir contraseña está vacio. \n";
+            msg += "El campo repetir contraseña está vacío. \n";
         }
         
         if( !String.valueOf(pnRegistrarme.campoPassword1.getPassword()).trim()
                 .equals(String.valueOf(pnRegistrarme.campoPassword2.getPassword()).trim()) ){
             campos_incorrectos++;
-            msg += "La contraseña no coindice. \n";
+            msg += "La contraseña no coincide. \n";
         }
         
         if( campos_incorrectos > 0 )

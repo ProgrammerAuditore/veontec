@@ -12,6 +12,7 @@ import java.util.Objects;
 import javax.swing.JOptionPane;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
+import src.Recursos;
 import src.Software;
 import vista.ventanas.VentanaHome;
 
@@ -57,6 +58,7 @@ public class CtrlHome{
         mtdEventoPnTabMenu();
         mtdCargarBienvenida();
         titulo = Veontec.ventanaHome.getTitle();
+        this.ventanaHome.setIconImage(Recursos.imgIconoDefault());
         
     }
     
@@ -114,7 +116,7 @@ public class CtrlHome{
         estadoSuccessVeontec = 4;
         switch(estadoVeontec){
             case 1 : JOptionPane.showMessageDialog(ventanaHome, "Software Veontec, no hay conexión"); break;
-            case 2 : Veontec.ventanaHome.setTitle( titulo + " (cuenta no verificada)"); break;
+            case 2 : JOptionPane.showMessageDialog(ventanaHome, "Dirigese a la sección \"Mi Cuenta\" para verificar la cuenta."); break;
             case 3 : Veontec.ventanaHome.setTitle( titulo + " (cuenta recuperada)"); break;
             case -1 : estadoVeontec = estadoSuccessVeontec; break;
             default: break;
