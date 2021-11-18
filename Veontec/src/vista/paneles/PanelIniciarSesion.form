@@ -80,7 +80,7 @@
       <SubComponents>
         <Component class="vista.componentes.etiqueta.Etiqueta" name="etiqueta1">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Correo electronico"/>
+            <Property name="text" type="java.lang.String" value="Correo electr&#xf3;nico"/>
           </Properties>
         </Component>
         <Component class="vista.componentes.campos.CampoPassword" name="campoPassword1">
@@ -96,7 +96,7 @@
         <Component class="vista.componentes.boton.Boton" name="btnIniciarSession">
           <Properties>
             <Property name="imgButtonType" type="java.lang.String" value="success"/>
-            <Property name="texto" type="java.lang.String" value="Iniciar session"/>
+            <Property name="texto" type="java.lang.String" value="Iniciar sesi&#xf3;n"/>
           </Properties>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>

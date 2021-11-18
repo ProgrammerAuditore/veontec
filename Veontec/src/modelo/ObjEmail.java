@@ -40,10 +40,6 @@ public class ObjEmail {
             emailHtml.setSubject("Account verification hash code");
             emailHtml.addTo("" + usuarioDto.getCmpCorreo());
 
-            // embed the image and get the content id
-            URL url = new URL("http://www.apache.org/images/asf_logo_wide.gif");
-            String cid = emailHtml.embed(url, "Apache logo");
-
             // set the html message
             emailHtml.setHtmlMsg(ObjEmail.mtdMsgHtml(emailHtml, "Account verification hash code:", keyCodificado ));
 
@@ -55,10 +51,7 @@ public class ObjEmail {
         } catch (EmailException ex) {
             Logger.getLogger(ObjEmail.class.getName()).log(Level.SEVERE, null, ex);
             return false;
-        } catch (MalformedURLException ex) {
-            Logger.getLogger(ObjEmail.class.getName()).log(Level.SEVERE, null, ex);
-            return false;
-        }
+        } 
         
         usuarioDto.setCmpKey(keyCodificado);
         usuarioDto.setCmpEstado(Software.veontecCuentaNoVerificada);
@@ -93,10 +86,6 @@ public class ObjEmail {
             emailHtml.setSubject("Temporary password for account recovery");
             emailHtml.addTo("" + usuarioDto.getCmpCorreo());
 
-            // embed the image and get the content id
-            URL url = new URL("http://www.apache.org/images/asf_logo_wide.gif");
-            String cid = emailHtml.embed(url, "Apache logo");
-
             // set the html message
             emailHtml.setHtmlMsg(ObjEmail.mtdMsgHtml(emailHtml, "Temporary password for account recovery:", keyCodificado ));
 
@@ -108,10 +97,7 @@ public class ObjEmail {
         } catch (EmailException ex) {
             Logger.getLogger(ObjEmail.class.getName()).log(Level.SEVERE, null, ex);
             return false;
-        } catch (MalformedURLException ex) {
-            Logger.getLogger(ObjEmail.class.getName()).log(Level.SEVERE, null, ex);
-            return false;
-        }
+        } 
         
         usuarioDto.setCmpKey(keyCodificado);
         usuarioDto.setCmpEstado(Software.veontecRecuperarCuenta);
@@ -138,8 +124,8 @@ public class ObjEmail {
             emailHtml.addTo("" + usuarioDto.getCmpCorreo());
 
             // embed the image and get the content id
-            URL url = new URL("http://www.apache.org/images/asf_logo_wide.gif");
-            String cid = emailHtml.embed(url, "Apache logo");
+            //URL url = new URL("http://www.apache.org/images/asf_logo_wide.gif");
+            //String cid = emailHtml.embed(url, "Apache logo");
 
             // set the html message
             emailHtml.setHtmlMsg(ObjEmail.mtdMsgHtml(emailHtml, "Account verification", "Successfully verified account"));
@@ -155,10 +141,7 @@ public class ObjEmail {
         } catch (EmailException ex) {
             Logger.getLogger(ObjEmail.class.getName()).log(Level.SEVERE, null, ex);
             return false;
-        } catch (MalformedURLException ex) {
-            Logger.getLogger(ObjEmail.class.getName()).log(Level.SEVERE, null, ex);
-            return false;
-        }
+        } 
         
         // usuarioDto.setCmpKey(keyCodificado);
         usuarioDto.setCmpEstado(Software.veontecCuentaVerificada);
@@ -171,11 +154,12 @@ public class ObjEmail {
         try {
             
             // embed the image and get the content id
-            URL url = new URL("http://www.apache.org/images/asf_logo_wide.gif");
+            URL url = new URL("https://scontent.fgdl5-4.fna.fbcdn.net/v/t1.15752-9/254093501_1126808778067167_7452774238143269890_n.png?"
+            + "_nc_cat=108&ccb=1-5&_nc_sid=ae9488&_nc_ohc=eeMwhOs-kK0AX-9X6NE&_nc_ht=scontent.fgdl5-4.fna&oh=ddb53dcb99c15ecbdfb672c45203f1a9&oe=61B9DF11");
             String cid = email.embed(url, "Apache logo");
             
             msg += "<html>";
-            msg += "<img src=\"cid:"+cid+"\">";
+            msg += "<img style='width:64%; height:64%; ' src=\"cid:"+cid+"\">";
             msg += "<h1>Welcome to software veontec</h1>";
             msg += "<legend>"+info+"</legend>";
             msg += "<p style='background-color: green; padding: 10px; border-radius: 20px; text-align: center; color: white; font-size: 14px;'>";

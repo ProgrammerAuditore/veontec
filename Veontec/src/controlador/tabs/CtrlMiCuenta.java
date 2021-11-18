@@ -170,13 +170,13 @@ public class CtrlMiCuenta{
         
         if( Veontec.usuarioDto.getCmpEstado() == 333 ){
             DesHabilitarBotones(false);
-            JOptionPane.showMessageDialog(pnMiCuenta, "Verifica la cuenta, por favor.\nRevise su email para obtener el codigo de verificación.");
+            JOptionPane.showMessageDialog(pnMiCuenta, "Verifica la cuenta, por favor.\nRevise su email para obtener el código de verificación.");
         }else{
             DesHabilitarBotones(true);
         }
         
         if( Veontec.usuarioDto.getCmpEstado() == 777 ){
-            JOptionPane.showMessageDialog(pnMiCuenta, "Cuenta recupera exitosamente.\nCambie su contraseña por seguridad.");
+            JOptionPane.showMessageDialog(pnMiCuenta, "Cuenta recuperada exitosamente.\nCambie su contraseña por seguridad.");
         }
         
     }   
@@ -198,7 +198,7 @@ public class CtrlMiCuenta{
         }
         
         Box boxPassword = Box.createVerticalBox();
-        JLabel infoInstruccion = new JLabel("Introduzca su constraseña para eliminiar la cuenta");
+        JLabel infoInstruccion = new JLabel("Introduzca la contraseña actual");
         boxPassword.add(infoInstruccion);
         JPasswordField cmpPassword = new JPasswordField(24);
         boxPassword.add(cmpPassword);
@@ -215,7 +215,7 @@ public class CtrlMiCuenta{
             if(  !passwd.trim().isEmpty() && passwd.length() > 0 ){
                 mtdProcesoEliminarCuenta();
             }else{
-                JOptionPane.showMessageDialog(pnMiCuenta, "El campo esta vacío.");
+                JOptionPane.showMessageDialog(pnMiCuenta, "El campo está vacío.");
             }
         }   
     }
@@ -237,7 +237,7 @@ public class CtrlMiCuenta{
                     JOptionPane.showMessageDialog(pnMiCuenta, "Cuenta eliminada exitosamente.");
                 }
             }else{
-                JOptionPane.showMessageDialog(pnMiCuenta, "La contraseña no coinciden\nCuenta no eliminada.");
+                JOptionPane.showMessageDialog(pnMiCuenta, "La contraseña no coincide\nCuenta no eliminada.");
             }
         }
     }
@@ -251,17 +251,17 @@ public class CtrlMiCuenta{
         
         String passwdActual="", passwdNueva="", passwdRepetir="";
         Box boxPassword = Box.createVerticalBox();
-        JLabel info1 = new JLabel("Introduza la constraseña actual");
+        JLabel info1 = new JLabel("Introduzca la contraseña actual");
         boxPassword.add(info1);
         JPasswordField cmpPasswdActual = new JPasswordField(24);
         boxPassword.add(cmpPasswdActual);
         
-        JLabel info2 = new JLabel("Introduza la constraseña nueva");
+        JLabel info2 = new JLabel("Introduzca la contraseña nueva");
         boxPassword.add(info2);
         JPasswordField cmpPasswdNueva = new JPasswordField(24);
         boxPassword.add(cmpPasswdNueva);
         
-        JLabel info3 = new JLabel("Repite la constraseña nueva");
+        JLabel info3 = new JLabel("Repite la contraseña nueva");
         boxPassword.add(info3);
         JPasswordField cmpPasswdRepetir = new JPasswordField(24);
         boxPassword.add(cmpPasswdRepetir);
@@ -294,11 +294,15 @@ public class CtrlMiCuenta{
                             Veontec.cuentaDto.setPasswd(passwdRepetir);
                             Veontec.cuentaDao.regitrar_datos(Veontec.cuentaDto);
                             
-                            JOptionPane.showMessageDialog(pnMiCuenta, "Contraseña modificado exitosamnete.");
+                            // * Establecer el titulo de la ventana
+                            Veontec.ventanaHome.setTitle( Veontec.usuarioDto.getCmpNombreCompleto() 
+                            + " | "  + Veontec.usuarioDto.getCmpCorreo() + " - " + Software.NombreSoftware );
+                            
+                            JOptionPane.showMessageDialog(pnMiCuenta, "Contraseña modificada exitosamente.");
                         }
                         
                     }else{
-                        JOptionPane.showMessageDialog(pnMiCuenta, "La contraseña nueva no coinciden.");
+                        JOptionPane.showMessageDialog(pnMiCuenta, "La contraseña nueva no coincide.");
                     }
                 }else{
                     JOptionPane.showMessageDialog(pnMiCuenta, "La contraseña actual es incorrecta.");
@@ -317,12 +321,12 @@ public class CtrlMiCuenta{
         
         String correoActual="", correoNueva="", correoRepetir="";
         Box boxCorreo = Box.createVerticalBox();
-        JLabel info1 = new JLabel("Introduza la contraseña actual");
+        JLabel info1 = new JLabel("Introduzca la contraseña actual");
         boxCorreo.add(info1);
         JPasswordField cmpPasswordActual = new JPasswordField(24);
         boxCorreo.add(cmpPasswordActual);
         
-        JLabel info2 = new JLabel("Introduza el correo nuevo");
+        JLabel info2 = new JLabel("Introduzca el correo nuevo");
         boxCorreo.add(info2);
         JTextField cmpCorreoNueva = new JTextField(24);
         boxCorreo.add(cmpCorreoNueva);
@@ -371,14 +375,14 @@ public class CtrlMiCuenta{
                                 
                                 // * Actualizar los datos
                                 mtdEstablecerDatos();
-                                JOptionPane.showMessageDialog(pnMiCuenta, "Correo modificado exitosamnete.");
+                                JOptionPane.showMessageDialog(pnMiCuenta, "Correo modificado exitosamente.");
                             }
                             
                         }else{
                             JOptionPane.showMessageDialog(pnMiCuenta, "El nuevo correo no está disponible.");
                         }
                     }else{
-                        JOptionPane.showMessageDialog(pnMiCuenta, "El correo nuevo no coinciden.");
+                        JOptionPane.showMessageDialog(pnMiCuenta, "El correo nuevo no coincide.");
                     }
                 }else{
                     JOptionPane.showMessageDialog(pnMiCuenta, "La contraseña actual es incorrecta.");
@@ -415,7 +419,7 @@ public class CtrlMiCuenta{
                     + " | "  + Veontec.usuarioDto.getCmpCorreo() + " - " + Software.NombreSoftware );
                     // * Actualizar los datos
                     mtdEstablecerDatos();
-                    JOptionPane.showMessageDialog(pnMiCuenta, "Datos actualizados exitosamnete.");
+                    JOptionPane.showMessageDialog(pnMiCuenta, "Datos actualizados exitosamente.");
                 }
             
         }else{
@@ -433,12 +437,12 @@ public class CtrlMiCuenta{
         
         String passwdActual="", codigoVerificacion="";
         Box boxVerificacion = Box.createVerticalBox();
-        JLabel info1 = new JLabel("Introduza la contraseña actual");
+        JLabel info1 = new JLabel("Introduzca la contraseña actual");
         boxVerificacion.add(info1);
         JPasswordField cmpPasswordActual = new JPasswordField(24);
         boxVerificacion.add(cmpPasswordActual);
         
-        JLabel info2 = new JLabel("Introduza el código de verifación");
+        JLabel info2 = new JLabel("Introduzca el código de verificación");
         boxVerificacion.add(info2);
         JTextField cmpCodigoVerificacion = new JTextField(24);
         boxVerificacion.add(cmpCodigoVerificacion);
@@ -455,7 +459,7 @@ public class CtrlMiCuenta{
             }else if( !mtdVerificarPassword( usuarioDto.getCmpPassword(), passwdActual.toCharArray() )){
                 JOptionPane.showMessageDialog(pnMiCuenta, "La contraseña actual es incorrecta.");
             }else if( !usuarioDto.getCmpKey().equals(codigoVerificacion) ){
-                JOptionPane.showMessageDialog(pnMiCuenta, "Codigo de verificación incorrecta");
+                JOptionPane.showMessageDialog(pnMiCuenta, "Código de verificación incorrecta");
             }else{
 
                 if( !usuarioDao.mtdComprobar(usuarioDto) ){
@@ -469,6 +473,10 @@ public class CtrlMiCuenta{
                         usuarioDto.setCmpEstado(Software.veontecCuentaVerificada);
                         usuarioDto.setCmpKey("No");
                         usuarioDao.mtdActualizar(usuarioDto);
+                        
+                        // * Establecer el titulo de la ventana
+                        Veontec.ventanaHome.setTitle( Veontec.usuarioDto.getCmpNombreCompleto() 
+                        + " | "  + Veontec.usuarioDto.getCmpCorreo() + " - " + Software.NombreSoftware );
                         
                         Veontec.usuarioDto = usuarioDto;
                         mtdCerrarSession();

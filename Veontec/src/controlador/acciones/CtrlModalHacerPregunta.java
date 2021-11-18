@@ -145,7 +145,7 @@ public class CtrlModalHacerPregunta {
             if( preguntaDao.mtdInsetar(preguntaDto) ){
                 try { CtrlPreguntas.mtdRecargarPreguntas(); } catch (Exception e) { }
                 
-                JOptionPane.showMessageDialog(pnHacerPregunta, "La pregunta se envio al vendedor....");
+                JOptionPane.showMessageDialog(pnHacerPregunta, "La pregunta se envió al vendedor...");
                 mtdCerrarModal();
             }
             

@@ -26,10 +26,10 @@ public class PanelIniciarSesion extends javax.swing.JPanel {
         etiqueta2 = new vista.componentes.etiqueta.Etiqueta();
         btnRecuperarCuenta = new vista.componentes.etiqueta.Enlace();
 
-        etiqueta1.setText("Correo electronico");
+        etiqueta1.setText("Correo electrónico");
 
         btnIniciarSession.setImgButtonType("success");
-        btnIniciarSession.setTexto("Iniciar session");
+        btnIniciarSession.setTexto("Iniciar sesión");
 
         etiqueta2.setText("Contraseña");
 

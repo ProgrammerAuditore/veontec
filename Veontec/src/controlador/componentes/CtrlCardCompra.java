@@ -195,7 +195,7 @@ public class CtrlCardCompra {
         compDto = compDao.mtdConsultar(compDto);
             
         if( compDto == null ){
-            JOptionPane.showMessageDialog(pnCardCompra, "Compra no encontrado.");
+            JOptionPane.showMessageDialog(pnCardCompra, "Compra no encontrada.");
             return;
         }
         
