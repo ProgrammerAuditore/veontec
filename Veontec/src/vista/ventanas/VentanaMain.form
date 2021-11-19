@@ -47,8 +47,8 @@
         <Container class="vista.componentes.jpanelbackground.JPanelBackground" name="jPanelBackground2">
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
-              <JTabbedPaneConstraints tabName="Iniciar session">
-                <Property name="tabTitle" type="java.lang.String" value="Iniciar session"/>
+              <JTabbedPaneConstraints tabName="Iniciar sesi&#xf3;n">
+                <Property name="tabTitle" type="java.lang.String" value="Iniciar sesi&#xf3;n"/>
               </JTabbedPaneConstraints>
             </Constraint>
           </Constraints>
@@ -56,7 +56,7 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="pnLoggin" alignment="0" max="32767" attributes="0"/>
+                  <Component id="pnLoggin" alignment="0" pref="407" max="32767" attributes="0"/>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
@@ -85,7 +85,7 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="pnRegistrarme" alignment="0" max="32767" attributes="0"/>
+                  <Component id="pnRegistrarme" alignment="0" pref="407" max="32767" attributes="0"/>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">

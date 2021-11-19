@@ -202,7 +202,7 @@ public class CtrlModalCrearProducto implements ActionListener{
             pnCrearProducto.cmpImagenPath.setText( archivo.getAbsolutePath() );
           
             if( archivo.length() > 805867 ){
-                JOptionPane.showMessageDialog(null, "La imágen es demasiado grande.");
+                JOptionPane.showMessageDialog(null, "La imagen es demasiado grande.");
                 pnCrearProducto.cmpImagenPath.rechazarCampo();
             }else{
                 productoDto.setProdImg(getImagen(path_img));

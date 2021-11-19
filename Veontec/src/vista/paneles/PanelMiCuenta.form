@@ -70,7 +70,7 @@
         <Component class="vista.componentes.boton.Boton" name="btnCerrarSession">
           <Properties>
             <Property name="imgButtonType" type="java.lang.String" value="danger"/>
-            <Property name="texto" type="java.lang.String" value="Cerrrar sesion"/>
+            <Property name="texto" type="java.lang.String" value="Cerrar sesi&#xf3;n"/>
           </Properties>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
@@ -111,7 +111,7 @@
           <Properties>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
-                <TitledBorder title="Datos"/>
+                <TitledBorder title="Datos de usuario"/>
               </Border>
             </Property>
           </Properties>
@@ -188,7 +188,7 @@
             </Component>
             <Component class="vista.componentes.etiqueta.Etiqueta" name="etiqueta1">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Correo electronico"/>
+                <Property name="text" type="java.lang.String" value="Correo electr&#xf3;nico"/>
               </Properties>
             </Component>
             <Component class="vista.componentes.etiqueta.Etiqueta" name="etiqueta3">

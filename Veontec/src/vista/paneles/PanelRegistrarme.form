@@ -85,7 +85,7 @@
       <SubComponents>
         <Component class="vista.componentes.etiqueta.Etiqueta" name="etiqueta1">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Correo electronico"/>
+            <Property name="text" type="java.lang.String" value="Correo electr&#xf3;nico"/>
           </Properties>
         </Component>
         <Component class="vista.componentes.campos.CampoPassword" name="campoPassword1">
