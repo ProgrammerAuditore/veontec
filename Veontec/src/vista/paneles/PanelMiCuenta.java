@@ -82,7 +82,7 @@ public class PanelMiCuenta extends javax.swing.JPanel {
             .addComponent(titulo1, javax.swing.GroupLayout.DEFAULT_SIZE, 85, Short.MAX_VALUE)
         );
 
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Datos"));
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Datos de usuario"));
 
         etiqueta4.setText("Nombre completo");
 
