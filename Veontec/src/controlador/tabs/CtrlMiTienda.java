@@ -74,7 +74,7 @@ public class CtrlMiTienda{
         this.imagesDto = new ImagesDto();
         this.categoriaDao = new CategoriaDao();
         this.categoriaDto = new CategoriaDto();
-        this.lstCategoriaRaiz = new DefaultMutableTreeNode("Categorias");
+        this.lstCategoriaRaiz = new DefaultMutableTreeNode("Categorías");
         this.lstCategoriaModelo = new DefaultTreeModel(lstCategoriaRaiz);
         this.cantidadResultados = 0;
         this.cantidadPorPagina = Software.veontecResultadoPorPagina;
@@ -393,7 +393,7 @@ public class CtrlMiTienda{
         if( categoriaNueva.trim().isEmpty()){
             JOptionPane.showMessageDialog(pnMiTienda, "Los campos están incompletos.");
 
-        }else if(categoriaNueva.equals("Categorias") || categoriaNueva.equals("Nueva")){
+        }else if(categoriaNueva.equals("Categorías") || categoriaNueva.equals("Nueva")){
             JOptionPane.showMessageDialog(pnMiTienda, "Nombre de categoría no válido.");
 
         }else if( categoriaNueva.length() > 30){
